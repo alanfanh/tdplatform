@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang='zh-cn'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        {% comment %} <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"> {% endcomment %}
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        {% include "footer.html" %}
+        {% block javascript %}{% endblock  %}
+    {% comment %} <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> {% endcomment %}
+    </body>
+</html>
