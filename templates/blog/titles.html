@@ -9,7 +9,7 @@
     <div class="col-xs-12 col-md-8">
     <ul>
     {% for blog in blogs %}
-        <li><a href="{% url 'blog:blog_title' blog.id }">{{ blog.title }}</a></li>
+        <li><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></li>
     {% endfor %}
     </ul>
     </div>
