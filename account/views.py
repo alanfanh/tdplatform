@@ -1,25 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 from .forms import LoginForm
+from .models import UserInfo, Group, Role
 
-def user_login(request):
-    if request.method == "POST":
-        login_form = LoginForm(request.POST)
-        if login_form.is_valid():
-            cd = login_form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
 
-            if user:
-                login(request, user)
-                return HttpResponse('Wellcome You.You have been authenticated')
-            else:
-                return HttpResponse("Sorry.Your username or password is not right.")
-        else:
-            return HttpResponse("Invalid login")
-
+@login_required(login_url="login/")
+def index(request):
     if request.method == "GET":
-        login_form = LoginForm()
-        return render(request,"account/login.html",{"form":login_form})
+        users = UserInfo.objects.all()
+        return render(request, 'account/index.html', {'users':users})
+
+@login_required(login_url="login/")
+def user_detail(request, user_id):
+    user_info = get_object_or_404(UserInfo, id=user_id)
+    return render(request, 'account/user_detail.html', {})
+
+@login_required(login_url="login/")
+def myself(request):
+    user = User.objects.get(username=request.user.username)
+    userinfo = UserInfo.objects.get(user=user)
+    return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
