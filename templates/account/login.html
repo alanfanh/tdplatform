@@ -1,24 +1,60 @@
-{% extends "base.html" %}
-
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% load i18n static %}
 {% load staticfiles %}
+<!DOCTYPE html>
+<html lang='zh-cn'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    </head>
 
-{% block title %} Login {% endblock %}
-
-{% block content %}
-<div class="row text-center vertical-middle-sm">
-    <h1>登录</h1>
-    <p>Input  your username and password</p>
-    <form class="form-horizontal" action="." method="post"> {% csrf_token %}
-        <!--{{form.as_p}}-->
-        <div class="form-group">
-            <label for="{{ form.username.id_for_label }}" class="col-md-5 control-label" style="color:red"><span class="glyphicon glyphicon-user"></span>Username</label>
-            <div class="col-md-6 text-left">{{form.username}}</div>
+<body class="login">
+<div id="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div id="header">
+            <div id="branding">
+                <h1 id="site-name">登录</h1>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="{{ from.password.id_for_label}}" class="col-md-5 control-label" style="color:blue"><span class="glyphicon glyphicon-floppy-open"></span>password</label>
-            <div class="col-md-6 text-left">{{form.password}}</div>
-        </div>
-        <input type="submit" class="btn btn-primary btn-lg" value="Login">
-    </form>
+    </nav>
+    <div id="content">
+        {% if form.errors and not form.non_field_errors %}
+        <p class="errornote">
+         ttt
+        {% comment %} {% if form.errors.items | == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %} {% endcomment %}
+        </p>
+        {% endif %}
+        {% if form.non_field_errors %}
+        <p class="errornote">
+            请输入正确的用户名或密码。
+        </p>
+        {% endif %}
+        <form id="login-form" action="." method="post"> {% csrf_token %}
+            <div class="form-row">
+                {{ form.username.errors }}
+                {{ form.username.label_tag }} {{ form.username }}
+            </div>
+            <div class="form-row">
+                {{ form.password.errors }}
+                {{ form.password.label_tag }} {{ form.password }}
+                <input type="hidden" name="next" value="{{ next }}">
+            </div>
+            {% url 'admin_password_reset' as password_reset_url %}
+            {% if password_reset_url %}
+            <div class="password-reset-link">
+                <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+            </div>
+            {% endif %}
+            <div class="submit-row">
+                <label>&nbsp;</label><input type="submit"  value="Login">
+            </div>
+        </form>
+    </div>
+    <div id="foot1"></div>
 </div>
-{% endblock %}
+{% include "footer.html" %}
+</body>
+</html>
