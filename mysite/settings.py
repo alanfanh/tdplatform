@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'account',
+    'password_reset',
 ]
 
 MIDDLEWARE = [
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 TIME_ZONE = 'UTC'
 
@@ -129,3 +130,11 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/blog'
+
+EMAIL_HOST = 'smtp.tenda.cn'
+EMAIL_USER = 'shiyanshi@tenda.cn'
+EMAIL_HOST_PASSWORD = ""
+EMAIL_PORT = '25'
+DEFAULT_FROM_EMAIL = "shiyanshi@tenda.cn"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
