@@ -8,7 +8,7 @@
             <ul class="nav navbar-nav" role="navigation">
                 <li><a href="{% url 'blog:blog_title' %}">技术资产</a></li>
                 <li><a href="">培训管理</a></li>
-                <li><a href="{% url 'account:index' %}">用户管理</a></li>
+                
             </ul>
             <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
                 {% if user.is_authenticated %}
@@ -22,6 +22,10 @@
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'account:password_change' %}">修改密码</a></li>
                         <li><a href="{% url 'account:my_information' %}">个人信息</a></li>
+                        {% if user.is_superuser == 1 or userinfo.role_id == 3 %}
+                        <li><a href="{% url 'account:index' %}">用户管理</a></li>
+                        {% endif %}
+                        
                     </ul>
                     </div>
                 </li>
