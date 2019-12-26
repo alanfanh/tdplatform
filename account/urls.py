@@ -5,11 +5,13 @@ from . import views
 from django.conf import settings
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetDoneView
 
 app_name = 'account'
 urlpatterns = [
     # path('login/', views.user_login, name="user_login"),
-    path('', views.index, name="index"),
+    path('index', views.index, name="index"),
     path('<int:user_id>', views.user_detail, name="user_detail"),
     path('my-information/', views.myself, name="my_information"),
 
