@@ -24,5 +24,8 @@ def user_detail(request, user_id):
 @login_required(login_url="login/")
 def myself(request):
     user = User.objects.get(username=request.user.username)
-    userinfo = UserInfo.objects.get(user=user)
-    return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
+    if user.is_superuser != 1:
+        userinfo = UserInfo.objects.get(user=user)
+        return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
+    else:
+        return render(request, "account/myself.html", {"user":user})
