@@ -19,7 +19,7 @@ def index(request):
 @login_required(login_url="login/")
 def user_detail(request, user_id):
     user_info = get_object_or_404(UserInfo, id=user_id)
-    return render(request, 'account/user_detail.html', {})
+    return render(request, 'account/user_detail.html', {'user_info': user_info})
 
 @login_required(login_url="login/")
 def myself(request):
