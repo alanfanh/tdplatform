@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} 用户信息 {% endblock  %}
+
+{% block content %}
+<div class="row text-center vertical-midldle-sm">
+    <h1>用户信息列表</h1>
+    <div class="results">
+        <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col" class="sortable column-username sorted descending">
+                <div class="text"><a href="">用户名</a></div>
+            </th>
+            <td scope="col" class="sortable column-email sorted descending">
+                <div class="text">邮箱</div>
+            </td>
+            <td scope="col" class="sortable column-realname sorted descending">
+                <div class="text">真实姓名</div>
+            </td>
+            <td scope="col" class="sortable column-gender sorted descending">
+                <div class="text">性别</div>
+            </td>
+            <td scope="col" class="sortable column-phone sorted descending">
+                <div class="text">手机</div>
+            </td>
+            <td scope="col" class="sortable column-engineer sorted descending">
+                <div class="text">职位</div>
+            </td>
+            <td scope="col" class="sortable column-group sorted descending">
+                <div class="text">小组</div>
+            </td>
+            <td scope="col" class="sortable column-school sorted descending">
+                <div class="text">毕业学校</div>
+            </td>
+            <td scope="col" class="sortable column-gradution_time sorted descending">
+                <div class="text">毕业时间</div>
+            </td>
+            <td scope="col" class="sortable column-education sorted descending">
+                <div class="text">学历</div>
+            </td>
+            <td scope="col" class="sortable column-pre_job sorted descending">
+                <div class="text">上一份工作</div>
+            </td>
+            <td scope="col" class="sortable column-entry_time sorted">
+                <div class="text">入职时间</div>
+            </td>
+            <td scope="col" class="sortable column-spical_date sorted">
+                <div class="text">生日</div>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            {% if user.form and user.form.non_field_errors %}
+                <tr><td colspan="">{{user.form.non_field_errors}}</td></tr>
+            {% endif %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <th class="field-user">
+                 <a href="{% url 'account:user_detail' user.id %}">{{user.user}}</a>
+                </th>
+                <td class="field-email">{{user.email}}</td>
+                <td class="field-realname">{{user.realname}}</td>
+                <td class="field-gender">{{user.gender}}</td>
+                <td class="field-phone">{{user.phone}}</td>
+                <td class="field-engineer">{{user.engineer}}</td>
+                <td class="field-group">{{user.group}}</td>
+                <td class="field-school">{{user.school}}</td>
+                <td class="field-gradution_time">{{user.gradution_time}}</td>
+                <td class="field-education">{{user.education}}</td>
+                <td class="field-pre_job">{{user.pre_job}}</td>
+                <td class="field-entry_time">{{user.entry_time}}</td>
+                <td class="field-spical_date">{{user.spical_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
