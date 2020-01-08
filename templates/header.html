@@ -6,7 +6,8 @@
         </div>
         <div>
             <ul class="nav navbar-nav" role="navigation">
-                <li><a href="{% url 'blog:blog_title' %}">技术资产</a></li>
+                <li><a href="{% url 'home' %}">主页</a></li>
+                <li><a href="{% url 'asset:blog_title' %}">技术资产</a></li>
                 <li><a href="">培训管理</a></li>
                 
             </ul>
@@ -25,7 +26,9 @@
                         {% if user.is_superuser == 1 or user.userinfo.role_id == 3 %}
                         <li><a href="{% url 'account:index' %}">用户管理</a></li>
                         {% endif %}
-                        
+                        {% if user.userinfo.role_id == 2 %}
+                        <li><a href="{% url 'account:group_user' %}">小组信息</a></li>
+                        {% endif %}
                     </ul>
                     </div>
                 </li>
