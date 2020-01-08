@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    'asset',
     'account',
     'password_reset',
+    'training',
+    'article',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +131,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-LOGIN_REDIRECT_URL = '/blog'
+LOGIN_REDIRECT_URL = '/home/'
 
 EMAIL_HOST = 'smtp.tenda.cn'
 EMAIL_USER = 'shiyanshi@tenda.cn'
