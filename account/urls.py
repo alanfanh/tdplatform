@@ -14,7 +14,7 @@ urlpatterns = [
     path('index', views.index, name="index"),
     path('<int:user_id>', views.user_detail, name="user_detail"),
     path('my-information/', views.myself, name="my_information"),
-
+    path('group', views.group_user, name="group_user"),
     # django内置的登录LoginView类
     path('login/', LoginView.as_view(template_name="account/login.html"), name="user_login"),
     path('logout/', LogoutView.as_view(template_name="account/logout.html"), name="user_logout"),

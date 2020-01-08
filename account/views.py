@@ -19,7 +19,7 @@ def index(request):
 @login_required(login_url="login/")
 def user_detail(request, user_id):
     user_info = get_object_or_404(UserInfo, id=user_id)
-    return render(request, 'account/user_detail.html', {'user_info': user_info})
+    return render(request, 'account/user_detail.html', {'userinfo': user_info})
 
 @login_required(login_url="login/")
 def myself(request):
@@ -29,3 +29,15 @@ def myself(request):
         return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
     else:
         return render(request, "account/myself.html", {"user":user})
+
+@login_required(login_url="login/")
+def group_user(request):
+    user = User.objects.get(username=request.user.username)
+    if user.is_superuser != 1:
+        userinfo = UserInfo.objects.get(user=user)
+        group = Group.objects.get(id=userinfo.group_id)
+        role = Role.objects.get(id=userinfo.role_id)
+        if role.role_name == "PL":
+            users = UserInfo.objects.filter(group_id=userinfo.group_id)
+            groups = Group.objects.all()
+            return render(request, 'account/group_user.html', {"users":users, "groups":groups})
