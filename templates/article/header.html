@@ -1,0 +1,13 @@
+{% load staticfiles %}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href=""><img width="100px" src="{% static 'images/logo.png' %}"></a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav" role="tablist">
+                <li><a href="{% url 'article:' %}">文章管理</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
