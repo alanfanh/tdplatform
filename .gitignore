@@ -1,4 +1,21 @@
+# Ignore useless files or some Configuration file for passwords.
+#
+
+# MacOS
 .DS_Store
-/.svn
+
+# windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# python cache
 __pycache__/
-*.pyc
+*.py[cod]
+*.egg
+*.egg-info
+
+# svn
+/.svn
+
+# my configuration
