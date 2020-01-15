@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.urls import reverse
+from slugify import slugify
 
 class ArticleColumn(models.Model):
     id = models.AutoField(primary_key=True)
@@ -12,4 +15,27 @@ class ArticleColumn(models.Model):
     def __str__(self):
         return self.column
 
+class ArticlePost(models.Model):
+    id = models.AutoField(primary_key=True)
+    auther = models.ForeignKey(User, verbose_name="作者", on_delete=models.DO_NOTHING, related_name="article")
+    title = models.CharField(verbose_name="标题", max_length=100)
+    slug = models.SlugField(max_length=500)
+    column = models.ForeignKey(ArticleColumn, verbose_name="栏目", on_delete=models.CASCADE)
+    body = models.TextField()
+    created = models.DateTimeField(default=timezone.now(), auto_now=False, auto_now_add=False)
+    update = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ("title",)
+        index_together = (('id','slug'),)
+
+    def __str__(self):
+        return self.title
+    
+    def save(self, *args, **kargs):
+        self.sug = slugify(self.title)
+        super(ArticlePost, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("article:article_detail", args=[self.id,self.slug])
+    
