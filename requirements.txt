@@ -1,3 +1,4 @@
 django=2.2.8
 django-password-reset=2.0
 pymysql=0.9.3
+slugify=0.0.1
