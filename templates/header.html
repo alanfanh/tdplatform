@@ -21,7 +21,7 @@
             <div id="u2006" class="ax_default" data-label="首页">
                 
                 <div id="u2006_state0" class="panel_state" data-label="State1" style="">
-                    <span>首页</span>
+                    <a href="{% url 'home' %}">主页</a> 
                     <div id="u2006_state0_content" class="panel_state_content">
                     
                     </div>
@@ -31,6 +31,7 @@
             <!-- 培训管理 (动态面板) -->
             <div id="u2007" class="ax_default" data-label="培训管理">
                 <div id="u2007_state0" class="panel_state" data-label="State1" style="">
+                    <a href="">培训管理</a>
                     <div id="u2007_state0_content" class="panel_state_content">
                     </div>
                 </div>
@@ -39,6 +40,7 @@
             <!-- 资产技术管理 (动态面板) -->
             <div id="u2008" class="ax_default" data-label="资产技术管理">
                 <div id="u2008_state0" class="panel_state" data-label="State1" style="">
+                    <a href="{% url 'asset:blog_title' %}">技术资产管理</a>
                     <div id="u2008_state0_content" class="panel_state_content">
                     </div>
                 </div>
@@ -47,6 +49,7 @@
             <!-- 个人中心 (动态面板) -->
             <div id="u2009" class="ax_default" data-label="个人中心">
                 <div id="u2009_state0" class="panel_state" data-label="State1" style="">
+                    <a href="{% url 'account:my_information' %}">个人中心</a>
                     <div id="u2009_state0_content" class="panel_state_content">
                     </div>
                 </div>
