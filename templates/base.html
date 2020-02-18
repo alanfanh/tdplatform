@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-        {% comment %} <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css"> {% endcomment %}
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
     </head>
     <body>
         {% include "header.html" %}
@@ -15,8 +16,6 @@
             {% endblock %}
         </div>
         {% include "footer.html" %}
-        {% block javascript %}{% endblock  %}
-    {% comment %} <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> {% endcomment %}
+        {% block javascript %}{% endblock  %}          
     </body>
 </html>
