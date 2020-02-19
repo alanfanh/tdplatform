@@ -1,121 +1,56 @@
 {% load staticfiles %}
-<head>
-<link type="text/css" rel="stylesheet" href="{% static 'css/header.css' %}"> 
-<link href="{% static '/css/styles.css' %} " type="text/css" rel="stylesheet"/>
-<link href="{% static '/css/axure_rp_page.css' %}" type="text/css" rel="stylesheet"/>
-</head>
 
-<div id="u1815" class="ax_default shape">
-    <div id="u1815_div" class="">
-            
-        <div id="u2004" class="ax_default" data-left="116" data-top="14" data-width="724" data-height="36">
-            <!-- logo (动态面板) -->
-            <div id="u2005" class="ax_default" data-label="logo">
-                <div id="u2005_state0" class="panel_state" data-label="State1" style="">
-                    <div id="u2005_state0_content" class="panel_state_content">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 首页 (动态面板) -->
-            <div id="u2006" class="ax_default" data-label="首页">
-                
-                <div id="u2006_state0" class="panel_state" data-label="State1" style="">
-                    <a href="{% url 'home' %}">主页</a> 
-                    <div id="u2006_state0_content" class="panel_state_content">
-                    
-                    </div>
-                </div>
-            </div>
-
-            <!-- 培训管理 (动态面板) -->
-            <div id="u2007" class="ax_default" data-label="培训管理">
-                <div id="u2007_state0" class="panel_state" data-label="State1" style="">
-                    <a href="">培训管理</a>
-                    <div id="u2007_state0_content" class="panel_state_content">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 资产技术管理 (动态面板) -->
-            <div id="u2008" class="ax_default" data-label="资产技术管理">
-                <div id="u2008_state0" class="panel_state" data-label="State1" style="">
-                    <a href="{% url 'asset:blog_title' %}">技术资产管理</a>
-                    <div id="u2008_state0_content" class="panel_state_content">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 个人中心 (动态面板) -->
-            <div id="u2009" class="ax_default" data-label="个人中心">
-                <div id="u2009_state0" class="panel_state" data-label="State1" style="">
-                    <a href="{% url 'account:my_information' %}">个人中心</a>
-                    <div id="u2009_state0_content" class="panel_state_content">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="u1983" class="ax_default" data-left="1572" data-top="22" data-width="49" data-height="20">
-            <!-- Unnamed (组合) -->
-            <div id="u1984" class="ax_default" data-left="1572" data-top="24" data-width="16" data-height="16">
-                <!-- Unnamed (占位符) -->
-                <div id="u1985" class="ax_default _形状">
-                    <img id="u1985_img" class="img " src="{% static 'images/u1200.svg' %}"/>
-                    <div id="u1985_text" class="text " style="display:none; visibility: hidden">
-                    <p></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unnamed (矩形) -->
-            <div id="u1986" class="ax_default label">
-                <div id="u1986_div" class="text"><p><span>帮助</span></p></div> 
-            </div>
-        </div>
-
-
-        <div id="u1987" class="ax_default" data-left="1637" data-top="22" data-width="49" data-height="20">
-
-            <!-- Unnamed (组合) -->
-            <div id="u1988" class="ax_default" data-left="1637" data-top="24" data-width="16" data-height="16">
-                <!-- Unnamed (占位符) -->
-                <div id="u1989" class="ax_default _形状">
-                    <img id="u1989_img" class="img " src="{% static 'images/u1200.svg' %}"/>
-                    <div id="u1989_text" class="text " style="display:none; visibility: hidden">
-                    <p></p>
-                    </div>
-                </div>
-                <!-- Unnamed (矩形) -->
-                <div id="u1990" class="ax_default label">
-                <div id="u1990_div" class="text"><p><span>提醒</span></p></div>            
-                </div>
-            </div>
-        </div>
-
-        <!-- Unnamed (组合) -->
-        <div id="u1980" class="ax_default" data-left="1702" data-top="0" data-width="91" data-height="64">
-            <!-- Unnamed (矩形) -->
-            <div id="u1981" class="ax_default shape">
-                <div id="u1981_div" class=""></div>
-                <div id="u1981_text" class="text " style="display:none; visibility: hidden">
-                    <p></p>
-                </div>
-            </div>
-            <!-- Unnamed (矩形) -->
-            <div id="u1982" class="ax_default shape">
-                <div id="u1982_div" class=""></div>
-                <div id="u1982_text" class="text ">
-                    <p><span>{{user.username}}</span></p>
-                </div>
-            </div>
-        </div>
-
+<div id="header" class="navbar">
+    <div id="logo">
+        <img src="{% static '/images/logo.svg' %}" alt="Tenda Logo" class="logoimg">
     </div>
-    <div id="u1815_text" class="text " style="display:none; visibility: hidden">
-        <p></p>
+    <div class="navbar-tool">
+        <div class="home">
+            <img src="{% static '/images/holder.svg' %}" alt="" class="home-img">
+            <a href="{% url 'home' %}" class="navbar-home">首页</a>
+        </div>
+        <div class="training">
+            <img src="{% static '/images/holder.svg' %}" alt="" class="training-img">
+            <a href="" class="navbar-training">培训管理</a>
+        </div>
+        <div class="asset">
+            <img src="{% static '/images/holder.svg' %}" alt="" class="asset-img">
+            <a href="{% url 'asset:blog_title' %}" class="navbar-asset">技术资产管理</a>
+        </div>
+        <div class="center">
+            <img src="{% static '/images/holder.svg' %}" alt="" class="center-img">
+            <a href="{% url 'account:index' %}" class="navbar-center">个人中心</a>
+        </div>
     </div>
-</div> 
+    <div id="navbar-user-info">
+        <div class="help">
+            <img src="{% static '/images/holder1.svg' %}" alt="" class="help-img">
+            <a href="" class="navbar-help">帮助</a>
+        </div>
+        <div class="tip">
+            <img src="{% static '/images/holder1.svg' %}" alt="" class="tip-img">
+            <a href="" class="navbar-tip">提醒</a>
+        </div>
+        <div class="user-info">
+            <img src="" alt="" class="user-img">
+            <div class="navbar-user">
+                <a href="" class="text">{{user.username}}</a>
+            </div>
+            <div id="pop" style="visibility: hidden; display: none;">
+                <div id="pop1" clas="text">
+                    <a href="" class="usercenter">个人中心</a>
+                </div>
+                <div id="pop2" class="text">
+                    <a href="" class="changepwd">修改密码</a>
+                </div>
+                <div id="pop3" clas="text">
+                    <img src="{% static '/images/u181.svg' %}" alt="" class="img3">
+                    <a href="{% url 'account:user_logout' %}" class="logout">退出登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
