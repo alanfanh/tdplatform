@@ -11,8 +11,8 @@ class Course(models.Model):
     course_time = models.DateField(verbose_name="培训时间", auto_now=False, auto_now_add=False)
     address = models.CharField(verbose_name="培训地点", max_length=30)
     teacher = models.CharField(verbose_name="主讲人", max_length=30)
-    group_name = models.CharField(verbose_name="小组", max_length=50)
-    file_name = models.FileField(verbose_name="附件", upload_to=None, max_length=100)
+    file_name = models.FileField(verbose_name="附件", upload_to="course_files", max_length=100)
+    cdescription = models.CharField(verbose_name="课程概述",max_length=150)
     # 多对多，培训课程与参加人
     student = models.ManyToManyField(UserInfo, related_name="course_joined", blank=True)
 
