@@ -6,6 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/account/forget_pwd.css' %}">
+        <link rel="stylesheet" href="{% static 'css/default.css' %}">
+        <script src=" {% static 'js/jquery.min.js' %} "></script>
+        <script src=" {% static 'js/bootstrap.min.js'%} "></script> 
     </head>
     <body>
         <div class="container">
@@ -13,8 +17,5 @@
             {% endblock %}
         </div>
         {% include "footer.html" %}
-        {% block javascript %}{% endblock  %}
-    <script src=" {% static 'js/jquery.min.js' %} "></script>
-    <script src=" {% static 'js/bootstrap.min.js'%} "></script> 
     </body>
 </html>
