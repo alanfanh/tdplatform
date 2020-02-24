@@ -1,0 +1,45 @@
+﻿.ax_default {
+  font-family:'ArialMT', 'Arial';
+  font-weight:400;
+  font-style:normal;
+  font-size:13px;
+  letter-spacing:normal;
+  color:#333333;
+  vertical-align:none;
+  text-align:center;
+  line-height:normal;
+  text-transform:none;
+}
+.text_p {
+  text-align:left;
+}
+a:-webkit-any-link {
+    color: #333333;
+    cursor: pointer;
+    text-decoration: none;
+}
+p {
+    margin: 0px;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+    -webkit-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern=1";
+    font-kerning: normal;
+}
+input {
+    height:44px;
+    width: 423px;
+    background:url(../images/login/usr.svg) no-repeat;
+    font-size: 14px;
+    border:0;
+    padding-left:43px;
+}
+input::-webkit-input-placeholder {
+    color:#333333;
+}
+button {
+    color: #FFFFFF;
+    text-align: center;
+}
+
