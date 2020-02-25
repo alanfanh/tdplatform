@@ -36,6 +36,13 @@
                     </p>
                 </div>
                 <form id="login-form" action="." method="post">{% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="errornote">
+                    {{ error }}
+                </p>
+                {% endfor %}
+                {% endif %}
                 <div class="user">
                     <div id="usr_img">
                         <img src="{% static 'images/account/usr.svg' %}">
@@ -50,7 +57,7 @@
                     </div>
                     {% comment %} {{ form.password.errors }}
                     {{ form.password }} {% endcomment %}
-                    <input type="text" id="login_pwd" name="password" placeholder="请输入密码">
+                    <input type="password" id="login_pwd" name="password" placeholder="请输入密码">
                     <div id="eye_img">
                         <img src="{% static 'images/account/eye.png' %}">
                     </div>

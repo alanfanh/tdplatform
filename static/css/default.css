@@ -27,7 +27,15 @@ p {
     -moz-font-feature-settings: "kern=1";
     font-kerning: normal;
 }
-input {
+#login_usrname {
+    height:44px;
+    width: 423px;
+    background:url(../images/login/usr.svg) no-repeat;
+    font-size: 14px;
+    border:0;
+    padding-left:43px;
+}
+#login_pwd {
     height:44px;
     width: 423px;
     background:url(../images/login/usr.svg) no-repeat;

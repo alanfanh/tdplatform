@@ -210,3 +210,10 @@
   box-sizing:border-box;
   width:100%;
 }
+.errornote {
+  border-width: 0px;
+  position: relative;
+  left: 160px;
+  top: 387px;
+  color: red;
+}

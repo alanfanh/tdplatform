@@ -205,17 +205,27 @@
   font-family:'PingFangSC-Regular', 'PingFang SC';
   font-weight:400;
   font-style:normal;
+  color:white;
 }
 
-input {
+/* input {
     height:44px;
     width: 423px;
     font-size: 14px;
     border:0;
     background-color:rgba(242, 242, 242, 1);
     padding-left:12px;
-}
+} */
 
 input::-webkit-input-placeholder {
     color:#AAAAAA;
+}
+
+#user_name,#mail_info,#name_info {
+    height: 44px;
+    width: 423px;
+    font-size: 14px;
+    border: 0;
+    background-color: rgba(242, 242, 242, 1);
+    padding-left: 12px;
 }
