@@ -1,6 +1,6 @@
-/*
+/*tdplatform项目
 * 
-*
+* 适用：本项目所有页面
 * Date:2020-1-10
 */
 
@@ -89,4 +89,10 @@ function delete_column(the, column_id) {
             })
         }
     });
+}
+
+
+// 控制显示或隐藏密码
+function show_pwd() {
+    let 
 }
