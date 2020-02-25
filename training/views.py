@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404,render
 
 # Create your views here.
 from django.views.generic import TemplateView, ListView
-from .models import Course
+from .models import Course, Integral
 
 class CourseListView(ListView):
     model = Course

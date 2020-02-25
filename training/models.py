@@ -20,7 +20,7 @@ class Course(models.Model):
         ordering = ('-course_time',)
 
     def __str__(self):
-        return self.name
+        return self.cname
 
 class Integral(models.Model):
     """培训积分"""
