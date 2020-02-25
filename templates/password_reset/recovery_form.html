@@ -1,10 +1,11 @@
 {% extends "password_reset/base.html" %}
+{% load staticfiles %}
 {% load i18n %}
 
 {% block title %}{% trans "Password recovery" %}{% endblock %}
 
 {% block content %}
-<div class="row text-center vertical-middle-sm">
+{% comment %} <div class="row text-center vertical-middle-sm">
 	<h2>Forgotten your password? Reset,please.</h2>
 	<p>Enter your username or email to set a new password.</p>
 	<form method="post" action="{{ url }}">
@@ -12,5 +13,54 @@
 		{{ form.as_p }}
 		<p><input type="submit" value="{% trans "Recover my password" %}"></p>
 	</form>
+</div>  {% endcomment %}
+<div id="pwd_base">
+	<div id="back_wall" class="ax_default placeholder">
+		<img id="back_img" class="wall" src="{% static 'images/account/bg.svg' %}">
+		<div id="pwd_logo" class="ax_default placeholder">
+			<img id="logoinfo_img" src="{% static 'images/account/logo.svg' %} ">
+			<div id="logoinfo_text" class="text">
+				<p>
+					<span>LOGO</span>
+				</p>
+			</div>
+		</div>
+		<div id="bgpattern">
+			<p>
+				<span>背景插图</span>
+			</p>
+		</div>
+		<div id="changepwd" class="ax_default text_p">
+			<div id="forget_password" class="text">
+				<p>
+					<span>忘记密码</span>
+				</p>
+			</div>
+			<div id="tips" class="ax_default text_p">
+				<p>
+					<span>请填写你的用户信息，稍后你的新密码将通过邮件发送给你，请注意查收。</span>
+				</p>
+			</div>
+			<form action="{{ url }}" method="post">{% csrf_token %}
+			<div class="usr">
+				<input type="text" id="user_name" placeholder="请输入用户名">
+			</div>
+			<div id="error" class="text">
+				<p>
+					<span>错误提示时，内容向下滑动，表单间距保持一致。</span>
+				</p>
+			</div>
+			<div class="mail">
+				<input type="text" id="mail_info" name="username_or_email" placeholder="请输入邮箱">
+			</div>
+			<div class="yname">
+				<input type="text" id="name_info" placeholder="请输入真实姓名">
+			</div>
+			<div>
+				<input id="confirm" type="submit" value="确定">
+			</div>
+			</form>
+		</div>
+	</div>
 </div>
 {% endblock %}
