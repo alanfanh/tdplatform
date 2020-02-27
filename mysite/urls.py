@@ -24,4 +24,5 @@ urlpatterns = [
     path('pwd_reset/', include("password_reset.urls")),
     path('home/', TemplateView.as_view(template_name="home.html"), name='home'), 
     path('article/', include('article.urls', namespace='article')),
+    path('training/', include('training.urls', namespace='training')),
 ]

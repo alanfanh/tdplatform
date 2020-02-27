@@ -7,4 +7,4 @@ from .models import Course, Integral
 class CourseListView(ListView):
     model = Course
     context_object_name = "courses"
-    template_name = 'course/course_list.html'
+    template_name = 'training/course_list.html'
