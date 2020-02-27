@@ -814,3 +814,53 @@ body {
   text-align:center;
   line-height:22px;
 }
+
+/* 修改密码弹窗CSS布局 */
+.tip-title {
+  font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+  font-weight: 650;
+  font-style: normal;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.647058823529412)
+}
+.login-tip {
+  border-width: 0px;
+  width: 169px;
+  height: 20px;
+  display: flex;
+  font-family: 'PingFangSC-Regular', 'PingFang SC';
+  font-weight: 400;
+  font-style: normal;
+}
+
+.change-pwd {
+  border-width: 0px;
+  width: 369px;
+  height: 44px;
+  display: flex;
+  font-family: 'PingFangSC-Regular', 'PingFang SC';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 11px;
+}
+.inner-pwd {
+  position: relative;
+  left: 120px;
+}
+.inner-pwd2 {
+  position: relative;
+  left: 107px;
+}
+
+.text-filed {
+  border-style: solid;
+  border-color: rgba(217, 217, 217, 1);
+  border-width: 1px;
+  border-radius: 4px;
+  height: 32px;
+  width: 240px;
+  background-color: white;
+  font-size: 14px;
+}

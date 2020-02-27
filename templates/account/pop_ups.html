@@ -7,17 +7,34 @@
   Launch demo modal
 </button>
 
-<!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+        <h4 class="modal-title tip-title" id="myModalLabel">修改密码</h4>
       </div>
       <div class="modal-body">
-        <form action="." method="post">{% csrf_token %}
-          
+        <div class="login-tip">修改密码后，请重新登录。</div>
+        <form action="." method="post">
+          <div class="change-pwd">
+            <div class="inner-pwd">
+              <span>原密码：</span>
+              <input type="password" class="text-filed" placeholder="请输入原密码">
+            </div>
+          </div>
+          <div class="change-pwd">
+            <div class="inner-pwd">
+              <span>新密码：</span>
+              <input type="password" class="text-filed" placeholder="请输入新密码，至少8个字符">
+            </div>
+          </div>
+          <div class="change-pwd">
+            <div class="inner-pwd2">
+              <span>确认密码：</span>
+              <input type="password" class="text-filed" placeholder="请再次输入新密码">
+            </div>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
