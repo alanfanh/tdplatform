@@ -43,7 +43,7 @@ def group_user(request):
             groups = Group.objects.all()
             return render(request, 'account/group_user.html', {"users":users, "groups":groups})
 
-@loging_required(login_url="login/")
+@login_required(login_url="login/")
 @csrf_exempt
 def add_user(request):
     """添加新用户"""
