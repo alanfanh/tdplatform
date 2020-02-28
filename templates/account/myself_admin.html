@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Admin用户 {% endblock  %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/account/admin.css' %}">
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <img src="{% static 'images/account/admin.svg' %}" class="photo">
+            <div class="Admin">
+                <span>Admin</span>
+            </div>
+            <div class="menu_ctl1">
+                <div id="usr_ctl">
+                    <span>用户管理</span>
+                </div>
+            </div>
+            <div class="menu_ctl2">
+                <img src="{% static 'images/account/menu.svg' %}" id="border_img">
+                <div id="data_info">
+                    <div id="border_lable"></div>
+                    <a href="{% url 'account:my_information' %}"><span>个人信息</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="title_border">
+                <div id="data_title">
+                    <span>个人信息</span>
+                </div>
+            </div>
+            <div class="cont_border">
+                <div id="data_name">
+                    <span>姓名：</span>
+                </div>
+                <div id="name_data">
+                    <span>{{user.username}}</span>
+                </div>
+                <div id="data_usr">
+                    <span>用户名：</span>
+                </div>
+                <div id="usr_data">
+                    <span>{{user.username}}</span>
+                </div>
+                <div id="data_group">
+                    <span>邮箱：</span>
+                </div>
+                <div id="group_data">
+                    <span>{{user.email}}</span>
+                </div>
+            </div>
+            <button type="button" id="pwd_change">修改密码</button>
+        </div>
+    </div>
+</div>
+{% endblock  %}
