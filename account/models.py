@@ -45,7 +45,7 @@ class UserInfo(models.Model):
     education = models.CharField(verbose_name="学历", max_length=20)
     pre_job = models.CharField(verbose_name="上一份工作", max_length=20)
     entry_time = models.DateField(verbose_name="入职时间")
-    spical_date = models.DateField(verbose_name="生日")
+    birth_day = models.DateField(verbose_name="生日")
     
     def __str__(self):
         return self.user.username

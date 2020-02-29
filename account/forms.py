@@ -11,4 +11,4 @@ class LoginForm(forms.Form):
 class UserInfoForm(forms.Form):
     class Meta:
         model = UserInfo
-        fields = ("user", "realname", "email", "phone", "gender", "group", "engineer", "role")
+        fields = ("user", "realname", "email", "phone", "gender", "group", "engineer", "role","id_card","school","gradution_time","education","pre_job","entry_time","birth_day")
