@@ -934,7 +934,7 @@ button {
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-  background: url('C:/Users/Administrator/Desktop/tdproject/images/admin/time.png') no-repeat  266px;
+  background: url('../../images/account/time.png') no-repeat  266px;
   background-size:14px;
   opacity: 0.43
 }
