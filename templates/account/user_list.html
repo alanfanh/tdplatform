@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}用户信息{% endblock  %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/user_list.css' %} ">
+    
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <img src="{% static 'images/account/admin.svg' %}" class="photo">
+            <div class="Admin">
+                <span>Admin</span>
+            </div>
+            <div class="menu_ctl1">
+                <img src="{% static 'images/account/menu.svg' %}" id="table1_img" class="bd_img">
+                <div id="menu_border1" class="menu_bg">
+                    <div class="menu_border"></div>
+                    <span>用户管理</span>
+                </div>
+            </div>
+            <div class="menu_ctl2">
+                <div id="menu_border2" class="menu_data">
+                    <span>个人信息</span>
+                </div>
+            </div>
+        </div>
+        <div class="info_base">
+            <div id="usr_title">
+                <span>用户管理</span>
+            </div>
+            <div class="input_info">
+                <div id="usr_num">
+                    <span>用户工号：</span>
+                </div>
+                <input type="text" id="input_num" placeholder="请输入工号">
+                <div id="Ur_name">
+                    <span>用户姓名：</span>
+                </div>
+                <input type="text" id="input_un" placeholder="请选择">
+                <div id="usr_group">
+                    <span>所在小组：</span>
+                </div>
+                <select id="pick_group">
+                    <option value="自动化开发组">自动化开发组</option>
+                    <option value="接入测试组">接入测试组</option>
+                </select>
+                <div id="usr_level">
+                    <span>职级：</span>
+                </div>
+                <select id="select_level">
+                    <option value="T2.1">T2.1</option>
+                    <option value="工程师普通等">工程师普通等</option>
+                </select>
+                <div id="cmp_role">
+                    <span>角色：</span>
+                </div>
+                <select id="pick_role">
+                    <option value="TE">TE</option>
+                    <option value="STE">STE</option>
+                </select>
+                <div id="state">
+                    <span>状态：</span>
+                </div>
+                <select id="select_state">
+                    <option value="正常"> 正常</option>
+                    <option value="禁用">禁用</option>
+                </select>
+                <div id="Reset">
+                    <span>重置</span>
+                </div>
+                <button id="add_usr">
+                    <span class="bt_text">添加用户 </span>
+                    <div class="plus_col"></div>
+                    <div class="plus_row"></div>
+                </button>
+            </div>
+            <table class="table1" cellspacing="0" align="center">
+                <tbody>
+                    <tr class="th_tr">
+                        <td class="tt0">用户工号</td>
+                        <td class="tt1">员工姓名</td>
+                        <td class="tt2">员工性别</td>
+                        <td class="tt3">所在小组</td>
+                        <td class="tt4">职级</td>
+                        <td class="tt5">角色</td>
+                        <td class="tt6">电话号码</td>
+                        <td class="tt7">邮箱</td>
+                        <td class="tt8">生日</td>
+                        <td class="tt9">操作</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table2 table-bordered" cellspacing="0" align="center">
+                <tbody class="tb2">
+                    <tr class="tb_tr">
+                        <td class="tt0">
+                            <span class="sp0">0030310</span>
+                        </td>
+                        <td class="tt1">
+                            <span class="sp1">张软件</span>
+                        </td>
+                        <td class="tt2">
+                            <span class="sp1">男</span>
+                        </td>
+                        <td class="tt3">
+                            <span class="sp0">自动化开发组</span>
+                        </td>
+                        <td class="tt4">
+                            <span class="sp0">T2.1</span>
+                        </td>
+                        <td class="tt5">
+                            <span class="sp0">TE</span>
+                        </td>
+                        <td class="tt6">
+                            <span class="sp1">13763526539</span>
+                        </td>
+                        <td class="tt7">
+                            <span class="sp1">zhangsan@tenda.cn</span>
+                        </td>
+                        <td class="tt8">
+                            <span class="sp0">1994/04/21</span>
+                        </td>
+                        <td class="tt9">
+                            <span class="sp2">查看</span>
+                            <img src="images/admin/See.png" class="See_img">
+                        </td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0">
+                            <span class="sp0">761</span>
+                        </td>
+                        <td class="tt1">
+                            <span class="sp1">李PL</span>
+                        </td>
+                        <td class="tt2">
+                            <span class="sp1">女</span>
+                        </td>
+                        <td class="tt3">
+                            <span class="sp0">OE组</span>
+                        </td>
+                        <td class="tt4">
+                            <span class="sp0">T3.2</span>
+                        </td>
+                        <td class="tt5">
+                            <span class="sp0">PL</span>
+                        </td>
+                        <td class="tt6">
+                            <span class="sp1">18276356732</span>
+                        </td>
+                        <td class="tt7">
+                            <span class="sp1">lisi@tenda.cn</span>
+                        </td>
+                        <td class="tt8">
+                            <span class="sp0">1994/04/21</span>
+                        </td>
+                        <td class="tt9">
+                            <span class="sp2">查看</span>
+                            <img src="images/admin/See.png" class="See_img">
+                        </td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                    <tr class="tb_tr">
+                        <td class="tt0"></td>
+                        <td class="tt1"></td>
+                        <td class="tt2"></td>
+                        <td class="tt3"></td>
+                        <td class="tt4"></td>
+                        <td class="tt5"></td>
+                        <td class="tt6"></td>
+                        <td class="tt7"></td>
+                        <td class="tt8"></td>
+                        <td class="tt9"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="footer">
+                <div id="totle">
+                    <span>共计 20 条数据</span>
+                </div>
+                <img src="{% static 'images/account/left.png' %}" class="left_img">
+                <div id="page1">
+                    <span class="pg1">1</span>
+                </div>
+                <div class="pg2">
+                    <span>2</span>
+                </div>
+                <div class="pg3">
+                    <span>3</span>
+                </div>
+                <div class="pg4">
+                    <span>4</span>
+                </div>
+                <div class="pg5">
+                    <span>5</span>
+                </div>
+                <img src="{% static 'images/account/right.png' %} " class="right_img">
+                <button id="bt_page">
+                    <span style="font-family:'ArialMT', 'Arial';">10</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+                    <img src="{% static 'images/account/right.png' %}" class="bt_img">
+                </button>
+                <div class="goto">
+                    <span>前往第</span>
+                </div>
+                <input type="text" id="input_pg" placeholder="2">
+                <div class="pages">
+                    <span>页</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
