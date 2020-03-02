@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}用户信息{% endblock  %}
+{% block title %}用户信息列表{% endblock  %}
 
 {% block content %}
 
@@ -74,7 +74,7 @@
                     <span>重置</span>
                 </div>
                 <button id="add_usr">
-                    <span class="bt_text">添加用户 </span>
+                    <a href="{% url 'account:add_user' %}"><span class="bt_text">添加用户</span></a>
                     <div class="plus_col"></div>
                     <div class="plus_row"></div>
                 </button>
@@ -128,39 +128,6 @@
                             <img src="{% static 'images/account/See.png' %}" class="See_img">
                         </td>
                     </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0">
-                            <span class="sp0">761</span>
-                        </td>
-                        <td class="tt1">
-                            <span class="sp1">李PL</span>
-                        </td>
-                        <td class="tt2">
-                            <span class="sp1">女</span>
-                        </td>
-                        <td class="tt3">
-                            <span class="sp0">OE组</span>
-                        </td>
-                        <td class="tt4">
-                            <span class="sp0">T3.2</span>
-                        </td>
-                        <td class="tt5">
-                            <span class="sp0">PL</span>
-                        </td>
-                        <td class="tt6">
-                            <span class="sp1">18276356732</span>
-                        </td>
-                        <td class="tt7">
-                            <span class="sp1">lisi@tenda.cn</span>
-                        </td>
-                        <td class="tt8">
-                            <span class="sp0">1994/04/21</span>
-                        </td>
-                        <td class="tt9">
-                            <span class="sp2">查看</span>
-                            <img src="{% static 'images/account/See.png' %}" class="See_img">
-                        </td>
-                    </tr>
                     {% for userinfo in user_info %}
                     <tr class="tb_tr">
                         <td class="tt0"></td>
@@ -173,7 +140,7 @@
                         <td class="tt7">{{ userinfo.email }}</td>
                         <td class="tt8">{{ userinfo.birth_day }}</td>
                         <td class="tt9">
-                            <span class="sp2">查看</span>
+                            <a href="{% url 'account:user_detail' userinfo.id %} "><span class="sp2">查看</span></a> 
                             <img src="{% static 'images/account/See.png' %}" class="See_img">
                         </td>
                     </tr>

@@ -2,73 +2,116 @@
 
 {% load staticfiles %}
 
-{% block title %} 用户信息 {% endblock  %}
+{% block title %} 用户详细信息 {% endblock  %}
 
 {% block content %}
-<div class="row text-center vertical-midldle-sm">
-    <h1>个人信息</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-4 text-right"><span>用户名:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.user}}</div>
+
+<link rel="stylesheet" href="{% static 'css/account/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/user_list.css' %}">
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <img src="{% static 'images/account/admin.svg' %}" class="photo">
+            <div class="Admin">
+                <span>Admin</span>
             </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>姓名:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.realname}}</div>
+            <div class="menu_ctl1">
+                <img src="{% static 'images/account/menu.svg' %}" id="table1_img" class="bd_img">
+                <div id="menu_border1" class="menu_bg">
+                    <div class="menu_border"></div>
+                    <a href="{% url 'account:user_list' %}"><span>用户管理</span></a>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>邮箱:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.email}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>电话:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.phone}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>性别:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.gender}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>小组:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.group}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>职位:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.engineer}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>角色:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.role}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>身份ID:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.id_card}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>毕业学校:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.school}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>毕业时间:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.gradution_time}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>学历:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.education}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>上一份工作:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.pre_job}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 text-right"><span>入职时间:</span></div>
-                <div class="col-md-8 text-left">{{userinfo.entry_time}}</div>
+            <div class="menu_ctl2">
+                <div id="menu_border2" class="menu_data">
+                    <a href="{% url 'account:my_information' %}"><span>个人信息</span></a>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <p>picture</p>
+        <div class="info_base">
+            <div class="base_info">
+                <div id="info_text">
+                    <p><span>基本信息</span></p>
+                </div>
+            </div>
+            <div class="ax_default label">
+                <div id="user_info">
+                    <div id="name_text"><span>姓名：</span></div>
+                    <div id="real_name">
+                        <span>{{userinfo.realname}}</span>
+                    </div>
+                    <div id="user_text"><span>用户名：</span></div>
+                    <div id="USER">
+                        <span>{{userinfo.user}}</span>
+                    </div>
+                    <div id="gender_text"><span>性别：</span></div>
+                    <div id="gender">
+                        <span>{{userinfo.gender}}</span>
+                    </div>
+                </div>
+                <div id="level">
+                    <div id="role_name"><span>角色：</span></div>
+                    <div id="role">
+                        <span>{{userinfo.role}}</span>
+                    </div>
+                    <div id="Rank_text"><span>职级：</span></div>
+                    <div id="rank">
+                        <span>{{userinfo.engineer}}</span>
+                    </div>
+                    <div id="group_text"><span>所在小组：</span></div>
+                    <div id="group">
+                        <span>{{userinfo.group}}</span>
+                    </div>
+                </div>
+                <div id="Privacy">
+                    <div id="mail"><span>邮箱：</span></div>
+                    <div id="mail_name">
+                        <span>{{userinfo.email}}</span>
+                    </div>
+                    <div id="phone"><span>联系电话：</span></div>
+                    <div id="phone_num">
+                        <span>{{userinfo.phone}}</span>
+                    </div>
+                    <div id="birth"><span>生日：</span></div>
+                    <div id="birthday">
+                        <span>{{userinfo.spical_date}}</span>
+                    </div>
+                </div>
+            </div>
+            <div id="vocation">
+                <div id="vocation_text">
+                    <p><span>职业信息</span></p>
+                </div>
+            </div>
+            <div id="edu_bg">
+                <div id="Education"><span>学历：</span></div>
+                <div id="edu_level">
+                    <span>{{userinfo.education}}</span>
+                </div>
+                <div id="graduation"><span>毕业时间：</span></div>
+                <div id="gd_time">
+                    <span>{{userinfo.gradution_time}}</span>
+                </div>
+                <div id="school"><span>毕业学校：</span></div>
+                <div id="school_name">
+                    <span>{{userinfo.school}}</span>
+                </div>
+            </div>
+            <div id="Working">
+                <div id="Last_work"><span>上一份工作：</span></div>
+                <div id="company">
+                    <span>{{userinfo.pre_job}}</span>
+                </div>
+                <div id="ID"><span>身份证号：</span></div>
+                <div id="ID_number">
+                    <span>{{userinfo.id_card}}</span>
+                </div>
+            </div>
+                <button type="button" id="btn" data-toggle="modal" data-target="#myModal">修改密码</button>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock %}

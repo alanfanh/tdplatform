@@ -57,6 +57,8 @@ def all_user(request):
         if role.role_name == "M":
             user_info = UserInfo.objects.all()
             return render(request,"account/user_list.html",{"user_info":user_info})
+        else:
+            return HttpResponse("404 not found")
 
 
 @login_required(login_url="login/")
