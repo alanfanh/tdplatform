@@ -325,27 +325,26 @@
   width: 1416px;
   height:55px;
   font-size:14px;
-  background-color:rgba(242, 242, 242, 1);
   color: #333333;
 }
 .tt0 {
-  width: 75px;
-  padding-left:25.5px;
+  width: 80px;
+  padding-left: 25.5px;
 }
 .tt1 {
-  width: 75px;
-  padding-left:28.5px;
+  width: 110px;
+  padding-left: 35px;
 }
 .tt2 {
-  width:75px;
-  padding-left:6.4px;
+  width: 80px;
+  padding-left: 25.5px;
 }
 .tt3 {
-  padding-left:16.5px;
+  padding-left: 25px;
   width: 135px;
 }
 .tt4 {
-  width: 89px;
+  width: 80px;
 }
 .tt5 {
   width: 96px;
@@ -372,18 +371,13 @@
   color: #02A7F0;
   bottom:4px;
 }
-.table2 {
-  border-collapse:collapse;
-  width: 1416px;
-  font-size:14px;
-  border-top: 1px solid rgba(217, 217, 217, 1);
-  border-left: 1px solid rgba(217, 217, 217, 1);
-  border-right: 1px solid rgba(217, 217, 217, 1);
-  border-bottom: 1px solid rgba(217, 217, 217, 1);
-}
 .tb_tr {
   width: 1416px;
   height:55px;
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  border-top: 1px solid rgba(217, 217, 217, 1);
+  border-left: 1px solid rgba(217, 217, 217, 1);
+  border-right: 1px solid rgba(217, 217, 217, 1);
   border-bottom: 1px solid rgba(217, 217, 217, 1);
 }
 .See_img {
@@ -627,4 +621,13 @@
   font-weight: 400;
   font-style: normal;
   font-size: 12px;
+}
+
+/*  */
+.th_tr {
+  height: 55px;
+  background-color: rgba(242, 242, 242, 1);
+}
+.th_tr th {
+  font-weight:normal;
 }

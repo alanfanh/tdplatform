@@ -8,7 +8,6 @@
 
 <link rel="stylesheet" href="{% static 'css/account/admin.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/user_list.css' %} ">
-    
 
 <div class="base">
     <div class="baseplate">
@@ -21,12 +20,12 @@
                 <img src="{% static 'images/account/menu.svg' %}" id="table1_img" class="bd_img">
                 <div id="menu_border1" class="menu_bg">
                     <div class="menu_border"></div>
-                    <span>用户管理</span>
+                    <a href="{% url 'account:user_list' %}"><span>用户管理</span></a>
                 </div>
             </div>
             <div class="menu_ctl2">
                 <div id="menu_border2" class="menu_data">
-                    <span>个人信息</span>
+                    <a href="{% url 'account:my_information' %}"><span>个人信息</span></a>
                 </div>
             </div>
         </div>
@@ -68,7 +67,7 @@
                     <span>状态：</span>
                 </div>
                 <select id="select_state">
-                    <option value="正常"> 正常</option>
+                    <option value="正常">正常</option>
                     <option value="禁用">禁用</option>
                 </select>
                 <div id="Reset">
@@ -81,22 +80,20 @@
                 </button>
             </div>
             <table class="table1" cellspacing="0" align="center">
-                <tbody>
+                <thead>
                     <tr class="th_tr">
-                        <td class="tt0">用户工号</td>
-                        <td class="tt1">员工姓名</td>
-                        <td class="tt2">员工性别</td>
-                        <td class="tt3">所在小组</td>
-                        <td class="tt4">职级</td>
-                        <td class="tt5">角色</td>
-                        <td class="tt6">电话号码</td>
-                        <td class="tt7">邮箱</td>
-                        <td class="tt8">生日</td>
-                        <td class="tt9">操作</td>
+                        <th class="tt0">用户工号</th>
+                        <th class="tt1">员工姓名</th>
+                        <th class="tt2">员工性别</th>
+                        <th class="tt3">所在小组</th>
+                        <th class="tt4">职级</th>
+                        <th class="tt5">角色</th>
+                        <th class="tt6">电话号码</th>
+                        <th class="tt7">邮箱</th>
+                        <th class="tt8">生日</th>
+                        <th class="tt9">操作</th>
                     </tr>
-                </tbody>
-            </table>
-            <table class="table2 table-bordered" cellspacing="0" align="center">
+                </thead>
                 <tbody class="tb2">
                     <tr class="tb_tr">
                         <td class="tt0">
@@ -164,102 +161,23 @@
                             <img src="{% static 'images/account/See.png' %}" class="See_img">
                         </td>
                     </tr>
+                    {% for userinfo in user_info %}
                     <tr class="tb_tr">
                         <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
+                        <td class="tt1">{{ userinfo.realname }}</td>
+                        <td class="tt2">{{ userinfo.gender }}</td>
+                        <td class="tt3">{{ userinfo.group }}</td>
+                        <td class="tt4">{{ userinfo.engineer }}</td>
+                        <td class="tt5">{{ userinfo.role }}</td>
+                        <td class="tt6">{{ userinfo.phone }}</td>
+                        <td class="tt7">{{ userinfo.email }}</td>
+                        <td class="tt8">{{ userinfo.birth_day }}</td>
+                        <td class="tt9">
+                            <span class="sp2">查看</span>
+                            <img src="{% static 'images/account/See.png' %}" class="See_img">
+                        </td>
                     </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
-                    <tr class="tb_tr">
-                        <td class="tt0"></td>
-                        <td class="tt1"></td>
-                        <td class="tt2"></td>
-                        <td class="tt3"></td>
-                        <td class="tt4"></td>
-                        <td class="tt5"></td>
-                        <td class="tt6"></td>
-                        <td class="tt7"></td>
-                        <td class="tt8"></td>
-                        <td class="tt9"></td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             <div class="footer">
