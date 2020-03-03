@@ -8,7 +8,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         error_messages={'required': u'密码不能为空'}, widget=forms.PasswordInput)
 
-class UserInfoForm(forms.Form):
+class UserInfoForm(forms.ModelForm):
     class Meta:
         model = UserInfo
         fields = ("user", "realname", "email", "phone", "gender", "group", "engineer", "role","id_card","school","gradution_time","education","pre_job","entry_time","birth_day")

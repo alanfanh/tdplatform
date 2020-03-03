@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+编辑用户信息
+{% endblock  %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/account/admin.css' %}">
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <img src="{% static 'images/account/admin.svg' %}" class="photo">
+            <div class="Admin">
+                <span>Admin</span>
+            </div>
+            <div class="menu_ctl1">
+                <img src="{% static 'images/account/menu.svg' %}" id="menu_img" class="bd_img">
+                <div id="control" class="menu_bg">
+                    <div class="menu_border"></div>
+                     <a href="{% url 'account:user_list' %}"><span>用户管理</span></a> 
+                </div>
+            </div>
+            <div class="menu_ctl2">
+                <div id="psl_info" class="menu_data">
+                    <a href="{% url 'account:my_information' %}"><span>个人信息</span></a>   
+                </div>
+            </div>
+        </div>
+        <div class="info_base">
+            <div id="Add_title">
+                <span>编辑用户</span>
+            </div>
+            <div class="Title">
+                <div id="info_title">
+                    <span>基本信息</span>
+                </div>
+            </div>
+            <form action="." method="post">{% csrf_token %}
+                <div class="add_info">
+                    <div class="floor1">
+                        <div id="ID_name">
+                            <span>姓名</span>
+                        </div>
+                        <input type="text" id="input_name" value="{{userinfo.realname}}" placeholder="请输入真实姓名">
+                        <div id="USR_name">
+                            <span>用户名</span>
+                        </div>
+                        <input type="text" id="input_usr" value="{{userinfo.user}}" placeholder="请输入用户名，如zhangsan">
+                        <div id="add_Gender">
+                            <span>性别</span>
+                        </div>
+                        <select id="select_gender">
+                            <option value="0" selected>请选择性别</option>
+                        </select>
+                    </div>
+                    <div class="floor2">
+                        <div id="role_name">
+                            <span>角色</span>
+                        </div>
+                        <select id="select_role">
+                            <option value="0" selected>请选择用户角色</option>
+                        </select>
+                        <div id="Rank_name">
+                            <span>职级</span>
+                        </div>
+                        <select id="select_rank">
+                            <option value="0" selected>请选择用户职级</option>
+                        </select>
+                        <div id="group_name">
+                            <span>所在小组</span>
+                        </div>
+                        <select id="select_group">
+                            <option value="0" selected>请选择用户所在小组</option>
+                        </select>
+                    </div>
+                    <div class="floor3">
+                        <div id="Add_mail">
+                            <span>邮箱</span>
+                        </div>
+                        <input type="text" id="input_mail" value={{userinfo.email}} placeholder="请输入邮箱，如zhhangsan@temda.cn">
+                        <div id="Add_phone">
+                            <span>联系电话</span>
+                        </div>
+                        <input type="text" id="input_phone" value="{{userinfo.phone}}" placeholder="请输入联系电话">
+                        <div id="Add_birth">
+                            <span>生日</span>
+                        </div>
+                        <select id="select_birth">
+                            <option value="0" selected>请选择用户生日</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="Occ_title">
+                    <div id="Occ_info">
+                        <span>职业信息</span>
+                    </div>
+                </div>
+                <div class="floor4">
+                    <div id="Add_edu">
+                        <span>学历</span>
+                    </div>
+                    <select id="select_edu">
+                        <option value="0" selected>请选择用户学历</option>
+                    </select>
+                    <div id="Gdu_time">
+                        <span>毕业时间</span>
+                    </div>
+                    <select id="select_time">
+                        <option value="0" selected>请选择毕业时间</option>
+                    </select>
+                    <div id="gdu_school">
+                        <span>毕业学校</span>
+                    </div>
+                    <input type="text" id="input_school" value="{{userinfo.school}}" placeholder="请输入毕业学校">
+                </div>
+                <div class="floor5">
+                    <div id="Add_ljob">
+                        <span>上一份工作</span>
+                    </div>
+                    <input type="text" id="input_ljob" placeholder="请输入上一份工作公司名称">
+                    <div id="Add_ID">
+                        <span>身份证号</span>
+                    </div>
+                    <input type="text" id="input_ID" placeholder="请输入身份证号">
+                </div>
+                <button id="submission" type="submit">
+                    <span class="sub_text">提 交</span>
+                    <img src="{% static 'images/account/subm.png' %}" class="sub_img">
+                </button>
+                <button id="cancel">取消</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

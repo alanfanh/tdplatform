@@ -94,3 +94,23 @@ def add_user(request):
     else:
         user_post_form = UserInfoForm()
         return render(request, "account/add_user.html",{"user_post_form":user_post_form})
+
+@login_required(login_url='/login')
+@csrf_exempt
+def redit_user(request,user_id):
+    # 编辑用户信息
+    user=User.objects.get(username=request.user.username)
+    if user.is_superuser == 1:
+        if request.method == "GET":
+            # 获取需要修改的user对象，实例化
+            userinfo = UserInfo.objects.get(id=user_id)
+            this_user_form = UserInfoForm(initial={"realname":userinfo.realname,"email":userinfo.email,"phone":userinfo.phone,"gender":userinfo.gender})
+            return render(request, "account/redit_user.html", {"user_form": this_user_form, "userinfo": userinfo})
+        else:
+            redit_user = UserInfo.objects.get(id=user_id)
+            try:
+                pass
+            except:
+                pass
+    else:
+        raise HttpResponse("404")
