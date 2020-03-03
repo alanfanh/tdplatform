@@ -25,6 +25,12 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
+class Rank(models.Model):
+    """
+    员工职级
+    """
+    id = models.AutoField(primary_key=True)
+    rank_name = models.CharField(verbose_name="职级",max_length=5)
 
 class UserInfo(models.Model):
     """
