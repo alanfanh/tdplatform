@@ -1,0 +1,86 @@
+[
+    {
+        "model": "account.Role",
+        "pk": 1,
+        "fields": {
+            "role_name": "TE"
+        }
+    },
+    {
+        "model": "account.Role",
+        "pk": 2,
+        "fields": {
+            "role_name": "STE"
+        }
+    },
+    {
+        "model": "account.Role",
+        "pk": 3,
+        "fields": {
+            "role_name": "PL"
+        }
+    },
+    {
+        "model": "account.Role",
+        "pk": 4,
+        "fields": {
+            "role_name": "M"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 1,
+        "fields": {
+            "name":"家用测试组",
+            "pl": "曲满德"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 2,
+        "fields": {
+            "name": "OEM测试组",
+            "pl": "蔡波琼"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 3,
+        "fields": {
+            "name": "接入测试组",
+            "pl": "卢维"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 4,
+        "fields": {
+            "name": "商用测试组",
+            "pl": "袁志宏"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 5,
+        "fields": {
+            "name": "便携测试组",
+            "pl": "唐路俊"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 6,
+        "fields": {
+            "name": "资料开发组",
+            "pl": "徐欢欢"
+        }
+    },
+    {
+        "model": "account.Group",
+        "pk": 7,
+        "fields": {
+            "name": "自动化开发组",
+            "pl": "刘德生"
+        }
+    }
+]

@@ -141,7 +141,7 @@
                         <td class="tt8">{{ userinfo.birth_day }}</td>
                         <td class="tt9">
                             <a href="{% url 'account:user_detail' userinfo.id %} "><span class="sp2">查看</span></a> 
-                            <img src="{% static 'images/account/See.png' %}" class="See_img">
+                            <a href="{% url 'account:redit_user' userinfo.id %}"><img src="{% static 'images/account/See.png' %}" class="See_img"></a>
                         </td>
                     </tr>
                     {% endfor %}

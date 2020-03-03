@@ -25,6 +25,7 @@ class TecContent(models.Model):
     body = models.TextField(verbose_name="内容概括")
     created_at = models.DateTimeField(verbose_name='时间', auto_now=False, auto_now_add=False, default=timezone.now)
     file = models.FileField(verbose_name="附件", upload_to=None, max_length=100)
+    status = models.CharField(verbose_name="状态", max_length=2)
 
     class Meta:
         ordering = ("-created_at", )
