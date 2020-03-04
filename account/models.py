@@ -32,19 +32,24 @@ class Rank(models.Model):
     id = models.AutoField(primary_key=True)
     rank_name = models.CharField(verbose_name="职级",max_length=5)
 
+    def __str__(self):
+        return self.rank_name
+    
+
 class UserInfo(models.Model):
     """
     用户详细信息表
     """
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    job_num = models.CharField(verbose_name="工号", max_length=8, blank=True)
     realname = models.CharField(verbose_name="真实姓名", max_length=10)
     email = models.EmailField(verbose_name="邮箱", max_length=32)
     phone = models.CharField(verbose_name="手机号", max_length=11)
     gender = models.CharField(verbose_name="性别", max_length=2)
-    group = models.ForeignKey(Group, related_name='group_users', verbose_name="用户所属组", on_delete=models.DO_NOTHING)
-    engineer = models.CharField(max_length=10, verbose_name="职位")
-    role = models.ForeignKey(Role, related_name='role_users', verbose_name="用户角色", on_delete=models.DO_NOTHING)
+    group = models.ForeignKey(Group, related_name='user_group', verbose_name="用户所属组", on_delete=models.DO_NOTHING)
+    rank = models.ForeignKey(Rank, related_name="user_rank", verbose_name="用户职级", on_delete=models.DO_NOTHING)
+    role = models.ForeignKey(Role, related_name='user_role', verbose_name="用户角色", on_delete=models.DO_NOTHING)
     id_card = models.CharField(verbose_name="身份证", max_length=20)
     school = models.CharField(verbose_name="毕业学校", max_length=20)
     gradution_time = models.DateField()

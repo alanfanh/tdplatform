@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import LoginForm,UserInfoForm
-from .models import UserInfo, Group, Role
+from .models import UserInfo, Group, Role, Rank
 
 
 @login_required(login_url="login/")
@@ -104,13 +104,26 @@ def redit_user(request,user_id):
         if request.method == "GET":
             # 获取需要修改的user对象，实例化
             userinfo = UserInfo.objects.get(id=user_id)
+            user_roles = Role.objects.all()
+            user_ranks = Rank.objects.all()
+            user_groups = Group.objects.all()
             this_user_form = UserInfoForm(initial={"realname":userinfo.realname,"email":userinfo.email,"phone":userinfo.phone,"gender":userinfo.gender})
-            return render(request, "account/redit_user.html", {"user_form": this_user_form, "userinfo": userinfo})
+            return render(request, "account/redit_user.html", {"user_form": this_user_form, "userinfo": userinfo, "user_roles":user_roles, "user_ranks":user_ranks, "user_groups":user_groups})
         else:
             redit_user = UserInfo.objects.get(id=user_id)
             try:
-                pass
+                redit_user.realname = request.POST['realname']
+                redit_user.gender = request.POST['gender']
+                redit_user.phone = request.POST['phone']
+                redit_user.email = request.POST['email']
+                redit_user.id_card = request.POST['id_card']
+                redit_user.school = request.POST['school']
+                redit_user.education = request.POST['education']
+                redit_user.pre_job = request.POST['pre_job']
+                redit_user.birth_day = request.POST['birth_day']
+                redit_user.save()
+                return HttpResponse("1")
             except:
-                pass
+                return HttpResponse("2")
     else:
         raise HttpResponse("404")
