@@ -55,25 +55,44 @@
                         <select id="select_gender">
                             <option value="0" selected>请选择性别</option>
                         </select>
+                        <input type="text" id="select_gender" value="{{userinfo.gender}}" placeholder="请输入用户性别">
                     </div>
                     <div class="floor2">
                         <div id="role_name">
                             <span>角色</span>
                         </div>
                         <select id="select_role">
-                            <option value="0" selected>请选择用户角色</option>
+                            {% for role in user_roles %}
+                                {% if role == userinfo.role %}
+                                    <option value="{{role.id}}" selected>{{role}}</option>
+                                {% else %}
+                                    <option value="{{role.id}}">{{role}}</option>
+                                {% endif %}
+                            {% endfor %}
                         </select>
                         <div id="Rank_name">
                             <span>职级</span>
                         </div>
                         <select id="select_rank">
-                            <option value="0" selected>请选择用户职级</option>
+                            {% for rank in user_ranks %}
+                                {% if rank == userinfo.rank %}
+                                    <option value="{{rank.id}}" selected>{{rank}}</option>
+                                {% else %}
+                                    <option value="{{rank.id}}">{{rank}}</option>
+                                {% endif %}
+                            {% endfor %}
                         </select>
                         <div id="group_name">
                             <span>所在小组</span>
                         </div>
                         <select id="select_group">
-                            <option value="0" selected>请选择用户所在小组</option>
+                            {% for group in user_groups %}
+                                {% if group == userinfo.group %}
+                                    <option value="{{group.id}}" selected>{{group}}</option>
+                                {% else %}
+                                    <option value="{{group.id}}">{{group}}</option>
+                                {% endif %}
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="floor3">
@@ -88,9 +107,7 @@
                         <div id="Add_birth">
                             <span>生日</span>
                         </div>
-                        <select id="select_birth">
-                            <option value="0" selected>请选择用户生日</option>
-                        </select>
+                        <input type="text" id="select_birth" value="{{userinfo.birth_day}}" placeholder="如:2000年1月1日">
                     </div>
                 </div>
                 <div class="Occ_title">
@@ -102,9 +119,7 @@
                     <div id="Add_edu">
                         <span>学历</span>
                     </div>
-                    <select id="select_edu">
-                        <option value="0" selected>请选择用户学历</option>
-                    </select>
+                    <input type="text" id="select_edu" value="{{userinfo.education}}" placeholder="请选择用户学历">
                     <div id="Gdu_time">
                         <span>毕业时间</span>
                     </div>
@@ -120,11 +135,11 @@
                     <div id="Add_ljob">
                         <span>上一份工作</span>
                     </div>
-                    <input type="text" id="input_ljob" placeholder="请输入上一份工作公司名称">
+                    <input type="text" id="input_ljob" value="{{userinfo.pre_job}}" placeholder="请输入上一份工作公司名称">
                     <div id="Add_ID">
                         <span>身份证号</span>
                     </div>
-                    <input type="text" id="input_ID" placeholder="请输入身份证号">
+                    <input type="text" id="input_ID" value="{{userinfo.id_card}}" placeholder="请输入身份证号">
                 </div>
                 <button id="submission" type="submit">
                     <span class="sub_text">提 交</span>

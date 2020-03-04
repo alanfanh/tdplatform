@@ -7,6 +7,7 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/account/admin.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/personal_data.css' %}">
 <link rel="stylesheet" href="{% static 'css/account/user_list.css' %}">
 
 <div class="base">
@@ -51,13 +52,13 @@
                     </div>
                 </div>
                 <div id="level">
-                    <div id="role_name"><span>角色：</span></div>
+                    <div class="role_name"><span>角色：</span></div>
                     <div id="role">
                         <span>{{userinfo.role}}</span>
                     </div>
                     <div id="Rank_text"><span>职级：</span></div>
                     <div id="rank">
-                        <span>{{userinfo.engineer}}</span>
+                        <span>{{userinfo.rank}}</span>
                     </div>
                     <div id="group_text"><span>所在小组：</span></div>
                     <div id="group">
@@ -108,7 +109,7 @@
                     <span>{{userinfo.id_card}}</span>
                 </div>
             </div>
-                <button type="button" id="btn" data-toggle="modal" data-target="#myModal">修改密码</button>
+                {% comment %} <button type="button" id="btn" data-toggle="modal" data-target="#myModal">修改密码</button> {% endcomment %}
             </div>
         </div>
     </div>

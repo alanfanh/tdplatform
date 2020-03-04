@@ -130,11 +130,11 @@
                     </tr>
                     {% for userinfo in user_info %}
                     <tr class="tb_tr">
-                        <td class="tt0"></td>
+                        <td class="tt0">{{ userinfo.job_num }}</td>
                         <td class="tt1">{{ userinfo.realname }}</td>
                         <td class="tt2">{{ userinfo.gender }}</td>
                         <td class="tt3">{{ userinfo.group }}</td>
-                        <td class="tt4">{{ userinfo.engineer }}</td>
+                        <td class="tt4">{{ userinfo.rank }}</td>
                         <td class="tt5">{{ userinfo.role }}</td>
                         <td class="tt6">{{ userinfo.phone }}</td>
                         <td class="tt7">{{ userinfo.email }}</td>
