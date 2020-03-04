@@ -82,5 +82,110 @@
             "name": "自动化开发组",
             "pl": "刘德生"
         }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 1,
+        "fields": {
+            "rank_name": "T1.1"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 2,
+        "fields": {
+            "rank_name": "T1.2"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 3,
+        "fields": {
+            "rank_name": "T1.3"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 4,
+        "fields": {
+            "rank_name": "T2.1"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 5,
+        "fields": {
+            "rank_name": "T2.2"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 6,
+        "fields": {
+            "rank_name": "T2.3"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 7,
+        "fields": {
+            "rank_name": "T3.1"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 8,
+        "fields": {
+            "rank_name": "T3.2"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 9,
+        "fields": {
+            "rank_name": "T3.3"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 10,
+        "fields": {
+            "rank_name": "T4.1"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 11,
+        "fields": {
+            "rank_name": "T4.2"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 12,
+        "fields": {
+            "rank_name": "T4.3"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 13,
+        "fields": {
+            "rank_name": "T5.1"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 14,
+        "fields": {
+            "rank_name": "T5.2"
+        }
+    },
+    {
+        "model": "account.Rank",
+        "pk": 15,
+        "fields": {
+            "rank_name": "T5.3"
+        }
     }
 ]
