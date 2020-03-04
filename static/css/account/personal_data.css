@@ -394,7 +394,7 @@ body {
   font-weight:650;
   font-style:normal;
 }
-#role_name {
+.role_name {
   border-width:0px;
   position:absolute;
   left:0px;
