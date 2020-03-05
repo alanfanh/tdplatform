@@ -110,18 +110,31 @@ def redit_user(request,user_id):
             this_user_form = UserInfoForm(initial={"realname":userinfo.realname,"email":userinfo.email,"phone":userinfo.phone,"gender":userinfo.gender})
             return render(request, "account/redit_user.html", {"user_form": this_user_form, "userinfo": userinfo, "user_roles":user_roles, "user_ranks":user_ranks, "user_groups":user_groups})
         else:
-            redit_user = UserInfo.objects.get(id=user_id)
+            redit_userinfo = UserInfo.objects.get(id=user_id)
+            redit_user = User.objects.get(username=redit_userinfo)
+            # print(request.POST)
             try:
-                redit_user.realname = request.POST['realname']
-                redit_user.gender = request.POST['gender']
-                redit_user.phone = request.POST['phone']
-                redit_user.email = request.POST['email']
-                redit_user.id_card = request.POST['id_card']
-                redit_user.school = request.POST['school']
-                redit_user.education = request.POST['education']
-                redit_user.pre_job = request.POST['pre_job']
-                redit_user.birth_day = request.POST['birth_day']
+                redit_userinfo.realname = request.POST['realname']
+                redit_userinfo.gender = request.POST['gender']
+                redit_userinfo.role = Role.objects.get(
+                    id=request.POST['role_id'])
+                redit_userinfo.rank = Rank.objects.get(
+                    id=request.POST['rank_id'])
+                redit_userinfo.group = Group.objects.get(
+                    id=request.POST['group_id'])
+                # 同步邮箱
+                redit_userinfo.email = request.POST['email']
+                redit_user.email = redit_userinfo.email
+                # 修改用户名username
+                redit_user.username = request.POST['username']
+                redit_userinfo.phone = request.POST['phone']
+                redit_userinfo.education = request.POST['education']
+                redit_userinfo.school = request.POST['school']
+                redit_userinfo.pre_job = request.POST['pre_job']
+                redit_userinfo.id_card = request.POST['id_card']
+                # redit_user.birth_day = request.POST['birth_day']
                 redit_user.save()
+                redit_userinfo.save()
                 return HttpResponse("1")
             except:
                 return HttpResponse("2")
