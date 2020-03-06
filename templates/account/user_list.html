@@ -46,22 +46,25 @@
                     <span>所在小组：</span>
                 </div>
                 <select id="pick_group">
-                    <option value="自动化开发组">自动化开发组</option>
-                    <option value="接入测试组">接入测试组</option>
+                {% for group in groups %}
+                    <option value="{{group.id}}">{{group}}</option>
+                {% endfor %}
                 </select>
                 <div id="usr_level">
                     <span>职级：</span>
                 </div>
                 <select id="select_level">
-                    <option value="T2.1">T2.1</option>
-                    <option value="工程师普通等">工程师普通等</option>
+                {% for rank in ranks %}
+                    <option value="{{rank.id}}">{{rank}}</option>
+                {% endfor %}
                 </select>
                 <div id="cmp_role">
                     <span>角色：</span>
                 </div>
                 <select id="pick_role">
-                    <option value="TE">TE</option>
-                    <option value="STE">STE</option>
+                {% for role in roles %}
+                    <option value="{{role.id}}">{{role}}</option>
+                {% endfor %}
                 </select>
                 <div id="state">
                     <span>状态：</span>
@@ -90,44 +93,11 @@
                         <th class="tt5">角色</th>
                         <th class="tt6">电话号码</th>
                         <th class="tt7">邮箱</th>
-                        <th class="tt8">生日</th>
+                        <th class="tt8">入职时间</th>
                         <th class="tt9">操作</th>
                     </tr>
                 </thead>
                 <tbody class="tb2">
-                    <tr class="tb_tr">
-                        <td class="tt0">
-                            <span class="sp0">0030310</span>
-                        </td>
-                        <td class="tt1">
-                            <span class="sp1">张软件</span>
-                        </td>
-                        <td class="tt2">
-                            <span class="sp1">男</span>
-                        </td>
-                        <td class="tt3">
-                            <span class="sp0">自动化开发组</span>
-                        </td>
-                        <td class="tt4">
-                            <span class="sp0">T2.1</span>
-                        </td>
-                        <td class="tt5">
-                            <span class="sp0">TE</span>
-                        </td>
-                        <td class="tt6">
-                            <span class="sp1">13763526539</span>
-                        </td>
-                        <td class="tt7">
-                            <span class="sp1">zhangsan@tenda.cn</span>
-                        </td>
-                        <td class="tt8">
-                            <span class="sp0">1994/04/21</span>
-                        </td>
-                        <td class="tt9">
-                            <span class="sp2">查看</span>
-                            <img src="{% static 'images/account/See.png' %}" class="See_img">
-                        </td>
-                    </tr>
                     {% for userinfo in user_info %}
                     <tr class="tb_tr">
                         <td class="tt0">{{ userinfo.job_num }}</td>
@@ -138,7 +108,7 @@
                         <td class="tt5">{{ userinfo.role }}</td>
                         <td class="tt6">{{ userinfo.phone }}</td>
                         <td class="tt7">{{ userinfo.email }}</td>
-                        <td class="tt8">{{ userinfo.birth_day }}</td>
+                        <td class="tt8">{{ userinfo.entry_time }}</td>
                         <td class="tt9">
                             <a href="{% url 'account:user_detail' userinfo.id %} "><span class="sp2">查看</span></a> 
                             <a href="{% url 'account:redit_user' userinfo.id %}"><img src="{% static 'images/account/See.png' %}" class="See_img"></a>

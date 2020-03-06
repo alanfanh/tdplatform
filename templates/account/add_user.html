@@ -36,58 +36,64 @@
                     <span>基本信息</span>
                 </div>
             </div>
+            <form action="." method="POST">
             <div class="add_info">
                 <div class="floor1">
-                    <div id="ID_name">
+                    <div class="user_title1" >
                         <span>姓名</span>
                     </div>
-                    <input type="text" id="input_name" placeholder="请输入真实姓名">
-                    <div id="USR_name">
+                    <input type="text" id="input_name" name="realname" placeholder="请输入真实姓名">
+                    <div class="user_title2">
                         <span>用户名</span>
                     </div>
-                    <input type="text" id="input_usr" placeholder="请输入用户名，如zhangsan">
-                    <div id="add_Gender">
+                    <input type="text" id="input_usr" name="user" placeholder="请输入用户名，如zhangsan">
+                    <div class="user_title3">
                         <span>性别</span>
                     </div>
-                    <select id="select_gender">
-                        <option value="0" selected>请选择性别</option>
+                    <select id="select_gender" name="gender">
+                        <option value="0" >男</option>
+                        <option value="1" >女</option>
                     </select>
                 </div>
                 <div class="floor2">
-                    <div id="role_name">
+                    <div class="user_title1">
                         <span>角色</span>
                     </div>
-                    <select id="select_role">
-                        <option value="0" selected>请选择用户角色</option>
+                    <select id="select_role" name="role">
+                        {% for role in user_roles %}
+                        <option value="{{role.id}}" >{{role}}</option>
+                        {% endfor %}
                     </select>
-                    <div id="Rank_name">
+                    <div class="user_title2">
                         <span>职级</span>
                     </div>
-                    <select id="select_rank">
-                        <option value="0" selected>请选择用户职级</option>
+                    <select id="select_rank" name="rank">
+                        {% for rank in user_ranks %}
+                        <option value="{{rank.id}}" >{{rank}}</option>
+                        {% endfor %}
                     </select>
-                    <div id="group_name">
+                    <div class="user_title3">
                         <span>所在小组</span>
                     </div>
-                    <select id="select_group">
-                        <option value="0" selected>请选择用户所在小组</option>
+                    <select id="select_group" name="group">
+                        {% for group in user_groups %}
+                        <option value="{{group.id}}">{{group}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="floor3">
-                    <div id="Add_mail">
+                    <div class="user_title1">
                         <span>邮箱</span>
                     </div>
-                    <input type="text" id="input_mail" placeholder="请输入邮箱，如zhhangsan@temda.cn">
-                    <div id="Add_phone">
+                    <input type="text" id="input_mail" name="email" placeholder="请输入邮箱，如zhangsan@temda.cn">
+                    <div class="user_title2">
                         <span>联系电话</span>
                     </div>
-                    <input type="text" id="input_phone" placeholder="请输入联系电话">
-                    <div id="Add_birth">
-                        <span>生日</span>
+                    <input type="text" id="input_phone" name="phone" placeholder="请输入联系电话">
+                    <div class="user_title3">
+                        <span>入职时间</span>
                     </div>
-                    <select id="select_birth">
-                        <option value="0" selected>请选择用户生日</option>
-                    </select>
+                    <input type="text" class="select_datetime" name="entry_time" placeholder="如2016/07/01">
                 </div>
             </div>
             <div class="Occ_title">
@@ -96,38 +102,39 @@
                 </div>
             </div>
             <div class="floor4">
-                <div id="Add_edu">
+                <div class="user_title1">
                     <span>学历</span>
                 </div>
-                <select id="select_edu">
-                    <option value="0" selected>请选择用户学历</option>
-                </select>
-                <div id="Gdu_time">
+                <input type="text" id="select_edu" name="education" placeholder="请输入学历">
+                <div class="user_title2">
                     <span>毕业时间</span>
                 </div>
-                <select id="select_time">
-                    <option value="0" selected>请选择毕业时间</option>
-                </select>
-                <div id="gdu_school">
+                <input type="text" id="select_time" name="gradution_time" placeholder="如2016/07/01"> 
+                <div class="user_title3">
                     <span>毕业学校</span>
                 </div>
-                <input type="text" id="input_school" placeholder="请输入毕业学校">
+                <input type="text" id="input_school" name="school" placeholder="请输入毕业学校">
             </div>
             <div class="floor5">
-                <div id="Add_ljob">
+                <div class="user_title1">
                     <span>上一份工作</span>
                 </div>
-                <input type="text" id="input_ljob" placeholder="请输入上一份工作公司名称">
-                <div id="Add_ID">
+                <input type="text" id="input_ljob" name="pre_job" placeholder="请输入上一份工作公司名称">
+                <div class="user_title2">
                     <span>身份证号</span>
                 </div>
-                <input type="text" id="input_ID" placeholder="请输入身份证号">
+                <input type="text" id="input_ID" name="id_card" placeholder="请输入身份证号">
+                <div class="user_title3">
+                    <span>生日</span>
+                </div>
+                <input type="text" class="select_datetime" name="birth_day" placeholder="如1991/01/08">
             </div>
             <button id="submission">
                 <span class="sub_text">提 交</span>
                 <img src="{% static 'images/account/subm.png' %}" class="sub_img">
             </button>
-            <button id="cancel">取消</button>
+            </form>
+            <button id="cancel" onclick="window.history.back()">取消</button>
         </div>
     </div>
 </div>
