@@ -48,15 +48,18 @@ def group_user(request):
 def all_user(request):
     """查看所有用户，显示用户信息列表"""
     user=User.objects.get(username=request.user.username)
+    groups = Group.objects.all()
+    ranks = Rank.objects.all()
+    roles = Role.objects.all()
     if user.is_superuser == 1:
         user_info = UserInfo.objects.all()
-        return render(request, "account/user_list.html", {"user_info":user_info})
+        return render(request, "account/user_list.html", {"user_info":user_info,"groups":groups,"ranks":ranks,"roles":roles})
     else:
         userinfo = UserInfo.objects.get(user=user)
         role = Role.objects.get(id=userinfo.role_id)
         if role.role_name == "M":
             user_info = UserInfo.objects.all()
-            return render(request,"account/user_list.html",{"user_info":user_info})
+            return render(request,"account/user_list.html",{"user_info":user_info,"groups":groups,"ranks":ranks,"roles":roles})
         else:
             return HttpResponse("404 not found")
 
@@ -66,7 +69,8 @@ def all_user(request):
 def add_user(request):
     """添加新用户"""
     if request.method == "POST":
-        user_post_form = UserInfoForm(data=request.post)
+        user_post_form = UserInfoForm(data=request.POST)
+        print(user_post_form, request.POST)
         if user_post_form.is_valid():
             cd = user_post_form.cleaned_data
             try:
@@ -93,7 +97,10 @@ def add_user(request):
             return HttpResponse("3")
     else:
         user_post_form = UserInfoForm()
-        return render(request, "account/add_user.html",{"user_post_form":user_post_form})
+        user_roles = Role.objects.all()
+        user_ranks = Rank.objects.all()
+        user_groups = Group.objects.all()
+        return render(request, "account/add_user.html",{"user_post_form":user_post_form,"user_roles":user_roles,"user_ranks":user_ranks,"user_groups":user_groups})
 
 @login_required(login_url='/login')
 @csrf_exempt

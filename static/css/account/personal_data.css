@@ -308,7 +308,7 @@ body {
   font-weight:650;
   font-style:normal;
 }
-#name_text {
+.base_information1 {
   border-width:0px;
   position:absolute;
   left:0px;
@@ -332,7 +332,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#user_text {
+.base_information2 {
   border-width:0px;
   position:absolute;
   left:356px;
@@ -356,7 +356,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#gender_text {
+.base_information3 {
   border-width:0px;
   position:absolute;
   left:704px;
@@ -394,18 +394,7 @@ body {
   font-weight:650;
   font-style:normal;
 }
-.role_name {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:13px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #role {
   border-width:0px;
   position:absolute;
@@ -418,18 +407,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#Rank_text {
-  border-width:0px;
-  position:absolute;
-  left:356px;
-  top:13px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #rank {
   border-width:0px;
   position:absolute;
@@ -442,18 +420,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#group_text {
-  border-width:0px;
-  position:absolute;
-  left:704px;
-  top:13px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #group {
   border-width:0px;
   position:absolute;
@@ -480,18 +447,7 @@ body {
   font-weight:650;
   font-style:normal;
 }
-#mail {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:13px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #mail_name {
   border-width:0px;
   position:absolute;
@@ -504,18 +460,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#phone {
-  border-width:0px;
-  position:absolute;
-  left:354px;
-  top:13px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #phone_num {
   border-width:0px;
   position:absolute;
@@ -528,18 +473,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#birth {
-  border-width:0px;
-  position:absolute;
-  left:704px;
-  top:13px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #birthday {
   border-width:0px;
   position:absolute;
@@ -566,18 +500,7 @@ body {
   font-weight:650;
   font-style:normal;
 }
-#Education {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:11px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #edu_level {
   border-width:0px;
   position:absolute;
@@ -590,18 +513,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#graduation {
-  border-width:0px;
-  position:absolute;
-  left:356px;
-  top:11px;
-  font-family: 'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #gd_time {
   border-width:0px;
   position:absolute;
@@ -614,7 +526,7 @@ body {
   color:rgba(0, 0, 0, 0.647058823529412);
   line-height:22px;
 }
-#school {
+.detail_information3 {
   border-width:0px;
   position:absolute;
   left:712px;
@@ -652,7 +564,7 @@ body {
   font-weight:650;
   font-style:normal;
 }
-#Last_work {
+.detail_information1 {
   border-width:0px;
   position:absolute;
   left:0px;
@@ -676,7 +588,7 @@ body {
   color:rgba(0, 0, 0, 0.847058823529412);
   line-height:22px;
 }
-#ID {
+.detail_information2 {
   border-width:0px;
   position:absolute;
   left:356px;

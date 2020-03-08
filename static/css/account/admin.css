@@ -443,12 +443,12 @@ button {
   font-weight:650;
   font-style:normal;
 }
-#ID_name {
+.user_title1 {
   border-width:0px;
   position:absolute;
   left:0px;
   top:0px;
-  width:28px;
+  width:70px;
   height:19px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
@@ -483,12 +483,12 @@ button {
   padding-top:0px;
   line-height:22px;
 }
-#USR_name {
+.user_title2 {
   border-width:0px;
   position:absolute;
   left:366px;
   top:0px;
-  width:42px;
+  width:56px;
   height:19px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
@@ -523,12 +523,12 @@ button {
   padding-top:0px;
   line-height:22px;
 }
-#add_Gender {
+.user_title3 {
   border-width:0px;
   position:absolute;
   left:731px;
   top:0px;
-  width:42px;
+  width:56px;
   height:19px;
   background:inherit;
   background-color:rgba(255, 255, 255, 0);
@@ -578,23 +578,7 @@ button {
   font-weight:650;
   font-style:normal;
 }
-#role_name {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:0px;
-  width:28px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #select_role {
   border-width:0px;
   position:absolute;
@@ -619,23 +603,7 @@ button {
   color:#AAAAAA;
   line-height:22px;
 }
-#Rank_name {
-  border-width:0px;
-  position:absolute;
-  left:366px;
-  top:0px;
-  width:28px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #select_rank {
   border-width:0px;
   position:absolute;
@@ -660,23 +628,7 @@ button {
   color:#AAAAAA;
   line-height:22px;
 }
-#group_name {
-  border-width:0px;
-  position:absolute;
-  left:731px;
-  top:0px;
-  width:56px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #select_group {
   border-width:0px;
   position:absolute;
@@ -715,23 +667,7 @@ button {
   font-weight:650;
   font-style:normal;
 }
-#Add_mail {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:0px;
-  width:28px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #input_mail {
   border-width:0px;
   position:absolute;
@@ -755,23 +691,7 @@ button {
   padding-top:0px;
   line-height:22px;
 }
-#Add_phone {
-  border-width:0px;
-  position:absolute;
-  left:366px;
-  top:0px;
-  width:56px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #input_phone {
   border-width:0px;
   position:absolute;
@@ -795,24 +715,8 @@ button {
   padding-top:0px;
   line-height:22px;
 }
-#Add_birth {
-  border-width:0px;
-  position:absolute;
-  left:731px;
-  top:0px;
-  width:28px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
-#select_birth {
+
+.select_datetime {
   border-width:0px;
   position:absolute;
   left:731px;
@@ -850,23 +754,7 @@ button {
   font-weight:650;
   font-style:normal;
 }
-#Add_edu {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:0px;
-  width:28px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #select_edu {
   border-width:0px;
   position:absolute;
@@ -891,23 +779,7 @@ button {
   line-height:22px;
   color:#AAAAAA;
 }
-#Gdu_time {
-  border-width:0px;
-  position:absolute;
-  left:366px;
-  top:0px;
-  width:56px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #select_time {
   border-width:0px;
   position:absolute;
@@ -938,23 +810,7 @@ button {
   background-size:14px;
   opacity: 0.43
 }
-#gdu_school {
-  border-width:0px;
-  position:absolute;
-  left:731px;
-  top:0px;
-  width:56px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #input_school {
   border-width:0px;
   position:absolute;
@@ -992,23 +848,7 @@ button {
   font-weight:650;
   font-style:normal;
 }
-#Add_ljob {
-  border-width:0px;
-  position:absolute;
-  left:0px;
-  top:0px;
-  width:70px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #input_ljob {
   border-width:0px;
   position:absolute;
@@ -1032,23 +872,7 @@ button {
   padding-top:0px;
   line-height:22px;
 }
-#Add_ID {
-  border-width:0px;
-  position:absolute;
-  left:366px;
-  top:0px;
-  width:56px;
-  height:19px;
-  background:inherit;
-  background-color:rgba(255, 255, 255, 0);
-  border:none;
-  font-family:'PingFangSC-Regular', 'PingFang SC';
-  font-weight:400;
-  font-style:normal;
-  font-size:14px;
-  color:rgba(0, 0, 0, 0.847058823529412);
-  line-height:22px;
-}
+
 #input_ID {
   border-width:0px;
   position:absolute;

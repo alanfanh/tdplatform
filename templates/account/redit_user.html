@@ -8,7 +8,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/account/admin.css' %}">
-
+<script type='text/javascript' src='{% static "js/layer.js" %}'></script>
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
@@ -41,24 +41,24 @@
             <form action="." method="post">{% csrf_token %}
                 <div class="add_info">
                     <div class="floor1">
-                        <div id="ID_name">
+                        <div class="user_title1">
                             <span>姓名</span>
                         </div>
                         <input type="text" id="input_name" value="{{userinfo.realname}}" placeholder="请输入真实姓名">
-                        <div id="USR_name">
+                        <div class="user_title2">
                             <span>用户名</span>
                         </div>
                         <input type="text" id="input_usr" value="{{userinfo.user}}" placeholder="请输入用户名，如zhangsan">
-                        <div id="add_Gender">
+                        <div class="user_title3">
                             <span>性别</span>
                         </div>
-                        <select id="select_gender">
+                        {% comment %} <select id="select_gender">
                             <option value="0" selected>请选择性别</option>
-                        </select>
+                        </select> {% endcomment %}
                         <input type="text" id="select_gender" value="{{userinfo.gender}}" placeholder="请输入用户性别">
                     </div>
                     <div class="floor2">
-                        <div id="role_name">
+                        <div class="user_title1">
                             <span>角色</span>
                         </div>
                         <select id="select_role">
@@ -70,7 +70,7 @@
                                 {% endif %}
                             {% endfor %}
                         </select>
-                        <div id="Rank_name">
+                        <div class="user_title2">
                             <span>职级</span>
                         </div>
                         <select id="select_rank">
@@ -82,7 +82,7 @@
                                 {% endif %}
                             {% endfor %}
                         </select>
-                        <div id="group_name">
+                        <div class="user_title3">
                             <span>所在小组</span>
                         </div>
                         <select id="select_group">
@@ -96,18 +96,18 @@
                         </select>
                     </div>
                     <div class="floor3">
-                        <div id="Add_mail">
+                        <div class="user_title1">
                             <span>邮箱</span>
                         </div>
                         <input type="text" id="input_mail" value={{userinfo.email}} placeholder="请输入邮箱，如zhhangsan@temda.cn">
-                        <div id="Add_phone">
+                        <div class="user_title2">
                             <span>联系电话</span>
                         </div>
                         <input type="text" id="input_phone" value="{{userinfo.phone}}" placeholder="请输入联系电话">
-                        <div id="Add_birth">
-                            <span>生日</span>
+                        <div class="user_title3">
+                            <span>入职时间</span>
                         </div>
-                        <input type="text" id="select_birth" value="{{userinfo.birth_day}}" placeholder="如:2000年1月1日">
+                        <input type="text" class="select_datetime" value="{{userinfo.entry_time}}" placeholder="如:2000年1月1日">
                     </div>
                 </div>
                 <div class="Occ_title">
@@ -116,39 +116,71 @@
                     </div>
                 </div>
                 <div class="floor4">
-                    <div id="Add_edu">
+                    <div class="user_title1">
                         <span>学历</span>
                     </div>
                     <input type="text" id="select_edu" value="{{userinfo.education}}" placeholder="请选择用户学历">
-                    <div id="Gdu_time">
+                    <div class="user_title2">
                         <span>毕业时间</span>
                     </div>
                     <select id="select_time">
                         <option value="0" selected>请选择毕业时间</option>
                     </select>
-                    <div id="gdu_school">
+                    <div class="user_title3">
                         <span>毕业学校</span>
                     </div>
                     <input type="text" id="input_school" value="{{userinfo.school}}" placeholder="请输入毕业学校">
                 </div>
                 <div class="floor5">
-                    <div id="Add_ljob">
+                    <div class="user_title1">
                         <span>上一份工作</span>
                     </div>
                     <input type="text" id="input_ljob" value="{{userinfo.pre_job}}" placeholder="请输入上一份工作公司名称">
-                    <div id="Add_ID">
+                    <div class="user_title2">
                         <span>身份证号</span>
                     </div>
                     <input type="text" id="input_ID" value="{{userinfo.id_card}}" placeholder="请输入身份证号">
                 </div>
-                <button id="submission" type="submit">
+                {% comment %} <button id="submission" type="submit" onclick="redit_user()">
                     <span class="sub_text">提 交</span>
                     <img src="{% static 'images/account/subm.png' %}" class="sub_img">
-                </button>
-                <button id="cancel">取消</button>
+                </button> {% endcomment %}
+                <input id="submission" class="sub_text" type="button" value="提交" onclick="redit_user()">
             </form>
+                <button id="cancel" onclick="window.history.back()">取消</button>
         </div>
     </div>
 </div>
+<script type ="text/javascript">
+function redit_user() {
+    var username = $("#input_usr").val();
+    var realname = $("#input_name").val();
+    var username = $("#input_usr").val();
+    var gender = $("#select_gender").val();
+    var role_id = $("#select_role").val();
+    var rank_id = $("#select_rank").val();
+    var group_id = $("#select_group").val();
+    var email = $("#input_mail").val();
+    var phone = $("#input_phone").val();
+    var education = $("#select_edu").val();
+    var school = $("#input_school").val();
+    var job = $("#input_ljob").val();
+    var id_card = $("#input_ID").val();
+    var birth_day = $("#select_birth").val();
+    $.ajax({
+        url: "{% url 'account:redit_user' userinfo.id %}",
+        type: "POST",
+        data: {"username":username,"realname":realname,"gender":gender,"role_id":role_id,"rank_id":rank_id,"group_id":group_id,"email":email,"phone":phone,"education":education,"school":school,"pre_job":job,"id_card":id_card,"birth_day":birth_day},
+        success:function(e) {
+            if(e=="1") {
+                layer.msg("提交成功。");
+                location.href = "{% url 'account:user_list' %}";
+            }else{
+                layer.msg("修改失败。");
+            }
+        },
+    });
+}
+</script>
 
 {% endblock  %}
