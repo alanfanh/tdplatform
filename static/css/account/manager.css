@@ -1,0 +1,342 @@
+﻿.menu_m5 {
+    border-width: 0px;
+    position: absolute;
+    width:200px;
+    height:46px;
+    left:0px;
+    top:369px;
+}
+.m_page1 {
+    border-width: 0px;
+    position: absolute;
+    left: 1061px;
+    top: 17px;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(16, 142, 233, 1);
+    border-radius: 4px;
+}
+.mp {
+    border-width: 0px;
+    position: absolute;
+    left: 1205px;
+    top: 15px;
+    width: 82px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666666;
+    text-align: left;
+}
+.It_box {
+    position: absolute;
+    left: 1348px;
+    top: 15px;
+    width: 47px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    font-size: 12px;
+    -webkit-text-fill-color: #666666;
+    text-align: left;
+    padding-left: 11px;
+}
+.mp8 {
+    width: 86px;
+    text-align: left; 
+  }
+.mp9 {
+    width: 139px;
+    text-align: left; 
+  }
+  .mgoing_content {
+    position: absolute;
+    left: 160px;
+    top: 442px;
+    width: 1200px;
+    height: 150px;
+  }
+  .mgoing_exam {
+    position: absolute;
+    left: 367px;
+    top: 52px;
+    width: 56px;
+    height: 19px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 650;
+    font-size: 14px;
+    color: #666666;
+  }
+  .mgoing_Suc2 {
+    position: absolute;
+    left: 390px;
+    top: 38px;
+    width:8px;
+    height:8px;
+  }
+  .depart_em {
+    position: absolute;
+    left: 752px;
+    top: 52px;
+    width: 56px;
+    height: 19px;
+    font-family: 'MicrosoftTaiLe', 'Microsoft Tai Le';
+    font-weight: 400;
+    font-size: 14px;
+    color: #999999;
+  }
+  .mgoing_Suc3 {
+    position: absolute;
+    left: 770px;
+    top: 31px;
+    width:22px;
+    height:22px;
+  }
+  .mwait_line {
+    position: absolute;
+    left: 788px;
+    top: 41px;
+    width: 346px;
+    height: 2px;
+    background-color: rgba(233, 233, 233, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(233, 233, 233, 1);
+    border-radius: 2px;
+  }
+  .m_name {
+    position: absolute;
+    left: 752px;
+    top: 84px;
+    width: 23px;
+    height: 54px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: #989898;
+    line-height: 18px;
+  }
+  .m_lastnm {
+    position: absolute;;
+    top: 1px;
+  }
+  .mexam_hist {
+    position: absolute;
+    left: 33px;
+    top: 612px;
+    width: 64px;
+    height: 21px;
+    font-family: 'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
+    font-weight: 650;
+    font-size: 16px;
+    color: #666666;
+    line-height: 21px;
+  }
+  .mexam_tb{
+    position: relative;
+    margin-top:649px;
+    margin-left: 33px;
+    width: 1408px;
+    border-collapse: collapse;
+  }
+  #m_sug {
+    position: absolute;
+    left:33px;
+    top:820px;
+    width: 104px;
+    height: 28px;
+    background-color: rgba(16, 142, 233, 1);
+    border: none;
+    border-radius: 4px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: left;
+  }
+  #mdload {
+    position: absolute;
+    left: 153px;
+    top: 818px;
+    width: 81px;
+    height: 32px;
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 4px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    text-align: center;
+    line-height: 22px;
+  }
+  .m_mdata {
+    position: absolute;
+    left:21.5px;
+    top:13px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 14px;
+    width:56px;
+    height:19px;
+    color: #7F7F7F;
+  }
+  .manag_check {
+    position: absolute;
+    left: 752px;
+    top: 52px;
+    width: 56px;
+    height: 19px;
+    font-family: 'MicrosoftTaiLe', 'Microsoft Tai Le';
+    font-weight: 400;
+    font-size: 14px;
+    color: #666666;
+  }
+  .gpld_exam {
+    position: absolute;
+    left: 367px;
+    top: 52px;
+    width: 56px;
+    height: 19px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 14px;
+    color: #666666;
+  }
+  .mSuc3 {
+    position: absolute;
+    left: 777px;
+    top: 38px;
+    width:8px;
+    height:8px;
+  }
+  .mSuc_line {
+    position: absolute;
+    left:16px;
+    top: 41px;
+    width:1124px;
+    height: 3px;
+    background-color: rgba(16, 141, 233, 1);
+    border: none;
+    border-radius: 6px;
+  }
+  .msuc_pass {
+    position: absolute;
+    left: 1126px;
+    top: 52px;
+    width: 28px;
+    height: 18px;
+    font-family: 'MicrosoftTaiLe', 'Microsoft Tai Le';
+    font-weight:650;
+    font-size: 14px;
+    color: #666666;
+  }
+  .mSuc4 {
+    position: absolute;
+    left: 1130px;
+    top: 31px;
+    width:22px;
+    height:22px;
+  }
+  .m_stage {
+    position: absolute;
+    left: 752px;
+    top: 84px;
+    width: 62px;
+    height: 54px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: #989898;
+    line-height: 18px;  
+  }
+  #mre_bt {
+    position: absolute;
+    left:33px;
+    top:826px;
+    width:81px;
+    height:32px;
+    background-color: rgba(16, 142, 233, 1);
+    border: none;
+    border-radius: 4px;
+    font-family: 'MicrosoftYaHei', '微软雅黑';
+    font-weight: 400;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .ste_pract {
+    position: absolute;
+    align-self: center;
+    padding: 12px 16px 12px 16px;
+    width: 110px;
+    height: 19px;
+  }
+  .ste_compt {
+    position: absolute;
+    align-self: center;
+    padding: 12px 16px 12px 16px;
+    width: 110px;
+    height: 19px;
+  }
+  #ste_page1 {
+    border-width: 0px;
+    position: absolute;
+    left: 1061px;
+    top: 17px;
+    width: 18px;
+    height: 18px;
+    background-color: rgba(16, 142, 233, 1);
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  #ste_page {
+    border-width: 0px;
+    position: absolute;
+    left: 1205px;
+    top: 15px;
+    width: 82px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 12px;
+    color: #666666;
+    text-align: left;
+  }
+  #ste_input {
+    position: absolute;
+    left: 1348px;
+    top: 15px;
+    width: 47px;
+    height: 22px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 12px;
+    -webkit-text-fill-color: #666666;
+    text-align: left;
+    padding-left: 11px;
+  }

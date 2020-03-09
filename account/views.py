@@ -27,7 +27,15 @@ def myself(request):
     user = User.objects.get(username=request.user.username)
     if user.is_superuser != 1:
         userinfo = UserInfo.objects.get(user=user)
-        return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
+        role = Role.objects.get(id=userinfo.role_id)
+        if role.role_name == "TE":
+            return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
+        elif role.role_name == "STE":
+            return render(request,"account/myself_ste.html",{"user":user,"userinfo":userinfo})
+        elif role.role_name == "PL":
+            return render(request,"account/myself_pl.html",{"user":user,"userinfo":userinfo})
+        else:
+            return render(request,"account/myself_m.html",{"user":user,"userinfo":userinfo})
     else:
         return render(request, "account/myself_admin.html", {"user":user})
 
@@ -41,7 +49,9 @@ def group_user(request):
         if role.role_name == "PL":
             users = UserInfo.objects.filter(group_id=userinfo.group_id)
             groups = Group.objects.all()
-            return render(request, 'account/group_user.html', {"users":users, "groups":groups})
+            return render(request, 'account/my_group.html', {"users": users, "userinfo": userinfo})
+    else:
+        return HttpResponse("404")
 
 
 @login_required(login_url="login/")
