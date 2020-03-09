@@ -53,6 +53,15 @@ def group_user(request):
     else:
         return HttpResponse("404")
 
+@login_required(login_url="login/")
+def group_list(request):
+    userinfo = UserInfo.objects.get(user=request.user)
+    role = Role.objects.get(id=userinfo.role_id)
+    if role.role_name == "M":
+        groups = Group.objects.all()
+        return render(request, "account/group_list.html", {"groups":groups,"userinfo":userinfo})
+    else:
+        return HttpResponse('404')
 
 @login_required(login_url="login/")
 def all_user(request):

@@ -23,5 +23,6 @@ urlpatterns = [
     # 用户
     path('add-user/', views.add_user, name="add_user"),
     path('user-list/',views.all_user, name="user_list"),
-    path('redit_user/<int:user_id>', views.redit_user, name="redit_user")
+    path('redit_user/<int:user_id>', views.redit_user, name="redit_user"),
+    path('group-list',views.group_list, name="group_list")
 ]
