@@ -11,45 +11,45 @@
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
-        <div class="pt">
-            <img src="{% static 'images/account/photo.svg' %}">
-            <span class="chpt">更换头像</span>
-        </div>
-        <img src="images/admin/hand.png" class="hand">
-        <div class="nm">
-            <span>{{userinfo.realname}}</span>
-        </div>
-        <div class="pt_dp">
-            <span>{{userinfo.group}}</span>
-        </div>
-        <div class="sc">
-            <span>80</span>
-        </div>
-        <div class="hv">
-            <span>29</span>
-        </div>
-        <div class="accum">
-            <span>积分</span>
-        </div>
-        <div class="tc">
-            <span>技术资产</span>
-        </div>
-        <div class="menu_gp1">
-            <a href="#"><span class="train">我贡献的培训</span></a>
-        </div>
-        <div class="menu_gp2">
-            <a href="#"><span class="pract">我的优秀实践</span></a>
-        </div>
-        <div class="menu_gp3">
-            <a href="#"><span class="Ct_Cp">我的客诉问题</span></a>
-        </div>
-        <div class="menu_gp4" style="background-color:white">
-            <a href="{% url 'account:group_user' %}"><span class="this_page" style="color:#7F7F7F">我的小组</span></a>
-        </div>
-        <div class="menu_gp5" style="background-color: rgba(244, 244, 244, 1)">
-            <div class="left_bd"></div>
-            <a href="{% url 'account:my_information' %} "><span class="Per_Data" style="color:black">个人资料</span></a>
-        </div>
+            <div class="pt">
+                <img src="{% static 'images/account/photo.svg' %}">
+                <span class="chpt">更换头像</span>
+            </div>
+            <img src="images/admin/hand.png" class="hand">
+            <div class="nm">
+                <span>{{userinfo.realname}}</span>
+            </div>
+            <div class="pt_dp">
+                <span>{{userinfo.group}}</span>
+            </div>
+            <div class="sc">
+                <span>80</span>
+            </div>
+            <div class="hv">
+                <span>29</span>
+            </div>
+            <div class="accum">
+                <span>积分</span>
+            </div>
+            <div class="tc">
+                <span>技术资产</span>
+            </div>
+            <div class="menu_gp1">
+                <a href="{% url 'training:person_course' %}"><span class="train">我贡献的培训</span></a>
+            </div>
+            <div class="menu_gp2">
+                <a href="#"><span class="pract">我的优秀实践</span></a>
+            </div>
+            <div class="menu_gp3">
+                <a href="{% url 'asset:my_complaint' %}"><span class="Ct_Cp">我的客诉问题</span></a>
+            </div>
+            <div class="menu_gp4" style="background-color:white">
+                <a href="{% url 'account:group_user' %}"><span class="this_page" style="color:#7F7F7F">我的小组</span></a>
+            </div>
+            <div class="menu_gp5" style="background-color: rgba(244, 244, 244, 1)">
+                <div class="left_bd"></div>
+                <a href="{% url 'account:my_information' %} "><span class="Per_Data" style="color:black">个人资料</span></a>
+            </div>
         </div>
         <div class="info_base">
             <div class="base_info">

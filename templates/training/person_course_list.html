@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/default.css' %}">
+
+<div class="base">
+    <div class="baseplate">
+        {% if userinfo.role_id == 3 %}
+        {% include "training/siderbar_pl.html" %}
+        {% elif userinfo.role_id == 4 %}
+        {% include "training/siderbar_m.html" %}
+        {% endif %}
+        <div class="info_base">
+            <div class="gp_title">
+                <span id="gp_text">部门小组</span>
+            </div>
+            <table class="gp_table" align="center">
+                <thead>
+                <tr class="gp_th">
+                    <th class="th1">
+                    <input type="checkbox" class="ck">
+                    </th>
+                    <th class="th2">序号</th>
+                    <th class="th3">小组</th>
+                    <th class="th4">组长</th>
+                    <th class="th5">人数</th>
+                    <th class="th6">技术资产
+                    <img src="{% static 'images/account/up.svg' %}" class="up_img">
+                    <img src="{% static 'images/account/down.svg' %}" class="down_img">
+                    </th>
+                    <th class="th7">积分
+                    <img src="{% static 'images/account/up.svg' %}" class="up_img">
+                    <img src="{% static 'images/account/down.svg' %}" class="down_img">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for group in groups %}
+                    <tr class="gp_tr">
+                        <td class="th1">
+                            <input type="checkbox" class="ck">
+                        </td>
+                        <td class="th2">{{forloop.counter}}</td>
+                        <td class="th3">{{group.name}}</td>
+                        <td class="th4">{{group.pl}}</td>
+                        <td class="th5">{{group.user_group.all.count}}</td>
+                        <td class="th6"></td>
+                        <td class="th7"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="gp_num">
+                <span>共计 {{groups.count}} 个小组</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
