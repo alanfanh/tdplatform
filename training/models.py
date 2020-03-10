@@ -10,7 +10,7 @@ class Course(models.Model):
     range = models.CharField(verbose_name="课程范围", max_length=50)
     course_time = models.DateField(verbose_name="培训时间", auto_now=False, auto_now_add=False)
     address = models.CharField(verbose_name="培训地点", max_length=30)
-    teacher = models.CharField(verbose_name="主讲人", max_length=30)
+    teacher = models.ForeignKey(UserInfo, related_name="course_teacher",verbose_name="主讲人", on_delete=models.DO_NOTHING)
     file_name = models.FileField(verbose_name="附件", upload_to="course_files", max_length=100)
     cdescription = models.CharField(verbose_name="课程概述",max_length=150, blank=True)
     # 多对多，培训课程与参加人
