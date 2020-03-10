@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/default.css' %}">
+
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+        <div class="pt">
+            <img src="{% static 'images/account/photo.svg' %}">
+            <span class="chpt">更换头像</span>
+        </div>
+        <img src="images/admin/hand.png" class="hand">
+        <div class="nm">
+            <span>{{userinfo.realname}}</span>
+        </div>
+        <div class="pt_dp">
+            {% if userinfo.role_id == 4 %}
+            <span>测试部 | 经理</span>
+            {% else %}
+            <span>{{userinfo.group}}</span>
+            {% endif %}
+        </div>
+        <div class="sc">
+            <span>80</span>
+        </div>
+        <div class="hv">
+            <span>29</span>
+        </div>
+        <div class="accum">
+            <span>积分</span>
+        </div>
+        <div class="tc">
+            <span>技术资产</span>
+        </div>
+        <div class="menu_gp1">
+            <a href="{% url 'training:person_course' %}"><span class="train">我贡献的培训</span></a>
+        </div>
+        <div class="menu_gp2">
+            <a href="#"><span class="pract">我的优秀实践</span></a>
+        </div>
+        <div class="chmenu_gp3">
+            <div class="left_bd"></div>
+            <a href="{% url 'asset:my_complaint' %}"><span class="chthis_page">我的客诉问题</span></a>
+        </div>
+        <div class="chmenu_gp4">
+            {% if userinfo.role_id == 4 %}
+            <a href="{% url 'account:group_list' %}"><span class="Per_Data">小组信息</span></a>
+            {% else %}
+            <a href="{% url 'account:group_user' %}"><span class="Per_Data">我的小组</span></a>
+            {% endif %}
+        </div>
+        <div class="menu_gp5">
+            <a href="{% url 'account:my_information' %}"><span class="Per_Data">个人资料</span></a>
+        </div>
+        </div>
+    <div class="info_base">
+        <div class="gp_title">
+        <span class="Cust_Com">我的客诉问题</span>
+        </div>
+        <table class="gp_table" align="center"">
+        <thead>
+            <tr class="ct_th">
+            <th class="ctt1">
+                <input type="checkbox" class="ck">
+            </th>
+            <th class="ctt2">序号</th>
+            <th class="ctt3">
+                <span class="Cust_name">客诉名称</span>
+            </th>
+            <th class="ctt4">客诉类型</th>
+            <th class="ctt5">提交人</th>
+            <th class="ctt6">客诉时间
+                <img src="images/admin/up.svg" class="up_img">
+                <img src="images/admin/down.svg" class="down_img">
+            </th>
+            <th class="ctt7">严重程度</th>
+            <th class="ctt8">产品线</th>
+            <th class="ctt9">问题分类</th>
+            <th class="ctt10">分析负责人</th>
+            <th class="ctt11">分析完成时间</th>
+            <th class="ctt12">措施状态</th>
+            <th class="ctt13">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="ct_tr">
+            <td class="ctt1">
+                <input type="checkbox" class="ck">
+            </td>
+            <td class="ctt2">1</td>
+            <td class="ctt3">
+                <span class="sign"></span>
+                <span class="Cust_cont">02客户端模式透传需求</span>
+            </td>
+            <td class="ctt4">新需求</td>
+            <td class="ctt5">李测试</td>
+            <td class="ctt6">2019/10</td>
+            <td class="ctt7">高</td>
+            <td class="ctt8">家用</td>
+            <td class="ctt9">安全性</td>
+            <td class="ctt10">李负责</td>
+            <td class="ctt11">-</td>
+            <td class="ctt12">
+                <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
+            </td>
+            <td class="ctt13">
+                <span class="dload">查看 | 下载</span>
+                <img src="images/admin/See.png" class="see_dload">
+            </td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+            <tr class="ct_tr">
+            <td class="ctt1"></td>
+            <td class="ctt2"></td>
+            <td class="ctt3"></td>
+            <td class="ctt4"></td>
+            <td class="ctt5"></td>
+            <td class="ctt6"></td>
+            <td class="ctt7"></td>
+            <td class="ctt8"></td>
+            <td class="ctt9"></td>
+            <td class="ctt10"></td>
+            <td class="ctt11"></td>
+            <td class="ctt12"></td>
+            <td class="ctt13"></td>
+            </tr>
+        </tbody>
+        </table>
+        <div class="ct_footer">
+            <div id="ct_total">
+                <span>共计 24 条数据</span>
+            </div>
+            <img src="images/admin/left.png" class="Ct_left">
+            <div id="Ct_page1">
+            <span class="Ct_pg1">1</span>
+            </div>
+            <div class="Ct_pg2">
+            <span>2</span>
+            </div>
+            <div class="Ct_pg3">
+            <span>3</span>
+            </div>
+            <div class="Ct_pg4">
+            <span>4</span>
+            </div>
+            <div class="Ct_pg5">
+            <span>5</span>
+            </div>
+            <img src="images/admin/right.png" class="Ct_right">
+            <button id="Ct_page">
+            <span style="font-family:'ArialMT', 'Arial';">10</span>
+            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+            <img src="images/admin/right.png" class="Ct_img">
+            </button>
+            <div class="Ct_goto">
+            <span>前往第</span>
+            </div>
+            <input type="text" id="Ct_input" placeholder="2">
+            <div class="Ct_pages">
+            <span>页</span>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock  %}
