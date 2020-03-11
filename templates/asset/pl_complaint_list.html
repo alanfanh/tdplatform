@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/default.css' %}">
 
-
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
@@ -42,7 +41,7 @@
             <a href="{% url 'training:person_course' %}"><span class="train">我贡献的培训</span></a>
         </div>
         <div class="menu_gp2">
-            <a href="#"><span class="pract">我的优秀实践</span></a>
+            <a href="{% url 'asset:process_tec' %}"><span class="pract">我的优秀实践</span></a>
         </div>
         <div class="chmenu_gp3">
             <div class="left_bd"></div>

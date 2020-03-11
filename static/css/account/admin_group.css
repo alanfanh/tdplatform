@@ -812,7 +812,9 @@
   .Processed_text {
     position: absolute;
     align-self: center;
-    padding: 12px 16px 12px 16px;
+    top: 12px;
+    left: 16px;
+    /* padding: 12px 16px 12px 16px; */
     width: 96px;
     height: 19px;
   }
@@ -832,7 +834,9 @@
   .Untreated_text {
     position: absolute;
     align-self: center;
-    padding: 12px 16px 12px 16px;
+    top: 12px;
+    left: 16px;
+    /* padding: 12px 16px 12px 16px; */
     width: 79px;
     height: 19px;
   }
