@@ -1,0 +1,418 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}客诉列表{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
+<link rel="stylesheet" href="{% static 'css/default.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <div class="menu_cp1">
+                <a href=""><span class="m_mdata">优秀实践</span></a>
+            </div>
+            <div class="menu_cp2">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:complaint_list' %}"><span class="chpract">客诉问题</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">客诉问题</span>
+            </div>
+            <div class="info_selt">
+                <div class="selcom">
+                    <span class="showcont">显示内容</span>
+                    <img src="images/4/select.png" class="sltimg">
+                </div>
+                <label for="" class="linenm">产品线：</label>
+                <select class="lineselt">
+                    <option value="0">家用</option>
+                    <option value="1">PON</option>
+                    <option value="2">PLC</option>
+                </select>
+                <label for="" class="pdtime">时间选择：</label>
+                <select class="pdtimepick">
+                    <option value="0">2019</option>
+                    <option value="1">2020</option>
+                </select>
+                <label for="" class="pdclassific">问题分类：</label>
+                <select class="typepick">
+                    <option value="0">安全性</option>
+                    <option value="1" selected>场景类</option>
+                    <option value="2">兼容性</option>
+                    <option value="3">功能类</option>
+                    <option value="4">可靠性</option>
+                    <option value="5">需求类</option>
+                </select>
+                <input type="text" class="itsearch" placeholder="请输入">
+                <img src="images/4/sort.svg" class="sortimg">
+                <img src="images/4/handle.svg" class="sthandle">
+                {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
+                <button class="adcustomer" type="button">添加客诉</button>
+                {% endif %}
+            </div>
+            <div class="tbbd" hidden>
+                <table align="center" class="hidtb">
+                    <thead>
+                    <tr class="tiptr">
+                        <td>
+                        <div class="tipcont">
+                            <span class="tiptext">请选择表格要显示的内容</span>
+                        </div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 客诉名称
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 客诉类型
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 提交人
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 客诉月份
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 产品型号
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 软件版本信息
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 严重程度
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 产品线
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 问题分类
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 分析负责人
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 分析完成时间
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 措施状态
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 改进措施
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 措施完成时间
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 计划闭环时间
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 问题根因
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 问题引入点
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 问题控制点
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 是否分析
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 客户影响分析
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 典型问题
+                        </td>
+                    </tr>
+                    <tr class="tipselt">
+                        <td>
+                        <input type="checkbox" class="tipck"> 资产编号
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table class="cc_table" align="center"">
+                <thead>
+                    <tr class="cc_th">
+                    <th class="cct1">
+                        <input type="checkbox" class="ck">
+                    </th>
+                    <th class="cct2">序号</th>
+                    <th class="cct3">
+                        <span class="Cust_name">客诉名称</span>
+                    </th>
+                    <th class="cct4">客诉类型</th>
+                    <th class="cct5">提交人</th>
+                    <th class="cct6">客诉时间
+                        <img src="images/admin/up.svg" class="up_img">
+                        <img src="images/admin/down.svg" class="down_img">
+                    </th>
+                    <th class="cct7">严重程度</th>
+                    <th class="cct8">产品线</th>
+                    <th class="cct9">问题分类</th>
+                    <th class="cct10">分析负责人</th>
+                    <th class="cct11">措施状态</th>
+                    <th class="cct12">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="ct_trwiden">
+                    <td class="cct1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td>1</td>
+                    <td>
+                        <span class="sign"></span>
+                        <span class="Cust_cont">02客户端模式透传需求</span>
+                    </td>
+                    <td>新需求</td>
+                    <td>李测试</td>
+                    <td>2019/10</td>
+                    <td>高</td>
+                    <td>家用</td>
+                    <td>安全性</td>
+                    <td>李负责</td>
+                    <td>
+                        <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                        <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
+                    </td>
+                    <td>
+                        <span class="dload">查看 | 下载</span>
+                        <img src="images/admin/See.png" class="see_dload">
+                    </td>
+                    </tr>
+                    <tr class="extratr">
+                    <td class="extratd" colspan="12">问题描述：客诉问题的概括，一两句话介绍客诉问题的的大概内容。</td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td>2</td>
+                    <td>
+                        <span class="sign"></span>
+                        <span class="Cust_cont">02客户端模式透传需求</span>
+                    </td>
+                    <td>品质</td>
+                    <td>刘便携</td>
+                    <td>2019/10</td>
+                    <td>低</td>
+                    <td>PON</td>
+                    <td>场景类</td>
+                    <td>张负责</td>
+                    <td>
+                        <span style="font-family:'Helvetica';font-size:12px;color:#999999;">●</span>
+                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
+                    </td>
+                    <td>
+                        <span class="dload">查看 | 下载</span>
+                        <img src="images/admin/See.png" class="see_dload">
+                    </td>
+                    </tr>
+                    {% for complaint in complaints %}
+                    <tr class="cc_tr">
+                        <td class="cct1"></td>
+                        <td>{{forloop.counter}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="cc_tr">
+                    <td class="cct1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="cc_footer">
+                <div class="cc_total">
+                    <span>共计 20 条数据</span>
+                </div>
+                <img src="images/admin/left.png" class="Ct_left">
+                <div class="cc_page1">
+                    <span class="Ct_pg1">1</span>
+                </div>
+                <div class="Ct_pg2">
+                    <span>2</span>
+                </div>
+                <div class="Ct_pg3">
+                    <span>3</span>
+                </div>
+                <div class="Ct_pg4">
+                    <span>4</span>
+                </div>
+                <div class="Ct_pg5">
+                    <span>5</span>
+                </div>
+                <img src="images/admin/right.png" class="Ct_right">
+                <button class="cc_page">
+                    <span style="font-family:'ArialMT', 'Arial';">10</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+                    <img src="images/admin/right.png" class="Ct_img">
+                </button>
+                <div class="Ct_goto">
+                    <span>前往第</span>
+                </div>
+                <input type="text" class="cc_input" placeholder="2">
+                <div class="Ct_pages">
+                    <span>页</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
