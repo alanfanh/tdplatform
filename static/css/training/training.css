@@ -118,10 +118,9 @@
     position: absolute;
     left: 200px;
     top: 32px;
-    width: 1px;
+    width: 2px;
     height: 888px;
     display: flex;
-
 }
 
 .title {
@@ -780,5 +779,5 @@
     border-width: 0.5px;
     color: black;
     border-right-color:rgba(217, 217, 217, 1);
-    background-image: url(transparent.gif);
+    background-image: url(/static/images/training/transparent.gif);
 }
