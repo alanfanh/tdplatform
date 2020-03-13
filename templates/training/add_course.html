@@ -1,6 +1,12 @@
+{% extends 'base.html' %}
 
-<link href="training.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" href="bootstrap.css">
+{% load staticfiles %}
+
+{% block title %}添加培训课程{% endblock  %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/training/training.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 
 <div class="all-container">
     <div class="uk-container">
@@ -16,7 +22,7 @@
             </div>
         </div>
         <div class="mid">
-            <img src="mid.svg" alt="" class="separate">
+            <img src="{% static 'images/training/mid.svg' %}" alt="" class="separate">
         </div>
         <div class="content">
             <div class="title">
@@ -81,3 +87,4 @@
         </div>
     </div>
 </div>
+{% endblock  %}
