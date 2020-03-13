@@ -5,55 +5,42 @@
 {% block title %} 用户信息 {% endblock  %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
 
 <div class="base">
     <div class="baseplate ax_default shape">
         <div class="menuinfo">
-            <div>
-                <img id="photo" src="{% static 'images/account/photo.svg' %} ">
+            <div class="pt">
+                <img src="{% static 'images/account/photo.svg' %} ">
             </div>
-            <div class="ax_default label">
-                <p>
-                    <span id="name">{{userinfo.realname}}</span>
-                </p>
+            <div class="nm">
+                <span>{{userinfo.realname}}</span>
             </div>
-            <div class="ax_default label">
-                <p>
-                    <span id="department">{{userinfo.group}}</span>
-                </p>
+            <div class="pt_dp">
+                <span>{{userinfo.group}}</span>
             </div>
-            <div>
-                <p>
-                    <span id="number">80</span>
-                </p>
+            <div class="sc">
+                <span>80</span>
             </div>
-            <div>
-                <p>
-                    <span id="assets">2</span>
-                </p>
+            <div class="myhv">
+                <span>2</span>
             </div>
-            <div class="ax_default label">
-                <p><span id="score">积分</span></p>
+            <div class="accum">
+                <span>积分</span>
             </div>
-            <div class="ax_default label">
-                <p><span id="tel_assets">技术资产</span></p>
+            <div class="tc">
+                <span>技术资产</span>
             </div>
-            <div class="tel_lable">
-                <div id="technology">
-                    <span>我贡献的培训</span>
-                </div>
+            <div class="chmenu_gp1" style="background-color: white">
+                <a href="{% url 'training:person_course' %}"><span class="chpract" style="color: #7F7F7F;">我贡献的培训</span></a>
             </div>
-            <div class="mytel_lable">
-                <div id="my_technology">
-                    <span>我的技术资产</span>
-                </div>
+            <div class="menu_gp2">
+                <a href="{% url 'asset:my_tec' %}"><span class="pract">我的技术资产</span></a>
             </div>
-            <div class="data_label">
-                <img src="{% static 'images/account/data.svg' %}" class="data_img">
-                <div id="data_border"><p></p></div>
-                <div id="personal_data">
-                    <a href="{% url 'account:my_information' %}">个人资料</a>
-                </div>
+            <div class="menu_gp3" style="background-color: rgba(244, 244, 244, 1)">
+                <span class="left_bd"></span>
+                <a href="{% url 'account:my_information' %}"><span class="m_mdata"  style="color:black">个人资料</span></a>
             </div>
         </div>
         <div class="info_base">

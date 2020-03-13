@@ -31,7 +31,7 @@ def myself(request):
         if role.role_name == "TE":
             return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
         elif role.role_name == "STE":
-            return render(request,"account/myself_ste.html",{"user":user,"userinfo":userinfo})
+            return render(request,"account/myself.html",{"user":user,"userinfo":userinfo})
         elif role.role_name == "PL":
             return render(request,"account/myself_pl.html",{"user":user,"userinfo":userinfo})
         else:
