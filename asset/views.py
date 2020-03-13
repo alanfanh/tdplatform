@@ -34,6 +34,17 @@ def assigned_list(request):
     userinfo = UserInfo.objects.get(user=request.user)
     return render(request, "asset/assigned_list.html", {"userinfo":userinfo})
 
+@login_required(login_url="/account/login")
+def complaint_list(request):
+    complaints = Complaint.objects.all()
+    userinfo = UserInfo.objects.get(user=request.user)
+    return render(request, "asset/complaint_list.html", {"complaints":complaints,"userinfo":userinfo})
+
+@login_required(login_url="/account/login")
+def complaint_detail(request, complaint_id):
+    complaint = get_object_or_404(Complaint,id=complaint_id)
+    return render(request, "asset/complaint_detail.html", {"complaint":complaint})
+
 # 优秀实践
 
 @login_required(login_url="/account/login")
