@@ -20,12 +20,21 @@ def article_content(request, article_id):
 
 
 # 资产应用视图函数
-#
+# 客诉
 
 @login_required(login_url="/account/login")
 def my_complaint(request):
+    # 我添加的客诉
     userinfo = UserInfo.objects.get(user=request.user)
     return render(request,"asset/pl_complaint_list.html",{"userinfo":userinfo})
+
+@login_required(login_url="/account/login")
+def assigned_list(request):
+    # 指派给ste、te的客诉
+    userinfo = UserInfo.objects.get(user=request.user)
+    return render(request, "asset/assigned_list.html", {"userinfo":userinfo})
+
+# 优秀实践
 
 @login_required(login_url="/account/login")
 def unprocess_tec(request):
@@ -55,3 +64,9 @@ def process_tec(request):
         return render(request, "asset/processed_m.html", {"userinfo":userinfo})
     else:
         return HttpResponse("Not Found")
+
+@login_required(login_url="/account/login")
+def my_tec(request):
+    # STE添加的优秀实践
+    userinfo = UserInfo.objects.get(user=request.user)
+    return render(request, "asset/my_tec.html", {"userinfo":userinfo})
