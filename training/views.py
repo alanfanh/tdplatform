@@ -17,6 +17,9 @@ class CourseListView(LoginRequiredMixin, ListView):
     template_name = 'training/course_list.html'
     login_url = "/account/login/"
 
+    def get_context_data(self, **kwargs):
+        kwargs['userinfo'] = UserInfo.objects.get(user=self.request.user)
+        return super(CourseListView, self).get_context_data(**kwargs)
 
 class UserMixin(object):
     def get_queryset(self):
@@ -35,6 +38,7 @@ class PersonCourseListView(UserCourseMixin, ListView):
     def get_context_data(self, **kwargs):
         # 获取context传入模版，如下为userinfo
         kwargs['userinfo'] = UserInfo.objects.get(user=self.request.user)
+        kwargs['course_list'] = Course.objects.filter(teacher=kwargs['userinfo'])
         return super(PersonCourseListView, self).get_context_data(**kwargs)
 
 class CourseCreateView(CreateView):
