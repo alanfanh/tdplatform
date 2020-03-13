@@ -48,7 +48,7 @@
                 <input type="text" id="search1" value="请输入">
             </div>
             <div class="addbutton">
-                <a href="#"><button id="add">添加</button></a>
+                <a href="{% url 'training:add_course' %}"><button id="add">添加</button></a>
             </div>
             <div class="table-train">
                 <table class="table table-text table-hover">
@@ -83,6 +83,25 @@
                                 </div>
                             </td>
                         </tr>
+                        {% for course in courses %}
+                        <tr>
+                            <td><input type="checkbox" name="box" onclick=""></td>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{course.cname}}</td>
+                            <td>{{course.range}}</td>
+                            <td>{{course.teacher}}</td>
+                            <td></td>
+                            <td>{{course.address}}</td>
+                            <td>{{course.course_time}}</td>
+                            <td>
+                                <div class="operate">
+                                    <a name="look-over">查看</a>
+                                    <a name="download">下载</a>
+                                    <img src="{% static 'images/training/button.png' %}" href="#" class="img-button">
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
