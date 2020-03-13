@@ -5,56 +5,130 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/default.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
 
 <div class="base">
     <div class="baseplate">
         {% if userinfo.role_id == 3 %}
-        {% include "training/siderbar_pl.html" %}
+            {% include "training/siderbar_pl.html" %}
         {% elif userinfo.role_id == 4 %}
-        {% include "training/siderbar_m.html" %}
+            {% include "training/siderbar_m.html" %}
+        {% else %}
+            {% include "training/siderbar_te.html" %}
         {% endif %}
         <div class="info_base">
             <div class="gp_title">
-                <span id="gp_text">部门小组</span>
+            <span class="Cust_Com">我贡献的培训</span>
             </div>
-            <table class="gp_table" align="center">
-                <thead>
-                <tr class="gp_th">
-                    <th class="th1">
-                    <input type="checkbox" class="ck">
-                    </th>
-                    <th class="th2">序号</th>
-                    <th class="th3">小组</th>
-                    <th class="th4">组长</th>
-                    <th class="th5">人数</th>
-                    <th class="th6">技术资产
-                    <img src="{% static 'images/account/up.svg' %}" class="up_img">
-                    <img src="{% static 'images/account/down.svg' %}" class="down_img">
-                    </th>
-                    <th class="th7">积分
-                    <img src="{% static 'images/account/up.svg' %}" class="up_img">
-                    <img src="{% static 'images/account/down.svg' %}" class="down_img">
-                    </th>
+            <table class="tr_table" align="center">
+            <thead>
+                <tr class="ct_th">
+                <th class="tra1">序号</th>
+                <th class="tra2">培训名称</th>
+                <th class="tra3">培训范围</th>
+                <th class="tra4">主讲人</th>
+                <th class="tra5">参加成员</th>
+                <th class="tra6">培训地址</th>
+                <th class="tra7">培训时间</th>
+                <th class="tra8">操作</th>
                 </tr>
-                </thead>
-                <tbody>
-                    {% for group in groups %}
-                    <tr class="gp_tr">
-                        <td class="th1">
-                            <input type="checkbox" class="ck">
-                        </td>
-                        <td class="th2">{{forloop.counter}}</td>
-                        <td class="th3">{{group.name}}</td>
-                        <td class="th4">{{group.pl}}</td>
-                        <td class="th5">{{group.user_group.all.count}}</td>
-                        <td class="th6"></td>
-                        <td class="th7"></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+            </thead>
+            <tbody>
+                <tr class="gp_tr">
+                    <td class="tra1">1</td>
+                    <td class="tra2">
+                        <span></span>
+                        <span class="colr">网评分析工具二次开发需求实现</span>
+                    </td>
+                    <td class="tra3">自动化开发组</td>
+                    <td class="tra4">李测试</td>
+                    <td class="tra5">12人
+                        <span></span>
+                    </td>
+                    <td class="tratd6">5楼1号会议室</td>
+                    <td class="tra7">2019/12/08</td>
+                    <td class="tra8">
+                        <span class="dload">查看 | 下载</span>
+                    </td>
+                </tr>
+                {% for course in courses %}
+                <tr class="gp_tr">
+                    <td class="tra1">{{forloop.counter}}</td>
+                    <td class="tra2">{{course.cname}}</td>
+                    <td class="tra3">{{course.range}}</td>
+                    <td class="tra4">{{course.teacher}}</td>
+                    <td class="tra5"></td>
+                    <td class="tratd6">{{course.address}}</td>
+                    <td class="tra7">{{course.course_time}}</td>
+                    <td class="tra8">
+                        <span class="dload">查看 | 下载</span>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr class="gp_tr">
+                <td class="tra1"></td>
+                <td class="tra2"></td>
+                <td class="tra3"></td>
+                <td class="tra4"></td>
+                <td class="tra5"></td>
+                <td class="tratd6"></td>
+                <td class="tra7"></td>
+                <td class="tra8"></td>
+                </tr>
+                <tr class="gp_tr">
+                <td class="tra1"></td>
+                <td class="tra2"></td>
+                <td class="tra3"></td>
+                <td class="tra4"></td>
+                <td class="tra5"></td>
+                <td class="tratd6"></td>
+                <td class="tra7"></td>
+                <td class="tra8"></td>
+                </tr>
+                <tr class="gp_tr">
+                <td class="tra1"></td>
+                <td class="tra2"></td>
+                <td class="tra3"></td>
+                <td class="tra4"></td>
+                <td class="tra5"></td>
+                <td class="tratd6"></td>
+                <td class="tra7"></td>
+                <td class="tra8"></td>
+                </tr>
+                <tr class="gp_tr">
+                <td class="tra1"></td>
+                <td class="tra2"></td>
+                <td class="tra3"></td>
+                <td class="tra4"></td>
+                <td class="tra5"></td>
+                <td class="tratd6"></td>
+                <td class="tra7"></td>
+                <td class="tra8"></td>
+                </tr>
+                <tr class="gp_tr">
+                <td class="tra1"></td>
+                <td class="tra2"></td>
+                <td class="tra3"></td>
+                <td class="tra4"></td>
+                <td class="tra5"></td>
+                <td class="tratd6"></td>
+                <td class="tra7"></td>
+                <td class="tra8"></td>
+                </tr>
+                <tr class="gp_tr">
+                <td class="tra1"></td>
+                <td class="tra2"></td>
+                <td class="tra3"></td>
+                <td class="tra4"></td>
+                <td class="tra5"></td>
+                <td class="tratd6"></td>
+                <td class="tra7"></td>
+                <td class="tra8"></td>
+                </tr>
+            </tbody>
             </table>
-            <div class="gp_num">
-                <span>共计 {{groups.count}} 个小组</span>
+            <div class="tra_total">
+            <span class="ept_text">共计 8 条数据</span>
             </div>
         </div>
     </div>
