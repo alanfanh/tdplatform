@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <div class="gmenu_cp1">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:tec_list' %}"><span class="chpract">优秀实践</span></a>
+            </div>
+            <div class="gmenu_cp2">
+                <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">添加优秀实践</span>
+            </div>
+            <div class="gnbd">
+                <span class="gdname">优秀实践名称：</span>
+                <input type="text" class="input_gd" placeholder="请输入优秀实践名称">
+                <span class="gdtip">此处不能为空</span>
+            </div>
+            <div class="gnbd2">
+                <span class="auth">小组：</span>
+                <select class="atgpselt">
+                    {% for group in groups %}
+                    <option value="{{group.id}}">{{group.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="gnbd3">
+                <span class="auth">作者：</span>
+                <select class="authselt">
+                    <option value="0">请选择作者</option>
+                </select>
+            </div>
+            <div class="gnbd4">
+                <span class="tttag">文章标签：</span>
+                <input type="checkbox" class="tagck">
+                <span class="usrex">用户体验</span>
+                <input type="checkbox" class="tagck2">
+                <span class="ptl">协议相关</span>
+                <input type="checkbox" class="tagck3">
+                <span class="methd">方法创新</span>
+                <input type="checkbox" class="tagck2">
+                <span class="autom">自动化</span>
+            </div>
+            <div class="gnbd5">
+                <span class="writetm">编写时间：</span>
+                <input type="date" style="color: rgb(153, 153, 153);" class="wtime">
+            </div>
+            <div class="gnbd6">
+                <span class="contsum">内容概括：</span>
+                <textarea class="sumtext" cols="30" rows="10" placeholder="请简单概括一下优秀实践的大致内容"></textarea>
+                <img src="images/4/texttag.png" class="texttag">
+            </div>
+            <div class="gnbd7">
+                <span class="contsum">上传附件：</span>
+                <button class="upextra">
+                    <img src="images/4/uparrow.png" class="uparr">
+                    <span class="ldtext">点击上传</span>
+                </button>
+                <span class="fileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
+                <button id="gahandin">
+                    <span class="gahdin">提 交</span>
+                    {% comment %} <img src="{% static 'images/account/subm.png' %} " class="gahdin_img"> {% endcomment %}
+                </button>
+                <button id="garevoke">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
