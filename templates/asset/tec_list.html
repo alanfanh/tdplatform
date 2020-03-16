@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <div class="gmenu_cp1">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:tec_list' %}"><span class="chpract">优秀实践</span></a>
+            </div>
+                <div class="gmenu_cp2">
+                <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">优秀实践</span>
+            </div>
+            <div class="info_selt">
+                <label for="" class="sortrg">搜索范围：</label>
+                <select class="rgselect">
+                    <option value="0">测试部</option>
+                    <option value="1">自动化开发组</option>
+                    <option value="2">接入测试组</option>
+                    <option value="3">家用测试组</option>
+                    <option value="4">商用测试组</option>
+                    <option value="5">便携测试组</option>
+                    <option value="6">资料开发组</option>
+                    <option value="7">OEM组</option>
+                </select>
+                <label for="" class="gptime">时间选择：</label>
+                <select class="gptimepick">
+                    <option value="0">2019</option>
+                    <option value="1">2020</option>
+                </select>
+                <label for="" class="lbselect">标签选择：</label>
+                <select class="lbpick">
+                    <option value="0">所有标签</option>
+                    <option value="1">自动化</option>
+                    <option value="2">用户体验</option>
+                    <option value="3">方法创新</option>
+                    <option value="4">协议相关</option>
+                </select>
+                <input type="text" class="gpsearch" placeholder="请输入">
+                <img src="{% static 'images/asset/sort.svg' %}" class="gpsortimg">
+                <img src="{% static 'images/asset/handle.svg' %}" class="gpsthandle">
+                {% if user.role_id  != 1 %}
+                <a href="{% url 'asset:add_tec' %}"><button class="adcustomer" type="button">添加优秀实践</button></a>
+                {% endif %}
+            </div>
+            <table class="gd_table" align="center"">
+                <thead>
+                    <tr class="gd_th">
+                    <td class="gdt1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td class="gdt2">序号</td>
+                    <td class="gdt3">名称</td>
+                    <td class="gdt4">作者</td>
+                    <td class="gdt5">小组</td>
+                    <td class="gdt6">标签</td>
+                    <td class="gdt7">编写时间</td>
+                    <td class="gdt8">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="gd_trwiden">
+                    <td class="gdt1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td>1</td>
+                    <td>
+                        <span class="sign"></span>
+                        <span class="Cust_cont">优化testlink数据库查询性能的方法与实施</span>
+                    </td>
+                    <td>李测试</td>
+                    <td>商用测试组</td>
+                    <td>
+                        <div class="tag_bd">
+                        <span class="tag_info">协议相关</span>
+                        </div>
+                    </td>
+                    <td>2019/12/08</td>
+                    <td>
+                        <span class="dload">
+                            <a href="{% url 'asset:tec_detail' %}">查看</a> | <a href="">下载</a>
+                        </span>
+                        <img src="{% static 'images/account/see.png' %}" class="see_dload">
+                    </td>
+                    </tr>
+                    <tr class="gdextratr">
+                    <td class="gpextratd" colspan="8">内容概括：客诉问题的概括，一两句话介绍客诉问题的的大概内容。</td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gdt1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td>2</td>
+                    <td>
+                        <span class="sign"></span>
+                        <span class="Cust_cont">实验室资产管理平台定时发送邮件实现物品催…</span>
+                    </td>
+                    <td>刘便携</td>
+                    <td>家用测试组</td>
+                    <td>
+                        <div class="tagbd1">
+                        <span class="tag_info">自动化</span>
+                        </div>
+                        <div class="tagbd2">
+                        <span class="tag_info">用户体验</span>
+                        </div>
+                        <div class="tagbd3">
+                        <span class="tag_info">方法创新</span>
+                        </div>
+                    </td>
+                    <td>2019/12/08</td>
+                    <td>
+                        <span class="dload">查看 | 下载</span>
+                        <img src="{% static 'images/account/see.png' %}" class="see_dload">
+                    </td>
+                    </tr>
+                    {% for tec in tecs %}
+                    <tr class="gd_tr">
+                        <td class="gpt1"></td>
+                        <td ></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr class="gd_tr">
+                    <td class="gpt1"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            {% comment %} <div class="autotip">
+                <span class="attipcont">实验室资产管理平台定时发送邮件实现物品催还的方法与实施</span>
+            </div> {% endcomment %}
+            <div class="gd_footer">
+                <div class="cc_total">
+                    <span>共计 20 条数据</span>
+                </div>
+                <img src="images/admin/left.png" class="Ct_left">
+                <div class="cc_page1">
+                    <span class="Ct_pg1">1</span>
+                </div>
+                <div class="Ct_pg2">
+                    <span>2</span>
+                </div>
+                <div class="Ct_pg3">
+                    <span>3</span>
+                </div>
+                <div class="Ct_pg4">
+                    <span>4</span>
+                </div>
+                <div class="Ct_pg5">
+                    <span>5</span>
+                </div>
+                <img src="images/admin/right.png" class="Ct_right">
+                <button class="cc_page">
+                    <span style="font-family:'ArialMT', 'Arial';">10</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+                    <img src="images/admin/right.png" class="Ct_img">
+                </button>
+                <div class="Ct_goto">
+                    <span>前往第</span>
+                </div>
+                <input type="text" class="cc_input" placeholder="2">
+                <div class="Ct_pages">
+                    <span>页</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

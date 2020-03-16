@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+     
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+      
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <div class="gmenu_cp1">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:tec_list' %}"><span class="chpract">优秀实践</span></a>
+            </div>
+            <div class="gmenu_cp2">
+                <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="De_title">
+                <div class="Route">
+                    <span style="color:rgba(0, 0, 0, 0.447058823529412);">技术资产管理</span>
+                    <span style="color:#999999;"> </span>
+                    <span style="color:rgba(0, 0, 0, 0.447058823529412);"> /  </span>
+                    <span style="color:rgba(0, 0, 0, 0.427450980392157);">优秀实践</span>
+                    <span style="color:rgba(0, 0, 0, 0.447058823529412);">  /</span>
+                    <span style="color:rgba(0, 0, 0, 0.847058823529412);">  优秀实践详情</span>
+                </div>
+                <div class="Page_Title">优秀实践详情</div>
+            </div>
+            <div class="cd_going">
+                <span class="cd_info">培训信息</span>
+            </div>
+            <div class="cdgoing_cont">
+                <span class="cdname">名称：优化testlink数据库查询性能的方法与实施</span>
+                <span class="cdtype">作者：    李测试</span>
+                <span class="hdname">所在小组：商用测试组</span>
+                <span class="cdoa">标签：协议相关 自动化 用户体验 方法创新</span>
+                <span class="cdtime">编写时间：2019/12/08</span>
+            </div>
+            <div class="gdcont">
+                <span class="cdname">内容概述：</span>
+                <span class="gdtext">示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字</span>
+                <span class="gdextext">附件：优化testlink数据库查询性能的方法与实施.zip</span>
+            </div>
+            <button class="gdrelist" onclick="window.history.back()">返回列表</button>
+            <button class="gdfile">下载附件</button>
+        </div>
+    </div>
+</div>
+{% endblock  %}
