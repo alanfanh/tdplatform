@@ -5,6 +5,7 @@ from .models import Articles, TecContent, Complaint
 from account.models import UserInfo, Role, Group
 
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required(login_url="/account/login")
 def article_title(request):
@@ -45,6 +46,13 @@ def complaint_detail(request, complaint_id):
     complaint = get_object_or_404(Complaint,id=complaint_id)
     return render(request, "asset/complaint_detail.html", {"complaint":complaint})
 
+@login_required(login_url="/account/login")
+def add_complaint(request):
+    if request.method == "POST":
+        pass
+    else:
+        return render(request, "asset/add_complaint.html")
+
 # 优秀实践
 
 @login_required(login_url="/account/login")
@@ -81,3 +89,25 @@ def my_tec(request):
     # STE添加的优秀实践
     userinfo = UserInfo.objects.get(user=request.user)
     return render(request, "asset/my_tec.html", {"userinfo":userinfo})
+
+@login_required(login_url="/account/login")
+def tec_list(request):
+    # 主页优秀实践列表
+    userinfo = UserInfo.objects.get(user=request.user)
+    tecs = TecContent.objects.filter(status="3")
+    return render(request, "asset/tec_list.html", {"tecs":tecs,"userinfo":userinfo})
+
+@login_required(login_url="/account/login")
+def tec_detail(request):
+    # 主页优秀时间详情
+    # tec = TecContent.objects.get(id=tec_id)
+    return render(request, "asset/tec_detail.html")
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def add_tec(request):
+    if request.method == "POST":
+        pass
+    else:
+        groups = Group.objects.all()
+        return render(request,"asset/add_tec.html",{"groups":groups})
