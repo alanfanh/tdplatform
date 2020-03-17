@@ -54,3 +54,11 @@ class CourseCreateView(CreateView):
             new_course.save()
             return redirect("training:course_list")
         return self.render_to_response({"form":form})
+
+
+# 积分视图
+class PointListView(LoginRequiredMixin, ListView):
+    model = Integral
+    context_object_name = "points"
+    template_name = "training/point_list.html"
+    login_url = "account/login"
