@@ -5,7 +5,7 @@
 {% block title %}培训管理{% endblock  %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/training/training.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'css/training/training.css' %}">
 <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 <div class="all-container">
     <div class="uk-container">
@@ -114,4 +114,244 @@
         </div>
     </div>
 </div>
+{% endcomment %}
+
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/default.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
+<link rel="stylesheet" href="{% static 'css/training/train.css' %}">
+
+<div class="base">
+    <div class="tnbaseplate">
+        <div class="menuinfo">
+            <div class="gmenu_cp1">
+                <span class="left_bd"></span>
+                <a href="{% url 'training:course_list' %}"><span class="chpract">培训课程</span></a>
+            </div>
+            <div class="gmenu_cp2">
+                <a href="{% url 'training:point_list' %}"><span class="m_mdata">积分展示</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">培训课程</span>
+            </div>
+            <div class="tnseltinfo">
+                <label for="" class="sortrg">搜索范围：</label>
+                <select class="rgselect">
+                    <option value="0">测试部</option>
+                    <option value="1">自动化开发组</option>
+                    <option value="2">接入测试组</option>
+                    <option value="3">家用测试组</option>
+                    <option value="4">商用测试组</option>
+                    <option value="5">便携测试组</option>
+                    <option value="6">资料开发组</option>
+                    <option value="7">OEM组</option>
+                </select>
+                <label for="" class="gptime">时间选择：</label>
+                <select class="gptimepick">
+                    <option value="0">2019</option>
+                    <option value="1">2020</option>
+                </select>
+                <input type="text" class="trsearch" placeholder="请输入">
+                <img src="images/4/sort.svg" class="trsortimg">
+                <img src="images/4/handle.svg" class="trsthandle">
+                {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
+                <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">添加记录</button></a>
+                {% endif %}
+            </div>
+            <table class="tntable" align="center">
+                <thead>
+                    <tr class="gd_th">
+                        <td class="tntd1">
+                            <input type="checkbox" class="tnck">
+                        </td>
+                        <td class="tntd2">序号</td>
+                        <td class="tntd3">名称</td>
+                        <td class="tntd4">培训范围</td>
+                        <td class="tntd5">主讲人</td>
+                        <td class="tntd6">参加成员</td>
+                        <td class="tntd7">培训地址</td>
+                        <td class="tntd8">培训时间</td>
+                        <td class="tntd9">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tntr">
+                        <td class="tntd1">
+                            <input type="checkbox" class="tnck">
+                        </td>
+                        <td>1</td>
+                        <td>
+                            <span class="sign"></span>
+                            <span class="Cust_cont">RF框架-架构篇</span>
+                        </td>
+                        <td>商用测试组</td>
+                        <td>李测试</td>
+                        <td>
+                            <span>19人</span>
+                            <span class="sign"></span>
+                        </td>
+                        <td>5楼5号会议室</td>
+                        <td>2019/12/08</td>
+                        <td>
+                            <span class="dload">查看 | 下载</span>
+                            <img src="images/admin/See.png" class="see_dload">
+                        </td>
+                    </tr>
+                    {% for course in courses %}
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1">
+                            <input type="checkbox" class="tnck">
+                        </td>
+                        <td>8</td>
+                        <td>
+                            <span class="sign"></span>
+                            <span class="Cust_cont">实验室资产管理平台定时发送邮件实现物品催…</span>
+                        </td>
+                        <td>自动化开发组</td>
+                        <td>李家用</td>
+                        <td>
+                            <span>10人</span>
+                            <span class="sign"></span>
+                        </td>
+                        <td>5楼5号会议室</td>
+                        <td>2019/12/08</td>
+                        <td>
+                            <span class="dload">查看 | 下载</span>
+                            <img src="images/admin/See.png" class="see_dload">
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tntd1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="rbacknum">2</div>
+            <div class="tnfooter">
+                <div class="cc_total">
+                    <span>共计 20 条数据</span>
+                </div>
+                <img src="images/admin/left.png" class="Ct_left">
+                <div class="cc_page1">
+                    <span class="Ct_pg1">1</span>
+                </div>
+                <div class="Ct_pg2">
+                    <span>2</span>
+                </div>
+                <div class="Ct_pg3">
+                    <span>3</span>
+                </div>
+                <div class="Ct_pg4">
+                    <span>4</span>
+                </div>
+                <div class="Ct_pg5">
+                    <span>5</span>
+                </div>
+                <img src="images/admin/right.png" class="Ct_right">
+                <button class="cc_page">
+                    <span style="font-family:'ArialMT', 'Arial';">10</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+                    <img src="images/admin/right.png" class="Ct_img">
+                </button>
+                <div class="Ct_goto">
+                    <span>前往第</span>
+                </div>
+                <input type="text" class="cc_input" placeholder="2">
+                <div class="Ct_pages">
+                    <span>页</span>
+                </div>
+            </div>
+            <div class="tnpgnum">3</div>
+        </div>
+    </div>
+</div>
+
 {% endblock  %}

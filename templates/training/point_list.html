@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}培训积分表{% endblock  %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
+<link rel="stylesheet" href="{% static 'css/default.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+<link rel="stylesheet" href="{% static 'css/training/train.css' %} ">
+
+<div class="base">
+    <div class="tnbaseplate">
+        <div class="menuinfo">
+            <div class="tmenu_cp1">
+                <a href="{% url 'training:course_list' %}"><span class="m_mdata">培训课程</span></a>
+            </div>
+            <div class="tmenu_cp2">
+                <span class="left_bd"></span>
+                <a href="{% url 'training:point_list' %}"><span class="chpract">积分展示</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">积分展示</span>
+            </div>
+            <div class="tnseltinfo">
+                <label for="" class="sortrg">搜索范围：</label>
+                <select class="rgselect">
+                    <option value="0">测试部</option>
+                    <option value="1">自动化开发组</option>
+                    <option value="2">接入测试组</option>
+                    <option value="3">家用测试组</option>
+                    <option value="4">商用测试组</option>
+                    <option value="5">便携测试组</option>
+                    <option value="6">资料开发组</option>
+                    <option value="7">OEM组</option>
+                </select>
+                <label for="" class="gptime">时间选择：</label>
+                <select class="gptimepick">
+                    <option value="0">2019</option>
+                    <option value="1">2020</option>
+                </select>
+                <input type="text" class="trsearch" placeholder="请输入">
+                <img src="images/4/sort.svg" class="trsortimg">
+                <img src="images/4/handle.svg" class="trsthandle">
+            </div>
+            <table class="tmtable" align="center">
+                <thead>
+                    <tr class="gd_th">
+                        <td class="tmtd1">序号</td>
+                        <td class="tmtd2">姓名</td>
+                        <td class="tmtd3">
+                            <span class="tmgroup">所属组</span>
+                        </td>
+                        <td class="tmtd4">参加培训积分</td>
+                        <td class="tmtd5">组织小组训积分</td>
+                        <td class="tmtd6">组织部门训积分</td>
+                        <td class="tmtd7">
+                            <span class="tmsore">总积分</span>
+                            <img src="images/admin/up.svg" class="tmupimg">
+                            <img src="images/admin/down.svg" class="tmdownimg">
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tntr">
+                        <td class="tmtd1">1</td>
+                        <td class="tmtd2">李测试</td>
+                        <td class="tmtd3">
+                            <span class="tmgroup">商用测试组</span>
+                        </td>
+                        <td class="tmtd4">42</td>
+                        <td class="tmtd5">20</td>
+                        <td class="tmtd6">30</td>
+                        <td class="tmtd7">
+                            <span class="tmsums">92</span>
+                        </td>
+                    </tr>
+                    {% for point in points %}
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                    <tr class="tntr">
+                        <td class="tmtd1"></td>
+                        <td class="tmtd2"></td>
+                        <td class="tmtd3">
+                            <span class="tmgroup"></span>
+                        </td>
+                        <td class="tmtd4"></td>
+                        <td class="tmtd5"></td>
+                        <td class="tmtd6"></td>
+                        <td class="tmtd7">
+                            <span class="tmsums"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="tnfooter">
+                <div class="cc_total">
+                    <span>共计 20 条数据</span>
+                </div>
+                <img src="images/admin/left.png" class="Ct_left">
+                <div class="cc_page1">
+                    <span class="Ct_pg1">1</span>
+                </div>
+                <div class="Ct_pg2">
+                    <span>2</span>
+                </div>
+                <div class="Ct_pg3">
+                    <span>3</span>
+                </div>
+                <div class="Ct_pg4">
+                    <span>4</span>
+                </div>
+                <div class="Ct_pg5">
+                    <span>5</span>
+                </div>
+                <img src="images/admin/right.png" class="Ct_right">
+                <button class="cc_page">
+                    <span style="font-family:'ArialMT', 'Arial';">10</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+                    <img src="images/admin/right.png" class="Ct_img">
+                </button>
+                <div class="Ct_goto">
+                    <span>前往第</span>
+                </div>
+                <input type="text" class="cc_input" placeholder="2">
+                <div class="Ct_pages">
+                    <span>页</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
