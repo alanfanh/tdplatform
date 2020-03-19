@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404,render
 # Create your views here.
 # 本views.py文件不再写视图函数，而是通过类的视图实现功能
 
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView
 from .models import Course, Integral
-from account.models import UserInfo
+from account.models import UserInfo, Group
 from braces.views import LoginRequiredMixin
 from django.shortcuts import redirect
 from .forms import CreateCourseForm
@@ -46,6 +46,12 @@ class CourseCreateView(CreateView):
     fields = ['cname', 'range', 'course_time', 'address', 'teacher','file_name']
     template_name = "training/add_course.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(CourseCreateView,self).get_context_data(**kwargs)
+        context["groups"] = Group.objects.all()
+        return context
+    
+
     def Post(self, request, *args, **kwargs):
         form = CreateCourseForm(data=request.POST)
         if form.is_valid():
@@ -54,6 +60,12 @@ class CourseCreateView(CreateView):
             new_course.save()
             return redirect("training:course_list")
         return self.render_to_response({"form":form})
+
+
+class CourseDetailView(LoginRequiredMixin, DetailView):
+    model = Course
+    template_name = "training/course_detail.html"
+    login_url = "/account/login/"
 
 
 # 积分视图
