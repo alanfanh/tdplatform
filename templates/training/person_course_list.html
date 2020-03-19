@@ -56,12 +56,12 @@
                     <td class="tra1">{{forloop.counter}}</td>
                     <td class="tra2">{{course.cname}}</td>
                     <td class="tra3">{{course.range}}</td>
-                    <td class="tra4">{{course.teacher}}</td>
-                    <td class="tra5"></td>
+                    <td class="tra4">{{course.teacher.realname}}</td>
+                    <td class="tra5">{{course.student.all.count}}人</td>
                     <td class="tratd6">{{course.address}}</td>
                     <td class="tra7">{{course.course_time}}</td>
                     <td class="tra8">
-                        <span class="dload">查看 | 下载</span>
+                        <span class="dload"><a href="{% url 'training:course_detail' course.id %}">查看</a> | <a href="">下载</a></span>
                     </td>
                 </tr>
                 {% endfor %}
