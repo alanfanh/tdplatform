@@ -118,7 +118,6 @@
 
 
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
-<link rel="stylesheet" href="{% static 'css/default.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
 <link rel="stylesheet" href="{% static 'css/training/train.css' %}">
 
@@ -147,7 +146,7 @@
                     <option value="4">商用测试组</option>
                     <option value="5">便携测试组</option>
                     <option value="6">资料开发组</option>
-                    <option value="7">OEM组</option>
+                    <option value="7">OEM测试组</option>
                 </select>
                 <label for="" class="gptime">时间选择：</label>
                 <select class="gptimepick">
@@ -158,7 +157,7 @@
                 <img src="images/4/sort.svg" class="trsortimg">
                 <img src="images/4/handle.svg" class="trsthandle">
                 {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
-                <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">添加记录</button></a>
+                <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">添加</button></a>
                 {% endif %}
             </div>
             <table class="tntable" align="center">
@@ -196,21 +195,29 @@
                         <td>5楼5号会议室</td>
                         <td>2019/12/08</td>
                         <td>
-                            <span class="dload">查看 | 下载</span>
-                            <img src="images/admin/See.png" class="see_dload">
+                            <span class="dload"><a href="">查看</a> | <a href="">下载</a></span>
+                            <img src="{% static 'images/account/see.png' %}" class="see_dload">
                         </td>
                     </tr>
                     {% for course in courses %}
                     <tr class="tntr">
-                        <td class="tntd1"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td class="tntd1">
+                            <input type="checkbox" class="tnck">
+                        </td>
+                        <td>{{forloop.counter}}</td>
+                        <td>
+                            <span class="sign"></span>
+                            <span class="Cust_cont">{{course.cname}}</span>
+                        </td>
+                        <td>{{course.range}}</td>
+                        <td>{{course.teacher.realname}}</td>
+                        <td>{{course.student.all.count}}人</td>
+                        <td>{{course.address}}</td>
+                        <td>{{course.course_time|date:"Y/m/d"}}</td>
+                        <td>
+                            <span class="dload"><a href="{% url 'training:course_detail' course.id %}">查看</a> | <a href="">下载</a></span>
+                            <img src="{% static 'images/account/see.png' %}" class="see_dload">
+                        </td>
                     </tr>
                     {% endfor %}
                     <tr class="tntr">
@@ -287,7 +294,7 @@
                         <td>2019/12/08</td>
                         <td>
                             <span class="dload">查看 | 下载</span>
-                            <img src="images/admin/See.png" class="see_dload">
+                            
                         </td>
                     </tr>
                     <tr class="tntr">
@@ -317,7 +324,7 @@
             <div class="rbacknum">2</div>
             <div class="tnfooter">
                 <div class="cc_total">
-                    <span>共计 20 条数据</span>
+                    <span>共计{{courses.count}}条数据</span>
                 </div>
                 <img src="images/admin/left.png" class="Ct_left">
                 <div class="cc_page1">
