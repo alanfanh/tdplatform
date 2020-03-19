@@ -41,7 +41,6 @@
   width: 20px;
   height: 20px;
   display: flex;
-  opacity: 0.8;
 }
 
 .navbar-home {
@@ -85,6 +84,7 @@
   font-size: 16px;
   color: #FFFFFF;
   text-decoration:none;
+  opacity:0.8;
 }
 
 .asset-img {
@@ -95,7 +95,6 @@
   width: 20px;
   height: 20px;
   display: flex;
-  opacity: 0.8;
 }
 
 .navbar-asset {
@@ -123,7 +122,6 @@
   width: 20px;
   height: 20px;
   display: flex;
-  opacity: 0.8;
 }
 
 .navbar-center {
@@ -211,10 +209,8 @@
 .navbar-user {
   border-width: 0px;
   position: absolute;
-  left: 1753px;
-  top: 0px;
-  width: 51px;
-  height: 64px;
+  left: 1696px;
+  top: 1px;
   display: flex;
   font-family: 'PingFangSC-Regular', 'PingFang SC';
   font-weight: 400;
@@ -336,4 +332,8 @@
     padding: 2px 16px 2px 34px;
     box-sizing: border-box;
     width: 100%;
+}
+
+.layui-nav .layui-nav-child a {
+  text-decoration: none;
 }

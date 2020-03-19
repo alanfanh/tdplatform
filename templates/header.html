@@ -1,5 +1,7 @@
 {% load staticfiles %}
-
+<link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+<script type="text/javascript" src='{% static "layui/layui.js" %}'></script>
+{% comment %} <script type='text/javascript' src='{% static "js/layer.js" %}'></script> {% endcomment %}
 <div id="header" class="navbar">
     <div id="logo">
         <img src="{% static '/images/logo.svg' %}" alt="Tenda Logo" class="logoimg">
@@ -31,27 +33,30 @@
             <img src="{% static '/images/holder1.svg' %}" alt="" class="tip-img">
             <a href="" class="navbar-tip">提醒</a>
         </div>
-        <div class="user-info">
-            <img src="" alt="" class="user-img">
-            <div class="navbar-user">
-                <a href="" class="text">{{user.username}}</a>
-            </div>
-            <div id="pop" style="visibility: hidden; display: none;">
-                <div id="pop1" clas="text">
-                    <a href="" class="usercenter">个人中心</a>
-                </div>
-                <div id="pop2" class="text">
-                    <a href="" class="changepwd">修改密码</a>
-                </div>
-                <div id="pop3" clas="text">
-                    <img src="{% static '/images/u181.svg' %}" alt="" class="img3">
-                    <a href="{% url 'account:user_logout' %}" class="logout">退出登录</a>
-                </div>
-            </div>
-        </div>
+        
+        <ul class="layui-nav navbar-user" style="background-color:rgba(127, 127, 127, 1)">  
+            <li class="layui-nav-item">
+                <a href style="text-decoration:none">
+                    {{user.userinfo.realname}}
+                    <span class="layui-nav-more"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="{% url 'account:my_information' %}">个人中心</a></dd>
+                    <dd><a href="javascript:;">修改密码</a></dd>
+                    <dd><a href="{% url 'account:user_logout' %}">退出登录</a></dd>
+                </dl>
+            </li>
+        </ul>
     </div>
 </div>
-
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  
+  //…
+});
+</script>
 
 
 
