@@ -207,74 +207,49 @@
                 </thead>
                 <tbody>
                     <tr class="ct_trwiden">
-                    <td class="cct1">
-                        <input type="checkbox" class="ck">
-                    </td>
-                    <td>1</td>
-                    <td>
-                        <span class="sign"></span>
-                        <span class="Cust_cont">02客户端模式透传需求</span>
-                    </td>
-                    <td>新需求</td>
-                    <td>李测试</td>
-                    <td>2019/10</td>
-                    <td>高</td>
-                    <td>家用</td>
-                    <td>安全性</td>
-                    <td>李负责</td>
-                    <td>
-                        <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                        <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
-                    </td>
-                    <td>
-                        <span class="dload">查看 | 下载</span>
-                        <img src="images/admin/See.png" class="see_dload">
-                    </td>
-                    </tr>
-                    <tr class="extratr">
-                    <td class="extratd" colspan="12">问题描述：客诉问题的概括，一两句话介绍客诉问题的的大概内容。</td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1">
-                        <input type="checkbox" class="ck">
-                    </td>
-                    <td>2</td>
-                    <td>
-                        <span class="sign"></span>
-                        <span class="Cust_cont">02客户端模式透传需求</span>
-                    </td>
-                    <td>品质</td>
-                    <td>刘便携</td>
-                    <td>2019/10</td>
-                    <td>低</td>
-                    <td>PON</td>
-                    <td>场景类</td>
-                    <td>张负责</td>
-                    <td>
-                        <span style="font-family:'Helvetica';font-size:12px;color:#999999;">●</span>
-                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
-                    </td>
-                    <td>
-                        <span class="dload">查看 | 下载</span>
-                        <img src="images/admin/See.png" class="see_dload">
-                    </td>
+                        <td class="cct1">
+                            <input type="checkbox" class="ck">
+                        </td>
+                        <td>1</td>
+                        <td>
+                            <span class="sign"></span>
+                            <span class="Cust_cont">02客户端模式透传需求</span>
+                        </td>
+                        <td>新需求</td>
+                        <td>李测试</td>
+                        <td>2019/10</td>
+                        <td>高</td>
+                        <td>家用</td>
+                        <td>安全性</td>
+                        <td>李负责</td>
+                        <td>
+                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
+                        </td>
+                        <td>
+                            <span class="dload">查看 | 下载</span>
+                            <img src="{% static 'images/account/see.png' %} " class="see_dload">
+                        </td>
+                        </tr>
+                        <tr class="extratr">
+                        <td class="extratd" colspan="12">问题描述：客诉问题的概括，一两句话介绍客诉问题的的大概内容。</td>
                     </tr>
                     {% for complaint in complaints %}
                     <tr class="cc_tr">
                         <td class="cct1"></td>
                         <td>{{forloop.counter}}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{complaint.cname}}</td>
+                        <td>{{complaint.type}}</td>
+                        <td>{{complaint.submitter}}</td>
+                        <td>{{complaint.ctime}}</td>
+                        <td>{{complaint.level}}</td>
+                        <td>{{complaint.product_line}}</td>
+                        <td>{{complaint.category}}</td>
+                        <td>{{complaint.tester}}</td>
+                        <td>{{complaint.status}}</td>
                         <td>
-                            <span class="dload">查看 | 下载</span>
+                            <span class="dload"><a href="{% url 'asset:complaint_detail' complaint_id %}">查看</a> | <a href="#">下载</a></span>
                             <img src="{% static 'images/account/see.png' %}" class="see_dload">
                         </td>
                     </tr>
