@@ -1,10 +1,39 @@
-{% extends "base.html" %}
 
-{% block title %}Logout{% endblock  %}
-
-{% block content %}
-<div class="row text-center vertical-middle-sm">
-    <p>You have log out</p>
-    <p>You can <a href="{% url 'account:user_login'%}">Login</a> again.</p>
-</div> 
-{% endblock  %}
+{% load staticfiles %}
+<html>
+    <head>
+        <title>退出登录</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" href="{% static 'css/account/login.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/default.css' %}" type="text/css">
+    </head>
+    <body>
+        <div id="base">
+            <div id="background" class="ax_default placeholder">
+                <img id="bg" class="bg_img" src="{% static 'images/account/bg.svg' %}">
+                <div id="logo" class="ax_default placeholder">
+                    <img id="logo_img" src="{% static 'images/account/logo.svg' %}">
+                    <div id="logo_text" class="text">
+                        <p>
+                            <span>LOGO</span>
+                        </p>
+                    </div>
+                </div>
+                <div id="illustration">
+                    <p>
+                        <span>背景插图</span>
+                    </p>
+                </div>
+                <div id="login" class="ax_default text_p">
+                    <div id="wlc_login" class="text">
+                        <span>已退出登录</span>
+                    </div>
+                    <div id="tool_name">
+                        <p>你可以重新 <a href="{% url 'account:user_login'%}" style="text-decoration:none">登录</a> 。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
