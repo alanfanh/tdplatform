@@ -128,9 +128,41 @@
                     <span>{{userinfo.id_card}}</span>
                 </div>
             </div>
-                <button type="button" id="btn" data-toggle="modal" data-target="#myModal">修改密码</button>
+                <button type="button" id="btn" onclick="change_pwd()">修改密码</button>
             </div>
         </div>
     </div>
 </div>
+
+<script src="{% static 'js/layer.js' %}"></script>
+<script>
+function change_pwd() {
+    var index = layer.open({
+        title:'修改密码',
+        btn:['确定','取消'],
+        content:'<div class="login-tip"><p>修改密码后请重新登录</p></div><p>{{ form.old_password }}</p><p>{{form.new_password1}}</p><p>{{form.new_password2}}</p>',
+        yes: function(index, layero) {
+            old_password = $("#id_old_password").val();
+            new_password1 = $("#id_new_password1").val();
+            new_password2 = $("#id_new_password2").val();
+            $.ajax({
+                url:'{% url 'account:change_password' %}',
+                type:'POST',
+                data:{"old_password":old_password,"new_password1":new_password1,"new_password2":new_password2},
+                success: function(e) {
+                    if (e=="1") {
+                        layer.msg("密码修改成功")
+                        location.href ="{% url 'account:user_login' %}";
+                    } else {
+                        layer.msg("密码修改失败")
+                    }
+                }
+            });
+        },
+        btn2: function(index, layero) {
+            layer.close(index);
+        }
+    });
+};
+</script>
 {% endblock  %}
