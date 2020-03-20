@@ -6,11 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-        <link href="{% static '/css/header.css' %}" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static '/css/header.css' %}">
         <link rel="stylesheet" href="{% static 'css/default.css' %}">
         <link rel="stylesheet" href="{% static 'css/account/personal_data.css' %}">
+        <link rel="stylesheet" href="{% static 'js/skin/default/layer.css' %}">
         <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/bootstrap.js' %}"></script>
+        <script src="{% static 'js/common.js' %}"></script>
     </head>
     <body>
         {% include "header.html" %}
