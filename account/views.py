@@ -6,25 +6,28 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-
+from django.views.decorators.http import require_POST
 from .forms import LoginForm,UserInfoForm
 from .models import UserInfo, Group, Role, Rank
 
+from django.contrib.auth.forms import PasswordChangeForm
 
-@login_required(login_url="login/")
+@login_required(login_url="/account/login/")
 def index(request):
     if request.method == "GET":
         users = UserInfo.objects.all()
         return render(request, 'account/index.html', {'users':users})
 
-@login_required(login_url="login/")
+@login_required(login_url="/account/login/")
 def user_detail(request, user_id):
     user_info = get_object_or_404(UserInfo, id=user_id)
     return render(request, 'account/user_detail.html', {'userinfo': user_info})
 
-@login_required(login_url="login/")
+@login_required(login_url="/account/login/")
 def myself(request):
     user = User.objects.get(username=request.user.username)
+    form = PasswordChangeForm(request.user)
+
     if user.is_superuser != 1:
         userinfo = UserInfo.objects.get(user=user)
         role = Role.objects.get(id=userinfo.role_id)
@@ -33,13 +36,14 @@ def myself(request):
         elif role.role_name == "STE":
             return render(request,"account/myself.html",{"user":user,"userinfo":userinfo})
         elif role.role_name == "PL":
-            return render(request,"account/myself_pl.html",{"user":user,"userinfo":userinfo})
+            return render(request,"account/myself_pl.html",{"user":user,"userinfo":userinfo,"form":form})
         else:
             return render(request,"account/myself_m.html",{"user":user,"userinfo":userinfo})
     else:
         return render(request, "account/myself_admin.html", {"user":user})
 
-@login_required(login_url="login/")
+
+@login_required(login_url="/account/login/")
 def group_user(request):
     user = User.objects.get(username=request.user.username)
     if user.is_superuser != 1:
@@ -53,7 +57,8 @@ def group_user(request):
     else:
         return HttpResponse("404")
 
-@login_required(login_url="login/")
+
+@login_required(login_url="/account/login/")
 def group_list(request):
     userinfo = UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
@@ -63,7 +68,8 @@ def group_list(request):
     else:
         return HttpResponse('404')
 
-@login_required(login_url="login/")
+
+@login_required(login_url="/account/login/")
 def all_user(request):
     """查看所有用户，显示用户信息列表"""
     user=User.objects.get(username=request.user.username)
@@ -83,7 +89,7 @@ def all_user(request):
             return HttpResponse("404 not found")
 
 
-@login_required(login_url="login/")
+@login_required(login_url="/account/login/")
 @csrf_exempt
 def add_user(request):
     """添加新用户"""
@@ -121,7 +127,7 @@ def add_user(request):
         user_groups = Group.objects.all()
         return render(request, "account/add_user.html",{"user_post_form":user_post_form,"user_roles":user_roles,"user_ranks":user_ranks,"user_groups":user_groups})
 
-@login_required(login_url='/login')
+@login_required(login_url='/account/login')
 @csrf_exempt
 def redit_user(request,user_id):
     # 编辑用户信息
@@ -166,3 +172,23 @@ def redit_user(request,user_id):
                 return HttpResponse("2")
     else:
         raise HttpResponse("404")
+
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+@require_POST
+def change_pwd(request):
+    form = PasswordChangeForm(user=request.user,data=request.POST)
+    print(form.errors)
+    if form.is_valid():
+        username = request.user.username
+        oldpwd = request.POST.get('old_password')
+        user = authenticate(username=username,password=oldpwd)
+        if user is not None and  user.is_active:
+            print('***OK***')
+            newpassword = request.POST.get('new_password1')
+            user.set_password(newpassword)
+            user.save()
+            return HttpResponse("1")
+    else:
+        return HttpResponse(form.errors)
