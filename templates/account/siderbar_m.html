@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+<div class="menuinfo">
+    <div class="pt">
+        <img src="{% static 'images/account/photo.svg' %}">
+    </div>
+    <div class="nm">
+        <span>{{userinfo.realname}}</span>
+    </div>
+    <div class="pt_dp">
+        <span>测试部 | 经理</span>
+    </div>
+    <div class="sc">
+        <span>80</span>
+    </div>
+    <div class="hv">
+        <span>29</span>
+    </div>
+    <div class="accum">
+        <span>积分</span>
+    </div>
+    <div class="tc">
+        <span>技术资产</span>
+    </div>
+    <div class="menu_gp1">
+        <a href="{% url 'training:person_course' %}"><span class="train">我贡献的培训</span></a>
+    </div>
+    <div class="menu_gp2">
+        <a href="{% url 'asset:process_tec' %}"><span class="pract">我的优秀实践</span></a>
+    </div>
+    <div class="menu_gp3">
+        <a href="{% url 'asset:my_complaint' %}"><span class="Ct_Cp">我的客诉问题</span></a>
+    </div>
+    <div class="menu_gp4" style="background-color:white">
+        <a href="{% url 'account:group_list' %}"><span class="this_page" style="color:#7F7F7F">小组信息</span></a>
+    </div>
+    <div class="menu_gp5" style="background-color: rgba(244, 244, 244, 1)">
+        <div class="left_bd"></div>
+        <a href="{% url 'account:my_information' %} "><span class="Per_Data" style="color:black">个人资料</span></a>
+    </div>
+</div>
