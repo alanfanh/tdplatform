@@ -31,14 +31,7 @@ def myself(request):
     if user.is_superuser != 1:
         userinfo = UserInfo.objects.get(user=user)
         role = Role.objects.get(id=userinfo.role_id)
-        if role.role_name == "TE":
-            return render(request, "account/myself.html", {"user":user, "userinfo":userinfo})
-        elif role.role_name == "STE":
-            return render(request,"account/myself.html",{"user":user,"userinfo":userinfo})
-        elif role.role_name == "PL":
-            return render(request,"account/myself_pl.html",{"user":user,"userinfo":userinfo,"form":form})
-        else:
-            return render(request,"account/myself_m.html",{"user":user,"userinfo":userinfo})
+        return render(request,"account/myself.html",{"user":user,"userinfo":userinfo,"form":form})
     else:
         return render(request, "account/myself_admin.html", {"user":user})
 
