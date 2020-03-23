@@ -42,7 +42,7 @@
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="{% url 'account:my_information' %}">个人中心</a></dd>
-                    <dd><a href="javascript:;">修改密码</a></dd>
+                    {% comment %} <dd><a href="javascript:;" onclick="change_pwd();">修改密码</a></dd> {% endcomment %}
                     <dd><a href="{% url 'account:user_logout' %}">退出登录</a></dd>
                 </dl>
             </li>
