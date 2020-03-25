@@ -145,22 +145,7 @@
     width:131px;
     text-align:left;
 }
-.rbacknum {
-    left: 447px;
-    top: 579px;
-    position: absolute;
-    cursor: help;
-    font-family: Helvetica,Arial;
-    padding-top: 1px;
-    background-color: #fff849;
-    font-size: 10px;
-    font-weight: bold;
-    line-height: 14px;
-    margin-right: 3px;
-    padding: 0px 4px;
-    color: #000;
-    box-shadow: 1px 1px 3px #aaa;
-}
+
 .tnfooter {
     border-width:0px;
     position:absolute;
@@ -172,22 +157,6 @@
     font-family:'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
     font-weight:650;
     font-style:normal;
-}
-.tnpgnum {
-    left: 1294px;
-    top: 739px;
-    position: absolute;
-    cursor: help;
-    font-family: Helvetica,Arial;
-    padding-top: 1px;
-    background-color: #fff849;
-    font-size: 10px;
-    font-weight: bold;
-    line-height: 14px;
-    margin-right: 3px;
-    padding: 0px 4px;
-    color: #000;
-    box-shadow: 1px 1px 3px #aaa;
 }
 .tdcont {
     position: absolute;
@@ -599,11 +568,10 @@
     position: absolute;
     left: 116px;
     top: 10px;
-    width: 80px;
     height: 22px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgba(217, 217, 217, 1);
+    border-color: white;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 2px;
     font-size: 12px;
@@ -619,8 +587,8 @@
 }
 .tafileformt {
     position: absolute;
-    left: 204px;
-    top: 12px;
+    left: 116px;
+    top: 34px;
     width: 284px;
     height: 18px;
     font-family: 'PingFangSC-Light', 'PingFang SC Light', 'PingFang SC';

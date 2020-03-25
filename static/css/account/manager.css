@@ -1454,11 +1454,9 @@
     position: absolute;
     left: 0px;
     top: 30px;
-    width: 80px;
-    height: 32px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgba(217, 217, 217, 1);
+    border-color: white;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 2px;
     font-size: 12px;
@@ -1480,8 +1478,8 @@
 }
 .extenm {
     position: absolute;
-    left: 88px;
-    top: 37px;
+    left: 0px;
+    top: 52px;
     width: 284px;
     height: 18px;
     font-family: 'PingFangSC-Light', 'PingFang SC Light', 'PingFang SC';
@@ -1592,7 +1590,7 @@
     -webkit-text-fill-color:#333333;
     line-height:22px;
     -webkit-appearance: none;
-    background: url(C:/Users/Administrator/Desktop/tdproject/images/admin/time.png) no-repeat 266px;
+    /* background: url(C:/Users/Administrator/Desktop/tdproject/images/admin/time.png) no-repeat 266px; */
     background-size: 14px;
     opacity: 0.43;
 }
@@ -2203,12 +2201,10 @@
 .upextra {
     position: absolute;
     left: 141px;
-    top: 1px;
-    width: 80px;
-    height: 32px;
+    top: 7px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgba(217, 217, 217, 1);
+    border-color: white;
     background-color: rgba(255, 255, 255, 1);
     border-radius: 2px;
     font-size: 12px;
@@ -2217,8 +2213,8 @@
 }
 .fileformt {
     position: absolute;
-    left: 229px;
-    top: 8px;
+    left: 141px;
+    top: 30px;
     width: 284px;
     height: 18px;
     font-family: 'PingFangSC-Light', 'PingFang SC Light', 'PingFang SC';
@@ -2845,3 +2841,61 @@
     border-radius: 5px;
     border: none;
 }
+
+.tagbd1 {
+    position: absolute;
+    /* left: 821px; */
+    top: 169px;
+    width: 53px;
+    height: 20px;
+    background-color: rgba(245, 245, 245, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    text-align: center;
+    line-height: 20px;
+  }
+  .tagbd2 {
+    position: relative;
+    left: 57px;
+    top: 10px;
+    width: 65px;
+    height: 20px;
+    background-color: rgba(245, 245, 245, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    text-align: center;
+    line-height: 20px;
+  }
+  .tagbd3 {
+    position: relative;
+    left: 127px;
+    bottom: 10px;
+    width: 65px;
+    height: 20px;
+    background-color: rgba(245, 245, 245, 1);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(217, 217, 217, 1);
+    border-radius: 4px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.647058823529412);
+    text-align: center;
+    line-height: 20px;
+  }
