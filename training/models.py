@@ -8,7 +8,7 @@ class Course(models.Model):
     id =  models.AutoField(primary_key=True)
     cname = models.CharField(verbose_name="课程名", max_length=30)
     range = models.CharField(verbose_name="课程范围", max_length=50)
-    course_time = models.DateField(verbose_name="培训时间", auto_now=False, auto_now_add=False)
+    course_time = models.DateTimeField(verbose_name="培训时间", auto_now=False, auto_now_add=False)
     address = models.CharField(verbose_name="培训地点", max_length=30)
     teacher = models.ForeignKey(UserInfo, related_name="course_teacher",verbose_name="主讲人", on_delete=models.DO_NOTHING)
     file_name = models.FileField(verbose_name="附件", upload_to="course_files", max_length=100)
