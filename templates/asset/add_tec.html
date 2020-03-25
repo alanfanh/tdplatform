@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% block title %}添加优秀实践{% endblock  %}
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
@@ -58,14 +60,17 @@
             <div class="gnbd6">
                 <span class="contsum">内容概括：</span>
                 <textarea class="sumtext" cols="30" rows="10" placeholder="请简单概括一下优秀实践的大致内容"></textarea>
-                <img src="images/4/texttag.png" class="texttag">
+                <img src="{% static 'images/asset/texttag.png' %}" class="texttag">
             </div>
             <div class="gnbd7">
                 <span class="contsum">上传附件：</span>
-                <button class="upextra">
+                <div class="upextra">
+                    <input type="file">
+                </div>
+                {% comment %} <button class="upextra">
                     <img src="images/4/uparrow.png" class="uparr">
                     <span class="ldtext">点击上传</span>
-                </button>
+                </button> {% endcomment %}
                 <span class="fileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
                 <button id="gahandin">
                     <span class="gahdin">提 交</span>

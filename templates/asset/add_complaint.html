@@ -158,16 +158,19 @@
                         <span>问题描述</span>
                     </div>
                     <textarea id="pbtext" cols="30" rows="10" placeholder="请简单概括一下客诉的大致内容"></textarea>
-                    <img src="images/4/texttag.png" class="pbttag">
+                    <img src="{% static 'images/asset/texttag.png' %}" class="pbttag">
                 </div>
                 <div class="cafllor5">
                     <div class="cm_name">
                         <span>上传附件</span>
                     </div>
-                    <button class="upload">
+                    <div class="upload">
+                        <input type="file">
+                    </div>
+                    {% comment %} <button class="upload">
                         <img src="images/4/uparrow.png" class="uparr">
                         <span class="ldtext">点击上传</span>
-                    </button>
+                    </button> {% endcomment %}
                     <span class="extenm">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
                     <button id="handin">
                         <span class="hdin">提 交</span>
