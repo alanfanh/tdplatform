@@ -27,7 +27,7 @@
             <div class="info_selt">
                 <div class="selcom">
                     <span class="showcont">显示内容</span>
-                    <img src="images/4/select.png" class="sltimg">
+                    <img src="{% static 'images/asset/select.png' %}" class="sltimg">
                 </div>
                 <label for="" class="linenm">产品线：</label>
                 <select class="lineselt">
@@ -50,8 +50,8 @@
                     <option value="5">需求类</option>
                 </select>
                 <input type="text" class="itsearch" placeholder="请输入">
-                <img src="images/4/sort.svg" class="sortimg">
-                <img src="images/4/handle.svg" class="sthandle">
+                <img src="{% static 'images/training/sort.svg' %}" class="sortimg">
+                <img src="{% static 'images/asset/handle.svg' %}" class="sthandle">
                 {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
                 <a href="{% url 'asset:add_complaint' %}"><button class="adcustomer" type="button">添加客诉</button></a>
                 {% endif %}
@@ -194,8 +194,8 @@
                     <th class="cct4">客诉类型</th>
                     <th class="cct5">提交人</th>
                     <th class="cct6">客诉时间
-                        <img src="images/admin/up.svg" class="up_img">
-                        <img src="images/admin/down.svg" class="down_img">
+                        {% comment %} <img src="images/admin/up.svg" class="up_img">
+                        <img src="images/admin/down.svg" class="down_img"> {% endcomment %}
                     </th>
                     <th class="cct7">严重程度</th>
                     <th class="cct8">产品线</th>
@@ -358,7 +358,7 @@
                 <div class="cc_total">
                     <span>共计 20 条数据</span>
                 </div>
-                <img src="images/admin/left.png" class="Ct_left">
+                {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
                 <div class="cc_page1">
                     <span class="Ct_pg1">1</span>
                 </div>
@@ -374,11 +374,11 @@
                 <div class="Ct_pg5">
                     <span>5</span>
                 </div>
-                <img src="images/admin/right.png" class="Ct_right">
+                {% comment %} <img src="images/admin/right.png" class="Ct_right"> {% endcomment %}
                 <button class="cc_page">
                     <span style="font-family:'ArialMT', 'Arial';">10</span>
                     <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                    <img src="images/admin/right.png" class="Ct_img">
+                    {% comment %} <img src="images/admin/right.png" class="Ct_img"> {% endcomment %}
                 </button>
                 <div class="Ct_goto">
                     <span>前往第</span>

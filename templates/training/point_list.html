@@ -44,8 +44,8 @@
                     <option value="1">2020</option>
                 </select>
                 <input type="text" class="trsearch" placeholder="请输入">
-                <img src="images/4/sort.svg" class="trsortimg">
-                <img src="images/4/handle.svg" class="trsthandle">
+                <img src="{% static 'images/training/sort.svg' %}" class="trsortimg">
+                <img src="{% static 'images/asset/handle.svg' %} " class="trsthandle">
             </div>
             <table class="tmtable" align="center">
                 <thead>
@@ -60,8 +60,8 @@
                         <td class="tmtd6">组织部门训积分</td>
                         <td class="tmtd7">
                             <span class="tmsore">总积分</span>
-                            <img src="images/admin/up.svg" class="tmupimg">
-                            <img src="images/admin/down.svg" class="tmdownimg">
+                            {% comment %} <img src="{% static 'images/asset/up.svg' %}" class="tmupimg">
+                            <img src="{% static 'images/asset/down.svg' %}" class="tmdownimg"> {% endcomment %}
                         </td>
                     </tr>
                 </thead>
@@ -204,7 +204,7 @@
                 <div class="cc_total">
                     <span>共计 20 条数据</span>
                 </div>
-                <img src="images/admin/left.png" class="Ct_left">
+                {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
                 <div class="cc_page1">
                     <span class="Ct_pg1">1</span>
                 </div>
@@ -220,11 +220,11 @@
                 <div class="Ct_pg5">
                     <span>5</span>
                 </div>
-                <img src="images/admin/right.png" class="Ct_right">
+                {% comment %} <img src="images/admin/right.png" class="Ct_right"> {% endcomment %}
                 <button class="cc_page">
                     <span style="font-family:'ArialMT', 'Arial';">10</span>
                     <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                    <img src="images/admin/right.png" class="Ct_img">
+                    {% comment %} <img src="images/admin/right.png" class="Ct_img"> {% endcomment %}
                 </button>
                 <div class="Ct_goto">
                     <span>前往第</span>

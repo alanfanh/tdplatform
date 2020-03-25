@@ -114,7 +114,7 @@
                 </td>
                 <td class="mp9">
                     <span class="dload">查看 | 下载</span>
-                    <img src="images/admin/See.png" class="see_dload">
+                    <img src="{% static 'images/asset/see.png' %} " class="see_dload">
                 </td>
                 </tr>
                 <tr class="Pra_tr">
@@ -220,7 +220,7 @@
             </table>
             <div class="Ep_total">
             <span class="ept_text">共计 295 条数据</span>
-            <img src="images/admin/left.png" class="Ep_left">
+            {% comment %} <img src="{% static 'images/asset/left.png' %}" class="Ep_left"> {% endcomment %}
             <div class="m_page1">
                 <span class="Ct_pg1">1</span>
             </div>
@@ -236,11 +236,11 @@
             <div class="Ep_pg5">
                 <span>5</span>
             </div>
-            <img src="images/admin/right.png" class="Ep_right">
+            {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_right"> {% endcomment %}
             <button id="M_page" class="mp">
                 <span style="font-family:'ArialMT', 'Arial';">10</span>
                 <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                <img src="images/admin/right.png" class="Ep_img">
+                {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_img"> {% endcomment %}
             </button>
             <div class="Ep_goto">
                 <span>前往第</span>

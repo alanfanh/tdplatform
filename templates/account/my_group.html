@@ -7,7 +7,6 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
-<link rel="stylesheet" href="{% static 'css/default.css' %}">
 
 <div class="base">
   <div class="baseplate">
@@ -65,12 +64,12 @@
             <th class="th4">工号</th>
             <th class="th5">职等</th>
             <th class="th6">技术资产
-              <img src="{% static 'images/account/up.svg' %}" class="up_img">
-              <img src="{% static 'images/account/down.svg' %}" class="down_img">
+              {% comment %} <img src="{% static 'images/account/up.svg' %}" class="up_img">
+              <img src="{% static 'images/account/down.svg' %}" class="down_img"> {% endcomment %}
             </th>
             <th class="th7">积分
-              <img src="{% static 'images/account/up.svg' %}" class="up_img">
-              <img src="{% static 'images/account/down.svg' %}" class="down_img">
+              {% comment %} <img src="{% static 'images/account/up.svg' %}" class="up_img">
+              <img src="{% static 'images/account/down.svg' %}" class="down_img"> {% endcomment %}
             </th>
           </tr>
         </thead>
