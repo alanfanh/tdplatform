@@ -41,25 +41,29 @@ class PersonCourseListView(UserCourseMixin, ListView):
         kwargs['course_list'] = Course.objects.filter(teacher=kwargs['userinfo'])
         return super(PersonCourseListView, self).get_context_data(**kwargs)
 
-class CourseCreateView(CreateView):
-    model = Course
-    fields = ['cname', 'range', 'course_time', 'address', 'teacher','file_name']
+class CourseCreateView(UserCourseMixin, CreateView):
+    fields = ['cname', 'range', 'course_time', 'address',
+              'teacher', 'cdescription', 'file_name', 'student']
     template_name = "training/add_course.html"
 
     def get_context_data(self, **kwargs):
         context = super(CourseCreateView,self).get_context_data(**kwargs)
         context["groups"] = Group.objects.all()
+        context['userinfos'] = UserInfo.objects.all()
         return context
-    
 
-    def Post(self, request, *args, **kwargs):
-        form = CreateCourseForm(data=request.POST)
+    def post(self, request, *args, **kwargs):
+        form = CreateCourseForm(request.POST, request.FILES)
+        print(request.POST,form)
         if form.is_valid():
             new_course = form.save(commit=False)
             new_course.author = self.request.user
             new_course.save()
             return redirect("training:course_list")
-        return self.render_to_response({"form":form})
+        else:
+            groups = Group.objects.all()
+            userinfos = UserInfo.objects.all()
+            return self.render_to_response({"form": form, "userinfos":userinfos, "groups":groups})
 
 
 class CourseDetailView(LoginRequiredMixin, DetailView):
