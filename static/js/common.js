@@ -97,3 +97,60 @@ function show_pwd() {
     let 
 }
 
+// 添加优秀实践页面：通过联动框，选择作者
+function handle() {
+    var group =  $("#group_name").val()
+    $.ajax({
+        type:"post",
+        url:"group_user",
+        data:{"group_id":group},
+        datatype:'json',
+        success: function(e) {
+            if(e!=null){
+                var author = $("#id_author");
+                var dataObj = eval(e);
+                var dataArr = dataObj.data;
+                author.empty();
+                // console.log(dataArr)
+                if(dataArr==null){
+                    keshi.append("<option value = '-1'>"+"成员为空"+"</option>");
+                }
+                if (dataArr!=null) {
+                    for(var i=0;i<dataArr.length;i++){
+                        var item =dataArr[i];
+                        author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                    };
+                }
+            }
+        }
+    });
+}
+
+function change_teacher() {
+    var group = $("#groups-user").val()
+    $.ajax({
+        type: "post",
+        url: "../../asset/group_user",
+        data: { "group_id": group },
+        datatype: 'json',
+        success: function (e) {
+            if (e != null) {
+                var author = $("#id_teacher");
+                var dataObj = eval(e);
+                var dataArr = dataObj.data;
+                author.empty();
+                console.log(dataArr)
+                // console.log(dataArr)
+                if (dataArr.length == 0) {
+                    author.append("<option value = '-1'>" + "成员为空" + "</option>");
+                }
+                if (dataArr != null) {
+                    for (var i = 0; i < dataArr.length; i++) {
+                        var item = dataArr[i];
+                        author.append("<option value = '" + item.id + "'>" + item.realname + "</option>")
+                    };
+                }
+            }
+        }
+    });
+}
