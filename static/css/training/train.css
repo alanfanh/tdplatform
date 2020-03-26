@@ -318,7 +318,7 @@
     border-style: solid;
     border-color: rgba(215, 215, 215, 1);
     border-radius: 2px;
-    -webkit-text-fill-color: #D7D7D7;
+    /* -webkit-text-fill-color: #D7D7D7; */
     padding-left: 7px;
     padding-top: 2px;
     font-size: 14px;
@@ -360,15 +360,29 @@
 }
 .taauthpick {
     position: absolute;
-    left: 115px;
+    left: 340px;
     top: 5px;
-    width: 401px;
+    width: 175px;
     height: 32px;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(215, 215, 215, 1);
     border-radius: 2px;
-    -webkit-text-fill-color: #D7D7D7;
+    /* -webkit-text-fill-color: #D7D7D7; */
+    padding-left: 7px;
+    padding-bottom: 2px;
+    font-size: 14px;
+}
+.group-user{
+    position: absolute;
+    left: 115px;
+    top: 5px;
+    width: 201px;
+    height: 32px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(215, 215, 215, 1);
+    border-radius: 2px;
     padding-left: 7px;
     padding-bottom: 2px;
     font-size: 14px;
