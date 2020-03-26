@@ -20,4 +20,6 @@ urlpatterns = [
     path('tec-list/', views.tec_list, name="tec_list"),
     path('tec-detail/', views.tec_detail, name="tec_detail"),
     path('add-tec', views.add_tec, name="add_tec"),
+    # 处理ajax返回json数据
+    path('group_user', views.group_user, name="group_user"),
 ]

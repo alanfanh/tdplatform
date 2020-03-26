@@ -1,11 +1,17 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .models import Articles, TecContent, Complaint
 from account.models import UserInfo, Role, Group
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+from .forms import TecContentForm, ComplaintForm
+
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 @login_required(login_url="/account/login")
 def article_title(request):
@@ -107,7 +113,29 @@ def tec_detail(request):
 @csrf_exempt
 def add_tec(request):
     if request.method == "POST":
-        pass
+        form = TecContentForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_tec = form.save(commit=False)
+            new_tec.status= "1"
+            new_tec.save()
+            return redirect("asset:tec_list")
     else:
         groups = Group.objects.all()
         return render(request,"asset/add_tec.html",{"groups":groups})
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+@require_POST
+def group_user(request):
+    """接收处理Ajax请求"""
+    
+    # 前端约定的返回格式 
+    result = {"rescode":'0',"message":'success',"data":[]}
+    group = Group.objects.get(id=request.POST['group_id'])
+    users = group.user_group.all()
+    for user in users:
+        user = model_to_dict(user) # model对象转换为dict字典
+        result["data"].append(user)
+    # json_user = serializers.serialize('json', users)
+    # return HttpResponse(json_user, content_type='application/json')
+    return JsonResponse(result)
