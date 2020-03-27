@@ -94,7 +94,12 @@ function delete_column(the, column_id) {
 
 // 控制显示或隐藏密码
 function show_pwd() {
-    let 
+    var login_pwd = $("#login_pwd")
+    if (login_pwd.attr('type') == "password") {
+        login_pwd.attr("type", "text");
+    } else {
+        login_pwd.attr("type", "password");
+    }
 }
 
 // 添加优秀实践页面：通过联动框，选择作者
