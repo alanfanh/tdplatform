@@ -211,11 +211,16 @@
                         </td>
                         <td>{{course.range}}</td>
                         <td>{{course.teacher.realname}}</td>
-                        <td>{{course.student.all.count}}人</td>
+                        <td>
+                            <span>{{course.student.all.count}}人</span>
+                            <span class="sign"></span>
+                        </td>
                         <td>{{course.address}}</td>
                         <td>{{course.course_time|date:"Y/m/d H:i"}}</td>
                         <td>
-                            <span class="dload"><a href="{% url 'training:course_detail' course.id %}">查看</a> | <a href="">下载</a></span>
+                            <span class="dload">
+                                <a href="{% url 'training:course_detail' course.id %}">查看</a> | {% if course.file_name != "" %}<a href="{% url 'training:download_file' course.id %}">下载</a>{% endif %}
+                            </span>
                             <img src="{% static 'images/account/see.png' %}" class="see_dload">
                         </td>
                     </tr>
