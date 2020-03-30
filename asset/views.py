@@ -108,7 +108,7 @@ def tec_list(request):
 def tec_detail(request, tec_id):
     # 主页优秀时间详情
     tec = get_object_or_404(TecContent, id=tec_id)
-    return render(request, "asset/tec_detail.html")
+    return render(request, "asset/tec_detail.html", {"tec":tec})
 
 @login_required(login_url="/account/login")
 @csrf_exempt
