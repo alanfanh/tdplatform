@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Articles, TecContent, Complaint
 from account.models import UserInfo, Role, Group
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -12,6 +12,7 @@ from .forms import TecContentForm, ComplaintForm
 
 from django.core import serializers
 from django.forms.models import model_to_dict
+from django.utils.encoding import escape_uri_path
 
 @login_required(login_url="/account/login")
 def article_title(request):
@@ -104,9 +105,9 @@ def tec_list(request):
     return render(request, "asset/tec_list.html", {"tecs":tecs,"userinfo":userinfo})
 
 @login_required(login_url="/account/login")
-def tec_detail(request):
+def tec_detail(request, tec_id):
     # 主页优秀时间详情
-    # tec = TecContent.objects.get(id=tec_id)
+    tec = get_object_or_404(TecContent, id=tec_id)
     return render(request, "asset/tec_detail.html")
 
 @login_required(login_url="/account/login")
@@ -122,6 +123,20 @@ def add_tec(request):
     else:
         groups = Group.objects.all()
         return render(request,"asset/add_tec.html",{"groups":groups})
+
+@login_required(login_url="/account/login")
+def download_tec_file(request, tec_id):
+    # 下载优秀实践附件
+    tec = get_object_or_404(TecContent, id=tec_id)
+    if tec.file != "":
+        file_name = tec.file.name.split('/')[1]
+        response = FileResponse(tec.file)
+        response['Content-Type'] = "application/octet-stream"
+        response['Content-Disposition'] = "attachment;filename*=utf-8''{}".format(
+            escape_uri_path(file_name))
+        return response
+    else:
+        return HttpResponse("null")
 
 @login_required(login_url="/account/login")
 @csrf_exempt
