@@ -19,3 +19,4 @@ __pycache__/
 /.svn
 
 # my configuration
+*.doc
