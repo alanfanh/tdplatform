@@ -31,7 +31,7 @@
                     <option value="4">商用测试组</option>
                     <option value="5">便携测试组</option>
                     <option value="6">资料开发组</option>
-                    <option value="7">OEM组</option>
+                    <option value="7">OEM测试组</option>
                 </select>
                 <label for="" class="gptime">时间选择：</label>
                 <select class="gptimepick">
@@ -88,7 +88,7 @@
                     <td>2019/12/08</td>
                     <td>
                         <span class="dload">
-                            <a href="{% url 'asset:tec_detail' %}">查看</a> | <a href="">下载</a>
+                            <a href="">查看</a> | <a href="">下载</a>
                         </span>
                         <img src="{% static 'images/account/see.png' %}" class="see_dload">
                     </td>
@@ -127,13 +127,21 @@
                     {% for tec in tecs %}
                     <tr class="gd_tr">
                         <td class="gpt1"></td>
-                        <td ></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{forloop.counter}}</td>
+                        <td>
+                            <span class="sign"></span>
+                            <span class="Cust_cont">{{tec.tname}}</span>
+                        </td>
+                        <td>{{tec.author}}</td>
+                        <td>{{tec.author.group}}</td>
+                        <td>{{tec.tag}}</td>
+                        <td>{{tec.created_at|date:"Y/m/d"}}</td>
+                        <td>
+                            <span class="dload">
+                                <a href="{% url 'asset:tec_detail' tec.id %}">查看</a> | {% if tec.file != "" %}<a href="{% url 'asset:down_tec_file' tec.id %}">下载</a>{% endif %}
+                            </span>
+                            <img src="{% static 'images/account/see.png' %}" class="see_dload">
+                        </td>
                     </tr>
                     {% endfor %}
                     <tr class="gd_tr">
@@ -213,7 +221,7 @@
             </div> {% endcomment %}
             <div class="gd_footer">
                 <div class="cc_total">
-                    <span>共计 20 条数据</span>
+                    <span>共计{{tecs.count}}条数据</span>
                 </div>
                 {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
                 <div class="cc_page1">

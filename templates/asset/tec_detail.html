@@ -34,16 +34,16 @@
                 <span class="cd_info">培训信息</span>
             </div>
             <div class="cdgoing_cont">
-                <span class="cdname">名称：优化testlink数据库查询性能的方法与实施</span>
-                <span class="cdtype">作者：    李测试</span>
-                <span class="hdname">所在小组：商用测试组</span>
-                <span class="cdoa">标签：协议相关 自动化 用户体验 方法创新</span>
-                <span class="cdtime">编写时间：2019/12/08</span>
+                <span class="cdname">名称：{{tec.tname}}</span>
+                <span class="cdtype">作者：    {{tec.author}}</span>
+                <span class="hdname">所在小组：{{tec.author.group}}</span>
+                <span class="cdoa">标签：{{tec.tag}}</span>
+                <span class="cdtime">编写时间：{{tec.created_at|date:"Y/m/d"}}</span>
             </div>
             <div class="gdcont">
                 <span class="cdname">内容概述：</span>
-                <span class="gdtext">示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字</span>
-                <span class="gdextext">附件：优化testlink数据库查询性能的方法与实施.zip</span>
+                <span class="gdtext">{{tec.body}}</span>
+                <span class="gdextext">附件：{{tec.file.name}}</span>
             </div>
             <button class="gdrelist" onclick="window.history.back()">返回列表</button>
             <button class="gdfile">下载附件</button>
