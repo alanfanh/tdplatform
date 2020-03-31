@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 from django.utils import timezone
 from django.contrib.auth.models import User
+from account.models import Group, UserInfo
 
 class Articles(models.Model):
     title = models.CharField(max_length=300)
@@ -21,9 +22,10 @@ class TecContent(models.Model):
     id = models.AutoField(primary_key=True)
     tname = models.CharField(verbose_name="优秀实践标题", max_length=30)
     tag = models.CharField(verbose_name="标签", max_length=10)
-    author = models.ForeignKey(User, verbose_name="作者", on_delete=models.DO_NOTHING, related_name="user_post")
+    group = models.ForeignKey(Group, verbose_name="小组", on_delete=models.DO_NOTHING, related_name="group_tec")
+    author = models.ForeignKey(UserInfo, verbose_name="作者", on_delete=models.DO_NOTHING, related_name="user_post")
     body = models.TextField(verbose_name="内容概括")
-    created_at = models.DateTimeField(verbose_name='时间', auto_now=False, auto_now_add=False, default=timezone.now)
+    created_at = models.DateTimeField(verbose_name='时间', auto_now=False, auto_now_add=False)
     file = models.FileField(verbose_name="附件", upload_to=None, max_length=100)
     status = models.CharField(verbose_name="状态", max_length=2)
 
