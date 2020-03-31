@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404,render
-
+import json
 # Create your views here.
 # 本views.py文件不再写视图函数，而是通过类的视图实现功能
 
@@ -87,7 +87,7 @@ def download_file(request, course_id):
         # 浏览器会导致中文乱码, 进行如下解码
         response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(
             escape_uri_path(file_name))
-        print(response['Content-Disposition'], content, file_name)
+        print(response['Content-Disposition'], file_name)
     return response
 
 class DeleteCourseView(LoginRequiredMixin, DeleteView):
