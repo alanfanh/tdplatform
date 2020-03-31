@@ -107,7 +107,7 @@ function handle() {
     var group =  $("#group_name").val()
     $.ajax({
         type:"post",
-        url:"group_user",
+        url:"../group_user",
         data:{"group_id":group},
         datatype:'json',
         success: function(e) {

@@ -4,7 +4,6 @@ from . import views
 
 app_name = 'asset'
 urlpatterns = [
-    path('', views.article_title,  name="blog_title"),
     path('<int:article_id>', views.article_content, name="blog_detail"),
     # 
     path('my-complaint/', views.my_complaint, name="my_complaint"),
@@ -19,7 +18,7 @@ urlpatterns = [
     # 主页优秀实践
     path('tec-list/', views.tec_list, name="tec_list"),
     path('tec-detail/<int:tec_id>', views.tec_detail, name="tec_detail"),
-    path('add-tec', views.add_tec, name="add_tec"),
+    path('add-tec/', views.add_tec, name="add_tec"),
     path('download-file/<int:tec_id>', views.download_tec_file, name="down_tec_file"),
     # 处理ajax返回json数据
     path('group_user', views.group_user, name="group_user"),
