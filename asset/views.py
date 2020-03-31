@@ -113,16 +113,20 @@ def tec_detail(request, tec_id):
 @login_required(login_url="/account/login")
 @csrf_exempt
 def add_tec(request):
+    form = TecContentForm(request.POST, request.FILES)
     if request.method == "POST":
-        form = TecContentForm(request.POST, request.FILES)
+        
+        print(form)
         if form.is_valid():
             new_tec = form.save(commit=False)
             new_tec.status= "1"
             new_tec.save()
             return redirect("asset:tec_list")
+        else:
+            return HttpResponse("错误")
     else:
         groups = Group.objects.all()
-        return render(request,"asset/add_tec.html",{"groups":groups})
+        return render(request,"asset/add_tec.html",{"groups":groups, "form":form})
 
 @login_required(login_url="/account/login")
 def download_tec_file(request, tec_id):

@@ -23,15 +23,15 @@
             <div class="Cp_title">
                 <span class="Cust_Com">添加优秀实践</span>
             </div>
-            <form action="" method="post">{% csrf_token %}
+            <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="gnbd">
                     <span class="gdname">优秀实践名称：</span>
-                    <input type="text" class="input_gd" placeholder="请输入优秀实践名称">
-                    <span class="gdtip">此处不能为空</span>
+                    <input type="text" class="input_gd" name="tname" placeholder="请输入优秀实践名称">
+                    {% comment %} <span class="gdtip">此处不能为空</span> {% endcomment %}
                 </div>
                 <div class="gnbd2">
                     <span class="auth">小组：</span>
-                    <select class="atgpselt"  id="group_name" onchange="handle();">
+                    <select class="atgpselt"  id="group_name" name="group"  onchange="handle();">
                         {% for group in groups %}
                         <option value="{{group.id}}">{{group.name}}</option>
                         {% endfor %}
@@ -39,14 +39,14 @@
                 </div>
                 <div class="gnbd3">
                     <span class="auth">作者：</span>
-                    <select class="authselt" id="id_author">
+                    <select class="authselt" id="id_author" name="author">
                         <option value="0">请选择作者</option>
                     </select>
                 </div>
                 <div class="gnbd4">
                     <span class="tttag">文章标签：</span>
                     <div class="usrex">
-                        <input type="checkbox" class="tagck" value="用户体验">
+                        <input type="checkbox" class="tagck" name="tag" value="用户体验">
                         <span>用户体验</span>
                     </div>
                     <div class="ptl">
@@ -64,11 +64,12 @@
                 </div>
                 <div class="gnbd5">
                     <span class="writetm">编写时间：</span>
-                    <input type="date" style="color: rgb(153, 153, 153);" class="wtime">
+                    <div style="color: rgb(153, 153, 153);" class="wtime">{{form.created_at}}</div>
+                    {% comment %} <input type="datetime-local" style="color: rgb(153, 153, 153);" name="created_at" required="" id="id_created_at" class="wtime" value="{{ form.created_at.value }}"> {% endcomment %}
                 </div>
                 <div class="gnbd6">
                     <span class="contsum">内容概括：</span>
-                    <textarea class="sumtext" cols="30" rows="10" placeholder="请简单概括一下优秀实践的大致内容"></textarea>
+                    <textarea class="sumtext" cols="30" rows="10" name="body" placeholder="请简单概括一下优秀实践的大致内容"></textarea>
                     <img src="{% static 'images/asset/texttag.png' %}" class="texttag">
                 </div>
                 <div class="gnbd7">
@@ -81,7 +82,7 @@
                         <span class="ldtext">点击上传</span>
                     </button> {% endcomment %}
                     <span class="fileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
-                    <button id="gahandin">
+                    <button id="gahandin" type="submit">
                         <span class="gahdin">提 交</span>
                         {% comment %} <img src="{% static 'images/account/subm.png' %} " class="gahdin_img"> {% endcomment %}
                     </button>
