@@ -2178,7 +2178,7 @@
     left: 141px;
     top: 8px;
     width: 400px;
-    height: 120px;
+    height: 170px;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(217, 217, 217, 1);
@@ -2315,7 +2315,7 @@
     position: absolute;
     left: 157px;
     top: 8px;
-    width: 84px;
+    /* width: 84px; */
     font-size: 14px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
     font-weight: 400;

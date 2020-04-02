@@ -26,12 +26,12 @@
             <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="gnbd">
                     <span class="gdname">优秀实践名称：</span>
-                    <input type="text" class="input_gd" name="tname" placeholder="请输入优秀实践名称">
+                    <input type="text" class="input_gd" id="id_tname" name="tname" placeholder="请输入优秀实践名称">
                     {% comment %} <span class="gdtip">此处不能为空</span> {% endcomment %}
                 </div>
                 <div class="gnbd2">
                     <span class="auth">小组：</span>
-                    <select class="atgpselt"  id="group_name" name="group"  onchange="handle();">
+                    <select class="atgpselt"  id="id_group" name="group"  onchange="handle();">
                         {% for group in groups %}
                         <option value="{{group.id}}">{{group.name}}</option>
                         {% endfor %}
@@ -46,9 +46,16 @@
                 <div class="gnbd4">
                     <span class="tttag">文章标签：</span>
                     <div class="usrex">
+                    {% for tag in tec_tags %}
+                        <input type="checkbox" class="tagck" id="{{tag.id}}" name="tec_tag" value="{{tag.tag}}">
+                        <span style="padding-right: 22px";>{{tag.tag}}</span>
+                    {% endfor %}
+                    </div>
+                    {% comment %} <div class="usrex">
                         <input type="checkbox" class="tagck" name="tag" value="用户体验">
                         <span>用户体验</span>
-                    </div>
+                    </div> 
+                   
                     <div class="ptl">
                         <input type="checkbox" class="tagck2" value="协议相关">
                         <span>协议相关</span>
@@ -60,14 +67,14 @@
                     <div class="autom">
                         <input type="checkbox" class="tagck2" value="自动化">
                         <span>自动化</span>
-                    </div>
+                    </div>   {% endcomment %}
                 </div>
-                <div class="gnbd5">
-                    <span class="writetm">编写时间：</span>
-                    <div style="color: rgb(153, 153, 153);" class="wtime">{{form.created_at}}</div>
+                {% comment %} <div class="gnbd5"> {% endcomment %}
+                    {% comment %} <span class="writetm">编写时间：</span>
+                    <div style="color: rgb(153, 153, 153);" class="wtime">{{form.created_at}}</div> {% endcomment %}
                     {% comment %} <input type="datetime-local" style="color: rgb(153, 153, 153);" name="created_at" required="" id="id_created_at" class="wtime" value="{{ form.created_at.value }}"> {% endcomment %}
-                </div>
-                <div class="gnbd6">
+                {% comment %} </div> {% endcomment %}
+                <div class="gnbd5">
                     <span class="contsum">内容概括：</span>
                     <textarea class="sumtext" cols="30" rows="10" name="body" placeholder="请简单概括一下优秀实践的大致内容"></textarea>
                     <img src="{% static 'images/asset/texttag.png' %}" class="texttag">
@@ -75,7 +82,7 @@
                 <div class="gnbd7">
                     <span class="contsum">上传附件：</span>
                     <div class="upextra">
-                        <input type="file" name="file">
+                        {{form.file}}
                     </div>
                     {% comment %} <button class="upextra">
                         <img src="images/4/uparrow.png" class="uparr">

@@ -104,7 +104,7 @@ function show_pwd() {
 
 // 添加优秀实践页面：通过联动框，选择作者
 function handle() {
-    var group =  $("#group_name").val()
+    var group =  $("#id_group").val()
     $.ajax({
         type:"post",
         url:"../group_user",
