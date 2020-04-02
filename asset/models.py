@@ -18,15 +18,23 @@ class Articles(models.Model):
     def __str__(self):
         return self.title
 
+class TecTag(models.Model):
+    id = models.AutoField(primary_key=True)
+    tag = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tag
+    
+
 class TecContent(models.Model):
     id = models.AutoField(primary_key=True)
     tname = models.CharField(verbose_name="优秀实践标题", max_length=30)
-    tag = models.CharField(verbose_name="标签", max_length=10)
+    tec_tag = models.ManyToManyField(TecTag, verbose_name="标签", related_name="tec_tag", blank=True)
     group = models.ForeignKey(Group, verbose_name="小组", on_delete=models.DO_NOTHING, related_name="group_tec")
     author = models.ForeignKey(UserInfo, verbose_name="作者", on_delete=models.DO_NOTHING, related_name="user_post")
     body = models.TextField(verbose_name="内容概括")
-    created_at = models.DateTimeField(verbose_name='时间', auto_now=False, auto_now_add=False)
-    file = models.FileField(verbose_name="附件", upload_to=None, max_length=100)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    file = models.FileField(verbose_name="附件", upload_to="tec_files", max_length=100)
     status = models.CharField(verbose_name="状态", max_length=2)
 
     class Meta:
@@ -34,6 +42,9 @@ class TecContent(models.Model):
 
     def __str__(self):
         return self.tname
+    
+    def save(self, *args, **kwargs):
+        super(TecContent, self).save(*args, **kwargs)
 
 
 class Complaint(models.Model):
@@ -56,7 +67,7 @@ class Complaint(models.Model):
     tester = models.CharField(verbose_name="分析责任人", max_length=10)
     complete_time = models.DateTimeField(verbose_name="分析完成时间", auto_now=False, auto_now_add=False)
     status = models.CharField(verbose_name="措施状态", max_length=50)
-    cfile = models.FileField(verbose_name="材料附件", upload_to=None, max_length=100)
+    cfile = models.FileField(verbose_name="材料附件", upload_to="complaint_file", max_length=100)
 
     def __str__(self):
         return self.cname
