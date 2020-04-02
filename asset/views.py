@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .models import Articles, TecContent, Complaint
+from .models import Articles, TecContent, Complaint, TecTag
 from account.models import UserInfo, Role, Group
 
 from django.http import HttpResponse, JsonResponse, FileResponse
@@ -113,20 +113,34 @@ def tec_detail(request, tec_id):
 @login_required(login_url="/account/login")
 @csrf_exempt
 def add_tec(request):
+    # 添加优秀实践
     form = TecContentForm(request.POST, request.FILES)
     if request.method == "POST":
-        
-        print(form)
         if form.is_valid():
             new_tec = form.save(commit=False)
-            new_tec.status= "1"
+            new_tec.status = "1"
+            # new_tec.author = UserInfo.objects.get(id=request.POST['author'])
+            # new_tec.group = Group.objects.get(id=request.POST['group'])
+            tags = request.POST.getlist('tec_tag')
+            # print('****tags', tags, new_tec.tname, new_tec.file, new_tec.status,new_tec.author, new_tec.group)
+            # new_tec.created_at = timezone.now().strftime("%Y-%m-%d %H:%m:%S")
+            # print(new_tec.created_at) 
             new_tec.save()
-            return redirect("asset:tec_list")
+            # form.save_m2m()
+            if tags:
+                print('test')
+                for atag in tags:
+                    tag = TecTag.objects.get(tag=atag)
+                    print(tag)
+                    new_tec.tec_tag.add(tag)
+            return redirect("asset:tec_list")     
         else:
-            return HttpResponse("错误")
+            return HttpResponse("3")
     else:
         groups = Group.objects.all()
-        return render(request,"asset/add_tec.html",{"groups":groups, "form":form})
+        tec_tags = TecTag.objects.all()
+        return render(request, "asset/add_tec.html", {"groups": groups, "tec_tags": tec_tags,"form":form})
+
 
 @login_required(login_url="/account/login")
 def download_tec_file(request, tec_id):
