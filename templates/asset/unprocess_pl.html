@@ -62,59 +62,43 @@
             </div>
             </div>
             <table class="un_pt" align="center">
-            <tbody>
-                <tr class="un_text">
-                <td class="untd1">
-                    <img src="{% static 'images/asset/id_photo.svg' %}" class="unpt_img">
-                </td>
-                <td class="untd2">李测试</td>
-                <td class="untd3">优化testlink数据库查询性能的方法与实施</td>
-                <td class="untd4">2019-12-21  08:50:08</td>
-                <td class="untd5">
-                    <span style="color:#108EE9;">查看</span>
-                    <span style="color:#D7D7D7;">|</span>
-                    <span style="color:#108EE9;">更多</span>
-                    <img src="{% static 'images/asset/see.png' %}" class="see_dload">
-                </td>
-                </tr>
-                <tr class="un_text">
+                <tbody>
+                    <tr class="un_text">
+                        <td class="untd1">
+                            <img src="{% static 'images/asset/id_photo.svg' %}" class="unpt_img">
+                        </td>
+                        <td class="untd2">李测试</td>
+                        <td class="untd3">优化testlink数据库查询性能的方法与实施</td>
+                        <td class="untd4">2019-12-21  08:50:08</td>
+                        <td class="untd5">
+                            <span style="color:#108EE9;">查看</span>
+                            <span style="color:#D7D7D7;">|</span>
+                            <span style="color:#108EE9;">更多</span>
+                            <img src="{% static 'images/asset/see.png' %}" class="see_dload">
+                        </td>
+                    </tr>
                     {% for tec in tec_list %}
-                    <td class="untd1"></td>
-                    <td class="untd2"></td>
-                    <td class="untd3"></td>
-                    <td class="untd4"></td>
-                    <td class="untd5"></td>
+                    <tr class="un_text">
+                        <td class="untd1"></td>
+                        <td class="untd2">{{tec.author.realname}}</td>
+                        <td class="untd3">{{tec.tname}}</td>
+                        <td class="untd4">{{tec.created_at}}</td>
+                        <td class="untd5">
+                            <a href=" {% url 'asset:unprocess_pl_detail' tec.id %} "><span style="color:#108EE9;">查看</span></a>
+                            <span style="color:#D7D7D7;">|</span>
+                            <span style="color:#108EE9;">更多</span>
+                            <img src="{% static 'images/asset/see.png' %}" class="see_dload">
+                        </td>
+                    </tr>
                     {% endfor %}
-                </tr>
-                <tr class="un_text">
-                <td class="untd1"></td>
-                <td class="untd2"></td>
-                <td class="untd3"></td>
-                <td class="untd4"></td>
-                <td class="untd5"></td>
-                </tr>
-                <tr class="un_text">
-                <td class="untd1"></td>
-                <td class="untd2"></td>
-                <td class="untd3"></td>
-                <td class="untd4"></td>
-                <td class="untd5"></td>
-                </tr>
-                <tr class="un_text">
-                <td class="untd1"></td>
-                <td class="untd2"></td>
-                <td class="untd3"></td>
-                <td class="untd4"></td>
-                <td class="untd5"></td>
-                </tr>
-            </tbody>
+                </tbody>
             </table>
             <div class="prompt_box">
-            <span class="al_read">设为已读</span>
-            <span class="Dload_ucs">下载附件</span>
+                <span class="al_read">设为已读</span>
+                <span class="Dload_ucs">下载附件</span>
             </div>
             <div class="Up_total">
-            <span class="ept_text">共计 8 条数据</span>
+                <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
             </div>
         </div>
     </div>
