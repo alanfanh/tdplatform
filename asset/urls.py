@@ -11,6 +11,8 @@ urlpatterns = [
     path('process-tec/', views.process_tec, name="process_tec"),
     path('my-tec/', views.my_tec, name="my_tec"),
     path('assigned-list', views.assigned_list, name="assigned_list"),
+    path('unprocess-pl-detail/<int:tec_id>', views.unprocess_pl_detail, name="unprocess_pl_detail"),
+    path('processed-pl-detail/<int:tec_id>', views.processed_pl_detail, name="processed_pl_detail"),
     # 主页客诉
     path('complaint-list/', views.complaint_list, name="complaint_list"),
     path('complaint-detail/<int:complaint_id>', views.complaint_detail, name="complaint_detail"),

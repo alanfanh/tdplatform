@@ -69,7 +69,7 @@ def unprocess_tec(request):
     role = Role.objects.get(id=userinfo.role_id)
     if role.role_name == "PL":
         # PL用户
-        tec_list = TecContent.objects.filter(status="1")
+        tec_list = TecContent.objects.filter(status="1", group_id=userinfo.group_id)
         return render(request, "asset/unprocess_pl.html",{"userinfo":userinfo, "tec_list":tec_list})
     elif role.role_name == "M":
         # M用户
@@ -84,9 +84,10 @@ def process_tec(request):
     userinfo =  UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
     if role.role_name == "PL":
-        tec_list = TecContent.objects.filter()
+        tec_list = TecContent.objects.filter(group_id=userinfo.group_id).exclude(status="1")
         return render(request, "asset/processed_pl.html",{"userinfo":userinfo, "tec_list":tec_list})
     elif role.role_name == "M":
+        tec_list = TecContent.objects.exclude(status="2")
         return render(request, "asset/processed_m.html", {"userinfo":userinfo})
     else:
         return HttpResponse("Not Found")
@@ -141,6 +142,29 @@ def add_tec(request):
         tec_tags = TecTag.objects.all()
         return render(request, "asset/add_tec.html", {"groups": groups, "tec_tags": tec_tags,"form":form})
 
+@login_required(login_url="/account/login")
+def unprocess_pl_detail(request, tec_id):
+    # 未处理的优秀实践详情
+    userinfo = UserInfo.objects.get(user=request.user)
+    role = Role.objects.get(id=userinfo.role_id)
+    if role.role_name == "PL":
+        tec = get_object_or_404(TecContent, id=tec_id)
+        return render(request, "asset/unprocess_pl_detail.html", {"tec":tec, "userinfo":userinfo})
+    elif role.role_name == "M":
+        tec = get_object_or_404(TecContent, id=tec_id)
+        return render(request, "asset/unprocess_m_detail.html", {"tec":tec, "userinfo":userinfo})
+
+@login_required(login_url="/account/login")
+def processed_pl_detail(request, tec_id):
+    # 已处理的优秀实践详情
+    userinfo = UserInfo.objects.get(user=request.user)
+    role = Role.objects.get(id=userinfo.role_id)
+    if role.role_name == "PL":
+        tec = get_object_or_404(TecContent, id=tec_id)
+        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo})
+    elif role.role_name == "M":
+        tec = get_object_or_404(TecContent, id=tec_id)
+        return render(request, "asset/processed_m_detail.html", {"tec":tec, "userinfo":userinfo})
 
 @login_required(login_url="/account/login")
 def download_tec_file(request, tec_id):
