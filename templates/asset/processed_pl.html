@@ -116,39 +116,37 @@
               <img src="{% static 'images/asset/see.png' %}" class="see_dload">
             </td>
           </tr>
+          {% for tec in tec_list %}
           <tr class="Pra_tr">
-            <td class="ep1"></td>
-            <td class="ep2"></td>
-            <td class="ep3"></td>
-            <td class="ep4"></td>
-            <td class="ep5"></td>
-            <td class="ep6"></td>
-            <td class="ep7"></td>
-            <td class="ep8"></td>
-            <td class="ep9"></td>
+            <td class="ep1">
+              <input type="checkbox" class="ck">
+            </td>
+            <td class="ep2">{{forloop.counter}}</td>
+            <td class="ep3">
+              <span class="sign"></span>
+              <span class="Cust_cont">{{tec.tname}}</span>
+            </td>
+            <td class="ep4">{{tec.author.realname}}</td>
+            <td class="ep5">{{tec.group}}</td>
+            <td class="ep6">
+              <div class="tag_bd">
+                <span>{{tec.tec_tag.all | join:' '}}</span>
+              </div>
+            </td>
+            <td class="ep7">{{tec.created_at | date:"Y-m-d"}}</td>
+            <td class="ep8">
+              {% if tec.status == '3' %}
+              <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
+              <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
+              <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
+              {% endif %}
+            </td>
+            <td class="ep9">
+              <span class="dload"><a href="{% url 'asset:processed_pl_detail' tec.id %}">查看</a> | <a href=""> 下载</a></span>
+              <img src="{% static 'images/asset/see.png' %}" class="see_dload">
+            </td>
           </tr>
-          <tr class="Pra_tr">
-            <td class="ep1"></td>
-            <td class="ep2"></td>
-            <td class="ep3"></td>
-            <td class="ep4"></td>
-            <td class="ep5"></td>
-            <td class="ep6"></td>
-            <td class="ep7"></td>
-            <td class="ep8"></td>
-            <td class="ep9"></td>
-          </tr>
-          <tr class="Pra_tr">
-            <td class="ep1"></td>
-            <td class="ep2"></td>
-            <td class="ep3"></td>
-            <td class="ep4"></td>
-            <td class="ep5"></td>
-            <td class="ep6"></td>
-            <td class="ep7"></td>
-            <td class="ep8"></td>
-            <td class="ep9"></td>
-          </tr>
+          {% endfor %}
           <tr class="Pra_tr">
             <td class="ep1"></td>
             <td class="ep2"></td>
@@ -218,7 +216,7 @@
         </tbody>
       </table>
       <div class="Ep_total">
-        <span class="ept_text">共计 295 条数据</span>
+        <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
         {% comment %} <img src="{% static 'images/asset/left.png' %}" class="Ep_left"> {% endcomment %}
         <div id="Ep_page1">
           <span class="Ct_pg1">1</span>
