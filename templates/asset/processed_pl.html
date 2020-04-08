@@ -56,10 +56,10 @@
       </div>
       <div class="Handle_State">
         <div class="Processed_bd">
-          <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color:black">已处理（295）</span></a>
+          <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color:black">已处理（{{tec_list.count}}）</span></a>
         </div>
         <div class="Untreated_bd">
-          <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color: rgba(85, 85, 85, 0.647058823529412);">未处理（5）</span></a>
+          <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color: rgba(85, 85, 85, 0.647058823529412);">未处理</span></a>
         </div>
       </div>
       <div class="My_State">
@@ -139,10 +139,18 @@
               <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
               <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
               <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
+              {% elif tec.status == '0' %}
+              <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#F5222D;">●</span>
+              <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
+              <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">驳回</span>
+              {% else %}
+              <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#1890FF;">●</span>
+              <span style="font-family:'Helvetica';color:#1890FF;"> </span>
+              <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">进行中</span>
               {% endif %}
             </td>
             <td class="ep9">
-              <span class="dload"><a href="{% url 'asset:processed_pl_detail' tec.id %}">查看</a> | <a href=""> 下载</a></span>
+              <span class="dload"><a href="{% url 'asset:processed_pl_detail' tec.id %}">查看</a> | <a href="{% url 'asset:down_tec_file' tec.id %}"> 下载</a></span>
               <img src="{% static 'images/asset/see.png' %}" class="see_dload">
             </td>
           </tr>

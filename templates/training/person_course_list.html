@@ -54,7 +54,10 @@
                 {% for course in course_list %}
                 <tr class="gp_tr">
                     <td class="tra1">{{forloop.counter}}</td>
-                    <td class="tra2">{{course.cname}}</td>
+                    <td class="tra2">
+                        <span></span>
+                        <span class="colr">{{course.cname}}</span>
+                    </td>
                     <td class="tra3">{{course.range}}</td>
                     <td class="tra4">{{course.teacher.realname}}</td>
                     <td class="tra5">{{course.student.all.count}}人</td>
@@ -128,7 +131,7 @@
             </tbody>
             </table>
             <div class="tra_total">
-            <span class="ept_text">共计 8 条数据</span>
+            <span class="ept_text">共计 {{courses.count}} 条数据</span>
             </div>
         </div>
     </div>

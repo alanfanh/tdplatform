@@ -59,9 +59,9 @@
                     <span style="color:rgba(0, 0, 0, 0.447058823529412);">个人中心</span>
                     <span style="color:#999999;"> </span>
                     <span style="color:rgba(0, 0, 0, 0.447058823529412);"> /  </span>
-                    <span style="color:rgba(0, 0, 0, 0.427450980392157);">我的技术资产</span>
+                    <span style="color:rgba(0, 0, 0, 0.427450980392157);">我的优秀实践</span>
                     <span style="color:rgba(0, 0, 0, 0.447058823529412);">  /</span>
-                    <span style="color:rgba(0, 0, 0, 0.847058823529412);">  优秀实践</span>
+                    <span style="color:rgba(0, 0, 0, 0.847058823529412);">  未处理</span>
                 </div>
                 <div class="Page_Title">优秀实践详情</div>
             </div>
@@ -123,10 +123,10 @@
             </table>
             <button id="but_sug">
                 <span class="sug_text">审核意见</span>
-                <img src="{% static 'images/admin/sug.svg' %} " class="sug_img">
-                <img src="{% static 'images/admin/arrow.png' %} " class="arrow">
+                <img src="{% static 'images/asset/sug.svg' %} " class="sug_img">
+                <img src="{% static 'images/asset/arrow.png' %} " class="arrow">
             </button>
-            <button id="dload_enc">下载附件</button>
+            <a href="{% url 'asset:down_tec_file' tec.id %}"><button id="dload_enc">下载附件</button></a>
         </div>
     </div>
 </div>
