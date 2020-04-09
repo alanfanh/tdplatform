@@ -24,7 +24,6 @@ class TecTag(models.Model):
 
     def __str__(self):
         return self.tag
-    
 
 class TecContent(models.Model):
     id = models.AutoField(primary_key=True)
@@ -42,9 +41,26 @@ class TecContent(models.Model):
 
     def __str__(self):
         return self.tname
-    
+
     def save(self, *args, **kwargs):
         super(TecContent, self).save(*args, **kwargs)
+
+
+class NodeMessage(models.Model):
+    # 优秀实践审核信息
+    id = models.AutoField(primary_key=True)
+    name = models.OneToOneField(
+        TecContent, verbose_name="优秀实践", on_delete=models.CASCADE)
+    pl_name = models.CharField(verbose_name="组长", max_length=50, blank=True)
+    pl_decide = models.CharField(verbose_name="组长意见", max_length=50, blank=True)
+    pl_notes = models.CharField(verbose_name="组长意见说明", max_length=50, blank=True)
+    pl_time = models.DateTimeField(
+        verbose_name="组长处理时间", auto_now=False, auto_now_add=False)
+    m_name = models.CharField(verbose_name="经理", max_length=50, blank=True)
+    m_decide = models.CharField(verbose_name="经理意见", max_length=50, blank=True)
+    m_notes = models.CharField(verbose_name="经理意见说明", max_length=50, blank=True)
+    m_time = models.DateTimeField(
+        verbose_name="经理处理时间", auto_now=False, auto_now_add=False)
 
 
 class Complaint(models.Model):
@@ -53,8 +69,11 @@ class Complaint(models.Model):
     cname = models.CharField(verbose_name="客诉名称", max_length=30)
     type = models.CharField(verbose_name="客诉类型", max_length=10)
     submitter = models.CharField(verbose_name="提交人", max_length=50)
+    oa_number = models.CharField(verbose_name="OA流程号", max_length=20, blank=True)
     ctime = models.DateTimeField(verbose_name="客诉时间", auto_now=False, auto_now_add=False)
+    area = models.CharField(verbose_name="区域", max_length=4, default=None)
     product = models.CharField(verbose_name="产品型号", max_length=10)
+    product_line = models.CharField(verbose_name="产品线", max_length=20)
     version = models.CharField(verbose_name="软件版本", max_length=10)
     NAME_IN_LEVEL_CHOICES = (
         ("high","高"),
@@ -62,12 +81,15 @@ class Complaint(models.Model):
         ("low","低"),
     )
     level = models.CharField(verbose_name="严重程度", max_length=50, choices=NAME_IN_LEVEL_CHOICES)
-    product_line = models.CharField(verbose_name="产品线", max_length=20)
-    category = models.CharField(verbose_name="问题分类", max_length=10)
     tester = models.CharField(verbose_name="分析责任人", max_length=10)
-    complete_time = models.DateTimeField(verbose_name="分析完成时间", auto_now=False, auto_now_add=False)
+    complete_time = models.DateTimeField(verbose_name="分析完成时间", auto_now=False, auto_now_add=False, blank=True)
     status = models.CharField(verbose_name="措施状态", max_length=50)
+    complete_time = models.DateField(verbose_name="措施完成时间", auto_now=False, auto_now_add=False, blank=True)
+    category = models.CharField(verbose_name="问题分类", max_length=10)
     cfile = models.FileField(verbose_name="材料附件", upload_to="complaint_file", max_length=100)
+    description = models.TextField(verbose_name="问题描述", blank=True)
+    created_by = models.ForeignKey(User, verbose_name="创建者", on_delete=models.DO_NOTHING, related_name="user_created")
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     def __str__(self):
         return self.cname
