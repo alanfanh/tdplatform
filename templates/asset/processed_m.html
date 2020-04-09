@@ -53,202 +53,149 @@
         </div>
         <div class="info_base">
             <div class="gp_title">
-            <span class="Cust_Com">我的优秀实践</span>
+                <span class="Cust_Com">我的优秀实践</span>
             </div>
             <div class="Handle_State">
-            <div class="Processed_bd">
-                <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color:black">已处理（295）</span></a>
-            </div>
-            <div class="Untreated_bd">
-                <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color: rgba(85, 85, 85, 0.647058823529412);">未处理（5）</span></a>
-            </div>
+                <div class="Processed_bd">
+                    <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color:black">已处理（{{tec_list.count}}）</span></a>
+                </div>
+                <div class="Untreated_bd">
+                    <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color: rgba(85, 85, 85, 0.647058823529412);">未处理</span></a>
+                </div>
             </div>
             <div class="My_State">
-            <span class="State_tt">状态：</span>
-            <select class="pick_State">
-                <option value="所有状态" selected>所有状态</option>
-                <option value="成功">成功</option>
-                <option value="进行中">进行中</option>
-                <option value="驳回">驳回</option>
-            </select>
-            <button class="Ep_Record" id="madd_bt">添加记录</button>
+                <span class="State_tt">状态：</span>
+                <select class="pick_State">
+                    <option value="所有状态" selected>所有状态</option>
+                    <option value="成功">成功</option>
+                    <option value="进行中">进行中</option>
+                    <option value="驳回">驳回</option>
+                </select>
+                <button class="Ep_Record" id="madd_bt">添加记录</button>
             </div>
             <table class="Pra_data" align="center">
-            <thead>
-                <tr class="Pra_th">
-                <td class="ep1">
-                    <input type="checkbox" class="ck">
-                </td>
-                <td class="ep2">序号</td>
-                <td class="ep3">名称</td>
-                <td class="ep4">作者</td>
-                <td class="ep5">小组</td>
-                <td class="ep6">标签</td>
-                <td class="ep7">编写时间</td>
-                <td class="Mp8">状态</td>
-                <td class="Mp9">操作</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="Pra_tr">
-                <td class="ep1">
-                    <input type="checkbox" class="ck">
-                </td>
-                <td class="ep2">1</td>
-                <td class="ep3">
-                    <span class="sign"></span>
-                    <span class="Cust_cont">优化testlink数据库查询性能的方法与实施</span>
-                </td>
-                <td class="ep4">李测试</td>
-                <td class="ep5">商用测试组</td>
-                <td class="ep6">
-                    <div class="tag_bd">
-                    <span>协议相关</span>
-                    </div>
-                </td>
-                <td class="ep7">2019/12/08</td>
-                <td class="mp8">
-                    <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
-                    <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
-                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
-                </td>
-                <td class="mp9">
-                    <span class="dload">查看 | 下载</span>
-                    <img src="{% static 'images/asset/see.png' %} " class="see_dload">
-                </td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-                <tr class="Pra_tr">
-                <td class="ep1"></td>
-                <td class="ep2"></td>
-                <td class="ep3"></td>
-                <td class="ep4"></td>
-                <td class="ep5"></td>
-                <td class="ep6"></td>
-                <td class="ep7"></td>
-                <td class="mp8"></td>
-                <td class="mp9"></td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr class="Pra_th">
+                    <td class="ep1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td class="ep2">序号</td>
+                    <td class="ep3">名称</td>
+                    <td class="ep4">作者</td>
+                    <td class="ep5">小组</td>
+                    <td class="ep6">标签</td>
+                    <td class="ep7">编写时间</td>
+                    <td class="Mp8">状态</td>
+                    <td class="Mp9">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Pra_tr">
+                        <td class="ep1">
+                            <input type="checkbox" class="ck">
+                        </td>
+                        <td class="ep2">1</td>
+                        <td class="ep3">
+                            <span class="sign"></span>
+                            <span class="Cust_cont">优化testlink数据库查询性能的方法与实施</span>
+                        </td>
+                        <td class="ep4">李测试</td>
+                        <td class="ep5">商用测试组</td>
+                        <td class="ep6">
+                            <div class="tag_bd">
+                            <span>协议相关</span>
+                            </div>
+                        </td>
+                        <td class="ep7">2019/12/08</td>
+                        <td class="mp8">
+                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
+                            <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
+                        </td>
+                        <td class="mp9">
+                            <span class="dload">查看 | 下载</span>
+                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
+                        </td>
+                    </tr>
+                    {% for tec in tec_list %}
+                    <tr class="Pra_tr">
+                        <td class="ep1">
+                            <input type="checkbox" class="ck">
+                        </td>
+                        <td class="ep2">{{forloop.count}}</td>
+                        <td class="ep3">
+                            <span class="sign"></span>
+                            <span class="Cust_cont">{{tec.tname}}</span>
+                        </td>
+                        <td class="ep4">{{tec.author.realname}}</td>
+                        <td class="ep5">{{tec.group}}</td>
+                        <td class="ep6"></td>
+                        <td class="ep7">{{tec.created_at}}</td>
+                        <td class="mp8">
+                            {% if tec.status == '3' %}
+                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
+                            <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
+                            {% elif tec.status == '0' %}
+                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#F5222D;">●</span>
+                            <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">驳回</span>
+                            {% else %}
+                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#1890FF;">●</span>
+                            <span style="font-family:'Helvetica';color:#1890FF;"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">进行中</span>
+                            {% endif %}
+                        </td>
+                        <td class="mp9">
+                            <span class="dload"><a href="{% url 'asset:processed_tec_detail' tec.id %}">查看</a> | <a href="{% url 'asset:down_tec_file' tec.id %}">下载</a></span>
+                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="Pra_tr">
+                        <td class="ep1"></td>
+                        <td class="ep2"></td>
+                        <td class="ep3"></td>
+                        <td class="ep4"></td>
+                        <td class="ep5"></td>
+                        <td class="ep6"></td>
+                        <td class="ep7"></td>
+                        <td class="mp8"></td>
+                        <td class="mp9"></td>
+                    </tr>                  
+                </tbody>
             </table>
             <div class="Ep_total">
-            <span class="ept_text">共计 295 条数据</span>
-            {% comment %} <img src="{% static 'images/asset/left.png' %}" class="Ep_left"> {% endcomment %}
-            <div class="m_page1">
-                <span class="Ct_pg1">1</span>
-            </div>
-            <div class="Ep_pg2">
-                <span>2</span>
-            </div>
-            <div class="Ep_pg3">
-                <span>3</span>
-            </div>
-            <div class="Ep_pg4">
-                <span>4</span>
-            </div>
-            <div class="Ep_pg5">
-                <span>5</span>
-            </div>
-            {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_right"> {% endcomment %}
-            <button id="M_page" class="mp">
-                <span style="font-family:'ArialMT', 'Arial';">10</span>
-                <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_img"> {% endcomment %}
-            </button>
-            <div class="Ep_goto">
-                <span>前往第</span>
-            </div>
-            <input type="text" id="M_input" class="It_box" placeholder="2">
-            <div class="Ep_pages">
-                <span>页</span>
-            </div>
+                <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
+                {% comment %} <img src="{% static 'images/asset/left.png' %}" class="Ep_left"> {% endcomment %}
+                <div class="m_page1">
+                    <span class="Ct_pg1">1</span>
+                </div>
+                <div class="Ep_pg2">
+                    <span>2</span>
+                </div>
+                <div class="Ep_pg3">
+                    <span>3</span>
+                </div>
+                <div class="Ep_pg4">
+                    <span>4</span>
+                </div>
+                <div class="Ep_pg5">
+                    <span>5</span>
+                </div>
+                {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_right"> {% endcomment %}
+                <button id="M_page" class="mp">
+                    <span style="font-family:'ArialMT', 'Arial';">10</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
+                    {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_img"> {% endcomment %}
+                </button>
+                <div class="Ep_goto">
+                    <span>前往第</span>
+                </div>
+                <input type="text" id="M_input" class="It_box" placeholder="2">
+                <div class="Ep_pages">
+                    <span>页</span>
+                </div>
             </div>
         </div>
     </div>

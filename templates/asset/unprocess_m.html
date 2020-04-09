@@ -57,10 +57,10 @@
             </div>
             <div class="Handle_State">
             <div class="chProcessed_bd">
-                <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color: rgba(85, 85, 85, 0.647058823529412);">已处理（295）</span></a>
+                <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color: rgba(85, 85, 85, 0.647058823529412);">已处理</span></a>
             </div>
             <div class="chUntreated_bd">
-                <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color:black">未处理（5）</span></a>
+                <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color:black">未处理（{{tec_list.count}}）</span></a>
             </div>
             </div>
             <table class="un_pt" align="center">
@@ -82,10 +82,15 @@
                 <tr class="un_text">
                     {% for tec in tec_list %}
                     <td class="untd1"></td>
-                    <td class="untd2"></td>
-                    <td class="untd3"></td>
-                    <td class="untd4"></td>
-                    <td class="untd5"></td>
+                    <td class="untd2">{{tec.author.realname}}</td>
+                    <td class="untd3">{{tec.tname}}</td>
+                    <td class="untd4">{{tec.created_at}}</td>
+                    <td class="untd5">
+                        <a href=" {% url 'asset:unprocess_tec_detail' tec.id %} "><span style="color:#108EE9;">查看</span></a>
+                        <span style="color:#D7D7D7;">|</span>
+                        <span style="color:#108EE9;">更多</span>
+                        <img src="{% static 'images/asset/see.png' %}"" class="see_dload">
+                    </td>
                     {% endfor %}
                 </tr>
                 <tr class="un_text">
@@ -112,11 +117,11 @@
             </tbody>
             </table>
             <div class="prompt_box">
-            <span class="al_read">设为已读</span>
-            <span class="Dload_ucs">下载附件</span>
+                <span class="al_read">设为已读</span>
+                <span class="Dload_ucs">下载附件</span>
             </div>
             <div class="Up_total">
-            <span class="ept_text">共计 8 条数据</span>
+            <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
             </div>
         </div>
     </div>
