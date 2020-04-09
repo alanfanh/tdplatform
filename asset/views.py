@@ -143,7 +143,7 @@ def add_tec(request):
         return render(request, "asset/add_tec.html", {"groups": groups, "tec_tags": tec_tags,"form":form})
 
 @login_required(login_url="/account/login")
-def unprocess_pl_detail(request, tec_id):
+def unprocess_tec_detail(request, tec_id):
     # 未处理的优秀实践详情
     userinfo = UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
@@ -155,7 +155,7 @@ def unprocess_pl_detail(request, tec_id):
         return render(request, "asset/unprocess_m_detail.html", {"tec":tec, "userinfo":userinfo})
 
 @login_required(login_url="/account/login")
-def processed_pl_detail(request, tec_id):
+def processed_tec_detail(request, tec_id):
     # 已处理的优秀实践详情
     userinfo = UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
