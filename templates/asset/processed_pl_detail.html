@@ -83,15 +83,15 @@
                 <span class="suc_pass">完成</span>
                 <div class="Pj_st">
                     <span class="exam_name">{{tec.author.realname}}</span>
-                    <span class="st_time">{{tec.created_at | date:"Y-m-d"}}</span>
+                    <p><span class="st_time">{{tec.created_at | date:"Y-m-d"}}</span></p>
                     <span class="hms">{{tec.created_at | date:"H:i:s"}}</span>
                 </div>
                 <div class="Pj_gp">
-                    <span class="exam_name">{{userinfo.realname}}</span>
-                    <span class="gp_time">2019-12-13</span>
-                    <span class="gp_hms">16:18:42</span>
+                    <span class="exam_name">{{node.pl_name}}</span>
+                    <span class="gp_time">{{node.pl_time | date:"Y-m-d"}}</span>
+                    <span class="gp_hms">{{node.pl_time | date:"H:i:s"}}</span>
                 </div>
-                <span class="m_Assessor">李M</span>
+                <span class="m_Assessor">{{user.realname}}</span>
             </div>
             <div class="pjexam_hist">
                 <span>审核历史</span>
@@ -118,11 +118,11 @@
                     </tr>
                     <tr class="ex_tr">
                     <td class="ex1">020_组长审核</td>
-                    <td class="ex2">刘PL</td>
-                    <td class="ex3">商用测试组PL</td>
-                    <td class="ex4">同意</td>
-                    <td class="ex5">2019-12-13  16:18:42</td>
-                    <td class="ex6">无</td>
+                    <td class="ex2">{{node.pl_name}}</td>
+                    <td class="ex3">{{tec.group}}PL</td>
+                    <td class="ex4">{{node.pl_decide}}</td>
+                    <td class="ex5">{{node.pl_time}}</td>
+                    <td class="ex6">{{node.pl_notes}}</td>
                     </tr>
                 </tbody>
             </table>

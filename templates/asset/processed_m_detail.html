@@ -62,12 +62,12 @@
                 <span class="pj_info">项目信息</span>
             </div>
             <div class="pjgoing_cont">
-                <span class="Pjgoing_name">名称：优化testlink数据库查询性能的方法与实施</span>
-                <span class="Pjgoing_author">作者：李测试</span>
-                <span class="Pjgoing_group">所在小组：商用测试组</span>
-                <span class="Pjgoing_tag">标签：用户体验 协议相关</span>
-                <span class="Pjgoing_time">编写时间：2019/12/08</span>
-                <span class="Pjgoing_Summary">内容概述：示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字</span>
+                <span class="Pjgoing_name">名称：{{tec.tname}}</span>
+                <span class="Pjgoing_author">作者：{{tec.author.realname}}</span>
+                <span class="Pjgoing_group">所在小组：{{tec.group}}</span>
+                <span class="Pjgoing_tag">标签：{{tec.tec_tag.all | join:', '}}</span>
+                <span class="Pjgoing_time">编写时间：{{tec.created_at}}</span>
+                <span class="Pjgoing_Summary">内容概述：{{tec.body}}</span>
             </div>
             <div class="pjgoing_speed">
                 <span class="spgoing_title">审核进度</span>
@@ -84,9 +84,9 @@
                 <span class="manag_check">经理复审</span>
                 <span class="msuc_pass">完成</span>
                 <div class="Pj_st">
-                    <span class="exam_name">李测试</span>
-                    <span class="st_time">2019-12-12</span>
-                    <span class="hms">12:32:08</span>
+                    <span class="exam_name">{{tec.author.realname}}</span>
+                    <span class="st_time">{{tec.created_at | date:"Y-m-d"}}</span>
+                    <span class="hms">{{tec.created_at | date:"H:i:s"}}</span>
                 </div>
                 <div class="Pj_gp">
                     <span class="exam_name">刘PL</span>
@@ -116,10 +116,10 @@
                 <tbody>
                     <tr class="ex_tr">
                     <td class="ex1">010_创建项目</td>
-                    <td class="ex2">李测试</td>
-                    <td class="ex3">商用测试组李测试</td>
+                    <td class="ex2">{{tec.author.realname}}</td>
+                    <td class="ex3">{{tec.author.rank}}</td>
                     <td class="ex4">提交</td>
-                    <td class="ex5">2019-12-12  12:32:08</td>
+                    <td class="ex5">{{tec.created_at}}</td>
                     <td class="ex6">初始化</td>
                     </tr>
                     <tr class="ex_tr">
