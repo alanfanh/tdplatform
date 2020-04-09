@@ -62,9 +62,9 @@
                 <span style="color:rgba(0, 0, 0, 0.447058823529412);">个人中心</span>
                 <span style="color:#999999;"> </span>
                 <span style="color:rgba(0, 0, 0, 0.447058823529412);"> /  </span>
-                <span style="color:rgba(0, 0, 0, 0.427450980392157);">我的技术资产</span>
+                <span style="color:rgba(0, 0, 0, 0.427450980392157);">我的优秀实践</span>
                 <span style="color:rgba(0, 0, 0, 0.447058823529412);">  /</span>
-                <span style="color:rgba(0, 0, 0, 0.847058823529412);">  优秀实践</span>
+                <span style="color:rgba(0, 0, 0, 0.847058823529412);">  未处理</span>
             </div>
             <div class="Page_Title">优秀实践详情</div>
             </div>
@@ -72,7 +72,7 @@
                 <span class="Project_info">项目信息</span>
                 <span class="Pj_name">名称：{{tec.tname}}</span>
                 <span class="Pj_author">作者：{{tec.author.realname}}</span>
-                <span class="Pj_group">所在小组：{{tec.group}}/span>
+                <span class="Pj_group">所在小组：{{tec.group}}</span>
                 <span class="Pj_tag">标签：{{tec.tec_tag.all | join:', '}}</span>
                 <span class="Pj_time">编写时间：{{tec.created_at}}</span>
                 <span class="Pj_Summary">内容概述：{{tec.body}}</span>
@@ -93,9 +93,9 @@
                 <span class="mwait_line"></span>
                 <span class="suc_pass">完成</span>
                 <div class="Pj_st">
-                    <span class="exam_name">李测试</span>
-                    <span class="st_time">2019-12-12</span>
-                    <span class="hms">12:32:08</span>
+                    <span class="exam_name">{{tec.author.realname}}</span>
+                    <p><span class="st_time">{{tec.created_at | date:"Y-m-d"}}</span></p>
+                    <span class="hms">{{tec.created_at | date:"H:i:s"}}</span>
                 </div>
                 <div class="Pj_gp">
                     <span class="exam_name">刘PL</span>
@@ -124,16 +124,16 @@
             <tbody>
                 <tr class="ex_tr">
                 <td class="ex1">010_创建项目</td>
-                <td class="ex2">李测试</td>
-                <td class="ex3">商用测试组李测试</td>
+                <td class="ex2">{{tec.author.realname}}</td>
+                <td class="ex3">{{tec.author.rank}}</td>
                 <td class="ex4">提交</td>
-                <td class="ex5">2019-12-12  12:32:08</td>
+                <td class="ex5">{{tec.created_at}}</td>
                 <td class="ex6">初始化</td>
                 </tr>
                 <tr class="ex_tr">
                 <td class="ex1">020_组长审核</td>
                 <td class="ex2">刘PL</td>
-                <td class="ex3">商用测试组PL</td>
+                <td class="ex3">{{tec.group}}PL</td>
                 <td class="ex4">同意</td>
                 <td class="ex5">2019-12-13  16:18:42</td>
                 <td class="ex6">无</td>
@@ -142,10 +142,10 @@
             </table>
             <button id="m_sug">
                 <span class="sug_text">审核意见</span>
-                <img src="images/admin/sug.svg" class="sug_img">
-                <img src="images/admin/arrow.png" class="arrow">
+                <img src="{% static 'images/asset/sug.svg' %}" class="sug_img">
+                <img src="{% static 'images/asset/arrow.png' %}" class="arrow">
             </button>
-            <button id="mdload">下载附件</button>
+            <a href="{% url 'asset:down_tec_file' tec.id %}"><button id="mdload">下载附件</button></a>
         </div>
     </div>
 </div>
