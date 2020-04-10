@@ -34,7 +34,7 @@ def article_content(request, article_id):
 def my_complaint(request):
     # 我添加的客诉
     userinfo = UserInfo.objects.get(user=request.user)
-    complaints = Complaint.objects.filter(created_by=userinfo)
+    complaints = Complaint.objects.filter(created_by=request.user)
     return render(request, "asset/pl_complaint_list.html", {"userinfo": userinfo, "complaints": complaints})
 
 @login_required(login_url="/account/login")
@@ -56,11 +56,34 @@ def complaint_detail(request, complaint_id):
     return render(request, "asset/complaint_detail.html", {"complaint":complaint})
 
 @login_required(login_url="/account/login")
-def add_complaint(request):
-    if request.method == "POST":
-        pass
+def download_cfile(request, complaint_id):
+    # 下载客诉附件
+    com = get_object_or_404(Complaint, id=complaint_id)
+    if com.file != "":
+        file_name = com.cfile.name.split('/')[1]
+        response = FileResponse(com.cfile)
+        response['Content-Type'] = "application/octet-stream"
+        response['Content-Disposition'] = "attachment;filename*=utf-8''{}".format(
+            escape_uri_path(file_name))
+        return response
     else:
-        return render(request, "asset/add_complaint.html")
+        return HttpResponse("null") 
+
+@login_required(login_url="/account/login")
+def add_complaint(request):
+    # 添加客诉信息
+    form = ComplaintForm(request.POST, request.FILES)
+    if request.method == "POST":
+        print(form)
+        if form.is_valid():
+            new_complaint = form.save(commit=False)
+            new_complaint.created_by = request.user
+            new_complaint.save()
+            return redirect("asset:complaint_list")
+        else:
+            return HttpResponse('3')
+    else:
+        return render(request, "asset/add_complaint.html", {"form":form})
 
 # 优秀实践
 
