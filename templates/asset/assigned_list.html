@@ -55,200 +55,112 @@
             </div>
             </div>
             <table class="te_table" align="center"">
-            <thead>
-                <tr class="te_th">
-                <th class="ctt1">
-                    <input type="checkbox" class="ck">
-                </th>
-                <th class="ctt2">序号</th>
-                <th class="ctt3">
-                    <span class="Cust_name">客诉名称</span>
-                </th>
-                <th class="ctt4">客诉类型</th>
-                <th class="ctt5">提交人</th>
-                <th class="ctt6">客诉时间
-                    <img src="images/admin/up.svg" class="up_img">
-                    <img src="images/admin/down.svg" class="down_img">
-                </th>
-                <th class="ctt7">严重程度</th>
-                <th class="ctt8">产品线</th>
-                <th class="ctt9">问题分类</th>
-                <th class="ctt10">分析负责人</th>
-                <th class="ctt11">分析完成时间</th>
-                <th class="ctt12">措施状态</th>
-                <th class="ctt13">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="te_tr">
-                <td class="ctt1">
-                    <input type="checkbox" class="ck">
-                </td>
-                <td class="ctt2">1</td>
-                <td class="ctt3">
-                    <span class="sign"></span>
-                    <span class="Cust_cont">02客户端模式透传需求</span>
-                </td>
-                <td class="ctt4">新需求</td>
-                <td class="ctt5">李测试</td>
-                <td class="ctt6">2019/10</td>
-                <td class="ctt7">高</td>
-                <td class="ctt8">家用</td>
-                <td class="ctt9">安全性</td>
-                <td class="ctt10">李负责</td>
-                <td class="ctt11">-</td>
-                <td class="ctt12">
-                    <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                    <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
-                </td>
-                <td class="ctt13">
-                    <span class="dload">查看 | 下载</span>
-                    <img src="{% static 'images/account/see.png' %} " class="see_dload">
-                </td>
-                </tr>
-                {% for complaint in complaints %}
-                <tr class="te_tr">
-                    <td class="ctt1"></td>
-                    <td class="ctt2"></td>
-                    <td class="ctt3"></td>
-                    <td class="ctt4"></td>
-                    <td class="ctt5"></td>
-                    <td class="ctt6"></td>
-                    <td class="ctt7"></td>
-                    <td class="ctt8"></td>
-                    <td class="ctt9"></td>
-                    <td class="ctt10"></td>
-                    <td class="ctt11"></td>
-                    <td class="ctt12"></td>
-                    <td class="ctt13"></td>
-                </tr>
-                {% endfor %}
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-                <tr class="te_tr">
-                <td class="ctt1"></td>
-                <td class="ctt2"></td>
-                <td class="ctt3"></td>
-                <td class="ctt4"></td>
-                <td class="ctt5"></td>
-                <td class="ctt6"></td>
-                <td class="ctt7"></td>
-                <td class="ctt8"></td>
-                <td class="ctt9"></td>
-                <td class="ctt10"></td>
-                <td class="ctt11"></td>
-                <td class="ctt12"></td>
-                <td class="ctt13"></td>
-                </tr>
-            </tbody>
+                <thead>
+                    <tr class="te_th">
+                    <th class="ctt1">
+                        <input type="checkbox" class="ck">
+                    </th>
+                    <th class="ctt2">序号</th>
+                    <th class="ctt3">
+                        <span class="Cust_name">客诉名称</span>
+                    </th>
+                    <th class="ctt4">客诉类型</th>
+                    <th class="ctt5">提交人</th>
+                    <th class="ctt6">客诉时间
+                        <img src="images/admin/up.svg" class="up_img">
+                        <img src="images/admin/down.svg" class="down_img">
+                    </th>
+                    <th class="ctt7">严重程度</th>
+                    <th class="ctt8">产品线</th>
+                    <th class="ctt9">问题分类</th>
+                    <th class="ctt10">分析负责人</th>
+                    <th class="ctt11">分析完成时间</th>
+                    <th class="ctt12">措施状态</th>
+                    <th class="ctt13">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="te_tr">
+                    <td class="ctt1">
+                        <input type="checkbox" class="ck">
+                    </td>
+                    <td class="ctt2">1</td>
+                    <td class="ctt3">
+                        <span class="sign"></span>
+                        <span class="Cust_cont">02客户端模式透传需求</span>
+                    </td>
+                    <td class="ctt4">新需求</td>
+                    <td class="ctt5">李测试</td>
+                    <td class="ctt6">2019/10</td>
+                    <td class="ctt7">高</td>
+                    <td class="ctt8">家用</td>
+                    <td class="ctt9">安全性</td>
+                    <td class="ctt10">李负责</td>
+                    <td class="ctt11">-</td>
+                    <td class="ctt12">
+                        <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                        <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
+                    </td>
+                    <td class="ctt13">
+                        <span class="dload">查看 | 下载</span>
+                        <img src="{% static 'images/account/see.png' %} " class="see_dload">
+                    </td>
+                    </tr>
+                    {% for com in complaints %}
+                    <tr class="te_tr">
+                        <td class="ctt1">
+                            <input type="checkbox" class="ck">
+                        </td>
+                        <td class="ctt2">{{forloop.count}}</td>
+                        <td class="ctt3">
+                            <span class="sign"></span>
+                            <span class="Cust_cont">com.cname</span>
+                        </td>
+                        <td class="ctt4">{{com.type}}</td>
+                        <td class="ctt5">{{com.submitter}}</td>
+                        <td class="ctt6">{{com.ctime}}</td>
+                        <td class="ctt7">{{com.level}}</td>
+                        <td class="ctt8">{{com.product_line}}</td>
+                        <td class="ctt9">{{com.category}}</td>
+                        <td class="ctt10">{{com.tester}}</td>
+                        <td class="ctt11">{{com.complete_time}}</td>
+                        <td class="ctt12">
+                            {% if com.status == "Open" %}
+                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F; font-size:14px;">Open</span>
+                            {% elif com.status == "Closed" %}
+                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;">● </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
+                            {% endif %}
+                        </td>
+                        <td class="ctt13">
+                            <span class="dload"><a href="{% url 'asset:complaint_detail' com.id %}">查看</a> | <a href="{% url 'asset:download_cfile' com.id %}">下载</a></span>
+                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="te_tr">
+                        <td class="ctt1"></td>
+                        <td class="ctt2"></td>
+                        <td class="ctt3"></td>
+                        <td class="ctt4"></td>
+                        <td class="ctt5"></td>
+                        <td class="ctt6"></td>
+                        <td class="ctt7"></td>
+                        <td class="ctt8"></td>
+                        <td class="ctt9"></td>
+                        <td class="ctt10"></td>
+                        <td class="ctt11"></td>
+                        <td class="ctt12"></td>
+                        <td class="ctt13"></td>
+                    </tr>  
+                </tbody>
             </table>
             <div class="te_footer">
             <div id="te_total">
-                <span>共计 24 条数据</span>
+                <span>共计 {complaints.count} 条数据</span>
             </div>
             <img src="images/admin/left.png" class="Ct_left">
             <div id="te_page1">
