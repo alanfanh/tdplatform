@@ -37,42 +37,42 @@
                 <span class="cd_info">基本信息</span>
             </div>
             <div class="cdgoing_cont">
-                <span class="cdname">名称：02客户端模式透传需求</span>
-                <span class="cdtype">客诉类型：新需求</span>
-                <span class="hdname">提交人：李测试</span>
-                <span class="cdoa">OA流程：XXXXXXXXXXXXX</span>
-                <span class="cdtime">客诉时间：2019/12/08</span>
-                <span class="cdarea">客诉区域：怎么分的区域</span>
+                <span class="cdname">名称：{{complaint.cname}}</span>
+                <span class="cdtype">客诉类型：{{complaint.type}}</span>
+                <span class="hdname">提交人：{{complaint.submitter}}</span>
+                <span class="cdoa">OA流程：{{complaint.oa_number}}</span>
+                <span class="cdtime">客诉时间：{{complaint.ctime | date:'Y-m-d'}}</span>
+                <span class="cdarea">客诉区域：{{complaint.area}}</span>
             </div>
             <div class="cdpdinfo">
                 <span class="cd_info">产品信息</span>
             </div>
             <div class="cdgoing_cont2">
-                <span class="cdname">产品型号：W60AP</span>
-                <span class="cdtype">产品线：商用</span>
-                <span class="hdname">软件版本信息：V1.0.0.28_ZGDX01</span>
-                <span class="cdoa">资产编号：格式？</span>
-                <span class="cdtime">严重程度：低</span>
+                <span class="cdname">产品型号：{{complaint.product}}</span>
+                <span class="cdtype">产品线：{{complaint.product_line}}</span>
+                <span class="hdname">软件版本信息：{{complaint.version}}</span>
+                <span class="cdoa">资产编号：{{complaint.asset_id}}</span>
+                <span class="cdtime">严重程度：{{complaint.level}}</span>
             </div>
             <div class="cddet">
                 <span class="cd_info">问题详情</span>
             </div>
             <div class="cdgoing_cont3">
-                <span class="cdname">是否分析：是</span>
-                <span class="cdtype">分析责任人：张责任</span>
-                <span class="hdname">分析完成时间：2019/12/20</span>
+                <span class="cdname">是否分析：{{complaint.analysis}}</span>
+                <span class="cdtype">分析责任人：{{complaint.tester}}</span>
+                <span class="hdname">分析完成时间：{{complaint.complete_time}}</span>
                 <span class="cdoa">改进措施：</span>
-                <span class="egcont">示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字</span>
+                <span class="egcont">{{complaint.improvement}}</span>
             </div>
             <div class="cdgoing_cont4">
-                <span class="cdname">措施状态：open</span>
-                <span class="cdtype">措施完成时间：2019/12/22</span>
-                <span class="hdname">计划闭环时间：2019/12/22</span>
+                <span class="cdname">措施状态：{{complaint.status}}</span>
+                <span class="cdtype">措施完成时间：{{complaint.complete_time}}</span>
+                <span class="hdname">计划闭环时间：{{complaint.closed_time}}</span>
                 <span class="cdoa">问题描述：</span>
-                <span class="egcont2">示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字示例文字</span>
+                <span class="egcont2">{{complaint.description}}</span>
             </div>
-            <button class="bklist">返回列表</button>
-            <button class="ddfile">下载附件</button>
+            <a href="{% url 'asset:complaint_list' %}"><button class="bklist">返回列表</button></a>
+            <a href="{% url 'asset:download_cfile' complaint.id %}"><button class="ddfile">下载附件</button></a>
         </div>
     </div>
 </div>
