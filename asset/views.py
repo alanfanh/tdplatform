@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-from .models import Articles, TecContent, Complaint, TecTag
+from .models import Articles, TecContent, Complaint, TecTag, NodeMessage
 from account.models import UserInfo, Role, Group
 
 from django.http import HttpResponse, JsonResponse, FileResponse
@@ -34,13 +34,15 @@ def article_content(request, article_id):
 def my_complaint(request):
     # 我添加的客诉
     userinfo = UserInfo.objects.get(user=request.user)
-    return render(request,"asset/pl_complaint_list.html",{"userinfo":userinfo})
+    complaints = Complaint.objects.filter(created_by=userinfo)
+    return render(request, "asset/pl_complaint_list.html", {"userinfo": userinfo, "complaints": complaints})
 
 @login_required(login_url="/account/login")
 def assigned_list(request):
     # 指派给ste、te的客诉
     userinfo = UserInfo.objects.get(user=request.user)
-    return render(request, "asset/assigned_list.html", {"userinfo":userinfo})
+    complaints = Complaint.objects.filter(tester=userinfo.realname)
+    return render(request, "asset/assigned_list.html", {"userinfo":userinfo, "complaints":complaints})
 
 @login_required(login_url="/account/login")
 def complaint_list(request):
@@ -88,7 +90,7 @@ def process_tec(request):
         return render(request, "asset/processed_pl.html",{"userinfo":userinfo, "tec_list":tec_list})
     elif role.role_name == "M":
         tec_list = TecContent.objects.exclude(status="2")
-        return render(request, "asset/processed_m.html", {"userinfo":userinfo})
+        return render(request, "asset/processed_m.html", {"userinfo":userinfo, "tec_list":tec_list})
     else:
         return HttpResponse("Not Found")
 
@@ -161,10 +163,13 @@ def processed_tec_detail(request, tec_id):
     role = Role.objects.get(id=userinfo.role_id)
     if role.role_name == "PL":
         tec = get_object_or_404(TecContent, id=tec_id)
-        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo})
+        node = get_object_or_404(NodeMessage, name_id=tec_id)
+        user = get_object_or_404(UserInfo, role_id=4)
+        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo, "node": node, "user": user})
     elif role.role_name == "M":
         tec = get_object_or_404(TecContent, id=tec_id)
-        return render(request, "asset/processed_m_detail.html", {"tec":tec, "userinfo":userinfo})
+        node = get_object_or_404(NodeMessage, name_id=tec_id)
+        return render(request, "asset/processed_m_detail.html", {"tec":tec, "userinfo":userinfo, "node":node})
 
 @login_required(login_url="/account/login")
 def download_tec_file(request, tec_id):
