@@ -229,7 +229,7 @@
                         </td>
                         <td>
                             <span class="dload">查看 | 下载</span>
-                            <img src="{% static 'images/account/see.png' %} " class="see_dload">
+                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
                         </td>
                         </tr>
                         <tr class="extratr">
@@ -237,126 +237,56 @@
                     </tr>
                     {% for complaint in complaints %}
                     <tr class="cc_tr">
-                        <td class="cct1"></td>
+                        <td class="cct1">
+                            <input type="checkbox" class="ck">
+                        </td>
                         <td>{{forloop.counter}}</td>
-                        <td>{{complaint.cname}}</td>
+                        <td>
+                            <span class="sign"></span>
+                            <span class="Cust_cont">{{complaint.cname}}</span>
+                        </td>
                         <td>{{complaint.type}}</td>
                         <td>{{complaint.submitter}}</td>
-                        <td>{{complaint.ctime}}</td>
+                        <td>{{complaint.ctime | date:"Y-m-d"}}</td>
                         <td>{{complaint.level}}</td>
                         <td>{{complaint.product_line}}</td>
                         <td>{{complaint.category}}</td>
                         <td>{{complaint.tester}}</td>
-                        <td>{{complaint.status}}</td>
                         <td>
-                            <span class="dload"><a href="{% url 'asset:complaint_detail' complaint_id %}">查看</a> | <a href="#">下载</a></span>
-                            <img src="{% static 'images/account/see.png' %}" class="see_dload">
+                            {% if complaint.status == "Open" %}
+                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F; font-size:14px;">Open</span>
+                            {% elif complaint.status == "Closed" %}
+                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;">● </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="dload"><a href="{% url 'asset:complaint_detail' complaint.id %}">查看</a> | <a href="{% url 'asset:download_cfile' complaint.id %}">下载</a></span>
+                            <img src="{% static 'images/asset/see.png' %}" class="see_dload">
                         </td>
                     </tr>
                     {% endfor %}
                     <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="cc_tr">
-                    <td class="cct1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                        <td class="cct1"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
             <div class="cc_footer">
                 <div class="cc_total">
-                    <span>共计 20 条数据</span>
+                    <span>共计 {{complatins.count}} 条数据</span>
                 </div>
                 {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
                 <div class="cc_page1">
