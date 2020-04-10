@@ -55,10 +55,10 @@
             </div>
             <div class="Handle_State">
             <div class="chProcessed_bd">
-                <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color: rgba(85, 85, 85, 0.647058823529412);">已处理（295）</span></a>
+                <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color: rgba(85, 85, 85, 0.647058823529412);">已处理</span></a>
             </div>
             <div class="chUntreated_bd">
-                <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color:black">未处理（5）</span></a>
+                <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color:black">未处理（{{tec_list.count}}）</span></a>
             </div>
             </div>
             <table class="un_pt" align="center">
@@ -84,9 +84,9 @@
                         <td class="untd3">{{tec.tname}}</td>
                         <td class="untd4">{{tec.created_at}}</td>
                         <td class="untd5">
-                            <a href=" {% url 'asset:unprocess_pl_detail' tec.id %} "><span style="color:#108EE9;">查看</span></a>
+                            <a href=" {% url 'asset:unprocess_tec_detail' tec.id %} "><span style="color:#108EE9;">查看</span></a>
                             <span style="color:#D7D7D7;">|</span>
-                            <span style="color:#108EE9;">更多</span>
+                            <a onclick="show_function()"><span style="color:#108EE9;" >更多</span></a>
                             <img src="{% static 'images/asset/see.png' %}" class="see_dload">
                         </td>
                     </tr>
@@ -103,6 +103,17 @@
         </div>
     </div>
 </div>
-
+<script>
+$(document).on("click",function(e)
+    {
+        if($(e.target).parents(".prompt_box").length == 0)
+        {
+            $(".prompt_box").hide();
+        }
+});
+function show_function() {
+    $(".prompt_box").show();
+};
+</script>
 
 {% endblock  %}
