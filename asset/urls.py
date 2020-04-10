@@ -17,6 +17,7 @@ urlpatterns = [
     path('complaint-list/', views.complaint_list, name="complaint_list"),
     path('complaint-detail/<int:complaint_id>', views.complaint_detail, name="complaint_detail"),
     path('add-complaint/', views.add_complaint, name="add_complaint"),
+    path('download-cfile/<int:complaint_id>', views.download_cfile, name="download_cfile"),
     # 主页优秀实践
     path('tec-list/', views.tec_list, name="tec_list"),
     path('tec-detail/<int:tec_id>', views.tec_detail, name="tec_detail"),
