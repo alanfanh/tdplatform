@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="gp_tr">
+                {% comment %} <tr class="gp_tr">
                     <td class="tra1">1</td>
                     <td class="tra2">
                         <span></span>
@@ -50,10 +50,14 @@
                     <td class="tra8">
                         <span class="dload">查看 | 下载</span>
                     </td>
-                </tr>
+                </tr> {% endcomment %}
                 {% for course in course_list %}
                 <tr class="gp_tr">
+                    {% if strat %}
+                    <td class="tra1">{{forloop.counter|add:strat}}</td>
+                    {% else %}
                     <td class="tra1">{{forloop.counter}}</td>
+                    {% endif %}
                     <td class="tra2">
                         <span></span>
                         <span class="colr">{{course.cname}}</span>
@@ -68,73 +72,38 @@
                     </td>
                 </tr>
                 {% endfor %}
-                <tr class="gp_tr">
-                <td class="tra1"></td>
-                <td class="tra2"></td>
-                <td class="tra3"></td>
-                <td class="tra4"></td>
-                <td class="tra5"></td>
-                <td class="tratd6"></td>
-                <td class="tra7"></td>
-                <td class="tra8"></td>
-                </tr>
-                <tr class="gp_tr">
-                <td class="tra1"></td>
-                <td class="tra2"></td>
-                <td class="tra3"></td>
-                <td class="tra4"></td>
-                <td class="tra5"></td>
-                <td class="tratd6"></td>
-                <td class="tra7"></td>
-                <td class="tra8"></td>
-                </tr>
-                <tr class="gp_tr">
-                <td class="tra1"></td>
-                <td class="tra2"></td>
-                <td class="tra3"></td>
-                <td class="tra4"></td>
-                <td class="tra5"></td>
-                <td class="tratd6"></td>
-                <td class="tra7"></td>
-                <td class="tra8"></td>
-                </tr>
-                <tr class="gp_tr">
-                <td class="tra1"></td>
-                <td class="tra2"></td>
-                <td class="tra3"></td>
-                <td class="tra4"></td>
-                <td class="tra5"></td>
-                <td class="tratd6"></td>
-                <td class="tra7"></td>
-                <td class="tra8"></td>
-                </tr>
-                <tr class="gp_tr">
-                <td class="tra1"></td>
-                <td class="tra2"></td>
-                <td class="tra3"></td>
-                <td class="tra4"></td>
-                <td class="tra5"></td>
-                <td class="tratd6"></td>
-                <td class="tra7"></td>
-                <td class="tra8"></td>
-                </tr>
-                <tr class="gp_tr">
-                <td class="tra1"></td>
-                <td class="tra2"></td>
-                <td class="tra3"></td>
-                <td class="tra4"></td>
-                <td class="tra5"></td>
-                <td class="tratd6"></td>
-                <td class="tra7"></td>
-                <td class="tra8"></td>
-                </tr>
             </tbody>
             </table>
-            <div class="tra_total">
-            <span class="ept_text">共计 {{courses.count}} 条数据</span>
+            <div class="tra_total" id="page_foot">
+                <span class="ept_text">共计 {{courses_list.count}} 条数据</span>
             </div>
         </div>
     </div>
 </div>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+layui.use('laypage', function(){
+  var laypage = layui.laypage;
+  
+  //执行一个laypage实例
+  laypage.render({
+    elem: 'page_foot' //注意，这里的 test1 是 ID，不用加 # 号
+    ,limit: 10
+    ,count: {{courses_list.count}} //数据总数，从服务端得到
+    ,curr: {{course_list.number}}
+    ,hash:'fenye'
+    ,jump: function(obj, first) {
+        console.log(obj.curr);
+        console.log(obj.limit);
+        page=obj.curr; 
+        limit=obj.limit;
+        // 首次不执行
+        if ( !first) {
+            location.href=`?page=${obj.curr}&limit=${obj.limit}`
+        }
+    }
+  });
+});
+</script>
 
 {% endblock  %}
