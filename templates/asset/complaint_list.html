@@ -264,7 +264,15 @@
                         </td>
                         <td>
                             <span class="dload"><a href="{% url 'asset:complaint_detail' complaint.id %}">查看</a> | <a href="{% url 'asset:download_cfile' complaint.id %}">下载</a></span>
-                            <img src="{% static 'images/asset/see.png' %}" class="see_dload">
+                            <a onclick="showTipbox(this)" style="position: relative;">
+                                <img src="{% static 'images/asset/see.png' %}" class="see_dload">
+                                <div class="tip_box" style="display: none;">
+                                    <div class="tip_content">
+                                        <span>删除</span>
+                                        <span>编辑</span>
+                                    </div>
+                                </div>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -284,9 +292,9 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="cc_footer">
+            <div class="cc_footer" id="test1">
                 <div class="cc_total">
-                    <span>共计 {{complatins.count}} 条数据</span>
+                    <span>共计 {{complaints.count}} 条数据</span>
                 </div>
                 {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
                 <div class="cc_page1">
@@ -321,5 +329,25 @@
         </div>
     </div>
 </div>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+function showTipbox(target) {
+        $el = $(target).find(".tip_box");
+        if ($el.is(':visible')) {
+            $el.hide()
+        } else {
+            $el.show()
+        }
+};
 
+layui.use('laypage', function(){
+  var laypage = layui.laypage;
+  
+  //执行一个laypage实例
+  laypage.render({
+    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
+    ,count: {{complaints.count}} //数据总数，从服务端得到
+  });
+});
+</script>
 {% endblock  %}

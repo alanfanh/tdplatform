@@ -126,7 +126,7 @@
                     </tr>
                     {% for tec in tecs %}
                     <tr class="gd_tr">
-                        <td class="gpt1"></td>
+                        <td class="gdt1"><input type="checkbox" class="ck"></td>
                         <td>{{forloop.counter}}</td>
                         <td>
                             <span class="sign"></span>
@@ -140,80 +140,18 @@
                             <span class="dload">
                                 <a href="{% url 'asset:tec_detail' tec.id %}">查看</a> | {% if tec.file != "" %}<a href="{% url 'asset:down_tec_file' tec.id %}">下载</a>{% endif %}
                             </span>
-                            <img src="{% static 'images/account/see.png' %}" class="see_dload">
+                            <a onclick="showTipbox(this)" style="position: relative;">
+                                <img src="{% static 'images/asset/see.png' %}" class="see_dload">
+                                <div class="tip_box" style="display: none;">
+                                    <div class="tip_content">
+                                        <span>删除</span>
+                                        <span>编辑</span>
+                                    </div>
+                                </div>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
-                    <tr class="gd_tr">
-                    <td class="gpt1"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    </tr>
                 </tbody>
             </table>
             {% comment %} <div class="autotip">
@@ -256,5 +194,14 @@
         </div>
     </div>
 </div>
-
+<script>
+function showTipbox(target) {
+        $el = $(target).find(".tip_box");
+        if ($el.is(':visible')) {
+            $el.hide()
+        } else {
+            $el.show()
+        }
+};
+</script>
 {% endblock  %}
