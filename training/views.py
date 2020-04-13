@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404,render
 import json
 # Create your views here.
 # 本views.py文件不再写视图函数，而是通过类的视图实现功能
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView
 from .models import Course, Integral
 from account.models import UserInfo, Group
@@ -28,12 +28,29 @@ class PersonCourseListView(UserCourseMixin, ListView):
     # 我贡献的培训视图
     context_object_name = "courses"
     template_name = "training/person_course_list.html"
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         # 获取context传入模版，如下为userinfo
-        kwargs['userinfo'] = UserInfo.objects.get(user=self.request.user)
-        kwargs['course_list'] = Course.objects.filter(teacher=kwargs['userinfo'])
-        return super(PersonCourseListView, self).get_context_data(**kwargs)
+        context = super(PersonCourseListView, self).get_context_data(**kwargs)
+        userinfo = UserInfo.objects.get(user=self.request.user)
+        courses_list = Course.objects.filter(teacher=userinfo)
+        paginator = Paginator(courses_list, self.paginate_by)
+        page = self.request.GET.get('page')
+        print(page)
+        try:
+            course_list = paginator.page(page)
+            context['current_page'] = int(page)
+            strat = (context['current_page']-1)*self.paginate_by
+            context['strat'] = strat
+        except PageNotAnInteger:
+            course_list = paginator.page(1)
+        except EmptyPage:
+            course_list = paginator.page(paginator.num_pages)
+        context['course_list'] = course_list
+        context['courses_list'] = courses_list
+        context['userinfo'] = userinfo
+        return context
 
 class CourseCreateView(UserCourseMixin, CreateView):
     fields = ['cname', 'range', 'course_time', 'address',
