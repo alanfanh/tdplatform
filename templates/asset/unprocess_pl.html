@@ -36,7 +36,7 @@
                 <a href="{% url 'training:person_course' %}"><span class="train">我贡献的培训</span></a>
             </div>
             <div class="chmenu_gp2">
-            <span class="left_bd"></span>
+                <span class="left_bd"></span>
                 <a href="{% url 'asset:unprocess_tec' %}"><span class="chpract">我的优秀实践</span></a>
             </div>
             <div class="menu_gp3">
@@ -51,15 +51,17 @@
         </div>
         <div class="info_base">
             <div class="gp_title">
-            <span class="Cust_Com">我的优秀实践</span>
+                <span class="Cust_Com">我的优秀实践</span>
             </div>
             <div class="Handle_State">
-            <div class="chProcessed_bd">
-                <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color: rgba(85, 85, 85, 0.647058823529412);">已处理</span></a>
-            </div>
-            <div class="chUntreated_bd">
-                <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color:black">未处理（{{tec_list.count}}）</span></a>
-            </div>
+                <div class="chProcessed_bd">
+                    <a href="{% url 'asset:process_tec' %}"><span class="Processed_text"
+                            style="color: rgba(85, 85, 85, 0.647058823529412);">已处理</span></a>
+                </div>
+                <div class="chUntreated_bd">
+                    <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text"
+                            style="color:black">未处理（{{tec_list.count}}）</span></a>
+                </div>
             </div>
             <table class="un_pt" align="center">
                 <tbody>
@@ -69,7 +71,7 @@
                         </td>
                         <td class="untd2">李测试</td>
                         <td class="untd3">优化testlink数据库查询性能的方法与实施</td>
-                        <td class="untd4">2019-12-21  08:50:08</td>
+                        <td class="untd4">2019-12-21 08:50:08</td>
                         <td class="untd5">
                             <span style="color:#108EE9;">查看</span>
                             <span style="color:#D7D7D7;">|</span>
@@ -84,19 +86,23 @@
                         <td class="untd3">{{tec.tname}}</td>
                         <td class="untd4">{{tec.created_at}}</td>
                         <td class="untd5">
-                            <a href=" {% url 'asset:unprocess_tec_detail' tec.id %} "><span style="color:#108EE9;">查看</span></a>
+                            <a href=" {% url 'asset:unprocess_tec_detail' tec.id %} "><span
+                                    style="color:#108EE9;">查看</span></a>
                             <span style="color:#D7D7D7;">|</span>
-                            <a onclick="show_function()"><span style="color:#108EE9;" >更多</span></a>
+                            <a onclick="showMenu(this)" style="position: relative;"><span style="color:#108EE9;">
+                                    更多
+                                </span>
+                                <div class="prompt_box" style="display: none;">
+                                    <span class="al_read">设为已读</span>
+                                    <span class="Dload_ucs">下载附件</span>
+                                </div>
+                            </a>
                             <img src="{% static 'images/asset/see.png' %}" class="see_dload">
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="prompt_box">
-                <span class="al_read">设为已读</span>
-                <span class="Dload_ucs">下载附件</span>
-            </div>
             <div class="Up_total">
                 <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
             </div>
@@ -104,16 +110,20 @@
     </div>
 </div>
 <script>
-$(document).on("click",function(e)
-    {
-        if($(e.target).parents(".prompt_box").length == 0)
-        {
-            $(".prompt_box").hide();
+    // $(document).on("click", function (e) {
+    //     if ($(e.target).parents(".prompt_box").length == 0) {
+    //         $(".prompt_box").hide();
+    //     }
+    // });
+
+    function showMenu(target) {
+        $el = $(target).find(".prompt_box");
+        if ($el.is(':visible')) {
+            $el.hide()
+        } else {
+            $el.show()
         }
-});
-function show_function() {
-    $(".prompt_box").show();
-};
+    };
 </script>
 
 {% endblock  %}
