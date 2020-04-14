@@ -92,6 +92,7 @@ layui.use('laypage', function(){
     ,count: {{courses_list.count}} //数据总数，从服务端得到
     ,curr: {{course_list.number}}
     ,hash:'fenye'
+    ,layout: ['count', 'prev', 'page', 'next',  'refresh', 'skip']
     ,jump: function(obj, first) {
         console.log(obj.curr);
         console.log(obj.limit);

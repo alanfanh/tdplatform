@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 # Create your views here.
 from .models import Articles, TecContent, Complaint, TecTag, NodeMessage
 from account.models import UserInfo, Role, Group
@@ -34,8 +35,24 @@ def article_content(request, article_id):
 def my_complaint(request):
     # 我添加的客诉
     userinfo = UserInfo.objects.get(user=request.user)
-    complaints = Complaint.objects.filter(created_by=request.user)
-    return render(request, "asset/pl_complaint_list.html", {"userinfo": userinfo, "complaints": complaints})
+    complaints_list = Complaint.objects.filter(created_by=request.user)
+    # 每页显示10条
+    paginator = Paginator(complaints_list, 10)
+    if request.method == "GET":
+        page = request.GET.get('page')
+        try:
+            complaints = paginator.page(page)
+            # 获取当前页面，实现当前页条目序号
+            current_page = int(page)
+            strat = (current_page-1)*10
+        except PageNotAnInteger:
+            # 如果请求的页数不是整数, 返回第一页。
+            complaints = paginator.page(1)
+        except EmptyPage:
+            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+            complaints = paginator.page(paginator.num_pages)
+    template_view = "asset/pl_complaint_list.html"
+    return render(request, template_view, {"userinfo": userinfo, "complaints": complaints, "complaints_list": complaints_list})
 
 @login_required(login_url="/account/login")
 def assigned_list(request):
@@ -59,7 +76,7 @@ def complaint_detail(request, complaint_id):
 def download_cfile(request, complaint_id):
     # 下载客诉附件
     com = get_object_or_404(Complaint, id=complaint_id)
-    if com.file != "":
+    if com.cfile != "":
         file_name = com.cfile.name.split('/')[1]
         response = FileResponse(com.cfile)
         response['Content-Type'] = "application/octet-stream"
@@ -84,6 +101,20 @@ def add_complaint(request):
             return HttpResponse('3')
     else:
         return render(request, "asset/add_complaint.html", {"form":form})
+
+@login_required(login_url="/account/login")
+@require_POST
+@csrf_exempt
+def delete_complaint(request):
+    # 删除客诉信息
+    complaint_id = request.POST['complaint_id']
+    userinfo = UserInfo.objects.get(user=request.user)
+    try:
+        complaint = Complaint.objects.get(id=complaint_id)
+        complaint.delete()
+    except:
+        return HttpResponse('2')
+
 
 # 优秀实践
 
@@ -129,6 +160,21 @@ def tec_list(request):
     userinfo = UserInfo.objects.get(user=request.user)
     tecs = TecContent.objects.filter(status="3")
     return render(request, "asset/tec_list.html", {"tecs":tecs,"userinfo":userinfo})
+
+@login_required(login_url="/account/login")
+def tec_list_data(request):
+    # 返回tec_list的json数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    tecs = TecContent.objects.filter(status="3")
+    for tec in tecs:
+        obj = model_to_dict(tec, exclude=['file', 'tec_tag'])
+        obj["created_at"] = tec.created_at
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        result['data'].append(obj)
+    print(result)
+    result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
 def tec_detail(request, tec_id):
@@ -224,3 +270,15 @@ def group_user(request):
     # json_user = serializers.serialize('json', users)
     # return HttpResponse(json_user, content_type='application/json')
     return JsonResponse(result)
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+@require_POST
+def delete_tec(request):
+    tec_id = request.POST['tec_id']
+    try:
+        tec = TecContent.objects.get(id=tec_id)
+        tec.delete()
+        return HttpResponse('1')
+    except:
+        return HttpResponse('2')

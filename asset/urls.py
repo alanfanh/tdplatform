@@ -18,6 +18,7 @@ urlpatterns = [
     path('complaint-detail/<int:complaint_id>', views.complaint_detail, name="complaint_detail"),
     path('add-complaint/', views.add_complaint, name="add_complaint"),
     path('download-cfile/<int:complaint_id>', views.download_cfile, name="download_cfile"),
+    path('delete-complaint/<int:complaint_id>', views.delete_complaint, name="delete_complaint"),
     # 主页优秀实践
     path('tec-list/', views.tec_list, name="tec_list"),
     path('tec-detail/<int:tec_id>', views.tec_detail, name="tec_detail"),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('download-file/<int:tec_id>', views.download_tec_file, name="down_tec_file"),
     # 处理ajax返回json数据
     path('group_user', views.group_user, name="group_user"),
+    path('tec-list-data/', views.tec_list_data, name="tec_list_data"),
 ]
