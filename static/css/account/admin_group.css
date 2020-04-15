@@ -1,4 +1,4 @@
-.pt {
+﻿.pt {
   border-width: 0px;
   position: relative;
   left: 24px;
@@ -464,9 +464,9 @@
 .gp_num {
   position: absolute;
   left: 27px;
-  top: 634px;
-  width: 117px;
-  height: 20px;
+  top: 689px;
+  width: 1415px;
+  height: 40px;
   font-family: 'PingFangSC-Regular', 'PingFang SC';
   font-weight: 400;
   color: #AAAAAA;
@@ -1079,7 +1079,7 @@
 .Ep_total {
   position: absolute;
   left: 25px;
-  top: 780px;
+  top: 785px;
   width: 1415px;
   height: 40px;
 }
@@ -1431,7 +1431,7 @@
 .Up_total {
   position: absolute;
   left: 25px;
-  top: 481px;
+  top: 855px;
   width: 1415px;
   height: 40px;
 }
