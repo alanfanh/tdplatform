@@ -59,7 +59,22 @@ def assigned_list(request):
     # 指派给ste、te的客诉
     userinfo = UserInfo.objects.get(user=request.user)
     complaints = Complaint.objects.filter(tester=userinfo.realname)
-    return render(request, "asset/assigned_list.html", {"userinfo":userinfo, "complaints":complaints})
+    #每页显示10条
+    paginator = Paginator(complaints, 10)
+    page = request.GET.get('page')
+    try:
+        groupnum = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        groupnum = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        groupnum = paginator.page(paginator.num_pages)
+    template_view = "asset/assigned_list.html"
+    return render(request, template_view, {"userinfo":userinfo, "complaints":complaints,"groupnum": groupnum})
 
 @login_required(login_url="/account/login")
 def complaint_list(request):
@@ -126,7 +141,22 @@ def unprocess_tec(request):
     if role.role_name == "PL":
         # PL用户
         tec_list = TecContent.objects.filter(status="1", group_id=userinfo.group_id)
-        return render(request, "asset/unprocess_pl.html",{"userinfo":userinfo, "tec_list":tec_list})
+        #每页显示10条
+        paginator = Paginator(tec_list, 10)
+        page = request.GET.get('page')
+        try:
+            groupnum = paginator.page(page)
+            # 获取当前页面，实现当前页条目序号
+            current_page = int(page)
+            strat = (current_page-1)*10
+        except PageNotAnInteger:
+            # 如果请求的页数不是整数, 返回第一页。
+            groupnum = paginator.page(1)
+        except EmptyPage:
+            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+            groupnum = paginator.page(paginator.num_pages)
+        template_view = "asset/unprocess_pl.html"
+        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
     elif role.role_name == "M":
         # M用户
         tec_list = TecContent.objects.filter(status="2")
@@ -141,7 +171,22 @@ def process_tec(request):
     role = Role.objects.get(id=userinfo.role_id)
     if role.role_name == "PL":
         tec_list = TecContent.objects.filter(group_id=userinfo.group_id).exclude(status="1")
-        return render(request, "asset/processed_pl.html",{"userinfo":userinfo, "tec_list":tec_list})
+        #每页显示10条
+        paginator = Paginator(tec_list, 10)
+        page = request.GET.get('page')
+        try:
+            groupnum = paginator.page(page)
+            # 获取当前页面，实现当前页条目序号
+            current_page = int(page)
+            strat = (current_page-1)*10
+        except PageNotAnInteger:
+            # 如果请求的页数不是整数, 返回第一页。
+            groupnum = paginator.page(1)
+        except EmptyPage:
+            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+            groupnum = paginator.page(paginator.num_pages)
+        template_view = "asset/processed_pl.html"
+        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
     elif role.role_name == "M":
         tec_list = TecContent.objects.exclude(status="2")
         return render(request, "asset/processed_m.html", {"userinfo":userinfo, "tec_list":tec_list})
@@ -152,7 +197,23 @@ def process_tec(request):
 def my_tec(request):
     # STE添加的优秀实践
     userinfo = UserInfo.objects.get(user=request.user)
-    return render(request, "asset/my_tec.html", {"userinfo":userinfo})
+    ste_tecs = TecContent.objects.filter(status="3")
+    #每页显示10条
+    paginator = Paginator(ste_tecs, 10)
+    page = request.GET.get('page')
+    try:
+        groupnum = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        groupnum = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        groupnum = paginator.page(paginator.num_pages)
+    template_view = "asset/my_tec.html"
+    return render(request, template_view, {"userinfo":userinfo,"ste_tecs":ste_tecs,"groupnum": groupnum})
 
 @login_required(login_url="/account/login")
 def tec_list(request):
@@ -167,13 +228,18 @@ def tec_list_data(request):
     result = {"code": 0, "msg": "", "count": 1000, "data": []}
     tecs = TecContent.objects.filter(status="3")
     for tec in tecs:
-        obj = model_to_dict(tec, exclude=['file', 'tec_tag'])
+        obj = model_to_dict(tec, exclude=['file',])
         obj["created_at"] = tec.created_at
+        # 获取tec标签，多对多查询
+        tag_list=[]
+        for tag in tec.tec_tag.all():
+            tag_list.append(tag.tag)
+        obj['tec_tag'] = tag_list
         obj['group'] = Group.objects.get(id=obj['group']).name
         obj['author'] = UserInfo.objects.get(id=obj['author']).realname
         result['data'].append(obj)
-    print(result)
     result['count'] = tecs.count()
+    print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
