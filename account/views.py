@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 # Create your views here.
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
@@ -38,6 +38,7 @@ def myself(request):
 
 @login_required(login_url="/account/login/")
 def group_user(request):
+    #我的小组
     user = User.objects.get(username=request.user.username)
     if user.is_superuser != 1:
         userinfo = UserInfo.objects.get(user=user)
@@ -45,8 +46,23 @@ def group_user(request):
         role = Role.objects.get(id=userinfo.role_id)
         if role.role_name == "PL":
             users = UserInfo.objects.filter(group_id=userinfo.group_id)
+            #每页显示10条
+            paginator = Paginator(users, 10)
+            page = request.GET.get('page')
+            try:
+                groupnum = paginator.page(page)
+                # 获取当前页面，实现当前页条目序号
+                current_page = int(page)
+                strat = (current_page-1)*10
+            except PageNotAnInteger:
+                # 如果请求的页数不是整数, 返回第一页。
+                groupnum = paginator.page(1)
+            except EmptyPage:
+                # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+                groupnum = paginator.page(paginator.num_pages)
+            template_view = "account/my_group.html"
             groups = Group.objects.all()
-            return render(request, 'account/my_group.html', {"users": users, "userinfo": userinfo})
+            return render(request, template_view, {"users": users, "userinfo": userinfo,"groupnum": groupnum})
     else:
         return HttpResponse("404")
 
