@@ -323,6 +323,18 @@ def download_tec_file(request, tec_id):
 @login_required(login_url="/account/login")
 @csrf_exempt
 @require_POST
+def delete_tec(request):
+    tec_id = request.POST['tec_id']
+    try:
+        tec = TecContent.objects.get(id=tec_id)
+        tec.delete()
+        return HttpResponse('1')
+    except:
+        return HttpResponse('2')
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+@require_POST
 def group_user(request):
     """接收处理Ajax请求"""
     
@@ -339,12 +351,35 @@ def group_user(request):
 
 @login_required(login_url="/account/login")
 @csrf_exempt
-@require_POST
-def delete_tec(request):
-    tec_id = request.POST['tec_id']
-    try:
-        tec = TecContent.objects.get(id=tec_id)
-        tec.delete()
-        return HttpResponse('1')
-    except:
-        return HttpResponse('2')
+def filter_tec_range(request):
+    # ajax请求，筛选不同部门范围的数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    # 筛选出所有的数据记录
+    tecs = TecContent.objects.filter(status="3")
+    if request.GET.get('range_name'):
+        # 过滤部门范围
+        range_id = request.GET.get('range_name')
+        tecs = tecs.filter(group_id=range_id)
+    if request.GET.get('time_year'):
+        # 筛选创建年
+        year = request.GET.get('time_year')
+        tecs = tecs.filter(created_at__year=year)
+    if request.GET.get('tag_id'):
+        # 筛选tec标签
+        tag_id = request.GET.get('tag_id')
+        tecs = tecs.filter(tec_tag=tag_id)
+    for tec in tecs:
+        obj = model_to_dict(tec, exclude=['file', ])
+        obj["created_at"] = tec.created_at
+        # 获取tec标签，多对多查询
+        tag_list = []
+        for tag in tec.tec_tag.all():
+            tag_list.append(tag.tag)
+        obj['tec_tag'] = tag_list
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        result['data'].append(obj)
+    result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+

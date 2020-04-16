@@ -24,28 +24,28 @@
             <div class="info_selt">
                 <label for="" class="sortrg">搜索范围：</label>
                 
-                <select class="rgselect">
+                <select class="rgselect" onchange="selectRange()" id="selectRange">
                     <option value="0">测试部</option>
-                    <option value="1">自动化开发组</option>
-                    <option value="2">接入测试组</option>
-                    <option value="3">家用测试组</option>
+                    <option value="1">家用测试组</option>
+                    <option value="2">OEM测试组</option>
+                    <option value="3">接入测试组</option>
                     <option value="4">商用测试组</option>
                     <option value="5">便携测试组</option>
                     <option value="6">资料开发组</option>
-                    <option value="7">OEM测试组</option>
+                    <option value="7">自动化开发组</option>
                 </select>
                 <label for="" class="gptime">时间选择：</label>
-                <select class="gptimepick">
-                    <option value="0">2019</option>
-                    <option value="1">2020</option>
+                <select class="gptimepick" onchange="selectTime()" id="selectTime">
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
                 </select>
                 <label for="" class="lbselect">标签选择：</label>
-                <select class="lbpick">
+                <select class="lbpick" onchange="selectTag()" id="selectTag">
                     <option value="0">所有标签</option>
-                    <option value="1">自动化</option>
-                    <option value="2">用户体验</option>
+                    <option value="1">用户体验</option>
+                    <option value="2">协议相关</option>
                     <option value="3">方法创新</option>
-                    <option value="4">协议相关</option>
+                    <option value="4">自动化</option>
                 </select>
                 <input type="text" class="gpsearch" placeholder="请输入">
 
@@ -156,7 +156,7 @@
                     {% endfor %}
                 </tbody>
             </table>  {% endcomment %}
-            <div style="width:1415px;position:absolute;left:25px;top:140px;"><table id="demo" lay-filter="test"></table></div>
+            <div style="width:1415px;position:absolute;left:25px;top:120px;"><table id="demo" lay-filter="test"></table></div>
             {% comment %} <div class="autotip">
                 <span class="attipcont">实验室资产管理平台定时发送邮件实现物品催还的方法与实施</span>
             </div> {% endcomment %}
@@ -201,7 +201,9 @@
 <script type="text/html" id="bar">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="download" >下载</a>
+  {% if userinfo.role.role_name == "M" %}
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  {% endif %}
 </script>
 <script type="text/html" id="toolbarDemo">
   <div class="layui-btn-container">
@@ -227,7 +229,7 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
   //table实例
   table.render({
     elem: '#demo'
-    ,height: 312
+    ,height: 512
     ,url: '/asset/tec-list-data/' //数据接口
     ,page: true //开启分页
     ,even: true
@@ -252,9 +254,57 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
         window.location.href="/asset/download-file/" + data.id
     }
   });
-  
 
 });
+
+function selectRange() {
+    // 选择范围，刷新表格
+    var range = $("#selectRange").val()
+    if(range != 0) {
+        layui.use(['table'], function(){
+            var table = layui.table  // 表格
+            table.reload('demo', {
+                url: '/asset/filter-tec-range/'
+                ,where: { range_name: range } //设定异步数据接口的额外参数
+                //,height: 300
+            });
+        });
+    };
+    if(range == 0) {
+        window.location.href="/asset/tec-list/"
+    }
+};
+
+function selectTag() {
+    // 选择刷新标签、
+    var tag = $("#selectTag").val()
+    if(tag != 0) {
+        layui.use(['table'], function(){
+            var table = layui.table  // 表格
+            table.reload('demo', {
+                url: '/asset/filter-tec-range/'
+                ,where: { tag_id: tag } //设定异步数据接口的额外参数
+                //,height: 300
+            });
+        });
+    };
+    if(tag == 0) {
+        window.location.href="/asset/tec-list/"
+    }
+};
+
+function selectTime() {
+    var time = $("#selectTime").val()
+    layui.use(['table'], function(){
+            var table = layui.table  // 表格
+            table.reload('demo', {
+                url: '/asset/filter-tec-range/'
+                ,where: { time_year: time } //设定异步数据接口的额外参数
+                //,height: 300
+            });
+    });
+}
+
 
 </script>
 {% endblock  %}

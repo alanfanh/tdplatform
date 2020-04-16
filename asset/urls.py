@@ -27,4 +27,5 @@ urlpatterns = [
     # 处理ajax返回json数据
     path('group_user', views.group_user, name="group_user"),
     path('tec-list-data/', views.tec_list_data, name="tec_list_data"),
+    path('filter-tec-range/', views.filter_tec_range, name="filter_tec_range"),
 ]
