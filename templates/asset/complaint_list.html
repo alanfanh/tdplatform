@@ -30,24 +30,28 @@
                     <img src="{% static 'images/asset/select.png' %}" class="sltimg">
                 </div>
                 <label for="" class="linenm">产品线：</label>
-                <select class="lineselt">
-                    <option value="0">家用</option>
-                    <option value="1">PON</option>
-                    <option value="2">PLC</option>
+                <select class="lineselt" onchange="selectProduct()" id="selectProduct">
+                    <option value="家用">家用</option>
+                    <option value="商用">商用</option>
+                    <option value="PON">PON</option>
+                    <option value="PLC">PLC</option>
+                    <option value="交换机">交换机</option>
+                    <option value="便携">便携</option>
+                    <option value="OEM">OEM</option>
                 </select>
                 <label for="" class="pdtime">时间选择：</label>
-                <select class="pdtimepick">
-                    <option value="0">2019</option>
-                    <option value="1">2020</option>
+                <select class="pdtimepick" onchange="selectYear()" id="selectYear">
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
                 </select>
                 <label for="" class="pdclassific">问题分类：</label>
-                <select class="typepick">
-                    <option value="0">安全性</option>
-                    <option value="1" selected>场景类</option>
-                    <option value="2">兼容性</option>
-                    <option value="3">功能类</option>
-                    <option value="4">可靠性</option>
-                    <option value="5">需求类</option>
+                <select class="typepick" onchange="selectType()" id="selectType">
+                    <option value="安全性">安全性</option>
+                    <option value="场景类">场景类</option>
+                    <option value="兼容性">兼容性</option>
+                    <option value="功能类">功能类</option>
+                    <option value="可靠性">可靠性</option>
+                    <option value="需求类">需求类</option>
                 </select>
                 <input type="text" class="itsearch" placeholder="请输入">
                 <img src="{% static 'images/training/sort.svg' %}" class="sortimg">
@@ -181,7 +185,8 @@
                     </tbody>
                 </table>
             </div>
-            <table class="cc_table" align="center"">
+            {% comment %}
+            <table class="cc_table" align="center">
                 <thead>
                     <tr class="cc_th">
                     <th class="cct1">
@@ -194,8 +199,8 @@
                     <th class="cct4">客诉类型</th>
                     <th class="cct5">提交人</th>
                     <th class="cct6">客诉时间
-                        {% comment %} <img src="images/admin/up.svg" class="up_img">
-                        <img src="images/admin/down.svg" class="down_img"> {% endcomment %}
+                        <img src="images/admin/up.svg" class="up_img">
+                        <img src="images/admin/down.svg" class="down_img">
                     </th>
                     <th class="cct7">严重程度</th>
                     <th class="cct8">产品线</th>
@@ -292,11 +297,14 @@
                     </tr>
                 </tbody>
             </table>
+            {% endcomment %}
+            <div style="width:1415px;position:absolute;left:25px;top:126px;"><table id="demo_table" lay-filter="test"></table></div>
+            {% comment %}
             <div class="cc_footer" id="test1">
                 <div class="cc_total">
                     <span>共计 {{complaints.count}} 条数据</span>
                 </div>
-                {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
+                <img src="images/admin/left.png" class="Ct_left">
                 <div class="cc_page1">
                     <span class="Ct_pg1">1</span>
                 </div>
@@ -312,11 +320,11 @@
                 <div class="Ct_pg5">
                     <span>5</span>
                 </div>
-                {% comment %} <img src="images/admin/right.png" class="Ct_right"> {% endcomment %}
+                <img src="images/admin/right.png" class="Ct_right">
                 <button class="cc_page">
                     <span style="font-family:'ArialMT', 'Arial';">10</span>
                     <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                    {% comment %} <img src="images/admin/right.png" class="Ct_img"> {% endcomment %}
+                    <img src="images/admin/right.png" class="Ct_img">
                 </button>
                 <div class="Ct_goto">
                     <span>前往第</span>
@@ -326,10 +334,23 @@
                     <span>页</span>
                 </div>
             </div>
+            {% endcomment %}
         </div>
     </div>
 </div>
-<script src="{% static 'layui/layui.js' %}"></script>
+<script src="{% static '/layui/layui.js' %}"></script>
+<script type="text/html" id="demobar">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="download" >下载</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="barDemo">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+    <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+  </div>
+</script>
 <script>
 function showTipbox(target) {
         $el = $(target).find(".tip_box");
@@ -339,15 +360,82 @@ function showTipbox(target) {
             $el.show()
         }
 };
-
-layui.use('laypage', function(){
-  var laypage = layui.laypage;
+layui.use(['laypage', 'layer', 'table', 'element'], function(){
+  var table = layui.table  // 表格
+  ,layer = layui.layer     // 弹窗
+  ,laypage = layui.laypage;    // 分页
   
-  //执行一个laypage实例
-  laypage.render({
-    elem: 'test1' //注意，这里的 test1 是 ID，不用加 # 号
-    ,count: {{complaints.count}} //数据总数，从服务端得到
+  //table实例
+  table.render({
+    elem: '#demo_table'
+    ,height: 512
+    ,url: '/asset/complaint-list-data/' //数据接口
+    ,page: true //开启分页
+    ,even: true
+    ,cols: [[ //表头
+      {field: 'id', title: 'ID', width:80, sort: true, }
+      ,{field: 'cname', title: '名称', width:296}
+      ,{field: 'type', title: '客诉类型', width:96},{field: 'submitter', title: '提交人', width:100, sort: true}
+      ,{field: 'ctime', title: '客诉时间', width:147, sort: true}
+      ,{field: 'level', title: '严重程度', width:96} 
+      ,{field: 'product_line', title: '产品线', width:101}
+      ,{field: 'category', title: '问题分类', width:128}
+      ,{field: 'tester', title: '分析负责人', width:110}
+      ,{field: 'status', title: '措施状态', width:90}
+      ,{field: '', title: '操作', toolbar:"#demobar"}
+    ]]
   });
+  
+  // table行工具栏事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data ,layEvent=obj.event;
+    console.log(data)
+    if(layEvent === 'detail'){
+        window.location.href="/asset/complaint-detail/" + data.id
+    } else if(layEvent === 'download') {
+        window.location.href="/asset/download-cfile/" + data.id
+    }
+  });
+  
+
 });
+
+function selectProduct() {
+    var product_line = $("#selectProduct").val()
+    layui.use(['table'], function(){
+        var table = layui.table  // 表格
+        table.reload('demo_table', {
+            url: '/asset/filter-complaint-list/'
+            ,where: { product_line: product_line } //设定异步数据接口的额外参数
+            //,height: 300
+        });
+    });
+};
+
+function selectYear() {
+    var year = $("#selectYear").val()
+    layui.use(['table'], function(){
+        var table = layui.table  // 表格
+        table.reload('demo_table', {
+            url: '/asset/filter-complaint-list/'
+            ,where: { year: year } //设定异步数据接口的额外参数
+            //,height: 300
+        });
+    });
+
+};
+
+function selectType() {
+    var type = $("#selectType").val()
+    layui.use(['table'], function(){
+        var table = layui.table  // 表格
+        table.reload('demo_table', {
+            url: '/asset/filter-complaint-list/'
+            ,where: { type: type } //设定异步数据接口的额外参数
+            //,height: 300
+        });
+    });
+}
+
 </script>
 {% endblock  %}
