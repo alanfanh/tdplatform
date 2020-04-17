@@ -83,6 +83,18 @@ def complaint_list(request):
     return render(request, "asset/complaint_list.html", {"complaints":complaints,"userinfo":userinfo})
 
 @login_required(login_url="/account/login")
+def complaint_list_data(request):
+    # 返回complaint_list的json数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    complaints = Complaint.objects.all()
+    for complaint in complaints:
+        obj = model_to_dict(complaint, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
+        result['data'].append(obj)
+    result['count'] = complaints.count()
+    print(result)
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+@login_required(login_url="/account/login")
 def complaint_detail(request, complaint_id):
     complaint = get_object_or_404(Complaint,id=complaint_id)
     return render(request, "asset/complaint_detail.html", {"complaint":complaint})
@@ -160,7 +172,22 @@ def unprocess_tec(request):
     elif role.role_name == "M":
         # M用户
         tec_list = TecContent.objects.filter(status="2")
-        return render(request, "asset/unprocess_m.html", {"userinfo":userinfo,"tec_list":tec_list})
+        #每页显示10条
+        paginator = Paginator(tec_list, 10)
+        page = request.GET.get('page')
+        try:
+            groupnum = paginator.page(page)
+            # 获取当前页面，实现当前页条目序号
+            current_page = int(page)
+            strat = (current_page-1)*10
+        except PageNotAnInteger:
+            # 如果请求的页数不是整数, 返回第一页。
+            groupnum = paginator.page(1)
+        except EmptyPage:
+            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+            groupnum = paginator.page(paginator.num_pages)
+        template_view = "asset/unprocess_m.html"
+        return render(request, template_view, {"userinfo":userinfo,"tec_list":tec_list,"groupnum": groupnum})
     else:
         return HttpResponse('Not Found')
 
@@ -189,7 +216,22 @@ def process_tec(request):
         return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
     elif role.role_name == "M":
         tec_list = TecContent.objects.exclude(status="2")
-        return render(request, "asset/processed_m.html", {"userinfo":userinfo, "tec_list":tec_list})
+        #每页显示10条
+        paginator = Paginator(tec_list, 10)
+        page = request.GET.get('page')
+        try:
+            groupnum = paginator.page(page)
+            # 获取当前页面，实现当前页条目序号
+            current_page = int(page)
+            strat = (current_page-1)*10
+        except PageNotAnInteger:
+            # 如果请求的页数不是整数, 返回第一页。
+            groupnum = paginator.page(1)
+        except EmptyPage:
+            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+            groupnum = paginator.page(paginator.num_pages)
+        template_view = "asset/processed_m.html"
+        return render(request, template_view, {"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
     else:
         return HttpResponse("Not Found")
 
@@ -383,3 +425,24 @@ def filter_tec_range(request):
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 
+@login_required(login_url="/account/login")
+@csrf_exempt
+def filter_complaint_list(request):
+    # 返回json数据
+    result = {"code":0,"msg":"", "count":1000, "data":[]}
+    # 获取所有数据
+    complaints = Complaint.objects.all()
+    if request.GET.get("product_line"):
+        product = request.GET.get("product_line")
+        complaints = complaints.filter(product_line=product)
+    if request.GET.get("year"):
+        year = request.GET.get("year")
+        complaints = complaints.filter(created_at__year=year)
+    if request.GET.get("type"):
+        type = request.GET.get("type")
+        complaints = complaints.filter(category=type)
+    for com in complaints:
+        obj = model_to_dict(com, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
+        result['data'].append(obj)
+    result['count'] = complaints.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
