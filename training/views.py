@@ -11,8 +11,9 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from .forms import CreateCourseForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse,JsonResponse
 from django.utils.encoding import escape_uri_path
+from django.forms.models import model_to_dict
 
 class UserMixin(object):
     # 筛选teacher为自己的course
@@ -86,6 +87,20 @@ class CourseListView(LoginRequiredMixin, ListView):
         kwargs['userinfo'] = UserInfo.objects.get(user=self.request.user)
         return super(CourseListView, self).get_context_data(**kwargs)
 
+@login_required(login_url="/account/login")
+def course_list_data(request):
+    # 返回course_list的json数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    courses = Course.objects.all()
+    for course in courses:
+        obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
+        obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
+        result['data'].append(obj)
+    result['count'] = courses.count()
+    print(result)
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+
 class CourseDetailView(LoginRequiredMixin, DetailView):
     model = Course
     template_name = "training/course_detail.html"
@@ -126,3 +141,39 @@ class PointListView(LoginRequiredMixin, ListView):
     context_object_name = "points"
     template_name = "training/point_list.html"
     login_url = "/account/login"
+
+@login_required(login_url="/account/login")
+def point_list_data(request):
+    # 返回course_list的json数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    integrals = Integral.objects.all()
+    for integral in integrals:
+        obj = model_to_dict(integral, fields=['id','person','total','joined','teached_group','teached'])
+        user_id = obj['person']
+        obj['person'] = UserInfo.objects.get(id=user_id).realname
+        obj['group'] = UserInfo.objects.get(id=user_id).group.name
+        result['data'].append(obj)
+    result['count'] = integrals.count()
+    print(result)
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+
+# 返回json格式数据
+@login_required(login_url="/account/login")
+def filter_course_list(request):
+    # 筛选course数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    courses = Course.objects.all()
+    if request.GET.get('range'):
+        range = request.GET.get('range')
+        courses = courses.filter(range=range)
+    if request.GET.get('year'):
+        year = request.GET.get('year')
+        courses = courses.filter(course_time__year=year)
+    for course in courses:
+        obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
+        # 获取参加课程的人数
+        obj['number'] = course.student.all().count()
+        result['data'].append(obj)
+    result['count'] = courses.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii':False})
