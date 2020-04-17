@@ -120,11 +120,36 @@
                 <span class="al_read">设为已读</span>
                 <span class="Dload_ucs">下载附件</span>
             </div>
-            <div class="Up_total">
+            <div class="Up_total" id="mup_sum">
             <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
             </div>
         </div>
     </div>
 </div>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+    layui.use('laypage', function () {
+        var laypage = layui.laypage;
 
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'mup_sum' //注意，这里的 test1 是 ID，不用加 # 号
+            , limit: 10
+            , count: {{ tec_list.count }} //数据总数，从服务端得到
+        , curr: 1
+        , hash: 'fenye'
+        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+        , jump: function (obj, first) {
+            console.log(obj.curr);
+            console.log(obj.limit);
+            page = obj.curr;
+            limit = obj.limit;
+            // 首次不执行
+            if (!first) {
+                location.href = `?page=${obj.curr}&limit=${obj.limit}`
+            }
+        }
+  });
+});
+</script>
 {% endblock %}

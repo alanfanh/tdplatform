@@ -216,7 +216,7 @@
                 </tr>
             </tbody>
             </table>
-            <div class="Ep_total">
+            <div class="Ep_total" id="tec_page">
             <span class="ept_text">共计 295 条数据</span>
             {% comment %} <img src="images/admin/left.png" class="Ep_left"> {% endcomment %}
             <div id="ste_page1">
@@ -251,5 +251,30 @@
         </div>
     </div>
 </div>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+    layui.use('laypage', function () {
+        var laypage = layui.laypage;
 
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'tec_page' //注意，这里的 test1 是 ID，不用加 # 号
+            , limit: 10
+            , count: {{ ste_tecs.count }} //数据总数，从服务端得到
+        , curr: 1
+        , hash: 'fenye'
+        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+        , jump: function (obj, first) {
+            console.log(obj.curr);
+            console.log(obj.limit);
+            page = obj.curr;
+            limit = obj.limit;
+            // 首次不执行
+            if (!first) {
+                location.href = `?page=${obj.curr}&limit=${obj.limit}`
+            }
+        }
+  });
+});
+</script>
 {% endblock  %}

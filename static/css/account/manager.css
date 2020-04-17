@@ -572,11 +572,11 @@
     width:1416px;
     height:45px;
 }
-#te_total {
+#te_sum {
     border-width: 0px;
     position: absolute;
     top: 10px;
-    width: 97px;
+    width: 1415px;
     height: 20px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
     font-weight: 400;

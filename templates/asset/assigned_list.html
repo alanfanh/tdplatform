@@ -158,41 +158,67 @@
                     </tr>  
                 </tbody>
             </table>
-            <div class="te_footer">
-            <div id="te_total">
+            <div class="te_footer" id="ste_pg">
+                <div id="te_sum">
                 <span>共计 {complaints.count} 条数据</span>
-            </div>
-            <img src="images/admin/left.png" class="Ct_left">
-            <div id="te_page1">
+                </div>
+                <img src="images/admin/left.png" class="Ct_left">
+                <div id="te_page1">
                 <span class="Ct_pg1">1</span>
-            </div>
-            <div class="Ct_pg2">
+                </div>
+                <div class="Ct_pg2">
                 <span>2</span>
-            </div>
-            <div class="Ct_pg3">
+                </div>
+                <div class="Ct_pg3">
                 <span>3</span>
-            </div>
-            <div class="Ct_pg4">
+                </div>
+                <div class="Ct_pg4">
                 <span>4</span>
-            </div>
-            <div class="Ct_pg5">
+                </div>
+                <div class="Ct_pg5">
                 <span>5</span>
-            </div>
-            <img src="images/admin/right.png" class="Ct_right">
-            <button id="te_page">
+                </div>
+                <img src="images/admin/right.png" class="Ct_right">
+                <button id="te_page">
                 <span style="font-family:'ArialMT', 'Arial';">10</span>
                 <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
                 <img src="images/admin/right.png" class="Ct_img">
-            </button>
-            <div class="Ct_goto">
+                </button>
+                <div class="Ct_goto">
                 <span>前往第</span>
-            </div>
-            <input type="text" id="te_input" placeholder="2">
-            <div class="Ct_pages">
+                </div>
+                <input type="text" id="te_input" placeholder="2">
+                <div class="Ct_pages">
                 <span>页</span>
-            </div>
-        </div> 
+                </div>
+            </div> 
+        </div>
     </div>
 </div>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+    layui.use('laypage', function () {
+        var laypage = layui.laypage;
 
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'ste_pg' //注意，这里的 test1 是 ID，不用加 # 号
+            , limit: 10
+            , count: {{ complaints.count }} //数据总数，从服务端得到
+        , curr: 1
+        , hash: 'fenye'
+        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+        , jump: function (obj, first) {
+            console.log(obj.curr);
+            console.log(obj.limit);
+            page = obj.curr;
+            limit = obj.limit;
+            // 首次不执行
+            if (!first) {
+                location.href = `?page=${obj.curr}&limit=${obj.limit}`
+            }
+    }
+  });
+});
+</script>
 {% endblock %}
