@@ -47,6 +47,7 @@
                 <img src="{% static 'images/training/sort.svg' %}" class="trsortimg">
                 <img src="{% static 'images/asset/handle.svg' %} " class="trsthandle">
             </div>
+            {% comment %}
             <table class="tmtable" align="center">
                 <thead>
                     <tr class="gd_th">
@@ -60,8 +61,8 @@
                         <td class="tmtd6">组织部门训积分</td>
                         <td class="tmtd7">
                             <span class="tmsore">总积分</span>
-                            {% comment %} <img src="{% static 'images/asset/up.svg' %}" class="tmupimg">
-                            <img src="{% static 'images/asset/down.svg' %}" class="tmdownimg"> {% endcomment %}
+                            <img src="{% static 'images/asset/up.svg' %}" class="tmupimg">
+                            <img src="{% static 'images/asset/down.svg' %}" class="tmdownimg">
                         </td>
                     </tr>
                 </thead>
@@ -200,11 +201,14 @@
                     </tr>
                 </tbody>
             </table>
+            {% endcomment %}
+            <div style="width:1415px;position:absolute;left:25px;top:117px;"><table id="point_table" lay-filter="test"></table></div>
+            {% comment %}
             <div class="tnfooter">
                 <div class="cc_total">
                     <span>共计 20 条数据</span>
                 </div>
-                {% comment %} <img src="images/admin/left.png" class="Ct_left"> {% endcomment %}
+                <img src="images/admin/left.png" class="Ct_left">
                 <div class="cc_page1">
                     <span class="Ct_pg1">1</span>
                 </div>
@@ -220,11 +224,11 @@
                 <div class="Ct_pg5">
                     <span>5</span>
                 </div>
-                {% comment %} <img src="images/admin/right.png" class="Ct_right"> {% endcomment %}
+                <img src="images/admin/right.png" class="Ct_right">
                 <button class="cc_page">
                     <span style="font-family:'ArialMT', 'Arial';">10</span>
                     <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                    {% comment %} <img src="images/admin/right.png" class="Ct_img"> {% endcomment %}
+                    <img src="images/admin/right.png" class="Ct_img">
                 </button>
                 <div class="Ct_goto">
                     <span>前往第</span>
@@ -234,8 +238,55 @@
                     <span>页</span>
                 </div>
             </div>
+            {% endcomment %}
         </div>
     </div>
 </div>
+<script src="{% static '/layui/layui.js' %}"></script>
+<script>
+    function showTipbox(target) {
+        $el = $(target).find(".tip_box");
+        if ($el.is(':visible')) {
+            $el.hide()
+        } else {
+            $el.show()
+        }
+    };
+    layui.use(['laypage', 'layer', 'table', 'element'], function () {
+        var table = layui.table  // 表格
+            , layer = layui.layer     // 弹窗
+            , laypage = layui.laypage;    // 分页
 
+        //table实例
+        table.render({
+            elem: '#point_table'
+            , height: 512
+            , url: '/training/point-list-data/' //数据接口
+            , page: true //开启分页
+            , even: true
+            , cols: [[ //表头
+                { field: 'id', title: 'ID', width: 120, sort: true, }
+                , { field: 'person', title: '姓名', width: 200 }
+                , { field: 'group', title: '所属组', width: 190 }, { field: 'joined', title: '参加培训积分', width: 209}
+                , { field: 'teached_group', title: '组织小组培训积分', width: 220}
+                , { field: 'teached', title: '组织部门培训积分', width: 225 }
+                , { field: 'total', title: '总积分'}
+            ]]
+        });
+
+        // table行工具栏事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data, layEvent = obj.event;
+            console.log(data)
+            if (layEvent === 'detail') {
+                window.location.href = "/asset/complaint-detail/" + data.id
+            } else if (layEvent === 'download') {
+                window.location.href = "/asset/download-cfile/" + data.id
+            }
+        });
+
+
+    });
+
+</script>
 {% endblock %}
