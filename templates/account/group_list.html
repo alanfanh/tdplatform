@@ -89,11 +89,36 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="gp_num">
+            <div class="gp_num" id="mgp_num">
                 <span>共计 {{groups.count}} 个小组</span>
             </div>
         </div>
     </div>
 </div>
+<script src="{% static 'layui/layui.js' %}"></script>
+<script>
+    layui.use('laypage', function () {
+        var laypage = layui.laypage;
 
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'mgp_num' //注意，这里的 mgp_num 是 ID，不用加 # 号
+            , limit: 10
+            , count: {{ users.count }} //数据总数，从服务端得到
+        , curr: 1
+        , hash: 'fenye'
+        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
+        , jump: function (obj, first) {
+            console.log(obj.curr);
+            console.log(obj.limit);
+            page = obj.curr;
+            limit = obj.limit;
+            // 首次不执行
+            if (!first) {
+                location.href = `?page=${obj.curr}&limit=${obj.limit}`
+            }
+        }
+  });
+});
+</script>
 {% endblock  %}
