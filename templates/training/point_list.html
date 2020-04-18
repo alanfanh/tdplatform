@@ -28,24 +28,24 @@
             </div>
             <div class="tnseltinfo">
                 <label for="" class="sortrg">搜索范围：</label>
-                <select class="rgselect">
+                <select class="rgselect" onchange="selectDepart()" id="selectDepart">
                     <option value="0">测试部</option>
-                    <option value="1">自动化开发组</option>
-                    <option value="2">接入测试组</option>
-                    <option value="3">家用测试组</option>
+                    <option value="1">家用测试组</option>
+                    <option value="2">OEM测试组</option>
+                    <option value="3">接入测试组</option>
                     <option value="4">商用测试组</option>
                     <option value="5">便携测试组</option>
                     <option value="6">资料开发组</option>
-                    <option value="7">OEM组</option>
+                    <option value="7">自动化开发组</option>
                 </select>
                 <label for="" class="gptime">时间选择：</label>
-                <select class="gptimepick">
-                    <option value="0">2019</option>
-                    <option value="1">2020</option>
+                <select class="gptimepick" onchange="selectYear()" id="selectDepart">
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
                 </select>
-                <input type="text" class="trsearch" placeholder="请输入">
+                {% comment %} <input type="text" class="trsearch" placeholder="请输入">
                 <img src="{% static 'images/training/sort.svg' %}" class="trsortimg">
-                <img src="{% static 'images/asset/handle.svg' %} " class="trsthandle">
+                <img src="{% static 'images/asset/handle.svg' %} " class="trsthandle"> {% endcomment %}
             </div>
             {% comment %}
             <table class="tmtable" align="center">
@@ -244,49 +244,78 @@
 </div>
 <script src="{% static '/layui/layui.js' %}"></script>
 <script>
-    function showTipbox(target) {
-        $el = $(target).find(".tip_box");
-        if ($el.is(':visible')) {
-            $el.hide()
-        } else {
-            $el.show()
-        }
-    };
-    layui.use(['laypage', 'layer', 'table', 'element'], function () {
-        var table = layui.table  // 表格
-            , layer = layui.layer     // 弹窗
-            , laypage = layui.laypage;    // 分页
+function showTipbox(target) {
+    $el = $(target).find(".tip_box");
+    if ($el.is(':visible')) {
+        $el.hide()
+    } else {
+        $el.show()
+    }
+};
+layui.use(['laypage', 'layer', 'table', 'element'], function () {
+    var table = layui.table  // 表格
+        , layer = layui.layer     // 弹窗
+        , laypage = layui.laypage;    // 分页
 
-        //table实例
-        table.render({
-            elem: '#point_table'
-            , height: 512
-            , url: '/training/point-list-data/' //数据接口
-            , page: true //开启分页
-            , even: true
-            , cols: [[ //表头
-                { field: 'id', title: 'ID', width: 120, sort: true, }
-                , { field: 'person', title: '姓名', width: 200 }
-                , { field: 'group', title: '所属组', width: 190 }, { field: 'joined', title: '参加培训积分', width: 209}
-                , { field: 'teached_group', title: '组织小组培训积分', width: 220}
-                , { field: 'teached', title: '组织部门培训积分', width: 225 }
-                , { field: 'total', title: '总积分'}
-            ]]
-        });
-
-        // table行工具栏事件
-        table.on('tool(test)', function (obj) {
-            var data = obj.data, layEvent = obj.event;
-            console.log(data)
-            if (layEvent === 'detail') {
-                window.location.href = "/asset/complaint-detail/" + data.id
-            } else if (layEvent === 'download') {
-                window.location.href = "/asset/download-cfile/" + data.id
-            }
-        });
-
-
+    //table实例
+    table.render({
+        elem: '#point_table'
+        , height: 512
+        , url: '/training/point-list-data/' //数据接口
+        , page: true //开启分页
+        //, even: true
+        //, skin: 'line'
+        , cols: [[ //表头
+            { field: 'id', title: 'ID', width: 120, sort: true, }
+            , { field: 'person', title: '姓名', width: 200 }
+            , { field: 'group', title: '所属组', width: 190 }
+            , { field: 'joined', title: '参加培训积分', width: 209, sort:true}
+            , { field: 'teached_group', title: '组织小组培训积分', width: 220}
+            , { field: 'teached', title: '组织部门培训积分', width: 225 }
+            , { field: 'total', title: '总积分', sort:true}
+        ]]
     });
+
+    // table行工具栏事件
+    table.on('tool(test)', function (obj) {
+        var data = obj.data, layEvent = obj.event;
+        console.log(data)
+        if (layEvent === 'detail') {
+            window.location.href = "/asset/complaint-detail/" + data.id
+        } else if (layEvent === 'download') {
+            window.location.href = "/asset/download-cfile/" + data.id
+        }
+    });
+
+});
+
+function selectDepart() {
+    var group = $("#selectDepart").val()
+    if(group != 0) {
+        layui.use(['table'], function(){
+        var table = layui.table  // 表格
+        table.reload('point_table', {
+            url: '/training/filter-point-list/'
+            ,where: { group: group } //设定异步数据接口的额外参数
+            //,height: 300
+            });
+        });
+    } else {
+        window.location.href="/training/point-list/"
+    }
+}
+
+function selectYear() {
+    var year = $("#selectYear").val()
+    layui.use(['table'], function(){
+        var table = layui.table  // 表格
+        table.reload('point_table', {
+            url: '/training/filter-point-list/'
+            ,where: { year: year } //设定异步数据接口的额外参数
+            //,height: 300
+        });
+    });
+}
 
 </script>
 {% endblock %}

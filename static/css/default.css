@@ -166,3 +166,7 @@ body {
     font-family:'PingFangSC-Regular', 'PingFang SC';
     font-size: 12px;
 }
+
+.layui-laypage-btn {
+  color: black;
+}
