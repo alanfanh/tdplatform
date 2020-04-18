@@ -19,4 +19,5 @@ urlpatterns = [
     path('course-list-data/', views.course_list_data, name="course_list_data"),
     path('point-list-data/', views.point_list_data, name="point_list_data"),
     path('filter-course-list/', views.filter_course_list, name="filter_course_list"),
+    path('filter-point-list/' ,views.filter_point_list, name="filter_point_list")
 ]

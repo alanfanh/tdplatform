@@ -92,12 +92,29 @@ def course_list_data(request):
     # 返回course_list的json数据
     result = {"code": 0, "msg": "", "count": 1000, "data": []}
     courses = Course.objects.all()
-    for course in courses:
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(courses, limit)
+    else:
+        paginator = Paginator(courses, 10)
+    page = request.GET.get('page')
+    try:
+        course_page = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        course_page = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        course_page = paginator.page(paginator.num_pages)
+    for course in course_page:
         obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
         obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
+        obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%M')
         result['data'].append(obj)
     result['count'] = courses.count()
-    print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 
@@ -158,7 +175,7 @@ def point_list_data(request):
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 
-# 返回json格式数据
+# 通过select筛选，返回json格式数据
 @login_required(login_url="/account/login")
 def filter_course_list(request):
     # 筛选course数据
@@ -174,6 +191,31 @@ def filter_course_list(request):
         obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
         # 获取参加课程的人数
         obj['number'] = course.student.all().count()
+        obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%m')
         result['data'].append(obj)
     result['count'] = courses.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii':False})
+
+
+@login_required(login_url="/account/login")
+def filter_point_list(request):
+    # 筛选point数据
+    result = {"code":0, "msg":"", "count": 0, "data":[]}
+    points = Integral.objects.all()
+    if request.GET.get('group'):
+        group_id = request.GET.get('group')
+        if group_id != 0:
+            group = Group.objects.get(id=group_id)
+            # 根据用户所属组过滤
+            points = points.filter(person__group=group)
+    if request.GET.get('year'):
+        pass
+    for point in points:
+        obj = model_to_dict(point, fields=['id','person','total','joined','teached_group','teached'])
+        user_id = obj['person']
+        obj['person'] = UserInfo.objects.get(id=user_id).realname
+        obj['group'] = UserInfo.objects.get(id=user_id).group.name
+        result['data'].append(obj)
+    result['count'] = points.count()
+    print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii':False})
