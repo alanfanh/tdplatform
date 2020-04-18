@@ -89,6 +89,7 @@ def complaint_list_data(request):
     complaints = Complaint.objects.all()
     for complaint in complaints:
         obj = model_to_dict(complaint, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
+        obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
         result['data'].append(obj)
     result['count'] = complaints.count()
     print(result)
@@ -271,7 +272,7 @@ def tec_list_data(request):
     tecs = TecContent.objects.filter(status="3")
     for tec in tecs:
         obj = model_to_dict(tec, exclude=['file',])
-        obj["created_at"] = tec.created_at
+        obj["created_at"] = tec.created_at.strftime('%Y-%m-%d')
         # 获取tec标签，多对多查询
         tag_list=[]
         for tag in tec.tec_tag.all():
@@ -412,7 +413,7 @@ def filter_tec_range(request):
         tecs = tecs.filter(tec_tag=tag_id)
     for tec in tecs:
         obj = model_to_dict(tec, exclude=['file', ])
-        obj["created_at"] = tec.created_at
+        obj["created_at"] = tec.created_at.strftime('%Y-%m-%d')
         # 获取tec标签，多对多查询
         tag_list = []
         for tag in tec.tec_tag.all():
@@ -443,6 +444,14 @@ def filter_complaint_list(request):
         complaints = complaints.filter(category=type)
     for com in complaints:
         obj = model_to_dict(com, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
+        obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
         result['data'].append(obj)
     result['count'] = complaints.count()
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+
+# 搜索数据
+@login_required(login_url="/account/login")
+@csrf_exempt
+def search_complaint(request):
+    pass
