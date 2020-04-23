@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404,render
+from django.db.models import Q
 import json
 # Create your views here.
 # 本views.py文件不再写视图函数，而是通过类的视图实现功能
@@ -38,7 +39,7 @@ class PersonCourseListView(UserCourseMixin, ListView):
         courses_list = Course.objects.filter(teacher=userinfo)
         paginator = Paginator(courses_list, self.paginate_by)
         page = self.request.GET.get('page')
-        print(page)
+        # print(page)
         try:
             course_list = paginator.page(page)
             context['current_page'] = int(page)
@@ -66,7 +67,7 @@ class CourseCreateView(UserCourseMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
         form = CreateCourseForm(request.POST, request.FILES)
-        print(request.POST,form)
+        # print(request.POST,form)
         if form.is_valid():
             new_course = form.save(commit=False)
             new_course.author = self.request.user
@@ -136,7 +137,7 @@ def download_file(request, course_id):
         # 浏览器会导致中文乱码, 进行如下解码
         response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(
             escape_uri_path(file_name))
-        print(response['Content-Disposition'], file_name)
+        # print(response['Content-Disposition'], file_name)
     return response
 
 class DeleteCourseView(LoginRequiredMixin, DeleteView):
@@ -171,7 +172,7 @@ def point_list_data(request):
         obj['group'] = UserInfo.objects.get(id=user_id).group.name
         result['data'].append(obj)
     result['count'] = integrals.count()
-    print(result)
+    # print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 
@@ -217,5 +218,20 @@ def filter_point_list(request):
         obj['group'] = UserInfo.objects.get(id=user_id).group.name
         result['data'].append(obj)
     result['count'] = points.count()
-    print(result)
+    # print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii':False})
+
+
+@login_required(login_url="/account/login")
+def search_course(request):
+    result = {"code":0, "msg":"", "count":0, "data":[]}
+    if request.GET.get("search"):
+        search_key = request.GET.get("search")
+        courses = Course.objects.filter(Q(cname__icontains=search_key) | Q(address__icontains=search_key)| Q(teacher__realname__icontains=search_key))
+        for course in courses:
+            obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
+            obj['number'] = course.student.all().count()
+            obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%m')
+            result['data'].append(obj)
+        result['count'] = courses.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
