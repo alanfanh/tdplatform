@@ -153,8 +153,8 @@
                     <option value="2019">2019</option>
                     <option value="2020">2020</option>
                 </select>
-                <input type="text" class="trsearch" placeholder="请输入">
-                <img src="{% static 'images/training/sort.svg' %}" class="trsortimg">
+                <input type="text" class="trsearch" placeholder="请输入" id="search-course">
+                <img src="{% static 'images/training/sort.svg' %}" id="btn3" class="trsortimg">
                 <img src="{% static 'images/asset/handle.svg' %}" class="trsthandle">
                 {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
                 <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">添加</button></a>
@@ -340,8 +340,9 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
         , cols: [[ //表头
             { field: 'id', title: 'ID', width: 80, sort: true, }
             , { field: 'cname', title: '课程名', width: 343 }
-            , { field: 'range', title: '课程范围', width: 169 }, { field: 'teacher', title: '主讲人', width: 147, sort: true }
-            , { field: 'cdescription', title: '参加成员', width: 136, sort: true }
+            , { field: 'range', title: '课程范围', width: 169 }
+            , { field: 'teacher', title: '主讲人', width: 147, sort: true }
+            , { field: 'number', title: '参加人数', width: 136, sort: true }
             , { field: 'address', title: '培训地点', width: 214 }
             , { field: 'course_time', title: '培训时间', width: 149 }
             , { field: '', title: '操作', toolbar: "#oper_tool" }
@@ -353,9 +354,9 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
         var data = obj.data, layEvent = obj.event;
         console.log(data)
         if (layEvent === 'detail') {
-            window.location.href = "/asset/complaint-detail/" + data.id
+            window.location.href = "/training/course-detail/" + data.id
         } else if (layEvent === 'download') {
-            window.location.href = "/asset/download-cfile/" + data.id
+            window.location.href = "/training/download-coursefile/" + data.id
         }
     });
 
@@ -384,6 +385,23 @@ function selectCTime() {
         });
     });
 }
+
+$("#btn3").on('click', function() {
+    var search_key = $("#search-course").val()
+    if(search_key != "") {
+        layui.use(['table'], function(){
+            var table = layui.table  // 表格
+            table.reload('train_table', {
+                url: '/training/search-course/'
+                ,where: { search: search_key } //设定异步数据接口的搜索的关键字
+                //,height: 300
+            });
+        });
+    } else {
+        window.location.href="/training/course-list/"
+    }
+})
+
 /*
 function delete_course(the, course_id){
     var name = $(the).parents("tr").children("td").eq(1).text();
