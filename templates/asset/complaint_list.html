@@ -53,8 +53,8 @@
                     <option value="可靠性">可靠性</option>
                     <option value="需求类">需求类</option>
                 </select>
-                <input type="text" class="itsearch" placeholder="请输入">
-                <img src="{% static 'images/training/sort.svg' %}" class="sortimg">
+                <input type="text" class="itsearch" placeholder="请输入" id="search-com">
+                <img src="{% static 'images/training/sort.svg' %}" id="btn2" class="sortimg">
                 <img src="{% static 'images/asset/handle.svg' %}" class="sthandle">
                 {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
                 <a href="{% url 'asset:add_complaint' %}"><button class="adcustomer" type="button">添加客诉</button></a>
@@ -441,6 +441,23 @@ function selectType() {
         });
     });
 }
+
+$("#btn2").on("click",function(){
+    var search_key = $("#search-com").val()
+    console.log(search_key)
+    if (search_key != "") {
+        layui.use(['table'], function(){
+            var table = layui.table  // 表格
+            table.reload('demo_table', {
+                url: '/asset/search-complaint/'
+                ,where: { search: search_key } //设定异步数据接口的额外参数
+                //,height: 300
+            });
+        });
+    } else {
+        window.location.href="/asset/complaint-list/"
+    }
+});
 
 </script>
 {% endblock  %}

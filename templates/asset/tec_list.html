@@ -47,9 +47,9 @@
                     <option value="3">方法创新</option>
                     <option value="4">自动化</option>
                 </select>
-                <input type="text" class="gpsearch" placeholder="请输入">
+                <input type="text" class="gpsearch" id="search-tec" placeholder="请输入">
 
-                <img src="{% static 'images/asset/sort.svg' %}" class="gpsortimg">
+                <img src="{% static 'images/asset/sort.svg' %}" id="btn1" class="gpsortimg">
                 <img src="{% static 'images/asset/handle.svg' %}" class="gpsthandle">
                 {% if user.role_id  != 1 %}
                 <a href="{% url 'asset:add_tec' %}"><button class="adcustomer" type="button">添加优秀实践</button></a>
@@ -304,8 +304,25 @@ function selectTime() {
                 //,height: 300
             });
     });
-}
+};
 
+
+$("#btn1").on('click', function() {
+    var text = $('#search-tec').val()
+    console.log(text)
+    if(text != "") {
+        layui.use(['table'], function(){
+            var table = layui.table  // 表格
+            table.reload('demo', {
+                url: '/asset/search-tec/'
+                ,where: { search: text } //设定异步数据接口的搜索的关键字
+                //,height: 300
+            });
+        });
+    } else {
+        window.location.href="/asset/tec-list/"
+    }
+});
 
 </script>
 {% endblock  %}
