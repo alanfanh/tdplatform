@@ -8,7 +8,7 @@ from account.models import UserInfo, Role, Group
 from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-
+from django.db.models import Q
 from .forms import TecContentForm, ComplaintForm
 
 from django.core import serializers
@@ -92,7 +92,7 @@ def complaint_list_data(request):
         obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
         result['data'].append(obj)
     result['count'] = complaints.count()
-    print(result)
+    # print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
@@ -119,7 +119,7 @@ def add_complaint(request):
     # 添加客诉信息
     form = ComplaintForm(request.POST, request.FILES)
     if request.method == "POST":
-        print(form)
+        # print(form)
         if form.is_valid():
             new_complaint = form.save(commit=False)
             new_complaint.created_by = request.user
@@ -282,7 +282,7 @@ def tec_list_data(request):
         obj['author'] = UserInfo.objects.get(id=obj['author']).realname
         result['data'].append(obj)
     result['count'] = tecs.count()
-    print(result)
+    # print(result)
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
@@ -309,10 +309,10 @@ def add_tec(request):
             new_tec.save()
             # form.save_m2m()
             if tags:
-                print('test')
+                # print('test')
                 for atag in tags:
                     tag = TecTag.objects.get(tag=atag)
-                    print(tag)
+                    # print(tag)
                     new_tec.tec_tag.add(tag)
             return redirect("asset:tec_list")     
         else:
@@ -450,8 +450,46 @@ def filter_complaint_list(request):
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 
-# 搜索数据
+# 搜索框搜索数据并返回
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def search_tec(request):
+    # 返回json数据
+    result = {"code":0, "msg":"", "count":0, "data":[]}
+    # 获取数据
+    if request.GET.get("search"):
+        search_key = request.GET.get("search")
+        tecs = TecContent.objects.filter(status="3")
+        # author为外键，需author__realname关联UserInfo的实际姓名
+        tecs = tecs.filter(Q(tname__icontains=search_key)|Q(author__realname__icontains=search_key))
+        for tec in tecs:
+            obj=model_to_dict(tec, exclude=['file', ])
+            obj["created_at"] = tec.created_at.strftime('%Y-%m-%d')
+            tag_list = []
+            for tag in tec.tec_tag.all():
+                tag_list.append(tag.tag)
+            obj['tec_tag'] = tag_list
+            obj['group'] = Group.objects.get(id=obj['group']).name
+            obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+            result['data'].append(obj)
+        result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
+
 @login_required(login_url="/account/login")
 @csrf_exempt
 def search_complaint(request):
-    pass
+    # 根据搜索关键字，返回json数据
+    result = {"code":0, "msg":"", "count":0, "data":[]}
+    # 获取数据
+    if request.GET.get("search"):
+        search_key = request.GET.get("search")
+        # 模糊匹配标题、提交人、分析责任人
+        complaints = Complaint.objects.filter(
+            Q(cname__icontains=search_key) | Q(submitter__icontains=search_key) | Q(tester__icontains=search_key))
+        for com in complaints:
+            obj = model_to_dict(com, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
+            obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
+            result['data'].append(obj)
+        result['count'] = complaints.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii':False})

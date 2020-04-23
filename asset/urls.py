@@ -30,4 +30,6 @@ urlpatterns = [
     path('complaint-list-data/', views.complaint_list_data, name="complaint_list_data"),
     path('filter-tec-range/', views.filter_tec_range, name="filter_tec_range"),
     path('filter-complaint-list/', views.filter_complaint_list, name="filter_complaint_list"),
+    path('search-tec/', views.search_tec, name="search_tec"),
+    path('search-complaint/', views.search_complaint, name="search_complaint")
 ]
