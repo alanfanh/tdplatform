@@ -131,6 +131,38 @@ def add_complaint(request):
         return render(request, "asset/add_complaint.html", {"form":form})
 
 @login_required(login_url="/account/login")
+@csrf_exempt
+def edit_complaint(request, complaint_id):
+    # 编辑客诉信息
+    if request.method == "GET":
+        complaint = Complaint.objects.get(id=complaint_id)
+        form = ComplaintForm(instance=complaint)
+        return render(request, "asset/edit_complaint.html", {"complaint":complaint,"form":form})
+    else:
+        com = Complaint.objects.get(id=complaint_id)
+        try:
+            com.cname = request.POST['cname']
+            com.type = request.POST['type']
+            com.submitter = request.POST['submitter']
+            com.oa_number = request.POST['oa_number']
+            com.ctime = request.POST['ctime']
+            com.area = request.POST['area']
+            com.product = request.POST['product']
+            com.product_line = request.POST['product_line']
+            com.version = request.POST['version']
+            com.level = request.POST['level']
+            com.tester = request.POST['tester']
+            com.status = request.POST['status']
+            com.complete_time = request.POST['complete_time']
+            com.category = request.POST['category']
+            com.description = request.POST['description']
+            com.save()
+            return HttpResponse("1")
+        except:
+            return HttpResponse("2")
+
+
+@login_required(login_url="/account/login")
 @require_POST
 @csrf_exempt
 def delete_complaint(request):
