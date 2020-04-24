@@ -82,7 +82,7 @@ class Complaint(models.Model):
     )
     level = models.CharField(verbose_name="严重程度", max_length=50, choices=NAME_IN_LEVEL_CHOICES)
     tester = models.CharField(verbose_name="分析责任人", max_length=10)
-    complete_time = models.DateTimeField(verbose_name="分析完成时间", auto_now=False, auto_now_add=False, blank=True)
+    analysis_time = models.DateTimeField(verbose_name="分析完成时间", auto_now=False, auto_now_add=False, blank=True)
     status = models.CharField(verbose_name="措施状态", max_length=50)
     complete_time = models.DateField(verbose_name="措施完成时间", auto_now=False, auto_now_add=False, blank=True)
     category = models.CharField(verbose_name="问题分类", max_length=10)
