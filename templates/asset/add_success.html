@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% block title %}添加成功{% endblock  %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/default.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+
+<div class="base">
+    <div class="baseplate">
+        <div class="menuinfo">
+            <div class="gmenu_cp1">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:tec_list' %}"><span class="chpract">优秀实践</span></a>
+            </div>
+            <div class="gmenu_cp2">
+                <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
+            </div>
+        </div>
+        <div class="info_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">添加优秀实践</span>
+            </div>
+            <img src="{% static 'images/asset/hdsuc.png' %} " class="hdsuc">
+            <span class="sbtsuc">提交成功</span>
+            <span class="suctext">您上传的优秀实践已经提交成功，请等待审核。</span>
+            <div class="contbg">
+                <span class="sucname">{{newtec.name}}</span>
+            <div class="mn1">
+                <span class="atnm">作者：{{newtec.author.realname}} </span>
+                <span class="wtim">编写日期：{{newtec.created_at|date:"Y/m/d"}}</span>
+            </div>
+            <img src="{% static 'images/asset/success.svg' %}" class="sucimg1">
+            <span class="suclin1"></span>
+            <img src="{% static 'images/asset/success2.svg' %}" class="sucimg2">
+            <span class="suclin2"></span>
+            <img src="{% static 'images/asset/success3.svg' %}" class="sucimg3">
+            <img src="{% static 'images/asset/success3.svg' %}" class="sucimg4">
+            <span class="gscreat">创建项目</span>
+            <span class="gsexam">小组初审</span>
+            <span class="gsdepart">部门复审</span>
+            <span class="gspass">完成</span>
+            <div class="gsst">
+                <span class="exam_name">{{newtec.author.realname}}</span>
+                <span class="st_time">{{newtec.created_at|date:"Y/m/d"}}</span>
+                <span class="hms">{{newtec.created_at|date:"H:i"}}</span>
+            </div>
+                <span class="gssessor">{{userinfo.realname}}</span>
+            </div>
+            <button class="gsback">返回列表</button>
+            <button class="gssee">查看详情</button>
+        </div>
+    </div>
+</div>
+{% endblock  %}
