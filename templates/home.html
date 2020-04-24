@@ -1,11 +1,253 @@
 {% extends "base.html" %}
-{% block title %}
-Home Page
-{% endblock %}
+
+{% load staticfiles %}
+
+{% block title %}Home Page{% endblock %}
+
 {% block content %}
-<div class="text-center">
-    <h1>欢迎</h1>
-    <h3>欢迎使用测试部内部学习交流平台</h3>
-    <h2>你可使用此平台查看客诉记录、培训课程、培训积分以及其他技术资料。</h2>
+<link rel="stylesheet" href="{% static 'css/home.css' %} ">
+<div class="homebase">
+    <div class="contentbase">
+        <div class="contentmenu1">
+            <div class="menutitle">
+                <p class="usedlink">常用链接</p>
+            </div>
+            <div class="menuconten1">
+                <div class="shadowborder1">
+                    <img src="{% static 'images/home/link.svg' %}" class="menulink">
+                    <span class="linknum">1</span>
+                    <span class="linkname">testlink</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">789</span>
+                </div>
+                <div class="shadowborder2">
+                    <img src="{% static 'images/home/link.svg' %}" class="menulink">
+                    <span class="linknum">2</span>
+                    <span class="linkname">bugfree</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">654</span>
+                </div>
+                <div class="shadowborder3">
+                    <img src="{% static 'images/home/link.svg' %}" class="menulink">
+                    <span class="linknum">3</span>
+                    <span class="linkname">eoa</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">623</span>
+                </div>
+                <div class="shadowborder4">
+                    <img src="{% static 'images/home/link2.svg' %}" class="menulink">
+                    <span class="linknum">4</span>
+                    <span class="linkname">旧oa</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">590</span>
+                </div>
+                <div class="shadowborder5">
+                    <img src="{% static 'images/home/link2.svg' %}" class="menulink">
+                    <span class="linknum">5</span>
+                    <span class="linkname">资产设备管理平台</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">123</span>
+                </div>
+                <div class="shadowborder6">
+                    <img src="{% static 'images/home/link2.svg' %}" class="menulink">
+                    <span class="linknum">6</span>
+                    <span class="linkname">Agile平台</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">113</span>
+                </div>
+                <div class="shadowborder7">
+                    <img src="{% static 'images/home/link2.svg' %}" class="menulink">
+                    <span class="linknum">7</span>
+                    <span class="linkname">考勤查询</span>
+                    <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
+                    <span class="seenumber">110</span>
+                </div>
+            </div>
+        </div>
+        <div class="contentmenu2">
+            <div class="menutitle">
+                <p class="usedlink">数据中心</p>
+            </div>
+            <div class="menuconten2">
+                <div class="menushadow1">
+                    <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
+                    <span class="dataname">培训</span>
+                    <span class="datanumber">500</span>
+                    <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
+                    <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                </div>
+                <div class="menushadow2">
+                    <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
+                    <span class="dataname">优秀实践</span>
+                    <span class="datanumber">2,317</span>
+                    <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
+                    <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                </div>
+                <div class="menushadow3">
+                    <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
+                    <span class="dataname">客诉问题</span>
+                    <span class="datanumber">1,421</span>
+                    <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
+                    <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                </div>
+            </div>
+        </div>
+        <div class="picturebase">
+            <img src="{% static 'images/home/center.png' %}" class="errshow">
+            <img src="{% static 'images/home/imgsort1.svg' %}" class="imgsort1">
+            <img src="{% static 'images/home/imgsort2.svg' %}" class="imgsort2">
+        </div>
+        <div class="tablebase">
+            <span class="recent">近期培训</span>
+            <span class="alltrain">所有培训</span>
+            <img src="{% static 'images/home/arrbase.svg' %}" class="trainarr">
+            <img src="{% static 'images/home/dataarr.svg' %}" class="gototrain">
+            <table class="train_records" align="center">
+                <thead>
+                    <tr class="train_head">
+                        <td class="train_td1">序号</td>
+                        <td class="train_td2">培训名称</td>
+                        <td class="train_td3">培训范围</td>
+                        <td class="train_td4">主讲人</td>
+                        <td class="train_td5">培训地址</td>
+                        <td class="train_td6">培训时间</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="train_body">
+                        <td class="train_td1">1</td>
+                        <td>
+                            <span class="name_flag"></span>
+                            <span class="train_name">网评分析工具二次开发需求实现</span>
+                        </td>
+                        <td>自动化开发组</td>
+                        <td>李测试</td>
+                        <td class="train_name">5楼1号会议室</td>
+                        <td>2019/12/08</td>
+                    </tr>
+                    <tr class="train_body1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="train_body1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="train_body1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="train_body1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="train_body1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="train_body1">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="courseware">
+            <div class="down_title">
+                <p class="title_text">培训课件</p>
+                <select id="select_group">
+                    <option value="0">测试部</option>
+                    <option value="1">家用测试组</option>
+                    <option value="2">OEM组</option>
+                    <option value="3">便携测试组</option>
+                    <option value="4">商用测试组</option>
+                    <option value="5">接入测试组</option>
+                    <option value="6">自动开发组</option>
+                    <option value="7">资料开发组</option>
+                    <option value="8">自动化开发组</option>
+                </select>
+            </div>
+            <div class="downbase">
+                <div class="fileshadow1">
+                    <div class="file_tip">
+                        <span class="tip_text">文件类型</span>
+                    </div>
+                    <span class="file_name">RF框架-架构篇</span>
+                    <span class="file_group">商用测试组 2019.12.08</span>
+                    <button class="file_down">下载</button>
+                </div>
+                <div class="fileshadow2">
+                    <div class="file_tip">
+                        <span class="tip_text">文件类型</span>
+                    </div>
+                    <span class="file_name">10G GPON新技术分享</span>
+                    <span class="file_group">OEM组 2019.11.02</span>
+                    <button class="file_down">下载</button>
+                </div>
+                <div class="fileshadow3">
+                    <div class="file_tip">
+                        <span class="tip_text">文件类型</span>
+                    </div>
+                    <span class="file_name">网评分析工具二次开发需求实现</span>
+                    <span class="file_group">家用测试组 2019.11.26</span>
+                    <button class="file_down">下载</button>
+                </div>
+                <div class="fileshadow4">
+                    <div class="file_tip">
+                        <span class="tip_text">文件类型</span>
+                    </div>
+                    <span class="file_name">MESH防环关键模块串讲</span>
+                    <span class="file_group">资料开发组 2019.11.20</span>
+                    <button class="file_down">下载</button>
+                </div>
+                <div class="fileshadow5">
+                    <div class="file_tip">
+                        <span class="tip_text">文件类型</span>
+                    </div>
+                    <span class="file_name">TR069协议交流</span>
+                    <span class="file_group">OEM组 2019.12.21</span>
+                    <button class="file_down">下载</button>
+                </div>
+                <div class="fileshadow6">
+                    <div class="file_tip">
+                        <span class="tip_text">文件类型</span>
+                    </div>
+                    <span class="file_name">TR069协议交流</span>
+                    <span class="file_group">家用测试组 2019.12.21</span>
+                    <button class="file_down">下载</button>
+                </div>
+            </div>
+        </div>
+        <div class="flie_list">
+            <div class="down_title">
+                <p class="title_text">技术文档</p>
+            </div>
+            <img src="{% static 'images/home/file.svg' %}" class="fileimg">
+        </div>
+    </div>
 </div>
 {% endblock %}
