@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% block title %}编辑客诉问题{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+
+<div class="cabase">
+    <div class="cabaseplate">
+        <div class="camenuinfo">
+            <div class="menu_cp1">
+                <a href="{% url 'asset:tec_list' %}"> <span class="m_mdata">优秀实践</span></a>
+            </div>
+            <div class="menu_cp2">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:complaint_list' %}"><span class="chpract">客诉问题</span></a>
+            </div>
+        </div>
+        <div class="cainfo_base">
+            <div class="Cp_title">
+                <span class="Cust_Com">编辑客诉</span>
+            </div>
+            <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="catitle">
+                    <div class="cainfo_title">
+                        <span>基本信息</span>
+                    </div>
+                </div>
+                <div class="caadd_info">
+                    <div class="cafloor1">
+                        <div class="cm_name">
+                            <span>客诉名称</span>
+                        </div>
+                        <input type="text" class="cmit_name" name="cname" placeholder="请填写客诉名称" value="{{complaint.cname}}">
+                        <div class="cmtype">
+                            <span>客诉类型</span>
+                        </div>
+                        <select class="typeselt" name="type">
+                            <option value="{{complaint.type}}" selected="selected">{{complaint.type}}</option>
+                            <option value="品质">品质</option>
+                            <option value="新需求">新需求</option>
+                            <option value="软件Bug">软件Bug</option>
+                            <option value="硬件Bug">硬件Bug</option>
+                            <option value="重复Bug">重复Bug</option>
+                        </select>
+                        <div class="pickman">
+                            <span>提交人</span>
+                        </div>
+                        <input type="text" class="selectman" value="{{complaint.submitter}}" name="submitter">
+                    </div>
+                    <div class="cafloor2">
+                        <div class="cm_name">
+                            <span>OA流程号</span>
+                        </div>
+                        <input type="text" class="cmit_name" value="{{complaint.oa_number}}" name="oa_number">
+                        <div class="cmtype">
+                            <span>客诉时间</span>
+                        </div>
+                        <input type="date" class="pickdate" name="ctime" placeholder="年 /月/日" style="color: rgb(153, 153, 153);" value="{{complaint.ctime|date:'Y-m-d'}}">
+                        <div class="pickman">
+                            <span>客诉区域</span>
+                        </div>
+                        <select class="selectman" name="area">
+                            <option value="{{complaint.area}}" selected="selected">{{complaint.area}}</option>
+                            <option value="国内">国内</option>
+                            <option value="海外">海外</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="catitle2">
+                    <div class="cainfo_title">
+                        <span>产品信息</span>
+                    </div>
+                </div>
+                <div class="caadd_info2">
+                    <div class="cafloor1">
+                        <div class="cm_name">
+                            <span>产品型号</span>
+                        </div>
+                        <input type="text" class="cmit_name" name="product" value="{{complaint.product}}" placeholder="请输入产品型号">
+                        <div class="cmtype">
+                            <span>产品线</span>
+                        </div>
+                        <select class="typeselt" name="product_line">
+                            <option value="{{complaint.product_line}}" selected="selected">{{complaint.product_line}}</option>
+                            <option value="家用">家用</option>
+                            <option value="商用">商用</option>
+                            <option value="PON">PON</option>
+                            <option value="PLC">PLC</option>
+                            <option value="交换机">交换机</option>
+                            <option value="便携">便携</option>
+                            <option value="OEM">OEM</option>
+                        </select>
+                        <div class="pickman">
+                            <span>软件版本信息</span>
+                        </div>
+                        <input type="text" class="swversion" name="version" value="{{complaint.version}}">
+                    </div>
+                    <div class="cafloor2">
+                        <div class="cm_name">
+                            <span>资产编号</span>
+                        </div>
+                        <input type="text" class="cmit_name">
+                        <div class="cmtype">
+                            <span>严重程度</span>
+                        </div>
+                        <select class="typeselt" name="level">
+                            <option value="{{complaint.level}}" selected="selected">{{complaint.level}}</option>
+                            <option value="low">低</option>
+                            <option value="mid">中</option>
+                            <option value="high">高</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="catitle3">
+                    <div class="cainfo_title">
+                        <span>问题详情</span>
+                    </div>
+                </div>
+                <div class="caadd_info3">
+                    <div class="cafloor1">
+                        <div class="cm_name">
+                            <span>是否分析</span>
+                        </div>
+                        <select class="analypick">
+                            <option value="否">否</option>
+                            <option value="是">是</option>
+                        </select>
+                        <div class="cmtype">
+                            <span>分析负责人</span>
+                        </div>
+                        <input type="text" class="typeselt" name="tester" value="{{complaint.tester}}" placeholder="请填写分析负责人">
+                        <div class="pickman">
+                            <span>分析完成时间</span>
+                        </div>
+                        <input type="date" class="timepick" value="{{complaint.complete_time|date:'Y-m-d'}}" name="complete_time" placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+                    </div>
+                    <div class="cafloor2">
+                        <div class="cm_name">
+                            <span>改进措施</span>
+                        </div>
+                        <input type="text" class="cmit_name">
+                        <div class="cmtype">
+                            <span>措施状态</span>
+                        </div>
+                        <select class="typeselt" name="status">
+                            <option value="{{complaint.status}}">{{complaint.status}}</option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                        <div class="pickman">
+                            <span>措施完成时间</span>
+                        </div>
+                        <input type="date" class="stepdate" value="{{complaint.complete_time|date:'Y-m-d'}}" name="complete_time" placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+                    </div>
+                    <div class="cafloor3">
+                        <div class="cm_name">
+                            <span>问题分类</span>
+                        </div>
+                        <select class="analypick" name="category">
+                            <option value="{{complaint.category}}">{{complaint.category}}</option>
+                            <option value="安全性">安全性</option>
+                            <option value="场景类">场景类</option>
+                            <option value="场景类">场景类</option>
+                            <option value="功能类">功能类</option>
+                            <option value="可靠性">可靠性</option>
+                            <option value="需求类">需求类</option>
+                        </select>
+                        <div class="cmtype">
+                            <span>计划闭环时间</span>
+                        </div>
+                        <input type="date" class="pickdate"  placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+                    </div>
+                    <div class="cafloor4">
+                        <div class="cm_name">
+                            <span>问题描述</span>
+                        </div>
+                        <textarea id="pbtext" cols="30" rows="10" name="description" >{{complaint.description}}</textarea>
+                        <img src="{% static 'images/asset/texttag.png' %}" class="pbttag">
+                    </div>
+                    <div class="cafllor5">
+                        <div class="cm_name">
+                            <span>上传附件</span>
+                        </div>
+                        <div class="upload">
+                            {% comment %} <input type="file" name="cfile" value="{{complaint.cfile}}"> {% endcomment %}
+                            {{form.cfile}}
+                        </div>
+                        <input id="handin" type="button" value="提交" onclick="edit_complaint()" style="text-align:center">
+                    </div>
+                </div>
+            </form>
+            <button id="revoke" onclick="window.history.back()">取消</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type ="text/javascript">
+function edit_complaint() {
+    var cname = $("[name='cname']").val();
+    var type = $("[name='type']").val();
+    var submitter = $("[name='submitter']").val();
+    var oa_number = $("[name='oa_number']").val();
+    var ctime = $("[name='ctime']").val();
+    var area = $("[name='area']").val();
+    var product = $("[name='product']").val();
+    var product_line = $("[name='product_line']").val();
+    var version = $("[name='version']").val();
+    var level = $("[name='level']").val();
+    var tester = $("[name='tester']").val();
+    var status = $("[name='status']").val();
+    var complete_time = $("[name='complete_time']").val();
+    var category = $("[name='category']").val();
+    var description = $("[name='description']").val();
+    $.ajax({
+        url: "{% url 'asset:edit_complaint' complaint.id %}",
+        type: "POST",
+        data: {"cname":cname,"type":type,"submitter":submitter,"oa_number":oa_number,"ctime":ctime,"area":area,"product":product,"product_line":product_line,"version":version,"level":level,"tester":tester,"status":status,"complete_time":complete_time, "category":category, "description":description},
+        success:function(e) {
+            if(e=="1") {
+                layer.msg("提交成功。");
+                location.href = "{% url 'asset:complaint_list' %}";
+            }else{
+                layer.msg("修改失败。");
+            }
+        },
+    });
+}
+</script>
+
+{% endblock  %}
