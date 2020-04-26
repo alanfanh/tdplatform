@@ -79,8 +79,8 @@
                     <img src="{% static 'images/asset/see.png' %}"" class="see_dload">
                 </td>
                 </tr>
+                {% for tec in tec_list %}
                 <tr class="un_text">
-                    {% for tec in tec_list %}
                     <td class="untd1"></td>
                     <td class="untd2">{{tec.author.realname}}</td>
                     <td class="untd3">{{tec.tname}}</td>
@@ -91,35 +91,14 @@
                         <span style="color:#108EE9;">更多</span>
                         <img src="{% static 'images/asset/see.png' %}"" class="see_dload">
                     </td>
-                    {% endfor %}
                 </tr>
-                <tr class="un_text">
-                <td class="untd1"></td>
-                <td class="untd2"></td>
-                <td class="untd3"></td>
-                <td class="untd4"></td>
-                <td class="untd5"></td>
-                </tr>
-                <tr class="un_text">
-                <td class="untd1"></td>
-                <td class="untd2"></td>
-                <td class="untd3"></td>
-                <td class="untd4"></td>
-                <td class="untd5"></td>
-                </tr>
-                <tr class="un_text">
-                <td class="untd1"></td>
-                <td class="untd2"></td>
-                <td class="untd3"></td>
-                <td class="untd4"></td>
-                <td class="untd5"></td>
-                </tr>
+                {% endfor %}
             </tbody>
             </table>
-            <div class="prompt_box">
+            {% comment %} <div class="prompt_box">
                 <span class="al_read">设为已读</span>
                 <span class="Dload_ucs">下载附件</span>
-            </div>
+            </div> {% endcomment %}
             <div class="Up_total" id="mup_sum">
             <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
             </div>

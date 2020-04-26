@@ -65,23 +65,11 @@
             </div>
             <table class="un_pt" align="center">
                 <tbody>
+                    {% for tec in tec_list %}
                     <tr class="un_text">
                         <td class="untd1">
                             <img src="{% static 'images/asset/id_photo.svg' %}" class="unpt_img">
                         </td>
-                        <td class="untd2">李测试</td>
-                        <td class="untd3">优化testlink数据库查询性能的方法与实施</td>
-                        <td class="untd4">2019-12-21 08:50:08</td>
-                        <td class="untd5">
-                            <span style="color:#108EE9;">查看</span>
-                            <span style="color:#D7D7D7;">|</span>
-                            <span style="color:#108EE9;">更多</span>
-                            <img src="{% static 'images/asset/see.png' %}" class="see_dload">
-                        </td>
-                    </tr>
-                    {% for tec in tec_list %}
-                    <tr class="un_text">
-                        <td class="untd1"></td>
                         <td class="untd2">{{tec.author.realname}}</td>
                         <td class="untd3">{{tec.tname}}</td>
                         <td class="untd4">{{tec.created_at}}</td>
