@@ -346,7 +346,10 @@ def add_tec(request):
                     tag = TecTag.objects.get(tag=atag)
                     # print(tag)
                     new_tec.tec_tag.add(tag)
-            return redirect("asset:tec_list")     
+            # return redirect("asset:tec_list")
+            role = Role.objects.get(role_name="PL")
+            userinfo = UserInfo.objects.filter(group=new_tec.group,role=role)
+            return render(request, "asset/add_success.html", {"newtec":new_tec})
         else:
             return HttpResponse("3")
     else:
@@ -375,7 +378,7 @@ def processed_tec_detail(request, tec_id):
         tec = get_object_or_404(TecContent, id=tec_id)
         node = get_object_or_404(NodeMessage, name_id=tec_id)
         user = get_object_or_404(UserInfo, role_id=4)
-        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo, "node": node, "user": user})
+        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo, "node": node, "user_m": user})
     elif role.role_name == "M":
         tec = get_object_or_404(TecContent, id=tec_id)
         node = get_object_or_404(NodeMessage, name_id=tec_id)
