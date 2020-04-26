@@ -55,6 +55,7 @@ class PersonCourseListView(UserCourseMixin, ListView):
         return context
 
 class CourseCreateView(UserCourseMixin, CreateView):
+    # 添加培训课程 类视图
     fields = ['cname', 'range', 'course_time', 'address',
               'teacher', 'cdescription', 'file_name', 'student']
     template_name = "training/add_course.html"
@@ -72,7 +73,8 @@ class CourseCreateView(UserCourseMixin, CreateView):
             new_course = form.save(commit=False)
             new_course.author = self.request.user
             new_course.save()
-            return redirect("training:course_list")
+            # return redirect("training:course_list")
+            return render(request, "training/success.html", {"course":new_course})
         else:
             groups = Group.objects.all()
             userinfos = UserInfo.objects.all()

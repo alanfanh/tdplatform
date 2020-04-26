@@ -15,10 +15,10 @@
         <div class="menuinfo">
             <div class="gmenu_cp1">
                 <span class="left_bd"></span>
-                <a href="{% url 'training:course_list' %}"><span class="chpract">培训记录</span></a>
+                <a href="{% url 'training:course_list' %}"><span class="chpract">培训课程</span></a>
             </div>
             <div class="gmenu_cp2">
-                <a href="{% url 'training:point_list' %}"><span class="m_mdata">积分管理</span></a>
+                <a href="{% url 'training:point_list' %}"><span class="m_mdata">积分展示</span></a>
             </div>
         </div>
         <div class="info_base">
@@ -27,7 +27,7 @@
             </div>
             <img src="{% static 'images/asset/success.png' %}" class="tshdsuc">
             <span class="tssbtsuc">添加成功</span>
-            <span class="tssuctext">您添加的培训课程已经提交成功，请返回或查看详情。</span>
+            <span class="tssuctext">您添加的培训课程已经提交成功，请返回列表或查看详情。</span>
         </div>
         <a href="{% url 'training:course_list' %}">
             <button class="tsback">返回列表</button>
