@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
@@ -367,7 +368,8 @@ def unprocess_tec_detail(request, tec_id):
         return render(request, "asset/unprocess_pl_detail.html", {"tec":tec, "userinfo":userinfo})
     elif role.role_name == "M":
         tec = get_object_or_404(TecContent, id=tec_id)
-        return render(request, "asset/unprocess_m_detail.html", {"tec":tec, "userinfo":userinfo})
+        node = get_object_or_404(NodeMessage, name=tec)
+        return render(request, "asset/unprocess_m_detail.html", {"tec":tec, "userinfo":userinfo,"node":node})
 
 @login_required(login_url="/account/login")
 def processed_tec_detail(request, tec_id):
@@ -528,3 +530,51 @@ def search_complaint(request):
             result['data'].append(obj)
         result['count'] = complaints.count()
     return JsonResponse(result, json_dumps_params={'ensure_ascii':False})
+
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+@require_POST
+def check_tec(request):
+    # 审核优秀实践
+    tec_id = request.POST.get('tec_id')
+    option = request.POST.get('option')
+    note = request.POST.get('note') 
+    userinfo = UserInfo.objects.get(user=request.user)
+    if userinfo.role.role_name == "PL":
+        # 组长审核信息
+        tec = TecContent.objects.get(id=tec_id)
+        new_node = NodeMessage.objects.filter(name=tec)
+        if new_node.exists():
+            new_node = new_node[0]
+        else:
+            new_node = NodeMessage(name=tec)
+        new_node.pl_name = userinfo.realname
+        new_node.pl_decide = option
+        if option == "同意":
+            tec.status = 2
+        else:
+            tec.status = 0
+        new_node.pl_notes = note
+        new_node.pl_time = datetime.datetime.now()
+        new_node.m_time = datetime.datetime.now()
+        new_node.save()
+        tec.save()
+        print(tec_id,option,note)
+        return HttpResponse("1")
+    elif userinfo.role.role_name == "M":
+        tec = TecContent.objects.get(id=tec_id)
+        m = NodeMessage.objects.get(name=tec)
+        m.m_name = userinfo.realname
+        m.m_decide = option
+        if option == "同意":
+            tec.status = 3
+        else:
+            tec.status = 0
+        m.m_notes = note
+        m.m_time = datetime.datetime.now()
+        m.save()
+        tec.save()
+        return HttpResponse("1")
+    else:
+        return HttpResponse('404')
