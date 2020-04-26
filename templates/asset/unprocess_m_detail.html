@@ -98,13 +98,13 @@
                     <span class="hms">{{tec.created_at | date:"H:i:s"}}</span>
                 </div>
                 <div class="Pj_gp">
-                    <span class="exam_name">刘PL</span>
-                    <span class="gp_time">2019-12-13</span>
-                    <span class="gp_hms">16:18:42</span>
+                    <span class="exam_name">{{node.pl_name}}</span>
+                    <span class="gp_time">{{node.pl_time | date:'Y-m-d'}}</span>
+                    <span class="gp_hms">{{node.pl_time | date:'H:i:s'}}</span>
                 </div>
                 <div class="m_name">
-                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#989898;">李</span>
-                    <span style="font-family:'Helvetica';color:#999999;" class="m_lastnm">M</span>
+                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#989898;">{{userinfo.realname}}</span>
+                    {% comment %} <span style="font-family:'Helvetica';color:#999999;" class="m_lastnm">M</span> {% endcomment %}
                 </div>
             </div>
             <div class="mexam_hist">
@@ -132,15 +132,15 @@
                 </tr>
                 <tr class="ex_tr">
                 <td class="ex1">020_组长审核</td>
-                <td class="ex2">刘PL</td>
+                <td class="ex2">{{node.pl_name}}</td>
                 <td class="ex3">{{tec.group}}PL</td>
-                <td class="ex4">同意</td>
-                <td class="ex5">2019-12-13  16:18:42</td>
-                <td class="ex6">无</td>
+                <td class="ex4">{{node.pl_decide}}</td>
+                <td class="ex5">{{node.pl_time}}</td>
+                <td class="ex6">{{node.pl_notes}}</td>
                 </tr>
             </tbody>
             </table>
-            <button id="m_sug">
+            <button id="m_sug" onclick="handle_m()">
                 <span class="sug_text">审核意见</span>
                 <img src="{% static 'images/asset/sug.svg' %}" class="sug_img">
                 <img src="{% static 'images/asset/arrow.png' %}" class="arrow">
@@ -149,5 +149,37 @@
         </div>
     </div>
 </div>
-
+<script src="{% static 'js/layer.js' %}"></script>
+<script>
+function handle_m() {
+    var index = layer.open({
+        title:'审核意见',
+        btn:['确定','取消'],
+        area: ['420px', '250px'], //宽高
+        content:'<div class="login-tip">审核意见：<select id="check_option" style="width:60px"><option value="同意">同意</option><option value="驳回">驳回</option></select></div><div style="padding-top:10px"><div>填写说明：</div><textarea type="text" id="option_text" style="width: 380px; height: 70px; margin: 0px;">无</textarea></div>',
+        yes: function(index, layero) {
+            option = $("#check_option").val();
+            note = $("#option_text").val();
+            tec_id = {{tec.id}}
+            console.log(option,note,tec_id)
+            $.ajax({
+                url:'/asset/check-tec/',
+                type:'POST',
+                data:{"option":option,"note":note,"tec_id":tec_id},
+                success: function(e) {
+                    if (e=="1") {
+                        layer.msg("审核成功，即将返回..");
+                        setTimeout(function(){location.href ="{% url 'asset:unprocess_tec' %}";},2000);
+                    } else {
+                        layer.msg("审核提交失败")
+                    }
+                }
+            });
+        },
+        btn2: function(index, layero) {
+            layer.close(index);
+        }
+    });
+}
+</script>
 {% endblock %}
