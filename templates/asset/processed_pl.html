@@ -89,7 +89,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for tec in tec_list %}
+          {% for tec in tecs %}
           <tr class="Pra_tr">
             <td class="ep1">
               <input type="checkbox" class="ck">
@@ -175,7 +175,7 @@ layui.use('laypage', function(){
     elem: 'ep_page' //注意，这里的 test1 是 ID，不用加 # 号
     ,limit: 10
     ,count: {{tec_list.count}} //数据总数，从服务端得到
-    ,curr: 1
+    ,curr: {{tecs.number}}
     ,hash:'fenye'
     ,layout: ['count', 'prev', 'page', 'next',  'refresh', 'skip']
     ,jump: function(obj, first) {

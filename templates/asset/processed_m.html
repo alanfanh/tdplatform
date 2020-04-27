@@ -90,20 +90,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for tec in tec_list %}
+                    {% for tec in tecs %}
                     <tr class="Pra_tr">
                         <td class="ep1">
                             <input type="checkbox" class="ck">
                         </td>
-                        <td class="ep2">{{forloop.count}}</td>
+                        <td class="ep2">{{forloop.counter}}</td>
                         <td class="ep3">
                             <span class="sign"></span>
                             <span class="Cust_cont">{{tec.tname}}</span>
                         </td>
                         <td class="ep4">{{tec.author.realname}}</td>
                         <td class="ep5">{{tec.group}}</td>
-                        <td class="ep6"></td>
-                        <td class="ep7">{{tec.created_at}}</td>
+                        <td class="ep6">{{tec.tec_tag.all | join:' '}}</td>
+                        <td class="ep7">{{tec.created_at | date:'Y-m-d'}}</td>
                         <td class="mp8">
                             {% if tec.status == '3' %}
                             <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
@@ -164,27 +164,27 @@
 </div>
 <script src="{% static 'layui/layui.js' %}"></script>
 <script>
-    layui.use('laypage', function () {
-        var laypage = layui.laypage;
+layui.use('laypage', function () {
+    var laypage = layui.laypage;
 
-        //执行一个laypage实例
-        laypage.render({
-            elem: 'mpd_num' //注意，这里的 test1 是 ID，不用加 # 号
-            , limit: 10
-            , count: {{ tec_list.count }} //数据总数，从服务端得到
-        , curr: 1
+    //执行一个laypage实例
+    laypage.render({
+        elem: 'mpd_num' //注意，这里的 test1 是 ID，不用加 # 号
+        , limit: 10
+        , count: {{ tec_list.count }} //数据总数，从服务端得到
+        , curr: {{tecs.number}}
         , hash: 'fenye'
         , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
         , jump: function (obj, first) {
-            console.log(obj.curr);
-            console.log(obj.limit);
-            page = obj.curr;
-            limit = obj.limit;
-            // 首次不执行
-            if (!first) {
-                location.href = `?page=${obj.curr}&limit=${obj.limit}`
-            }
+        console.log(obj.curr);
+        console.log(obj.limit);
+        page = obj.curr;
+        limit = obj.limit;
+        // 首次不执行
+        if (!first) {
+            location.href = `?page=${obj.curr}&limit=${obj.limit}`
         }
+    }
   });
 });
 </script>

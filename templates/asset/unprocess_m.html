@@ -79,7 +79,7 @@
                     <img src="{% static 'images/asset/see.png' %}"" class="see_dload">
                 </td>
                 </tr>
-                {% for tec in tec_list %}
+                {% for tec in tecs %}
                 <tr class="un_text">
                     <td class="untd1"></td>
                     <td class="untd2">{{tec.author.realname}}</td>
@@ -107,15 +107,15 @@
 </div>
 <script src="{% static 'layui/layui.js' %}"></script>
 <script>
-    layui.use('laypage', function () {
-        var laypage = layui.laypage;
+layui.use('laypage', function () {
+    var laypage = layui.laypage;
 
-        //执行一个laypage实例
-        laypage.render({
-            elem: 'mup_sum' //注意，这里的 test1 是 ID，不用加 # 号
-            , limit: 10
-            , count: {{ tec_list.count }} //数据总数，从服务端得到
-        , curr: 1
+    //执行一个laypage实例
+    laypage.render({
+        elem: 'mup_sum' //注意，这里的 test1 是 ID，不用加 # 号
+        , limit: 10
+        , count: {{ tec_list.count }} //数据总数，从服务端得到
+        , curr: {{tecs.number}}
         , hash: 'fenye'
         , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
         , jump: function (obj, first) {
@@ -128,7 +128,7 @@
                 location.href = `?page=${obj.curr}&limit=${obj.limit}`
             }
         }
-  });
+    });
 });
 </script>
 {% endblock %}
