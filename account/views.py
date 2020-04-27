@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from .forms import LoginForm,UserInfoForm
 from .models import UserInfo, Group, Role, Rank
+from asset.models import TecContent, Complaint
+from training.models import Course
 
 from django.contrib.auth.forms import PasswordChangeForm
 
@@ -217,3 +219,17 @@ def change_pwd(request):
             return HttpResponse("1")
     else:
         return HttpResponse(form.errors)
+
+
+# 首页视图渲染
+@login_required(login_url="/account/login")
+@csrf_exempt
+def home_page(request):
+    # 查询数据中心
+    courses = Course.objects.all()
+    tecs = TecContent.objects.filter(status="3")
+    coms = Complaint.objects.all()
+    # 获取最近培训数据
+    last_courses = Course.objects.filter().order_by('-course_time')[:7]
+    files = Course.objects.filter().order_by('-course_time')[:6]
+    return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
