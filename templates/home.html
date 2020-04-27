@@ -16,49 +16,49 @@
                 <div class="shadowborder1">
                     <img src="{% static 'images/home/link.svg' %}" class="menulink">
                     <span class="linknum">1</span>
-                    <span class="linkname">testlink</span>
+                    <a href="http://192.168.100.23/testlink/login.php"><span class="linkname">testlink</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">789</span>
                 </div>
                 <div class="shadowborder2">
                     <img src="{% static 'images/home/link.svg' %}" class="menulink">
                     <span class="linknum">2</span>
-                    <span class="linkname">bugfree</span>
+                    <a href="http://192.168.100.23/bugfree/"><span class="linkname">bugfree</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">654</span>
                 </div>
                 <div class="shadowborder3">
                     <img src="{% static 'images/home/link.svg' %}" class="menulink">
                     <span class="linknum">3</span>
-                    <span class="linkname">eoa</span>
+                    <a href="http://eoa.tenda.cn"><span class="linkname">eoa</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">623</span>
                 </div>
                 <div class="shadowborder4">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">4</span>
-                    <span class="linkname">旧oa</span>
+                    <a href="http://oa.tenda.cn"><span class="linkname">旧oa</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">590</span>
                 </div>
                 <div class="shadowborder5">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">5</span>
-                    <span class="linkname">资产设备管理平台</span>
+                    <a href="http://172.16.100.12/login"><span class="linkname">资产设备管理平台</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">123</span>
                 </div>
                 <div class="shadowborder6">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">6</span>
-                    <span class="linkname">Agile平台</span>
+                    <a href="http://plm.tenda.cn:7001/Agile/default/login-cms.jsp"><span class="linkname">Agile平台</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">113</span>
                 </div>
                 <div class="shadowborder7">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">7</span>
-                    <span class="linkname">考勤查询</span>
+                    <a href="http://172.16.100.5:1808/"><span class="linkname">考勤查询</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">110</span>
                 </div>
@@ -72,36 +72,43 @@
                 <div class="menushadow1">
                     <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
                     <span class="dataname">培训</span>
-                    <span class="datanumber">500</span>
-                    <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
-                    <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                    <span class="datanumber">{{courses.count}}</span>
+                    <a href="{% url 'training:course_list' %}">   
+                        <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
+                        <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                    </a>
                 </div>
                 <div class="menushadow2">
                     <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
                     <span class="dataname">优秀实践</span>
-                    <span class="datanumber">2,317</span>
-                    <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
-                    <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                    <span class="datanumber">{{tecs.count}}</span>
+                    <a href="{% url 'asset:tec_list' %}">
+                        <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
+                        <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                    </a>
                 </div>
                 <div class="menushadow3">
                     <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
                     <span class="dataname">客诉问题</span>
-                    <span class="datanumber">1,421</span>
-                    <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
-                    <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                    <span class="datanumber">{{coms.count}}</span>
+                    <a href="{% url 'asset:complaint_list' %}">
+                        <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
+                        <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="picturebase">
-            <img src="{% static 'images/home/center.png' %}" class="errshow">
-            <img src="{% static 'images/home/imgsort1.svg' %}" class="imgsort1">
-            <img src="{% static 'images/home/imgsort2.svg' %}" class="imgsort2">
+        <div class="layui-carousel picturebase" id="autoplay">
+            <div carousel-item>
+                <div><img src="{% static 'images/home/center.png' %}"></div>
+                <div><img src="{% static 'images/home/center.png' %}"></div>
+            </div>
         </div>
         <div class="tablebase">
             <span class="recent">近期培训</span>
             <span class="alltrain">所有培训</span>
-            <img src="{% static 'images/home/arrbase.svg' %}" class="trainarr">
-            <img src="{% static 'images/home/dataarr.svg' %}" class="gototrain">
+            <a href="{% url 'training:course_list' %}"> <img src="{% static 'images/home/arrbase.svg' %}" class="trainarr">
+            <img src="{% static 'images/home/dataarr.svg' %}" class="gototrain"></a>
             <table class="train_records" align="center">
                 <thead>
                     <tr class="train_head">
@@ -114,65 +121,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="train_body">
-                        <td class="train_td1">1</td>
+                    {% for course in  last_courses %}
+                    <tr class="train_body1">
+                        <td class="train_td1">{{forloop.counter}}</td>
                         <td>
                             <span class="name_flag"></span>
-                            <span class="train_name">网评分析工具二次开发需求实现</span>
+                            <span class="train_name">{{course.cname}}</span>
                         </td>
-                        <td>自动化开发组</td>
-                        <td>李测试</td>
-                        <td class="train_name">5楼1号会议室</td>
-                        <td>2019/12/08</td>
+                        <td>{{course.range}}</td>
+                        <td>{{course.teacher.realname}}</td>
+                        <td class="train_name">{{course.address}}</td>
+                        <td>{{course.course_time | date:"Y/m/d H:i"}}</td>
                     </tr>
-                    <tr class="train_body1">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="train_body1">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="train_body1">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="train_body1">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="train_body1">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="train_body1">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -192,54 +153,16 @@
                 </select>
             </div>
             <div class="downbase">
-                <div class="fileshadow1">
+                {% for course in files %}
+                <div class="fileshadow">
                     <div class="file_tip">
                         <span class="tip_text">文件类型</span>
                     </div>
-                    <span class="file_name">RF框架-架构篇</span>
-                    <span class="file_group">商用测试组 2019.12.08</span>
-                    <button class="file_down">下载</button>
+                    <span class="file_name">{{course.cname}}</span>
+                    <span class="file_group">{{course.range}} {{course.course_time | date:'Y.m.d'}}</span>
+                    <a href="{% url 'training:download_file' course.id %}"></a> <button class="file_down">下载</button>
                 </div>
-                <div class="fileshadow2">
-                    <div class="file_tip">
-                        <span class="tip_text">文件类型</span>
-                    </div>
-                    <span class="file_name">10G GPON新技术分享</span>
-                    <span class="file_group">OEM组 2019.11.02</span>
-                    <button class="file_down">下载</button>
-                </div>
-                <div class="fileshadow3">
-                    <div class="file_tip">
-                        <span class="tip_text">文件类型</span>
-                    </div>
-                    <span class="file_name">网评分析工具二次开发需求实现</span>
-                    <span class="file_group">家用测试组 2019.11.26</span>
-                    <button class="file_down">下载</button>
-                </div>
-                <div class="fileshadow4">
-                    <div class="file_tip">
-                        <span class="tip_text">文件类型</span>
-                    </div>
-                    <span class="file_name">MESH防环关键模块串讲</span>
-                    <span class="file_group">资料开发组 2019.11.20</span>
-                    <button class="file_down">下载</button>
-                </div>
-                <div class="fileshadow5">
-                    <div class="file_tip">
-                        <span class="tip_text">文件类型</span>
-                    </div>
-                    <span class="file_name">TR069协议交流</span>
-                    <span class="file_group">OEM组 2019.12.21</span>
-                    <button class="file_down">下载</button>
-                </div>
-                <div class="fileshadow6">
-                    <div class="file_tip">
-                        <span class="tip_text">文件类型</span>
-                    </div>
-                    <span class="file_name">TR069协议交流</span>
-                    <span class="file_group">家用测试组 2019.12.21</span>
-                    <button class="file_down">下载</button>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="flie_list">
@@ -250,4 +173,21 @@
         </div>
     </div>
 </div>
+<script>
+// 实现页面图片轮播
+layui.use('carousel', function(){
+  var carousel = layui.carousel;
+  //建造实例
+  carousel.render({
+    elem: '#autoplay'
+    ,width: '877px' //设置容器宽度
+    ,height: '240px'
+    ,autoplay: 'true'
+    ,interval: '2000' //自动切换时间间隔
+    ,arrow: 'always' //始终显示箭头
+    //,anim: 'updown' //切换动画方式
+  });
+});
+</script>
+
 {% endblock %}

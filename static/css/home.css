@@ -229,6 +229,14 @@
     height: 240px;
     background-color: rgba(242, 242, 242, 1);
 }
+.imglist {
+    width: 100%;
+    height: 240px;
+    position: absolute;/*绝对定位*/
+    left: 0px;
+    top: 0px;
+    /* z-index: -1;z-index 属性设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。 */
+}
 .errshow {
     position: absolute;
     left: 403px;
@@ -453,45 +461,8 @@
     border-color: rgba(121, 121, 121, 1);
     border-radius: 5px;
 }
-.fileshadow1 {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 393px;
-    height: 55px;
-}
-.fileshadow2 {
-    position: absolute;
-    left: 0px;
-    top: 55px;
-    width: 393px;
-    height: 55px;
-}
-.fileshadow3 {
-    position: absolute;
-    left: 0px;
-    top: 110px;
-    width: 393px;
-    height: 55px;
-}
-.fileshadow4 {
-    position: absolute;
-    left: 0px;
-    top: 165px;
-    width: 393px;
-    height: 55px;
-}
-.fileshadow5 {
-    position: absolute;
-    left: 0px;
-    top: 220px;
-    width: 393px;
-    height: 55px;
-}
-.fileshadow6 {
-    position: absolute;
-    left: 0px;
-    top: 275px;
+.fileshadow {
+    position: relative;
     width: 393px;
     height: 55px;
 }
