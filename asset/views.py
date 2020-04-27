@@ -202,7 +202,7 @@ def unprocess_tec(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/unprocess_pl.html"
-        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
+        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"tecs": groupnum})
     elif role.role_name == "M":
         # M用户
         tec_list = TecContent.objects.filter(status="2")
@@ -221,7 +221,7 @@ def unprocess_tec(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/unprocess_m.html"
-        return render(request, template_view, {"userinfo":userinfo,"tec_list":tec_list,"groupnum": groupnum})
+        return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": groupnum})
     else:
         return HttpResponse('Not Found')
 
@@ -247,9 +247,10 @@ def process_tec(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/processed_pl.html"
-        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
+        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"tecs": groupnum})
     elif role.role_name == "M":
         tec_list = TecContent.objects.exclude(status="2")
+        tec_list = tec_list.exclude(status="1")
         #每页显示10条
         paginator = Paginator(tec_list, 10)
         page = request.GET.get('page')
@@ -265,7 +266,7 @@ def process_tec(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/processed_m.html"
-        return render(request, template_view, {"userinfo":userinfo, "tec_list":tec_list,"groupnum": groupnum})
+        return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": groupnum})
     else:
         return HttpResponse("Not Found")
 
