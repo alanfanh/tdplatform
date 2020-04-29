@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
 <script type="text/javascript" src='{% static "layui/layui.js" %}'></script>
 {% comment %} <script type='text/javascript' src='{% static "js/layer.js" %}'></script> {% endcomment %}
-<div id="header" class="navbar">
+<div id="header-navbar" >
     <div id="logo">
-        <img src="{% static '/images/logo.svg' %}" alt="Tenda Logo" class="logoimg">
+        <img src="{% static '/images/Tenda-logo.png' %}" alt="Tenda Logo" class="logoimg">
     </div>
     <div class="navbar-tool">
         <div class="home">
@@ -26,17 +26,17 @@
     </div>
     <div id="navbar-user-info">
         <div class="help">
-            <img src="{% static '/images/holder1.svg' %}" alt="" class="help-img">
+            <img src="{% static '/images/question-circle.png' %}" alt="" class="help-img">
             <a href="" class="navbar-help">帮助</a>
         </div>
         <div class="tip">
-            <img src="{% static '/images/holder1.svg' %}" alt="" class="tip-img">
+            <img src="{% static '/images/tips.png' %}" alt="" class="tip-img">
             <a href="" class="navbar-tip">提醒</a>
         </div>
         
-        <ul class="layui-nav navbar-user" style="background-color:rgba(127, 127, 127, 1)">  
+        <ul class="layui-nav navbar-user" style="background-color:#FFFFFF">  
             <li class="layui-nav-item">
-                <a href style="text-decoration:none">
+                <a href style="text-decoration:none;color:rgba(0,0,0,0.85)">
                     {{user.userinfo.realname}}
                     <span class="layui-nav-more"></span>
                 </a>
@@ -58,50 +58,3 @@ layui.use('element', function(){
 });
 </script>
 
-
-
-
-
-
-
-{% comment %} <div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" href=""><img src="{% static '/images/logo.png' %}" width="100px"></a>
-        </div>
-        <div>
-            <ul class="nav navbar-nav" role="navigation">
-                <li><a href="{% url 'home' %}">主页</a></li>
-                <li><a href="{% url 'asset:blog_title' %}">技术资产</a></li>
-                <li><a href="">培训管理</a></li>
-                
-            </ul>
-            <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
-                {% if user.is_authenticated %}
-                {% if user.is_superuser == 1 %}
-                <li><a href="{% url 'admin:index' %}">后台管理</a></li>
-                {% endif %}
-
-                <li>
-                    <div class="dropdown" style="margin-top:8px">
-                    <button class="btn btn-default dropdown-toggle" type='button' id='dropdownMenu' data-toggle='dropdown'>{{user.username}}<span class='caret'></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url 'account:password_change' %}">修改密码</a></li>
-                        <li><a href="{% url 'account:my_information' %}">个人信息</a></li>
-                        {% if user.is_superuser == 1 or user.userinfo.role_id == 3 %}
-                        <li><a href="{% url 'account:index' %}">用户管理</a></li>
-                        {% endif %}
-                        {% if user.userinfo.role_id == 2 %}
-                        <li><a href="{% url 'account:group_user' %}">小组信息</a></li>
-                        {% endif %}
-                    </ul>
-                    </div>
-                </li>
-                <li><a href="{% url 'account:user_logout' %}">退出</a></li>
-                {% else %}
-                <li><a href="{% url 'account:user_login' %}">登录</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-</div> {% endcomment %}

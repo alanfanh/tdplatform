@@ -65,17 +65,22 @@
     position: absolute;
     left: 15px;
     top: 19px;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    background: #FF8F00;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
 }
 .linknum {
     position: absolute;
     left: 20.5px;
-    top: 21px;
-    font-family: 'ArialMT', 'Arial';
+    top: 20px;
+    font-family: PingFangSC-Regular;
     font-weight: 400;
-    font-size: 13px;
-    color: #333333;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
 }
 .linkname {
     position: absolute;
@@ -413,13 +418,13 @@
     position: absolute;
     left: 16px;
     top: 17px;
-    width: 36px;
-    height: 36px;
+    /* width: 36px;
+    height: 36px; */
     background-color: rgba(242, 242, 242, 1);
     box-sizing: border-box;
     border-width: 1px;
     border-style: solid;
-    border-color: #333333;
+    border-color: white;
 }
 .tip_text {
     position: absolute;

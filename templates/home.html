@@ -14,21 +14,21 @@
             </div>
             <div class="menuconten1">
                 <div class="shadowborder1">
-                    <img src="{% static 'images/home/link.svg' %}" class="menulink">
+                    <div class="menulink"></div>
                     <span class="linknum">1</span>
                     <a href="http://192.168.100.23/testlink/login.php"><span class="linkname">testlink</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">789</span>
                 </div>
                 <div class="shadowborder2">
-                    <img src="{% static 'images/home/link.svg' %}" class="menulink">
+                    <div class="menulink"></div>
                     <span class="linknum">2</span>
                     <a href="http://192.168.100.23/bugfree/"><span class="linkname">bugfree</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
                     <span class="seenumber">654</span>
                 </div>
                 <div class="shadowborder3">
-                    <img src="{% static 'images/home/link.svg' %}" class="menulink">
+                    <div class="menulink"></div>
                     <span class="linknum">3</span>
                     <a href="http://eoa.tenda.cn"><span class="linkname">eoa</span></a>
                     <img src="{% static 'images/home/linkeye.svg' %}" class="linkeye">
@@ -156,7 +156,7 @@
                 {% for course in files %}
                 <div class="fileshadow">
                     <div class="file_tip">
-                        <span class="tip_text">文件类型</span>
+                        <img src="{% static 'images/training/format_ppt.png' %}" >
                     </div>
                     <span class="file_name">{{course.cname}}</span>
                     <span class="file_group">{{course.range}} {{course.course_time | date:'Y.m.d'}}</span>
