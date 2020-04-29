@@ -23,7 +23,8 @@ urlpatterns = [
     path('asset/', include('asset.urls', namespace='asset')),
     path('account/', include('account.urls',namespace='account')),
     path('pwd_reset/', include("password_reset.urls")),
-    path('home/', views.home_page, name='home'), 
+    path('', views.home_page, name='home'), 
+    path('home/', views.home_page, name='home'),
     path('article/', include('article.urls', namespace='article')),
     path('training/', include('training.urls', namespace='training')),
 ]
