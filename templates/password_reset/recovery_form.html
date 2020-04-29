@@ -16,21 +16,9 @@
 </div>  {% endcomment %}
 <div id="pwd_base">
 	<div id="back_wall" class="ax_default placeholder">
-		<img id="back_img" class="wall" src="{% static 'images/account/bg.svg' %}">
-		<div id="pwd_logo" class="ax_default placeholder">
-			<img id="logoinfo_img" src="{% static 'images/account/logo.svg' %} ">
-			<div id="logoinfo_text" class="text">
-				<p>
-					<span>LOGO</span>
-				</p>
-			</div>
-		</div>
-		<div id="bgpattern">
-			<p>
-				<span>背景插图</span>
-			</p>
-		</div>
+		<img src="{% static 'images/account/bg_login.png' %}" id="forget_login">
 		<div id="changepwd" class="ax_default text_p">
+			<a href="{% url 'account:user_login' %}"><span id="back_login">返回登录</span></a>
 			<div id="forget_password" class="text">
 				<p>
 					<span>忘记密码</span>
@@ -41,20 +29,18 @@
 					<span>请填写你的用户信息，稍后你的新密码将通过邮件发送给你，请注意查收。</span>
 				</p>
 			</div>
+			<span id="forget_usr">用户名</span>
 			<form action="{{ url }}" method="post">{% csrf_token %}
 			<div class="usr">
-				<input type="text" id="user_name" placeholder="请输入用户名">
+				<input type="text" id="user_name">
 			</div>
-			<div id="error" class="text">
-				<p>
-					<span>错误提示时，内容向下滑动，表单间距保持一致。</span>
-				</p>
-			</div>
+			<span id="forget_email">邮箱</span>
 			<div class="mail">
-				<input type="text" id="mail_info" name="username_or_email" placeholder="请输入邮箱">
+				<input type="text" id="mail_info" name="username_or_email">
 			</div>
+			<span id="usr_realname">真实姓名</span>
 			<div class="yname">
-				<input type="text" id="name_info" placeholder="请输入真实姓名">
+				<input type="text" id="name_info">
 			</div>
 			<div>
 				<input id="confirm" type="submit" value="确定">

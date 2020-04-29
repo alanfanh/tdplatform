@@ -6,25 +6,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="{% static 'css/account/login.css' %}" type="text/css">
-        <link rel="stylesheet" href="{% static 'css/default.css' %}" type="text/css">
     </head>
     <body>
         <div id="base">
-            <div id="background" class="ax_default placeholder">
-                <img id="bg" class="bg_img" src="{% static 'images/account/bg.svg' %}">
-                <div id="logo" class="ax_default placeholder">
-                    <img id="logo_img" src="{% static 'images/account/logo.svg' %}">
-                    <div id="logo_text" class="text">
-                        <p>
-                            <span>LOGO</span>
-                        </p>
-                    </div>
-                </div>
-                <div id="illustration">
-                    <p>
-                        <span>背景插图</span>
-                    </p>
-                </div>
+            <div class="login_ground" class="ax_default placeholder">
+                <img src="{% static 'images/account/bg_login.png' %}" class="bg_login">
                 <div id="login" class="ax_default text_p">
                     <div id="wlc_login" class="text">
                         <span>已退出登录</span>

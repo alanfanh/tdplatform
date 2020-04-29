@@ -28,20 +28,22 @@ p {
     font-kerning: normal;
 }
 #login_usrname {
-    height:44px;
-    width: 423px;
+    height:48px;
+    width: 420px;
     background:url(../images/login/usr.svg) no-repeat;
     font-size: 14px;
     border:0;
-    padding-left:43px;
+    padding-left:10px;
+    outline: none;
 }
 #login_pwd {
-    height:44px;
-    width: 423px;
+    height:48px;
+    width: 420px;
     background:url(../images/login/usr.svg) no-repeat;
     font-size: 14px;
     border:0;
-    padding-left:43px;
+    padding-left:10px;
+    outline: none;
 }
 input::-webkit-input-placeholder {
     color:#333333;
@@ -52,7 +54,7 @@ button {
 }
 
 /* 个人中心页面复用css */
-body {
+/* body {
   margin:0px;
   background-image:none;
   position:relative;
@@ -61,7 +63,7 @@ body {
   margin-left:auto;
   margin-right:auto;
   text-align:left;
-}
+} */
 .BackGround {
   border-width:0px;
   position:absolute;

@@ -11,21 +11,8 @@
 </head>
 <body>
     <div id="base">
-        <div id="background" class="ax_default placeholder">
-            <img id="bg" class="bg_img" src="{% static 'images/account/bg.svg' %}">
-            <div id="logo" class="ax_default placeholder">
-                <img id="logo_img" src="{% static 'images/account/logo.svg' %}">
-                <div id="logo_text" class="text">
-                    <p>
-                        <span>LOGO</span>
-                    </p>
-                </div>
-            </div>
-            <div id="illustration">
-                <p>
-                    <span>背景插图</span>
-                </p>
-            </div>
+        <div class="login_ground ax_default placeholder">
+            <img class="bg_login" src="{% static 'images/account/bg_login.png' %}">
             <div id="login" class="ax_default text_p">
                 <div id="wlc_login" class="text">
                     <p>
@@ -37,6 +24,7 @@
                         <span>测试部内部学习交流平台</span>
                     </p>
                 </div>
+                <span id="usr_name">用户名</span>
                 <form id="login-form" action="." method="post">{% csrf_token %}
                 {% if form.non_field_errors %}
                 {% for error in form.non_field_errors %}
@@ -46,17 +34,13 @@
                 {% endfor %}
                 {% endif %}
                 <div class="user">
-                    <div id="usr_img">
-                        <img src="{% static 'images/account/usr.svg' %}">
-                    </div>
+                    
                     {% comment %} {{ form.username.errors }}
                     {{ form.username }} {% endcomment %}
                     <input type="text" id="login_usrname" name="username" placeholder="请输入用户名">
                 </div>
+                <span id="usr_pwd">密码</span>
                 <div class="pwd">
-                    <div id="pwd_img">
-                        <img src="{% static 'images/account/pwd.svg' %}">
-                    </div>
                     {% comment %} {{ form.password.errors }}
                     {{ form.password }} {% endcomment %}
                     <input type="password" id="login_pwd" name="password" placeholder="请输入密码">
@@ -64,6 +48,8 @@
                         <img src="{% static 'images/account/eye.png' %}" onclick="show_pwd()">
                     </div>
                 </div>
+                <input type="checkbox" id="is_pick">
+                <span id="auto_login">自动登录</span>
                 <div>
                     <input id="submit" type="submit" value="登录">
                 </div>
