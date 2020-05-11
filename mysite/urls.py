@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 from account import views
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
     path('home/', views.home_page, name='home'),
     path('article/', include('article.urls', namespace='article')),
     path('training/', include('training.urls', namespace='training')),
+    path('favicon.ico', RedirectView.as_view(url='static/favicon.ico'))
 ]
