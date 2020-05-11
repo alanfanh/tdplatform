@@ -30,7 +30,7 @@ p {
 #login_usrname {
     height:48px;
     width: 420px;
-    background:url(../images/login/usr.svg) no-repeat;
+    background: none;
     font-size: 14px;
     border:0;
     padding-left:10px;
@@ -39,7 +39,7 @@ p {
 #login_pwd {
     height:48px;
     width: 420px;
-    background:url(../images/login/usr.svg) no-repeat;
+    background: none;
     font-size: 14px;
     border:0;
     padding-left:10px;

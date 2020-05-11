@@ -43,7 +43,7 @@
                 <div class="pwd">
                     {% comment %} {{ form.password.errors }}
                     {{ form.password }} {% endcomment %}
-                    <input type="password" id="login_pwd" name="password" placeholder="请输入密码">
+                    <input type="password" id="login_pwd" name="password" placeholder="请输入密码" autocomplete="on">
                     <div id="eye_img">
                         <img src="{% static 'images/account/eye.png' %}" onclick="show_pwd()">
                     </div>
