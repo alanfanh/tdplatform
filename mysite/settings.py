@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -159,3 +160,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #         },
 #     }
 # }
+
+# simple组件配置
+SIMPLEUI_STATIC_OFFLINE = True
+SIMPLEUI_ANALYSIS = False
+SIMPLEUI_DEFAULT_THEME = 'ant.design.css'
