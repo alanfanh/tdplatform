@@ -14,6 +14,8 @@ class Articles(models.Model):
 
     class Meta:
         ordering = ("-publish",)
+        verbose_name = "技术文章"
+        verbose_name_plural = "技术文章"
     
     def __str__(self):
         return self.title
@@ -38,6 +40,7 @@ class TecContent(models.Model):
 
     class Meta:
         ordering = ("-created_at", )
+        verbose_name_plural = "优秀实践"
 
     def __str__(self):
         return self.tname
@@ -90,6 +93,10 @@ class Complaint(models.Model):
     description = models.TextField(verbose_name="问题描述", blank=True)
     created_by = models.ForeignKey(User, verbose_name="创建者", on_delete=models.DO_NOTHING, related_name="user_created")
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at", )
+        verbose_name_plural = "客诉记录"
 
     def __str__(self):
         return self.cname

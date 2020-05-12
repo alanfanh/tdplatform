@@ -12,6 +12,9 @@ class ArticleColumn(models.Model):
     column = models.CharField(verbose_name="栏目", max_length=50)
     created = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "文章栏目"
+
     def __str__(self):
         return self.column
 

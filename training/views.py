@@ -240,3 +240,17 @@ def search_course(request):
             result['data'].append(obj)
         result['count'] = courses.count()
     return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
+
+
+# 编辑课程数据
+@login_required(login_url="/account/login")
+def edit_course(request, course_id):
+    if request.method == "GET":
+        course = Course.objects.get(id=course_id)
+        return render(request, "training/edit_course.html",{"course":course})
+    else:
+        c = Course.objects.get(id=course_id)
+        try:
+            pass
+        except:
+            pass

@@ -20,3 +20,7 @@ __pycache__/
 
 # my configuration
 *.doc
+*.xls
+*.xml.old
+*.xml
+*.xls.bak

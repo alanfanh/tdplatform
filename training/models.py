@@ -18,6 +18,8 @@ class Course(models.Model):
 
     class Meta:
         ordering = ('-course_time',)
+        verbose_name = '培训课程'
+        verbose_name_plural = '培训课程'
 
     def __str__(self):
         return self.cname

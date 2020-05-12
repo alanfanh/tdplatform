@@ -10,6 +10,10 @@ class Role(models.Model):
     id = models.AutoField(primary_key=True)
     role_name = models.CharField(max_length=10)
 
+    class Meta:
+        verbose_name = "用户角色"
+        verbose_name_plural = "用户角色"
+
     def __str__(self):
         return self.role_name
 
@@ -21,6 +25,10 @@ class Group(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name="组名", max_length=20)
     pl = models.CharField(verbose_name="组长", max_length=10)
+
+    class Meta:
+        verbose_name = "用户小组"
+        verbose_name_plural = "用户小组"
 
     def __str__(self):
         return self.name
@@ -58,5 +66,9 @@ class UserInfo(models.Model):
     entry_time = models.DateField(verbose_name="入职时间")
     birth_day = models.DateField(verbose_name="生日")
     
+    class Meta:
+        verbose_name = "用户信息"
+        verbose_name_plural = "用户信息"
+
     def __str__(self):
         return self.user.username
