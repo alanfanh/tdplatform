@@ -1,9 +1,7 @@
 ﻿#header-navbar {
   border-width:0px;
-  position:absolute;
-  left:0px;
-  top:0px;
-  width:1920px;
+  position:relative;
+  width:1440px;
   height:64px;
   display:flex;
   background:inherit;
@@ -13,8 +11,14 @@
   -moz-box-shadow:none;
   -webkit-box-shadow:none;
   box-shadow:none;
+  margin-right: auto;
+  margin-left: auto;
 }
-
+#navbar-user-info {
+  position: relative;
+  left: 1062px;
+  width: 172px;
+}
 #logo {
   border-width: 0px;
   position: absolute;
@@ -128,7 +132,7 @@
 .help-img {
   border-width: 0px;
   position: absolute;
-  left: 1583px;
+  left: 0px;
   top: 24px;
   width: 16px;
   height: 16px;
@@ -139,7 +143,7 @@
   border-width: 0px;
   font-size: 14px;
   position: absolute;
-  left: 1603px;
+  left: 24px;
   top: 22px;
   width: 29px;
   height: 20px;
@@ -154,7 +158,7 @@
 .tip-img {
   border-width: 0px;
   position: absolute;
-  left: 1648px;
+  left: 76px;
   top: 26px;
   display: flex;
 }
@@ -163,7 +167,7 @@
   border-width: 0px;
   font-size: 14px;
   position: absolute;
-  left: 1668px;
+  left: 100px;
   top: 22px;
   width: 29px;
   height: 20px;
@@ -191,7 +195,7 @@
 .navbar-user {
   border-width: 0px;
   position: absolute;
-  left: 1696px;
+  left: 172px;
   top: 1px;
   display: flex;
   font-family: 'PingFangSC-Regular', 'PingFang SC';
