@@ -3,7 +3,7 @@ import os
 
 # 修改training应用在后台管理中的名字为中文
 
-verbose_app_name = '技术文章'
+verbose_app_name = '技术文档'
 
 default_app_config = 'article.ArticleConfig'
 

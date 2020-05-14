@@ -165,3 +165,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_DEFAULT_THEME = 'ant.design.css'
+SIMPLEUI_LOGO = '../../static/images/logo.png'
