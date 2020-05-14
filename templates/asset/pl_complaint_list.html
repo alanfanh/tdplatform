@@ -63,12 +63,12 @@
             <table class="gp_table" align="center"">
                 <thead>
                     <tr class="ct_th">
-                    <th class="ctt1">
+                    {% comment %} <th class="ctt1">
                         <input type="checkbox" class="ck">
-                    </th>
+                    </th> {% endcomment %}
                     <th class="ctt2">序号</th>
                     <th class="ctt3">
-                        <span class="Cust_name">客诉名称</span>
+                        客诉名称
                     </th>
                     <th class="ctt4">客诉类型</th>
                     <th class="ctt5">提交人</th>
@@ -115,10 +115,10 @@
                     </tr> {% endcomment %}
                     {% for com in complaints %}
                     <tr class="ct_tr">
-                        <td class="ctt1">
+                        {% comment %} <td class="ctt1">
                             <input type="checkbox" class="ck">
-                        </td>
-                        <td class="ctt2">{{forloop.count}}</td>
+                        </td> {% endcomment %}
+                        <td class="ctt2">{{forloop.counter}}</td>
                         <td class="ctt3">
                             <span class="Cust_cont">{{com.cname}}</span>
                         </td>
