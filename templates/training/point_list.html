@@ -202,7 +202,7 @@
                 </tbody>
             </table>
             {% endcomment %}
-            <div style="width:1415px;position:absolute;left:25px;top:117px;"><table id="point_table" lay-filter="test"></table></div>
+            <div style="position:absolute;left:25px;top:117px;"><table id="point_table" lay-filter="test"></table></div>
             {% comment %}
             <div class="tnfooter">
                 <div class="cc_total">
@@ -266,13 +266,13 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
         //, even: true
         //, skin: 'line'
         , cols: [[ //表头
-            { field: 'id', title: 'ID', width: 120, sort: true, }
+            { field: 'id', title: 'ID', width: 60, sort: true, }
             , { field: 'person', title: '姓名', width: 200 }
             , { field: 'group', title: '所属组', width: 190 }
-            , { field: 'joined', title: '参加培训积分', width: 209, sort:true}
-            , { field: 'teached_group', title: '组织小组培训积分', width: 220}
-            , { field: 'teached', title: '组织部门培训积分', width: 225 }
-            , { field: 'total', title: '总积分', sort:true}
+            , { field: 'joined', title: '参加培训积分', width: 160, sort:true}
+            , { field: 'teached_group', title: '组织小组培训积分', width: 168}
+            , { field: 'teached', title: '组织部门培训积分', width: 180 }
+            , { field: 'total', title: '总积分', sort:true, width:180}
         ]]
     });
 

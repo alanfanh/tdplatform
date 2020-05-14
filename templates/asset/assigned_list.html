@@ -48,10 +48,10 @@
             </div>
             <div class="Handle_State">
             <div class="chProcessed_bd">
-                <a href="{% url 'asset:my_tec' %}"><span class="Processed_text" style="color:rgba(85, 85, 85, 0.647058823529412)">优秀实践（5）</span></a>
+                <a href="{% url 'asset:my_tec' %}"><span class="Processed_text" style="color:rgba(85, 85, 85, 0.647058823529412)">优秀实践</span></a>
             </div>
             <div class="chUntreated_bd">
-                <a href="{% url 'asset:assigned_list' %}"><span class="cut_compt" style="color:black">客诉问题（24）</span></a>
+                <a href="{% url 'asset:assigned_list' %}"><span class="cut_compt" style="color:black">客诉问题（{{complaints.count}}）</span></a>
             </div>
             </div>
             <table class="te_table" align="center"">
@@ -80,33 +80,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="te_tr">
-                    <td class="ctt1">
-                        <input type="checkbox" class="ck">
-                    </td>
-                    <td class="ctt2">1</td>
-                    <td class="ctt3">
-                        <span class="sign"></span>
-                        <span class="Cust_cont">02客户端模式透传需求</span>
-                    </td>
-                    <td class="ctt4">新需求</td>
-                    <td class="ctt5">李测试</td>
-                    <td class="ctt6">2019/10</td>
-                    <td class="ctt7">高</td>
-                    <td class="ctt8">家用</td>
-                    <td class="ctt9">安全性</td>
-                    <td class="ctt10">李负责</td>
-                    <td class="ctt11">-</td>
-                    <td class="ctt12">
-                        <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                        <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
-                    </td>
-                    <td class="ctt13">
-                        <span class="dload">查看 | 下载</span>
-                        <img src="{% static 'images/account/see.png' %} " class="see_dload">
-                    </td>
-                    </tr>
+                    {% comment %} <tr class="te_tr">
+                        <td class="ctt1">
+                            <input type="checkbox" class="ck">
+                        </td>
+                        <td class="ctt2">1</td>
+                        <td class="ctt3">
+                            <span class="sign"></span>
+                            <span class="Cust_cont">02客户端模式透传需求</span>
+                        </td>
+                        <td class="ctt4">新需求</td>
+                        <td class="ctt5">李测试</td>
+                        <td class="ctt6">2019/10</td>
+                        <td class="ctt7">高</td>
+                        <td class="ctt8">家用</td>
+                        <td class="ctt9">安全性</td>
+                        <td class="ctt10">李负责</td>
+                        <td class="ctt11">-</td>
+                        <td class="ctt12">
+                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
+                        </td>
+                        <td class="ctt13">
+                            <span class="dload">查看 | 下载</span>
+                            <img src="{% static 'images/account/see.png' %} " class="see_dload">
+                        </td>
+                    </tr> {% endcomment %}
                     {% for com in complaints %}
                     <tr class="te_tr">
                         <td class="ctt1">
@@ -114,7 +114,6 @@
                         </td>
                         <td class="ctt2">{{forloop.count}}</td>
                         <td class="ctt3">
-                            <span class="sign"></span>
                             <span class="Cust_cont">com.cname</span>
                         </td>
                         <td class="ctt4">{{com.type}}</td>

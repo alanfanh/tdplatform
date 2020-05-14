@@ -156,7 +156,7 @@
                     {% endfor %}
                 </tbody>
             </table>  {% endcomment %}
-            <div style="width:1415px;position:absolute;left:25px;top:120px;"><table id="demo" lay-filter="test"></table></div>
+            <div style="position:absolute;left:25px;top:120px;"><table id="demo" lay-filter="test"></table></div>
             {% comment %} <div class="autotip">
                 <span class="attipcont">实验室资产管理平台定时发送邮件实现物品催还的方法与实施</span>
             </div> {% endcomment %}
@@ -235,13 +235,13 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
     //,even: true
     //,skin: 'line'
     ,cols: [[ //表头
-      {field: 'id', title: 'ID', width:80, sort: true, }
-      ,{field: 'tname', title: '名称', width:435}
-      ,{field: 'author', title: '作者', width:118, sort: true}
-      ,{field: 'group', title: '小组', width:159} 
+      {field: 'id', title: 'ID', width:60, sort: true, }
+      ,{field: 'tname', title: '名称', width:380}
+      ,{field: 'author', title: '作者', width:100, sort: true}
+      ,{field: 'group', title: '小组', width:120} 
       ,{field: 'tec_tag', title: '标签', width: 280}
-      ,{field: 'created_at', title: '编写时间', width: 180, sort: true}
-      ,{field: '', title: '操作', toolbar:"#bar", width: 155}
+      ,{field: 'created_at', title: '编写时间', width: 120, sort: true}
+      ,{field: '', title: '操作', toolbar:"#bar", width: 125}
     ]]
   });
   

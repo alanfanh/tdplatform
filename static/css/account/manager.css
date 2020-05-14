@@ -60,7 +60,7 @@
   }
   .mgoing_content {
     position: absolute;
-    left: 160px;
+    left: 40px;
     top: 442px;
     width: 1200px;
     height: 150px;
@@ -146,7 +146,7 @@
     position: relative;
     margin-top:649px;
     margin-left: 33px;
-    width: 1408px;
+    width: 1140px;
     border-collapse: collapse;
   }
   #m_sug {
@@ -435,7 +435,7 @@
   .tr_table {
     position:relative;
     margin-top:72px;
-    width: 1415px;
+    width: 1200px;
     border-collapse:collapse;
     font-size:14px;
   }
@@ -544,7 +544,7 @@
   .te_table {
     position:relative;
     margin-top:126px;
-    width: 1415px;
+    width: 1200px;
     border-collapse:collapse;
     font-size:14px;
   }
@@ -647,7 +647,7 @@
     position:absolute;
     left:25px;
     top:17px;
-    width:1416px;
+    width:120px;
     height:55px;
   }
   .info_selt {
@@ -655,7 +655,7 @@
     position:absolute;
     left:25px;
     top:78px;
-    width:1416px;
+    width:1200px;
     height:45px;
     background:inherit;
     background-color:rgba(255, 255, 255, 1);
@@ -1063,7 +1063,7 @@
 }
 .adcustomer {
   position:absolute;
-  left:1316px;
+  left:1016px;
   top:4px;
   width:100px;
   height:32px;
@@ -1088,18 +1088,19 @@
   position:absolute;
   left:0px;
   top:64px;
-  width:1920px;
+  width:100%;
   height:1640px;
   background-color:rgba(244, 244, 244, 1);
 }
 .cabaseplate {
   border-width:0px;
-  position:absolute;
-  left:128px;
+  position:relative;
   top:24px;
-  width:1665px;
+  width:1440px;
   height:1542px;
   background-color:rgba(255, 255, 255, 1);
+  margin-left: auto;
+  margin-right: auto;
 }
 .camenuinfo {
   position: absolute;
@@ -1118,7 +1119,7 @@
   position: absolute;
   left: 200px;
   top: 0px;
-  width: 1465px;
+  width: 1240px;
   height: 1542px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -1128,7 +1129,7 @@
   position:absolute;
   left:33px;
   top:79px;
-  width:1416px;
+  width:1174px;
   height:55px;
   border-width:1px;
   border-style:solid;
@@ -1157,7 +1158,7 @@
   position: absolute;
   left: 0px;
   top: 159px;
-  width: 1464px;
+  width: 1200px;
   height: 188px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -1167,7 +1168,7 @@
   position:absolute;
   left:33px;
   top:0px;
-  width:1416px;
+  width:1200px;
   height:63px;
   background-color:rgba(255, 255, 255, 1);
   box-sizing:border-box;
@@ -1291,7 +1292,7 @@
   position:absolute;
   left:33px;
   top:94px;
-  width:1416px;
+  width:1000px;
   height:63px;
   background:inherit;
   background-color:rgba(255, 255, 255, 1);
@@ -1305,7 +1306,7 @@
     position:absolute;
     left:33px;
     top:346px;
-    width:1416px;
+    width:1174px;
     height:55px;
     border-width:1px;
     border-style:solid;
@@ -1322,7 +1323,7 @@
   position: absolute;
   left: 0px;
   top: 426px;
-  width: 1464px;
+  width: 1200px;
   height: 188px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -1355,7 +1356,7 @@
     position:absolute;
     left:33px;
     top:614px;
-    width:1416px;
+    width:1174px;
     height:55px;
     border-width:1px;
     border-style:solid;
@@ -1372,7 +1373,7 @@
   position: absolute;
   left: 0px;
   top: 694px;
-  width: 1464px;
+  width: 1200px;
   height: 402px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -1405,7 +1406,7 @@
     position:absolute;
     left:33px;
     top:188px;
-    width:1416px;
+    width:1000px;
     height:63px;
     background:inherit;
     background-color:rgba(255, 255, 255, 1);
@@ -1598,7 +1599,7 @@
   position: absolute;
   left: 33px;
   top: 96px;
-  width: 1408px;
+  width: 1174px;
   height: 55px;
   border-width: 1px;
   border-style: solid;
@@ -1686,7 +1687,7 @@
   position: absolute;
   left: 33px;
   top: 251px;
-  width: 1408px;
+  width: 1174px;
   height: 55px;
   border-width: 1px;
   border-style: solid;
@@ -1712,7 +1713,7 @@
   position: absolute;
   left: 33px;
   top: 407px;
-  width: 1408px;
+  width: 1174px;
   height: 55px;
   border-width: 1px;
   border-style: solid;

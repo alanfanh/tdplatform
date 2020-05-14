@@ -101,18 +101,18 @@
         <div class="layui-carousel picturebase" id="autoplay">
             <div carousel-item>
                 <div><img src="{% static 'images/home/banner_center.png' %}"></div>
-                <div><img src="{% static 'images/home/banner_center.png' %}"></div>
+                <div><img src="{% static 'images/home/banner_2.png' %}"></div>
             </div>
         </div>
         <div class="tablebase">
-            <span class="recent">近期培训</span>
-            <span class="alltrain">所有培训</span>
-            <a href="{% url 'training:course_list' %}"> <img src="{% static 'images/home/arrbase.svg' %}" class="trainarr">
-            <img src="{% static 'images/home/dataarr.svg' %}" class="gototrain"></a>
+            <div class="tableheader">
+                <span class="recent">近期培训</span>
+                <span class="alltrain"><a href="{% url 'training:course_list' %}" style="color: #FF8F00;">所有培训</a></span>
+            </div>
             <table class="train_records" align="center">
                 <thead>
                     <tr class="train_head">
-                        <td class="train_td1">序号</td>
+                        
                         <td class="train_td2">培训名称</td>
                         <td class="train_td3">培训范围</td>
                         <td class="train_td4">主讲人</td>
@@ -123,9 +123,8 @@
                 <tbody>
                     {% for course in  last_courses %}
                     <tr class="train_body1">
-                        <td class="train_td1">{{forloop.counter}}</td>
+                        
                         <td>
-                            <span class="name_flag"></span>
                             <span class="train_name">{{course.cname}}</span>
                         </td>
                         <td>{{course.range}}</td>
@@ -160,7 +159,8 @@
                     </div>
                     <span class="file_name">{{course.cname}}</span>
                     <span class="file_group">{{course.range}} {{course.course_time | date:'Y.m.d'}}</span>
-                    <a href="{% url 'training:download_file' course.id %}"></a> <button class="file_down">下载</button>
+                    <a href="{% url 'training:download_file' course.id %}"> <span class="file_down">下载</span></a>
+                    <a href="{% url 'training:course_detail' course.id %}"><span class="file_detail">查看</span></a>    
                 </div>
                 {% endfor %}
             </div>
@@ -180,7 +180,7 @@ layui.use('carousel', function(){
   //建造实例
   carousel.render({
     elem: '#autoplay'
-    ,width: '877px' //设置容器宽度
+    ,width: '760px' //设置容器宽度
     ,height: '240px'
     ,autoplay: 'true'
     ,interval: '2000' //自动切换时间间隔

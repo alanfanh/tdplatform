@@ -298,7 +298,7 @@
                 </tbody>
             </table>
             {% endcomment %}
-            <div style="width:1415px;position:absolute;left:25px;top:126px;"><table id="demo_table" lay-filter="test"></table></div>
+            <div style="position:absolute;left:25px;top:126px;"><table id="demo_table" lay-filter="test"></table></div>
             {% comment %}
             <div class="cc_footer" id="test1">
                 <div class="cc_total">
@@ -376,15 +376,16 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
     //,even: true
     //,skin: 'line'
     ,cols: [[ //表头
-      {field: 'id', title: 'ID', width:80, sort: true, }
-      ,{field: 'cname', title: '名称', width:296}
-      ,{field: 'type', title: '客诉类型', width:96},{field: 'submitter', title: '提交人', width:100, sort: true}
-      ,{field: 'ctime', title: '客诉时间', width:147, sort: true}
-      ,{field: 'level', title: '严重程度', width:96} 
-      ,{field: 'product_line', title: '产品线', width:101}
-      ,{field: 'category', title: '问题分类', width:128}
-      ,{field: 'tester', title: '分析负责人', width:110}
-      ,{field: 'status', title: '措施状态', width:90}
+      {field: 'id', title: 'ID', width:50, sort: true, }
+      ,{field: 'cname', title: '名称', width:254}
+      ,{field: 'type', title: '客诉类型', width:86}
+      ,{field: 'submitter', title: '提交人', width:86, sort: true}
+      ,{field: 'ctime', title: '客诉时间', width:108, sort: true}
+      ,{field: 'level', title: '严重程度', width:86} 
+      ,{field: 'product_line', title: '产品线', width:72}
+      ,{field: 'category', title: '问题分类', width:92}
+      ,{field: 'tester', title: '分析负责人', width:100}
+      ,{field: 'status', title: '措施状态', width:86}
       ,{field: '', title: '操作', toolbar:"#demobar"}
     ]]
   });

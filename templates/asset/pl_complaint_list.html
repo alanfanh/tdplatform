@@ -86,7 +86,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="ct_tr">
+                    {% comment %} <tr class="ct_tr">
                         <td class="ctt1">
                             <input type="checkbox" class="ck">
                         </td>
@@ -112,7 +112,7 @@
                             <span class="dload">查看 | 下载</span>
                             <img src="{% static 'images/asset/see.png' %} " class="see_dload">
                         </td>
-                    </tr>
+                    </tr> {% endcomment %}
                     {% for com in complaints %}
                     <tr class="ct_tr">
                         <td class="ctt1">
@@ -120,7 +120,6 @@
                         </td>
                         <td class="ctt2">{{forloop.count}}</td>
                         <td class="ctt3">
-                            <span class="sign"></span>
                             <span class="Cust_cont">{{com.cname}}</span>
                         </td>
                         <td class="ctt4">{{com.type}}</td>

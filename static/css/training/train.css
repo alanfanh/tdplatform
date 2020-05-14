@@ -1,25 +1,22 @@
 .tnbaseplate {
   border-width:0px;
-  position:absolute;
-  left:128px;
-  top:26px;
-  width:1665px;
+  position:relative;
+  top:24px;
+  width: 1440px;
   height:912px;
   background:inherit;
   background-color:rgba(255, 255, 255, 1);
   border:none;
   border-radius:0px;
-  -moz-box-shadow:none;
-  -webkit-box-shadow:none;
-  box-shadow:none;
-  text-align:left;
+  margin-left: auto;
+  margin-right: auto;
 }
 .tnseltinfo {
     border-width:0px;
     position:absolute;
     left:24px;
     top:78px;
-    width:1416px;
+    width:1000px;
     height:45px;
     background:inherit;
     background-color:rgba(255, 255, 255, 1);

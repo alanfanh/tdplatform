@@ -466,18 +466,27 @@
     position: absolute;
     left: 656px;
     top: 22px;
-    width: 61px;
-    height: 29px;
+    width: 28px;
+    height: 20px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
     font-weight: 400;
-    font-size: 13px;
-    color: #333333;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 1);
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(121, 121, 121, 1);
-    border-radius: 5px;
+    font-size: 14px;
+    color: #8C8C8C;
+    text-align: left;
+    line-height: 20px;
+}
+.file_detail {
+    position: absolute;
+    right: 32px;
+    top: 22px;
+    width: 28px;
+    height: 20px;
+    font-family: 'PingFangSC-Regular', 'PingFang SC';
+    font-weight: 400;
+    font-size: 14px;
+    color: #8C8C8C;
+    text-align: left;
+    line-height: 20px;
 }
 .fileshadow {
     position: relative;
@@ -489,7 +498,7 @@
     left: 928px;
     top: 705px;
     width: 368px;
-    height: 235px;
+    height: 330px;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(242, 242, 242, 1);

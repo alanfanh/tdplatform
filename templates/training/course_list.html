@@ -259,7 +259,7 @@
                 </tbody>
             </table>
             {% endcomment %}
-            <div style="width:1415px;position:absolute;left:25px;top:118px;"><table id="train_table" lay-filter="test"></table></div>
+            <div style="position:absolute;left:25px;top:118px;"><table id="train_table" lay-filter="test"></table></div>
             {% comment %}
             <div class="tnfooter">
                 <div class="cc_total">
@@ -338,12 +338,12 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
         //, even: true
         //, skin: 'line'
         , cols: [[ //表头
-            { field: 'id', title: 'ID', width: 80, sort: true, }
+            { field: 'id', title: 'ID', width: 60, sort: true, }
             , { field: 'cname', title: '课程名', width: 343 }
-            , { field: 'range', title: '课程范围', width: 169 }
-            , { field: 'teacher', title: '主讲人', width: 147, sort: true }
-            , { field: 'number', title: '参加人数', width: 136, sort: true }
-            , { field: 'address', title: '培训地点', width: 214 }
+            , { field: 'range', title: '课程范围', width: 120 }
+            , { field: 'teacher', title: '主讲人', width: 96, sort: true }
+            , { field: 'number', title: '参加人数', width: 100, sort: true }
+            , { field: 'address', title: '培训地点', width: 134 }
             , { field: 'course_time', title: '培训时间', width: 149 }
             , { field: '', title: '操作', toolbar: "#oper_tool" }
         ]]
