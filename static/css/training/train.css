@@ -45,11 +45,11 @@
     -webkit-text-fill-color:#D7D7D7;
 }
 .trsortimg {
-    position: absolute;
-    left:573px;
-    top:12px;
-    width: 13px;
-    height: 13px;
+    position: relative;
+    left:440px;
+    top:8px;
+    width: 16px;
+    height: 16px;
     transform: rotate(345deg);
 }
 .trsthandle {
@@ -143,18 +143,6 @@
     text-align:left;
 }
 
-.tnfooter {
-    border-width:0px;
-    position:absolute;
-    left:26px;
-    top:739px;
-    width:1416px;
-    height:45px;
-    box-sizing:border-box;
-    font-family:'PingFangSC-Semibold', 'PingFang SC Semibold', 'PingFang SC';
-    font-weight:650;
-    font-style:normal;
-}
 .tdcont {
     position: absolute;
     left: 33px;
@@ -615,7 +603,7 @@
     left: 116px;
     width:75px;
     height:32px;
-    background-color:rgba(24, 144, 255, 1);
+    background-color:#FF8F00;
     border:none;
     border-radius:4px;
     box-shadow:none;
