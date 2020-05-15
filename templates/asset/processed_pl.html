@@ -70,7 +70,7 @@
           <option value="进行中">进行中</option>
           <option value="驳回">驳回</option>
         </select>
-        <button class="Ep_Record" id="ep_bt">添加记录</button>
+        <a href="{% url 'asset:add_tec' %}"><button class="Ep_Record" id="ep_bt">新增</button></a>
       </div>
       <table class="Pra_data" align="center">
         <thead>
@@ -131,36 +131,6 @@
         </tbody>
       </table>
       <div class="Ep_total" id="ep_page">
-        <span class="ept_text">共计 {{tec_list.count}} 条数据</span>
-        {% comment %} <img src="{% static 'images/asset/left.png' %}" class="Ep_left"> {% endcomment %}
-        <div id="Ep_page1">
-          <span class="Ct_pg1">1</span>
-        </div>
-        <div class="Ep_pg2">
-          <span>2</span>
-        </div>
-        <div class="Ep_pg3">
-          <span>3</span>
-        </div>
-        <div class="Ep_pg4">
-          <span>4</span>
-        </div>
-        <div class="Ep_pg5">
-          <span>5</span>
-        </div>
-        {% comment %} <img src="{% static 'images/asset/right.png' %}" class="Ep_right"> {% endcomment %}
-        <button id="Ep_page">
-          <span style="font-family:'ArialMT', 'Arial';">10</span>
-          <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-          {% comment %} <img src="{% static 'images/asset/right.png' %} " class="Ep_img"> {% endcomment %}
-        </button>
-        <div class="Ep_goto">
-          <span>前往第</span>
-        </div>
-        <input type="text" id="Ep_input" placeholder="2">
-        <div class="Ep_pages">
-          <span>页</span>
-        </div>
       </div>
     </div>
   </div>
