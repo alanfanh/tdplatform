@@ -154,10 +154,9 @@
                     <option value="2020">2020</option>
                 </select>
                 <input type="text" class="trsearch" placeholder="请输入" id="search-course">
-                <img src="{% static 'images/training/sort.svg' %}" id="btn3" class="trsortimg">
-                <img src="{% static 'images/asset/handle.svg' %}" class="trsthandle">
+                <img src="{% static 'images/asset/icn_search.png' %}" id="btn3" class="trsortimg">
                 {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
-                <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">添加</button></a>
+                <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">新增</button></a>
                 {% endif %}
             </div>
             {% comment %}
@@ -260,42 +259,6 @@
             </table>
             {% endcomment %}
             <div style="position:absolute;left:25px;top:118px;"><table id="train_table" lay-filter="test"></table></div>
-            {% comment %}
-            <div class="tnfooter">
-                <div class="cc_total">
-                    <span>共计{{courses.count}}条数据</span>
-                </div>
-                <img src="{% static 'images/asset/left.png' %}" class="Ct_left">
-                <div class="cc_page1">
-                    <span class="Ct_pg1">1</span>
-                </div>
-                <div class="Ct_pg2">
-                    <span>2</span>
-                </div>
-                <div class="Ct_pg3">
-                    <span>3</span>
-                </div>
-                <div class="Ct_pg4">
-                    <span>4</span>
-                </div>
-                <div class="Ct_pg5">
-                    <span>5</span>
-                </div>
-                <img src="images/admin/right.png" class="Ct_right">
-                <button class="cc_page">
-                    <span style="font-family:'ArialMT', 'Arial';">10</span>
-                    <span style="font-family:'PingFangSC-Regular', 'PingFang SC';">条/页</span>
-                    <img src="images/admin/right.png" class="Ct_img">
-                </button>
-                <div class="Ct_goto">
-                    <span>前往第</span>
-                </div>
-                <input type="text" class="cc_input" placeholder="2">
-                <div class="Ct_pages">
-                    <span>页</span>
-                </div>
-            </div>
-            {% endcomment %}
         </div>
     </div>
 </div>
