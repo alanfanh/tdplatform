@@ -297,22 +297,35 @@
     position: absolute;
     left: 116px;
     top: 5px;
+    width: 160px;
+    height: 32px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(215, 215, 215, 1);
+    border-radius: 2px;
+    padding-left: 7px;
+    padding-top: 2px;
+    font-size: 14px;
+}
+.course-name {
+    position: absolute;
+    left: 116px;
+    top: 5px;
     width: 400px;
     height: 32px;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(215, 215, 215, 1);
     border-radius: 2px;
-    /* -webkit-text-fill-color: #D7D7D7; */
     padding-left: 7px;
     padding-top: 2px;
     font-size: 14px;
 }
 .tabd2 {
     position: absolute;
-    width: 1465px;
+    width: 700px;
     height: 40px;
-    top: 144px;
+    top: 126px;
 }
 .tatm {
     position: absolute;
@@ -331,9 +344,9 @@
 }
 .tabd3 {
     position: absolute;
-    width: 1465px;
+    width: 700px;
     height: 40px;
-    top: 200px;
+    top: 172px;
 }
 .taauth {
     position: absolute;
@@ -374,22 +387,13 @@
 }
 .tabd4 {
     position: absolute;
-    width: 1465px;
+    width: 700px;
     height: 40px;
-    top: 256px;
+    top: 266px;
 }
-.tamsel {
-    position: absolute;
-    left: 496px;
-    top: 19px;
-    width: 10px;
-    height: 5px;
-    transform: rotate(180deg);
-}
+
 .tampick {
-    position: absolute;
-    left: 115px;
-    top: 5px;
+
     width: 401px;
     height: 32px;
     border-width: 1px;
@@ -402,79 +406,13 @@
     font-size: 14px;
     -webkit-appearance:none;
 }
-.mselbd {
-    position: absolute;
-    left: 123px;
-    top: 11px;
-    width: 64px;
-    height: 20px;
-    background-color: rgba(242, 242, 242, 1);
-    border: none;
-    border-radius: 2px;
-}
-.mselname {
+.tree-select {
     position: relative;
-    left: 8px;
-    top: 2px;
-    font-family: 'PingFangSC-Regular', 'PingFang SC';
-    font-weight: 400;
-    font-size: 12px;
-    color: #7F7F7F;
+    left: 115px;
+    top: 5px;
 }
-.mseldel {
-    position: absolute;;
-    left: 53px;
-    top: 7px;
-    width: 7px;
-    height: 7px;
-}
-.mselbd2 {
-    position: absolute;
-    left: 191px;
-    top: 11px;
-    width: 52px;
-    height: 20px;
-    background-color: rgba(242, 242, 242, 1);
-    border: none;
-    border-radius: 2px;
-}
-.mseldel2 {
-    position: absolute;;
-    left: 41px;
-    top: 7px;
-    width: 7px;
-    height: 7px;
-}
-.mselbd3 {
-    position: absolute;
-    left: 247px;
-    top: 11px;
-    width: 52px;
-    height: 20px;
-    background-color: rgba(242, 242, 242, 1);
-    border: none;
-    border-radius: 2px;
-}
-.mselbd4 {
-    position: absolute;
-    left: 303px;
-    top: 11px;
-    width: 52px;
-    height: 20px;
-    background-color: rgba(242, 242, 242, 1);
-    border: none;
-    border-radius: 2px;
-}
-.mselbd5 {
-    position: absolute;
-    left: 359px;
-    top: 11px;
-    width: 52px;
-    height: 20px;
-    background-color: rgba(242, 242, 242, 1);
-    border: none;
-    border-radius: 2px;
-}
+
+
 .mhelp {
     position: absolute;
     left: 393px;
@@ -494,21 +432,22 @@
 }
 .tabd5 {
     position: absolute;
-    width: 1465px;
+    width: 700px;
     height: 40px;
-    top: 312px;
+    top: 218px;
 }
 .tabd6 {
     position: absolute;
-    width: 1465px;
+    width: 300px;
     height: 40px;
-    top: 368px;
+    left: 240px;
+    top: 218px;
 }
 .tarang {
     position: absolute;
     left: 116px;
     top: 5px;
-    width: 400px;
+    width: 160px;
     height: 32px;
     border-width: 1px;
     border-style: solid;
@@ -519,14 +458,13 @@
 }
 .tabd7 {
     position: absolute;
-    width: 1465px;
-    height: 130px;
-    top: 421px;
+    width: 700px;
+    height: 100px;
+    top: 642px;
 }
 .tacontsum {
     position: absolute;
     left: 50px;
-    top: 8px;
     width: 65px;
     height: 17px;
     font-size: 13px;
@@ -534,9 +472,8 @@
 .tasumtext {
     position: absolute;
     left: 116px;
-    top: 8px;
     width: 400px;
-    height: 120px;
+    height: 100px;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(217, 217, 217, 1);
@@ -559,9 +496,9 @@
   }
   .tabd8 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height: 130px;
-    top: 563px;
+    top: 750px;
 }
 .taupextra {
     position: absolute;

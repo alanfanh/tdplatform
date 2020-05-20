@@ -1279,7 +1279,7 @@
     position:absolute;
     left:33px;
     top:415px;
-    width:1416px;
+    width:600px;
     height:150px;
 }
 .upload {
@@ -1856,10 +1856,10 @@
 }
 .gnbd {
     position: absolute;
-    width: 1465px;
-    height:60px;
+    width: 600px;
+    height: 40px;
     left: 0px;
-    top: 88px;
+    top: 80px;
 }
 .gdname {
     position: absolute;
@@ -1900,7 +1900,7 @@
 }
 .gnbd2 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height:40px;
     left: 0px;
     top: 148px;
@@ -1928,7 +1928,7 @@
 }
 .gnbd3 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height:40px;
     left: 0px;
     top: 204px;
@@ -1947,7 +1947,7 @@
 }
 .gnbd4 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height:40px;
     left: 0px;
     top: 254px;
@@ -1962,7 +1962,7 @@
 }
 .gnbd5 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height:40px;
     left: 0px;
     top: 306px;
@@ -1992,7 +1992,7 @@
 }
 .gnbd6 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height:130px;
     left: 0px;
     top: 355px;
@@ -2025,7 +2025,7 @@
 }
 .gnbd7 {
     position: absolute;
-    width: 1465px;
+    width: 600px;
     height:130px;
     left: 0px;
     top: 506px;
