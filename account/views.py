@@ -230,6 +230,6 @@ def home_page(request):
     tecs = TecContent.objects.filter(status="3")
     coms = Complaint.objects.all()
     # 获取最近培训数据
-    last_courses = Course.objects.filter().order_by('-course_time')[:7]
-    files = Course.objects.filter().order_by('-course_time')[:6]
+    last_courses = Course.objects.filter().order_by('-course_time')[:4]
+    files = Course.objects.filter().order_by('-course_time')[:5]
     return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
