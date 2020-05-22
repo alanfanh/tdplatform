@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}添加培训课程{% endblock  %}
+{% block title %}编辑培训课程{% endblock  %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
@@ -27,11 +27,11 @@
             <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="gnbd">
                     <span class="taname">培训名称：</span>
-                    <input type="text" class="ittaname" name="cname" placeholder="请输入培训名称">
+                    <input type="text" class="course-name" name="cname" placeholder="请输入培训名称">
                 </div>
                 <div class="tabd2">
                     <span class="taname">培训时间：</span>
-                    <input type="text" name="course_time" style="color: rgb(153, 153, 153);" class="tatm">
+                    <input type="text" name="course_time" id="course_time" style="color: rgb(153, 153, 153);" class="tatm">
                 </div>
                 <div class="tabd3">
                     <span class="taauth">主讲人：</span>
@@ -46,29 +46,10 @@
                 </div>
                 <div class="tabd4">
                     <span class="taname">参与成员：</span>
-                    <select class="tampick">
-                        <option value="0"></option>
-                    </select>
-                    <img src="{% static 'images/training/msel.svg' %} " class="tamsel">
-                    <div class="mselbd">
-                        <span class="mselname">张测试</span>
-                        <img src="{% static 'images/training/mseldel.png' %}" class="mseldel">
-                    </div>
-                    <div class="mselbd2">
-                        <span class="mselname">杨阳</span>
-                        <img src="{% static 'images/training/mseldel.png' %}" class="mseldel2">
-                    </div>
-                    <div class="mselbd3">
-                        <span class="mselname">李伟</span>
-                        <img src="{% static 'images/training/mseldel.png' %}" class="mseldel2">
-                    </div>
-                    <div class="mselbd4">
-                        <span class="mselname">何末</span>
-                        <img src="{% static 'images/training/mseldel.png' %}" class="mseldel2">
-                    </div>
-                    <div class="mselbd5">
-                        <span class="mselname">赵行</span>
-                        <img src="{% static 'images/training/mseldel.png' %}" class="mseldel2">
+                    <div class="tree-select">
+                        <div  id="joined">
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="tabd5">
@@ -107,7 +88,45 @@
 </div>
 <script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
 <script>
+layui.use('transfer', function(){
+    var transfer = layui.transfer;
+    let $ = layui.$;
+    $.get('/training/get-userinfo/',{}, 
+        function(data,status) {
+            //console.log(data['data']);
+            //渲染
+            transfer.render({
+                elem: '#joined'  //绑定元素
+                ,data: data['data']
+                ,id: 'demo1' //定义索引
+                ,width:162
+                ,title:['未参加成员','参加成员']
+                ,showSearch: true
+                ,parseData: function (res) {
+                    return {
+                        "value": res.id
+                        ,"title": res.realname
+                        ,"disabled": res.disabled
+                        ,"checked": res.checked
+                    }
+                }
+            });
+            var data = transfer.getData('demo1'); //获得右侧数据
+            console.log(data)
+        }, "json");
+});
 
+// 日期时间控件
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#course_time' //指定元素
+    ,type: 'datetime'
+    ,format: 'yyyy/MM/dd HH:mm:ss'
+  });
+});
 </script>
 
 {% endblock  %}
