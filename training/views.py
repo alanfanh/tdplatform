@@ -72,7 +72,14 @@ class CourseCreateView(UserCourseMixin, CreateView):
         if form.is_valid():
             new_course = form.save(commit=False)
             new_course.author = self.request.user
+            # 获取穿梭框选中的数据
+            joined_people = request.POST.get('student-joined')
+            # 先保存对象，生成主键ID后才能添加多对多关系数据。
             new_course.save()
+            if joined_people != '':
+                id_list = joined_people.split(',')
+                for id in id_list:
+                    new_course.student.add(id)
             # return redirect("training:course_list")
             return render(request, "training/success.html", {"course":new_course})
         else:
@@ -254,3 +261,14 @@ def edit_course(request, course_id):
             pass
         except:
             pass
+
+
+# 返回json数据，
+@login_required(login_url="/account/login")
+def get_userinfo(request):
+    result = {"data":[]}
+    users = UserInfo.objects.all()
+    for user in users:
+        obj = model_to_dict(user, fields=['id', 'realname'])
+        result['data'].append(obj)
+    return JsonResponse(result, json_dumps_params={"ensure_ascii": False})

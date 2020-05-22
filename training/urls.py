@@ -21,4 +21,6 @@ urlpatterns = [
     path('filter-course-list/', views.filter_course_list, name="filter_course_list"),
     path('filter-point-list/' ,views.filter_point_list, name="filter_point_list"),
     path('search-course/', views.search_course, name="search_course"),
+    path('edit-course/<int:course_id>', views.edit_course, name="edit_course"),
+    path('get-userinfo/', views.get_userinfo, name="get_userinfo"),
 ]
