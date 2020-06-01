@@ -252,23 +252,41 @@ def search_course(request):
 # 编辑课程数据
 @login_required(login_url="/account/login")
 def edit_course(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
+    this_form = CreateCourseForm(instance=course)
     if request.method == "GET":
-        course = Course.objects.get(id=course_id)
-        return render(request, "training/edit_course.html",{"course":course})
+        groups = Group.objects.all()
+        return render(request, "training/edit_course.html",{"course":course, "groups":groups, "this_form":this_form})
     else:
-        c = Course.objects.get(id=course_id)
-        try:
-            pass
-        except:
-            pass
+        # print(request.POST, request.FILES)
+        # 生成表单对象，修改为上传的数据
+        form = CreateCourseForm(request.POST or None, request.FILES,  instance=course)
+        if form.is_valid():
+            edit_course = form.save(commit=False)
+            # 获取穿梭框选中的数据
+            joined_people = request.POST.get('student-joined')
+            # 先保存对象，生成主键ID后才能添加多对多关系数据。
+            edit_course.save()
+            if joined_people != '':
+                id_list = joined_people.split(',')
+                for id in id_list:
+                    edit_course.student.add(id)
+            # return redirect("training:course_list")
+            return redirect("training:course_list")
 
 
 # 返回json数据，
 @login_required(login_url="/account/login")
 def get_userinfo(request):
-    result = {"data":[]}
+    result = {"data": [], "select":[]}
     users = UserInfo.objects.all()
     for user in users:
         obj = model_to_dict(user, fields=['id', 'realname'])
         result['data'].append(obj)
+    # 获取指定course参与的用户id
+    if 'id' in request.GET:
+        # print('id=', request.GET['id'])
+        course = Course.objects.get(id=request.GET['id'])
+        for s in course.student.all():
+            result['select'].append(s.id)
     return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
