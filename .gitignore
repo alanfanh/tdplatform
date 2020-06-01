@@ -24,3 +24,6 @@ __pycache__/
 *.xml.old
 *.xml
 *.xls.bak
+*.xlsx
+*.rar
+*.pdf
