@@ -24,37 +24,39 @@
             <div class="Cp_title">
                 <span class="Cust_Com">编辑培训课程</span>
             </div>
-            <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+            <form action="{% url  'training:edit_course' course.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="gnbd">
                     <span class="taname">培训名称：</span>
-                    <input type="text" class="course-name" name="cname" placeholder="请输入培训名称">
+                    <input type="text" class="course-name" name="cname" placeholder="请输入培训名称" value="{{course.cname}}">
                 </div>
                 <div class="tabd2">
                     <span class="taname">培训时间：</span>
-                    <input type="text" name="course_time" id="course_time" style="color: rgb(153, 153, 153);" class="tatm">
+                    <input type="text" name="course_time" id="course_time" style="color: rgb(153, 153, 153);" class="tatm" value="{{course.course_time | date:'Y/m/d H:i:s'}}">
                 </div>
                 <div class="tabd3">
                     <span class="taauth">主讲人：</span>
                     <select class="group-user" name="" id="groups-user" onchange="change_teacher();">
                         {% for group in groups %}
+                        {% if group.name == course.teacher.group.name %}
+                        <option value="{{group.id}}" selected>{{group.name}}</option>
+                        {% endif %}
                         <option value="{{group.id}}">{{group.name}}</option>
                         {% endfor %}
                     </select>
                     <select class="taauthpick" id="id_teacher" name="teacher">
-                        
+                        <option value="{{course.teacher.id}}">{{course.teacher.realname}}</option>
                     </select>
                 </div>
                 <div class="tabd4">
                     <span class="taname">参与成员：</span>
                     <div class="tree-select">
-                        <div  id="joined">
-                            
-                        </div>
+                        <input type="hidden" name="student-joined" value="">
+                        <div id="joined"></div>
                     </div>
                 </div>
                 <div class="tabd5">
                     <span class="taname">培训地址：</span>
-                    <input type="text" class="ittaname" name="address" value="{{coure.address}}" placeholder="请输入培训地址">
+                    <input type="text" class="ittaname" name="address" value="{{course.address}}" placeholder="请输入培训地址">
                 </div>
                 <div class="tabd6">
                     <span class="taname">培训范围：</span>
@@ -71,14 +73,13 @@
                 </div>
                 <div class="tabd7">
                     <span class="tacontsum">内容概括：</span>
-                    <textarea class="tasumtext" cols="30" rows="10" name="cdescription" placeholder="请简单概括一下培训记录的大致内容"></textarea>
+                    <textarea class="tasumtext" cols="30" rows="10" name="cdescription" placeholder="请简单概括一下培训记录的大致内容">{{course.cdescription}}</textarea>
                 </div>
                 <div class="tabd8">
                     <span class="taname">上传附件：</span>
                     <div class="taupextra">
-                        {{form.file_name}}
+                        {{this_form.file_name}}
                     </div>
-                    <span class="tafileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
                     <input type="submit" id="tahandin" value="提交">
                     <button id="tarevoke"  onclick="window.history.back()">取消</button>
                 </div>
@@ -91,7 +92,7 @@
 layui.use('transfer', function(){
     var transfer = layui.transfer;
     let $ = layui.$;
-    $.get('/training/get-userinfo/',{}, 
+    $.get('/training/get-userinfo/',{id:{{course.id}} }, 
         function(data,status) {
             //console.log(data['data']);
             //渲染
@@ -102,6 +103,7 @@ layui.use('transfer', function(){
                 ,width:162
                 ,title:['未参加成员','参加成员']
                 ,showSearch: true
+                ,value: data['select']
                 ,parseData: function (res) {
                     return {
                         "value": res.id
@@ -110,9 +112,19 @@ layui.use('transfer', function(){
                         ,"checked": res.checked
                     }
                 }
+                ,onchange: function (data, index) {
+                    var transfer = layui.transfer;
+                    var data = transfer.getData('demo1');
+                    var ids = [];
+                    for(let i = 0, len=data.length; i<len; i++) {
+                        let value = data[i].value
+                        ids.push(value)
+                    };
+                    $("input[name='student-joined']").attr("value",ids.join(','));
+                }
             });
             var data = transfer.getData('demo1'); //获得右侧数据
-            console.log(data)
+            // console.log(data)
         }, "json");
 });
 
