@@ -1,4 +1,4 @@
-django==2.2.10
+django==2.2.13
 django-password-reset==2.0
 pymysql==0.9.3
 awesome-slugify==1.6.5
