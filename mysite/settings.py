@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -134,10 +135,11 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = '/home/'
 
+# 配置邮箱，以下填入后端发送邮件的邮箱账户
 EMAIL_HOST = 'smtp.tenda.cn'
-EMAIL_USER = 'shiyanshi@tenda.cn'
-EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = '25'
+EMAIL_HOST_USER = 'shiyanshi@tenda.cn'
+EMAIL_HOST_PASSWORD = ""
 DEFAULT_FROM_EMAIL = "shiyanshi@tenda.cn"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -166,3 +168,8 @@ SIMPLEUI_STATIC_OFFLINE = True
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_DEFAULT_THEME = 'ant.design.css'
 SIMPLEUI_LOGO = '../../static/images/logo.png'
+
+# Django-Crontab工作任务
+CRONJOBS = [
+    ('30 5 * * 1-5', 'training.cron.send_course_email')
+]
