@@ -274,7 +274,7 @@ def process_tec(request):
 def my_tec(request):
     # STE添加的优秀实践
     userinfo = UserInfo.objects.get(user=request.user)
-    ste_tecs = TecContent.objects.filter(status="3")
+    ste_tecs = TecContent.objects.filter(status="3", author=userinfo)
     #每页显示10条
     paginator = Paginator(ste_tecs, 10)
     page = request.GET.get('page')
