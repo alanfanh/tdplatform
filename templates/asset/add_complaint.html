@@ -34,7 +34,7 @@
                         <div class="cm_name">
                             <span>客诉名称</span>
                         </div>
-                        <input type="text" class="cmit_name" name="cname" placeholder="请填写客诉名称">
+                        <input type="text" class="cmit_name" name="cname" placeholder="">
                         <div class="cmtype">
                             <span>客诉类型</span>
                         </div>
@@ -48,13 +48,13 @@
                         <div class="pickman">
                             <span>提交人</span>
                         </div>
-                        <input type="text" class="selectman" name="submitter" placeholder="请填写客诉提交人">
+                        <input type="text" class="selectman" name="submitter" placeholder="">
                     </div>
                     <div class="cafloor2">
                         <div class="cm_name">
                             <span>OA流程号</span>
                         </div>
-                        <input type="text" class="cmit_name" name="oa_number" placeholder="请输入OA流程号">
+                        <input type="text" class="cmit_name" name="oa_number" placeholder="">
                         <div class="cmtype">
                             <span>客诉时间</span>
                         </div>
@@ -78,7 +78,7 @@
                         <div class="cm_name">
                             <span>产品型号</span>
                         </div>
-                        <input type="text" class="cmit_name" name="product" placeholder="请输入产品型号">
+                        <input type="text" class="cmit_name" name="product" placeholder="">
                         <div class="cmtype">
                             <span>产品线</span>
                         </div>
@@ -94,13 +94,13 @@
                         <div class="pickman">
                             <span>软件版本信息</span>
                         </div>
-                        <input type="text" class="swversion" name="version" placeholder="请输入软件版本信息">
+                        <input type="text" class="swversion" name="version" placeholder="">
                     </div>
                     <div class="cafloor2">
                         <div class="cm_name">
                             <span>资产编号</span>
                         </div>
-                        <input type="text" class="cmit_name" placeholder="请输入资产编号">
+                        <input type="text" class="cmit_name" placeholder="">
                         <div class="cmtype">
                             <span>严重程度</span>
                         </div>
@@ -131,16 +131,20 @@
                         <input type="text" class="typeselt" name="tester" placeholder="请填写分析负责人">
                         <div class="pickman">
                             <span>分析完成时间</span>
+                            <div style="width:200px;height:32px;top:6px;left:0px;position:relative">
+                            <input type="text" class="layui-input" name="analysis_time" id="analysis_time" style="height:32px">
+                            </div>
                         </div>
-                        <select class="timepick">
-                            <option value="0" selected>请选择分析完成时间</option>
-                        </select>
+                        
+                        {% comment %} <select class="timepick">
+                            <input type="date" class="stepdate" name="analysis_time" placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+                        </select> {% endcomment %}
                     </div>
                     <div class="cafloor2">
                         <div class="cm_name">
                             <span>改进措施</span>
                         </div>
-                        <input type="text" class="cmit_name" placeholder="请输入改进措施">
+                        <input type="text" class="cmit_name" placeholder="">
                         <div class="cmtype">
                             <span>措施状态</span>
                         </div>
@@ -168,13 +172,13 @@
                         <div class="cmtype">
                             <span>计划闭环时间</span>
                         </div>
-                        <input type="date" class="pickdate"  placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+                        <input type="date" class="pickdate"  placeholder="年 /月/日" style="">
                     </div>
                     <div class="cafloor4">
                         <div class="cm_name">
                             <span>问题描述</span>
                         </div>
-                        <textarea id="pbtext" cols="30" rows="10" name="description" placeholder="请简单概括一下客诉的大致内容"></textarea>
+                        <textarea id="pbtext" cols="30" rows="10" name="description" placeholder=""></textarea>
                         <img src="{% static 'images/asset/texttag.png' %}" class="pbttag">
                     </div>
                     <div class="cafllor5">
@@ -200,5 +204,26 @@
         </div>
     </div>
 </div>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //各种基于事件的操作，下面会有进一步介绍
+});
+
+// 日期时间控件
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#analysis_time' //指定元素
+    ,type: 'date'
+    ,format: 'yyyy/MM/dd'
+  });
+
+});
+
+</script>
 
 {% endblock  %}
