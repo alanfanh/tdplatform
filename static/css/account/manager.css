@@ -1042,7 +1042,7 @@
   padding-left:11px;
   padding-top:0px;
   line-height:22px;
-  -webkit-text-fill-color:rgba(0, 0, 0, 0.247058823529412);
+
 }
 .cmtype {
   border-width:0px;
@@ -1059,7 +1059,6 @@
   line-height:22px;
 }
 .typeselt {
-  border-width:0px;
   position:absolute;
   left:366px;
   top:30px;
@@ -1078,7 +1077,6 @@
   text-align:left;
   padding-left:7px;
   padding-bottom:2px;
-  color:#D7D7D7;
   line-height:22px;
 }
 .pickman {
@@ -1096,7 +1094,6 @@
   line-height:22px;
 }
 .selectman {
-    border-width:0px;
     position:absolute;
     left:732px;
     top:30px;
@@ -1115,7 +1112,6 @@
     text-align:left;
     padding-left:7px;
     padding-bottom:2px;
-    color:#D7D7D7;
     line-height:22px;
 }
 .cafloor2 {
@@ -1180,7 +1176,6 @@
     padding-left:11px;
     padding-top:0px;
     line-height:22px;
-    -webkit-text-fill-color:rgba(0, 0, 0, 0.247058823529412);
 }
 .catitle3 {
     border-width:0px;
@@ -1229,7 +1224,6 @@
     text-align:left;
     padding-left:7px;
     padding-bottom:2px;
-    color:#D7D7D7;
     line-height:22px;
 }
 .cafloor3 {
@@ -1269,7 +1263,6 @@
     font-weight: 400;
     font-style: normal;
     font-size: 14px;
-    -webkit-text-fill-color:#D7D7D7;
     text-align: left;
     padding-left: 11px;
     padding-top: 4px;
@@ -1879,7 +1872,6 @@
     height: 32px;
     border-width: 1px;
     border-style: solid;
-    border-color: rgba(217, 0, 27, 1);
     border-radius: 2px;
     /* -webkit-text-fill-color:#D7D7D7; */
     padding-left: 7px;
@@ -1939,7 +1931,7 @@
     top: 1px;
     width: 401px;
     height: 32px;
-    padding-left: 2px;
+    padding-left: 7px;
     padding-bottom: 0px;
     font-size: 13px;
     border-color: rgba(215, 215, 215, 1);
@@ -2010,13 +2002,13 @@
     left: 141px;
     top: 8px;
     width: 400px;
-    height: 170px;
+    height: 130px;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(217, 217, 217, 1);
     border-radius: 4px;
     font-size: 14px;
-    -webkit-text-fill-color:#D7D7D7;
+    /* -webkit-text-fill-color:#D7D7D7; */
     padding-left: 11px;
     padding-top: 4px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
