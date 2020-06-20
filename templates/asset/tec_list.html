@@ -39,13 +39,15 @@
                     <option value="2019">2019</option>
                     <option value="2020">2020</option>
                 </select>
-                <label for="" class="lbselect">标签选择：</label>
+                <label for="" class="lbselect">类别选择：</label>
                 <select class="lbpick" onchange="selectTag()" id="selectTag">
-                    <option value="0">所有标签</option>
-                    <option value="1">用户体验</option>
-                    <option value="2">协议相关</option>
-                    <option value="3">方法创新</option>
-                    <option value="4">自动化</option>
+                    <option value="0">所有类别</option>
+                    <option value="1">工具</option>
+                    <option value="2">方法</option>
+                    <option value="3">流程</option>
+                    <option value="4">规范</option>
+                    <option value="5">机制</option>
+                    <option value="6">要求</option>
                 </select>
                 <input type="text" class="gpsearch" id="search-tec" placeholder="请输入">
                 <img src="{% static 'images/asset/icn_search.png' %}" id="btn1" class="gpsortimg">
@@ -101,8 +103,9 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
       {field: 'id', title: 'ID', width:60, sort: true, }
       ,{field: 'tname', title: '名称', width:380}
       ,{field: 'author', title: '作者', width:100, sort: true}
-      ,{field: 'group', title: '小组', width:120} 
-      ,{field: 'tec_tag', title: '标签', width: 280}
+      ,{field: 'group', title: '小组', width:120}
+      ,{field: 'award', title: '奖项级别', width:100}
+      ,{field: 'tec_tag', title: '类别', width: 180}
       ,{field: 'created_at', title: '编写时间', width: 120, sort: true}
       ,{field: '', title: '操作', toolbar:"#bar", width: 125}
     ]]
