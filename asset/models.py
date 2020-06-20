@@ -30,7 +30,8 @@ class TecTag(models.Model):
 class TecContent(models.Model):
     id = models.AutoField(primary_key=True)
     tname = models.CharField(verbose_name="优秀实践标题", max_length=30)
-    tec_tag = models.ManyToManyField(TecTag, verbose_name="标签", related_name="tec_tag", blank=True)
+    tec_tag = models.ManyToManyField(TecTag, verbose_name="类别", related_name="tec_tag", blank=True)
+    award = models.CharField(verbose_name="奖项", max_length=50, blank=True)
     group = models.ForeignKey(Group, verbose_name="小组", on_delete=models.DO_NOTHING, related_name="group_tec")
     author = models.ForeignKey(UserInfo, verbose_name="作者", on_delete=models.DO_NOTHING, related_name="user_post")
     body = models.TextField(verbose_name="内容概括")
