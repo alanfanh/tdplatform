@@ -269,9 +269,11 @@ def edit_course(request, course_id):
             edit_course.save()
             if joined_people != '':
                 id_list = joined_people.split(',')
-                for id in id_list:
-                    edit_course.student.add(id)
-            # return redirect("training:course_list")
+                # 直接修改多对多关系
+                edit_course.student.set(id_list)
+            else:
+                # 清除所有多对多
+                edit_course.student.clear()
             return redirect("training:course_list")
 
 
