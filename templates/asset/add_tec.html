@@ -26,7 +26,7 @@
             <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="gnbd">
                     <span class="gdname">优秀实践名称：</span>
-                    <input type="text" class="input_gd" id="id_tname" name="tname" placeholder="请输入优秀实践名称">
+                    <input type="text" class="input_gd layui-input" id="id_tname" name="tname" placeholder="">
                     {% comment %} <span class="gdtip">此处不能为空</span> {% endcomment %}
                 </div>
                 <div class="gnbd2">
@@ -44,53 +44,35 @@
                     </select>
                 </div>
                 <div class="gnbd4">
-                    <span class="tttag">文章标签：</span>
+                    <span class="tttag">实践类别：</span>
                     <div class="usrex">
                     {% for tag in tec_tags %}
                         <input type="checkbox" class="tagck" id="{{tag.id}}" name="tec_tag" value="{{tag.tag}}">
                         <span style="padding-right: 22px";>{{tag.tag}}</span>
                     {% endfor %}
                     </div>
-                    {% comment %} <div class="usrex">
-                        <input type="checkbox" class="tagck" name="tag" value="用户体验">
-                        <span>用户体验</span>
-                    </div> 
-                   
-                    <div class="ptl">
-                        <input type="checkbox" class="tagck2" value="协议相关">
-                        <span>协议相关</span>
-                    </div>
-                    <div class="methd">
-                        <input type="checkbox" class="tagck3" value="方法创新">
-                        <span>方法创新</span>
-                    </div>
-                    <div class="autom">
-                        <input type="checkbox" class="tagck2" value="自动化">
-                        <span>自动化</span>
-                    </div>   {% endcomment %}
                 </div>
-                {% comment %} <div class="gnbd5"> {% endcomment %}
-                    {% comment %} <span class="writetm">编写时间：</span>
-                    <div style="color: rgb(153, 153, 153);" class="wtime">{{form.created_at}}</div> {% endcomment %}
-                    {% comment %} <input type="datetime-local" style="color: rgb(153, 153, 153);" name="created_at" required="" id="id_created_at" class="wtime" value="{{ form.created_at.value }}"> {% endcomment %}
-                {% comment %} </div> {% endcomment %}
                 <div class="gnbd5">
+                    <span class="tttag">奖项级别：</span>
+                    <select class="authselt" name="award">
+                        <option value="鼓励奖">鼓励奖</option>
+                        <option value="改进奖">改进奖</option>
+                        <option value="突破奖">突破奖</option>
+                    </select>
+                </div>
+                <div class="gnbd6">
                     <span class="contsum">内容概括：</span>
-                    <textarea class="sumtext" cols="30" rows="10" name="body" placeholder="请简单概括一下优秀实践的大致内容"></textarea>
-                    <img src="{% static 'images/asset/texttag.png' %}" class="texttag">
+                    <textarea class="sumtext" cols="30" rows="10" name="body" placeholder=""></textarea>
+                    {% comment %} <img src="{% static 'images/asset/texttag.png' %}" class="texttag"> {% endcomment %}
                 </div>
                 <div class="gnbd7">
                     <span class="contsum">上传附件：</span>
                     <div class="upextra">
                         {{form.file}}
                     </div>
-                    {% comment %} <button class="upextra">
-                        <img src="images/4/uparrow.png" class="uparr">
-                        <span class="ldtext">点击上传</span>
-                    </button> {% endcomment %}
                     <span class="fileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
                     <button id="gahandin" type="submit">
-                        <span class="gahdin">提 交</span>
+                        提 交
                         {% comment %} <img src="{% static 'images/account/subm.png' %} " class="gahdin_img"> {% endcomment %}
                     </button>
                     <button id="garevoke">取消</button>
