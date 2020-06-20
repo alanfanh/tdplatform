@@ -5,90 +5,6 @@
 {% block title %}添加培训课程{% endblock  %}
 
 {% block content %}
-{% comment %} <link rel="stylesheet" href="{% static 'css/training/training.css' %}">
-<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-
-<div class="all-container">
-    <div class="uk-container">
-        <div class="sider-bar">
-            <div class="bar1">
-            <!--改动-->
-               <div class="menu1_icon"></div>
-             <!--改动-->
-                <a href="#" class="menu1 btn-default" role="button">培训</a>
-            </div>
-            <div class="bar2">
-                <a href="#" class="menu2 btn-default" role="button">积分</a>
-            </div>
-        </div>
-        <div class="mid">
-            <img src="{% static 'images/training/mid.svg' %}" alt="" class="separate">
-        </div>
-        <div class="content">
-            <div class="title">
-                <span>添加培训</span>
-            </div>
-            <div class="course-name default">
-                <span>培训名称：</span>
-            </div>
-            <div class="cname1">
-                <input type="text" id="cname2" placeholder="请输入培训名称">
-            </div>
-            <div class="course-time default">
-                <span>培训时间：</span>
-            </div>
-            <div class="ctime1">
-                <input type="datetime-local" id="ctime2">
-            </div>
-            <div class="main-people default">
-                <span>主讲人：</span>
-            </div>
-            <div class="mpeople1">
-                <select id="mpeople2" placeholder="请选择主讲人"></select>
-            </div>
-            <div class="course-member default">
-                <span>参与成员：</span>
-            </div>
-            <div class="cmember1">
-                <select id="cmember2"></select>
-            </div>
-            <div class="course-address default">
-                <span>培训地址：</span>
-            </div>
-            <div class="address1">
-                <input type="text" id="address2" placeholder="请输入培训地址">
-            </div>
-            <div class="course-range default">
-                <span>培训范围：</span>
-            </div>
-            <div class="range1">
-                <select id="range2"></select>
-            </div>
-            <div class="course-content default">
-                <span>内容概括：</span>
-            </div>
-            <div class="content1">
-                <textarea cols="55" rows="10" id="content2" οnfοcus="document.getElementById('note').style.display='none'" οnblur="if(value=='')document.getElementById('note').style.display='block'" ></textarea>
-                <div id="note">
-                    <font>请简单概括一下培训记录的大致内容</font>
-                </div>
-            </div>
-            <div class="course-file default">
-                <span>上传附件：</span>
-            </div>
-            <div class="file1 default">
-                <input type="file" id="file2">
-                <span class="file-tip">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
-            </div>
-            <div class="course-button">
-                <button id="course-save">提交</button>
-                <button id="course-cancle">取消</button>
-            </div>
-        </div>
-    </div>
-</div> {% endcomment %}
-
-
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
 <link rel="stylesheet" href="{% static 'css/training/train.css' %}">
@@ -111,7 +27,7 @@
             <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="gnbd">
                     <span class="taname">培训名称：</span>
-                    <input type="text" class="course-name" name="cname" placeholder="请输入培训名称">
+                    <input type="text" class="course-name" name="cname" placeholder="">
                 </div>
                 <div class="tabd2">
                     <span class="taname">培训时间：</span>
@@ -132,7 +48,7 @@
                     </select>
                 </div>
                 <div class="tabd4">
-                    <span class="taname">参与成员：</span>
+                    <span class="taname">签到成员：</span>
                     {% comment %} <select class="tampick">
                         <option value="0"></option>
                     </select> {% endcomment %}
@@ -144,7 +60,7 @@
                 </div>
                 <div class="tabd5">
                     <span class="taname">培训地址：</span>
-                    <input type="text" class="ittaname" name="address" placeholder="请输入培训地址">
+                    <input type="text" class="ittaname" name="address" placeholder="">
                 </div>
                 <div class="tabd6">
                     <span class="taname">培训范围：</span>
@@ -161,17 +77,13 @@
                 </div>
                 <div class="tabd7">
                     <span class="tacontsum">内容概括：</span>
-                    <textarea class="tasumtext" cols="30" rows="10" name="cdescription" placeholder="请简单概括一下培训记录的大致内容"></textarea>
+                    <textarea class="tasumtext" cols="30" rows="10" name="cdescription" placeholder=""></textarea>
                 </div>
                 <div class="tabd8">
                     <span class="taname">上传附件：</span>
                     <div class="taupextra">
                         {{form.file_name}}
                     </div>
-                    {% comment %} <button class="taupextra">
-                        <img src="images/4/uparrow.png" class="tauparr">
-                        <span class="ldtext">点击上传</span>
-                    </button> {% endcomment %}
                     <span class="tafileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
                     <input type="submit" id="tahandin" value="提交">
                     <button id="tarevoke"  onclick="window.history.back()">取消</button>

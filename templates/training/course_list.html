@@ -367,6 +367,26 @@ $("#btn3").on('click', function() {
     }
 })
 
+// 绑定回车键、搜索课程
+$(document).bind('keyup', function(e) {
+    if (event.keyCode == 13) {
+        var search_key = $("#search-course").val()
+        if(search_key != "") {
+            layui.use(['table'], function(){
+                var table = layui.table  // 表格
+                table.reload('train_table', {
+                    url: '/training/search-course/'
+                    ,where: { search: search_key } //设定异步数据接口的搜索的关键字
+                    //,height: 300
+                });
+            });
+        } else {
+            window.location.href="/training/course-list/"
+        }
+    }
+});
+
+
 /*
 function delete_course(the, course_id){
     var name = $(the).parents("tr").children("td").eq(1).text();
