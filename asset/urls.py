@@ -26,7 +26,7 @@ urlpatterns = [
     path('add-tec/', views.add_tec, name="add_tec"),
     path('download-file/<int:tec_id>', views.download_tec_file, name="down_tec_file"),
     # 处理ajax返回json数据
-    path('group_user', views.group_user, name="group_user"),
+    path('group-user/', views.group_user, name="group_user"),
     path('tec-list-data/', views.tec_list_data, name="tec_list_data"),
     path('complaint-list-data/', views.complaint_list_data, name="complaint_list_data"),
     path('filter-tec-range/', views.filter_tec_range, name="filter_tec_range"),

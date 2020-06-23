@@ -107,7 +107,7 @@ function handle() {
     var group =  $("#id_group").val()
     $.ajax({
         type:"post",
-        url:"../group_user",
+        url:"/asset/group-user/",
         data:{"group_id":group},
         datatype:'json',
         success: function(e) {
@@ -135,7 +135,7 @@ function change_teacher() {
     var group = $("#groups-user").val()
     $.ajax({
         type: "post",
-        url: "../../asset/group_user",
+        url: "/asset/group-user/",
         data: { "group_id": group },
         datatype: 'json',
         success: function (e) {
