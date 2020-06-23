@@ -150,13 +150,19 @@
     width: 1000px;
     height: 60px;
 }
-.tdrelist {
-    position: absolute;
+.course-content {
+    position: relative;
     left: 33px;
-    top: 360px;
+    top:325px;
+    width: 1000px;
+}
+.tdrelist {
+    position: relative;
+    left: 33px;
+    top: 400px;
     width: 81px;
     height: 32px;
-    background-color: rgba(16, 142, 233, 1);
+    background-color:#FF8F00;
     border: none;
     border-radius: 3px;
     font-weight: 400;

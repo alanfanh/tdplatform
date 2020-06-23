@@ -6,8 +6,6 @@
     left:0px;
     top:369px;
 }
-
-
 .mp8 {
     width: 86px;
     text-align: left; 
@@ -548,7 +546,7 @@
     background-color:rgba(244, 244, 244, 1);
   }
   .Cp_title {
-    position:absolute;
+    position: relative;
     left:25px;
     top:17px;
     width:120px;
@@ -1848,18 +1846,17 @@
     font-style:normal;
 }
 .gnbd {
-    position: absolute;
-    width: 600px;
+    position: relative;
+    width: 500px;
     height: 40px;
-    left: 0px;
-    top: 80px;
+    margin-bottom: 15px;
 }
 .gdname {
-    position: absolute;
-    left: 49px;
+    position: relative;
+    /* left: 49px;
     top: 12px;
     width: 91px;
-    height: 17px;
+    height: 17px; */
     font-family: 'PingFangSC-Regular', 'PingFang SC';
     font-weight: 400;
     font-size: 13px;
@@ -1878,33 +1875,14 @@
     padding-top: 2px;
     font-size: 14px;
 }
-.gdtip {
-    position: absolute;
-    left: 141px;
-    top: 37px;
-    width: 294px;
-    height: 24px;
-    font-family: 'PingFangSC-Regular', 'PingFang SC';
-    font-weight: 400;
-    font-size: 14px;
-    color: #D9001B;
-    line-height: 22px;
-}
+
 .gnbd2 {
-    position: absolute;
-    width: 600px;
+    position: relative;
+    width: 500px;
     height:40px;
-    left: 0px;
-    top: 148px;
+    margin-bottom: 15px;
 }
-.auth {
-    position: absolute;
-    left: 102px;
-    top: 8px;
-    width: 40px;
-    height: 18px;
-    font-size: 13px;
-}
+
 .authselt {
     position: absolute;
     left: 141px;
@@ -1919,11 +1897,10 @@
     /* color: #D7D7D7; */
 }
 .gnbd3 {
-    position: absolute;
-    width: 600px;
+    position: relative;
+    width: 500px;
     height:40px;
-    left: 0px;
-    top: 204px;
+    margin-bottom: 15px;
 }
 .atgpselt {
     position: absolute;
@@ -1938,11 +1915,10 @@
     border-radius: 2px;
 }
 .gnbd4 {
-    position: absolute;
-    width: 600px;
+    position: relative;
+    width: 500px;
     height:40px;
-    left: 0px;
-    top: 254px;
+    margin-bottom: 40px;
 }
 .tttag {
     position: absolute;
@@ -1953,11 +1929,10 @@
     font-size: 13px;
 }
 .gnbd5 {
-    position: absolute;
-    width: 600px;
+    position: relative;
+    width: 500px;
     height:40px;
-    left: 0px;
-    top: 306px;
+    margin-bottom: 15px;
 }
 .writetm {
     position: absolute;
@@ -1983,48 +1958,33 @@
     padding-left: 3px;
 }
 .gnbd6 {
-    position: absolute;
-    width: 600px;
-    height:130px;
-    left: 0px;
-    top: 355px;
+    position: relative;
+    width: 500px;
+    height: 170px;
+    margin-bottom: 15px;
 }
 .contsum {
-    position: absolute;
-    left: 76px;
+    position: relative;
+    left: 35px;
     top: 8px;
     width: 65px;
     height: 17px;
     font-size: 13px;
 }
 .sumtext {
-    position: absolute;
-    left: 141px;
-    top: 8px;
-    width: 400px;
-    height: 130px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(217, 217, 217, 1);
-    border-radius: 4px;
-    font-size: 14px;
-    /* -webkit-text-fill-color:#D7D7D7; */
-    padding-left: 11px;
-    padding-top: 4px;
-    font-family: 'PingFangSC-Regular', 'PingFang SC';
-    font-weight: 400;
-    resize: none; 
+
+    height: 170px;
+
 }
 .gnbd7 {
-    position: absolute;
+    position: relative;
     width: 600px;
-    height:130px;
+    height: 70px;
     left: 0px;
-    top: 506px;
 }
 .upextra {
     position: absolute;
-    left: 141px;
+    left: 109px;
     top: 7px;
     border-width: 1px;
     border-style: solid;
@@ -2037,7 +1997,7 @@
 }
 .fileformt {
     position: absolute;
-    left: 141px;
+    left: 109px;
     top: 30px;
     width: 284px;
     height: 18px;
@@ -2723,3 +2683,9 @@
     text-align: center;
     line-height: 20px;
   }
+
+.site-text {
+  position: relative;
+  padding: 25px;
+  margin-top: 20px;
+}
