@@ -274,23 +274,25 @@ def process_tec(request):
 def my_tec(request):
     # STE添加的优秀实践
     userinfo = UserInfo.objects.get(user=request.user)
-    ste_tecs = TecContent.objects.filter(status="3", author=userinfo)
-    #每页显示10条
+    ste_tecs = TecContent.objects.filter(author=userinfo)
+    # ste_tecs = TecContent.objects.filter(status="3", author=userinfo)
+    # 每页显示10条
     paginator = Paginator(ste_tecs, 10)
+    # 获取前台传入后台的page值
     page = request.GET.get('page')
     try:
-        groupnum = paginator.page(page)
+        cur_tecs = paginator.page(page)
         # 获取当前页面，实现当前页条目序号
         current_page = int(page)
         strat = (current_page-1)*10
     except PageNotAnInteger:
         # 如果请求的页数不是整数, 返回第一页。
-        groupnum = paginator.page(1)
+        cur_tecs = paginator.page(1)
     except EmptyPage:
         # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-        groupnum = paginator.page(paginator.num_pages)
+        cur_tecs = paginator.page(paginator.num_pages)
     template_view = "asset/my_tec.html"
-    return render(request, template_view, {"userinfo":userinfo,"ste_tecs":ste_tecs,"groupnum": groupnum})
+    return render(request, template_view, {"userinfo": userinfo, "ste_tecs": ste_tecs, "cur_tecs": cur_tecs})
 
 @login_required(login_url="/account/login")
 def tec_list(request):
