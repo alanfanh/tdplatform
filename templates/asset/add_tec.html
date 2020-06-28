@@ -23,63 +23,189 @@
             <div class="Cp_title">
                 <span class="Cust_Com">添加优秀实践</span>
             </div>
-            <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
-                <div class="gnbd">
-                    <span class="gdname">优秀实践名称：</span>
-                    <input type="text" class="input_gd layui-input" id="id_tname" name="tname" placeholder="">
-                    {% comment %} <span class="gdtip">此处不能为空</span> {% endcomment %}
-                </div>
-                <div class="gnbd2">
-                    <span class="auth">小组：</span>
-                    <select class="atgpselt"  id="id_group" name="group"  onchange="handle();">
-                        {% for group in groups %}
-                        <option value="{{group.id}}">{{group.name}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="gnbd3">
-                    <span class="auth">作者：</span>
-                    <select class="authselt" id="id_author" name="author">
-                        <option value="0">请选择作者</option>
-                    </select>
-                </div>
-                <div class="gnbd4">
-                    <span class="tttag">实践类别：</span>
-                    <div class="usrex">
-                    {% for tag in tec_tags %}
-                        <input type="checkbox" class="tagck" id="{{tag.id}}" name="tec_tag" value="{{tag.tag}}">
-                        <span style="padding-right: 22px";>{{tag.tag}}</span>
-                    {% endfor %}
+            <div class="site-text">
+                <form action="." method="post" class="layui-form" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="gnbd">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:110px">实践名称：</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="tname" lay-verify="required" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="gnbd5">
-                    <span class="tttag">奖项级别：</span>
-                    <select class="authselt" name="award">
-                        <option value="鼓励奖">鼓励奖</option>
-                        <option value="改进奖">改进奖</option>
-                        <option value="突破奖">突破奖</option>
-                    </select>
-                </div>
-                <div class="gnbd6">
-                    <span class="contsum">内容概括：</span>
-                    <textarea class="sumtext" cols="30" rows="10" name="body" placeholder=""></textarea>
-                    {% comment %} <img src="{% static 'images/asset/texttag.png' %}" class="texttag"> {% endcomment %}
-                </div>
-                <div class="gnbd7">
-                    <span class="contsum">上传附件：</span>
-                    <div class="upextra">
-                        {{form.file}}
+                    <div class="gnbd2">
+                        <div class="layui-form-item">
+                            
+                            <label class="layui-form-label" style="width:110px">小组：</label>
+                            <div class="layui-input-block">
+                                <select lay-filter="group" class="atgpselt" lay-verify="required|number" id="id_group" name="group"  onchange="handle();">
+                                    {% for group in groups %}
+                                    <option value="{{group.id}}">{{group.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                    <span class="fileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
-                    <button id="gahandin" type="submit">
-                        提 交
-                        {% comment %} <img src="{% static 'images/account/subm.png' %} " class="gahdin_img"> {% endcomment %}
-                    </button>
-                    <button id="garevoke">取消</button>
-                </div>
-            </form>
+                    <div class="gnbd3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:110px">作者：</label>
+                            <div class="layui-input-block">
+                                <select lay-filter="author" class="authselt" id="id_author" name="author" placeholder="请选择作者" lay-verify="required">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gnbd4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:110px">实践类别：</label>
+                            <div class="layui-input-block">
+                            {% for tag in tec_tags %}
+                                <input type="checkbox" id="{{tag.id}}" name="tec_tag" value="{{tag.tag}}" title="{{tag.tag}}" lay-skin="primary" lay-verify="otherReq">
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gnbd5">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:110px">奖项级别：</label>
+                            <div class="layui-input-block">
+                                <select class="authselt" name="award" lay-verify="required">
+                                    <option value="鼓励奖">鼓励奖</option>
+                                    <option value="改进奖">改进奖</option>
+                                    <option value="突破奖">突破奖</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gnbd6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:110px">内容概括：</label>
+                            {% comment %} <span class="contsum">内容概括：</span> {% endcomment %}
+                            <div class="layui-input-block">
+                                <textarea class="sumtext layui-textarea" cols="30" rows="10" name="body" placeholder="" lay-verify="required"></textarea>
+                            </div>
+                            {% comment %} <img src="{% static 'images/asset/texttag.png' %}" class="texttag"> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="gnbd7">
+                        <span class="contsum">上传附件：</span>
+                        <div class="upextra">
+                            {{form.file}}
+                        </div>
+                        <span class="fileformt">支持扩展名：.ppt .doc .xls .xlsx .rar .zip .pdf .md。</span>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" style="background-color:#FF8F00" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  form.on('select(group)', function(data) {
+      var value = data.value
+      //console.log(data.elem);  //得到select原始DOM对象
+      //console.log(data.value); //得到被选中的值
+      //console.log(data.othis); //得到美化后的DOM对象
+
+      $.ajax({
+        type:"post",
+        url:"/asset/group-user/",
+        data:{"group_id": value},
+        datatype:'json',
+        success: function(e) {
+            if(e!=null){
+                var author = $("#id_author");
+                var dataObj = eval(e);
+                var dataArr = dataObj.data;
+                author.empty();
+                // console.log(dataArr)
+                if (dataArr!=null) {
+                    for(var i=0;i<dataArr.length;i++){
+                        var item =dataArr[i];
+                        author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                    };
+                } else {
+                    author.append("<option value = '-1'>"+"成员为空"+"</option>");
+                }
+            }
+            layui.form.render("select");
+        }
+        
+      });
+  });
+  // layui.form.render("select", 'author');
+
+  //各种基于事件的操作，下面会有进一步介绍
+  form.verify({
+    // 验证多选框不能全为空
+    otherReq: function(value,item){
+      var $ = layui.$;
+      var verifyName=$(item).attr('name')
+        , verifyType=$(item).attr('type')
+        ,formElem=$(item).parents('.layui-form')//获取当前所在的form元素,如果存在的话
+        ,verifyElem=formElem.find('input[name='+verifyName+']')//获取需要校验的元素
+        ,isTrue= verifyElem.is(':checked')//是否命中校验
+        ,focusElem = verifyElem.next().find('i.layui-icon');//焦点元素
+        if(!isTrue || !value){
+            //定位焦点
+            focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
+            //对非输入框设置焦点
+            focusElem.first().attr("tabIndex","1").css("outline","0").blur(function() {
+                focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
+            }).focus();
+            return '必填项不能为空';
+        }
+    }
+  });
+
+});
+
+// 进入页面后，即根据小组 更新 作者选择框数据
+window.onload=function() {
+    layui.use('form', function(){
+        var form = layui.form;
+        var group = $("#id_group").val()
+        console.log('test',group)
+        $.ajax({
+            type:"post",
+            url:"/asset/group-user/",
+            data:{"group_id": group},
+            datatype:'json',
+            success: function(e) {
+                if(e!=null){
+                    var author = $("#id_author");
+                    var dataObj = eval(e);
+                    var dataArr = dataObj.data;
+                    author.empty();
+                    // console.log(dataArr)
+                    if (dataArr!=null) {
+                        for(var i=0;i<dataArr.length;i++){
+                            var item =dataArr[i];
+                            author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                        };
+                    } else {
+                        author.append("<option value = '-1'>"+"成员为空"+"</option>");
+                    }
+                }
+                form.render("select");
+            }
+            
+        });
+    })
+}
+
+// 内容框粗体显示
+$('[name=body]').focus(function(){
+    $(this).css("font-weight","bold");
+});
+</script>
 
 {% endblock  %}
