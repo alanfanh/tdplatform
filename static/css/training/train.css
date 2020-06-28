@@ -327,11 +327,11 @@
     padding-top: 2px;
     font-size: 14px;
 }
-.tabd2 {
-    position: absolute;
-    width: 700px;
+.tabd {
+    position: relative;
+    width: 500px;
     height: 40px;
-    top: 126px;
+    margin-bottom: 10px;
 }
 .tatm {
     position: absolute;
@@ -348,12 +348,7 @@
     border-radius: 2px;
     border-color: rgba(215, 215, 215, 1);
 }
-.tabd3 {
-    position: absolute;
-    width: 700px;
-    height: 40px;
-    top: 172px;
-}
+
 .taauth {
     position: absolute;
     left: 63px;
@@ -364,9 +359,9 @@
 }
 .taauthpick {
     position: absolute;
-    left: 340px;
+    left: 325px;
     top: 5px;
-    width: 175px;
+    width: 190px;
     height: 32px;
     border-width: 1px;
     border-style: solid;
@@ -381,7 +376,7 @@
     position: absolute;
     left: 115px;
     top: 5px;
-    width: 201px;
+    width: 190px;
     height: 32px;
     border-width: 1px;
     border-style: solid;
@@ -391,15 +386,8 @@
     padding-bottom: 2px;
     font-size: 14px;
 }
-.tabd4 {
-    position: absolute;
-    width: 700px;
-    height: 40px;
-    top: 266px;
-}
 
 .tampick {
-
     width: 401px;
     height: 32px;
     border-width: 1px;
@@ -436,24 +424,24 @@
     line-height: 14px;
     font-family: Helvetica,Arial;
 }
-.tabd5 {
-    position: absolute;
+.tabd-joined {
+    position: relative;
     width: 700px;
-    height: 40px;
-    top: 218px;
+    height: 365px;
+    /* top: 218px; */
+    margin-bottom: 10px;
 }
-.tabd6 {
+.tabd-range {
     position: absolute;
     width: 300px;
     height: 40px;
     left: 240px;
-    top: 218px;
 }
 .tarang {
     position: absolute;
-    left: 116px;
+    left: 113px;
     top: 5px;
-    width: 160px;
+    width: 162px;
     height: 32px;
     border-width: 1px;
     border-style: solid;
@@ -462,11 +450,12 @@
     padding-left: 2px;
     font-size: 13px;
 }
-.tabd7 {
-    position: absolute;
+.tabd-content {
+    position: relative;
     width: 700px;
     height: 100px;
-    top: 642px;
+    /* top: 642px; */
+    margin-bottom: 10px;
 }
 .tacontsum {
     position: absolute;
@@ -499,11 +488,11 @@
     height: 4px;
     transform: rotate(315deg);
   }
-  .tabd8 {
-    position: absolute;
+.tabd-file {
+    position: relative;
     width: 600px;
     height: 130px;
-    top: 750px;
+    /* top: 750px; */
 }
 .taupextra {
     position: absolute;
@@ -726,4 +715,8 @@
 .tmsums {
     position:relative;
     right: 35px;
+}
+.add-course {
+    position: relative;
+    padding: 25px;
 }

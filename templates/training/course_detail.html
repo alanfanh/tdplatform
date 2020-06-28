@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}添加培训课程{% endblock %}
+{% block title %}课程详情{% endblock %}
 
 {% block content %}
 
@@ -43,7 +43,9 @@
             </div>
             <div class="tdcont">
                 <span class="cdname">参加成员：{% for username in course.student.all %}{{username.realname}} {% endfor %}</span>
-                <span class="cdoa">内容概述：{{course.cdescription}}</span>
+            </div>
+            <div class="course-content">
+                <span>内容概述：{{course.cdescription}}</span>
             </div>
             <button class="tdrelist" onclick="window.history.back()">返回列表</button>
         </div>
