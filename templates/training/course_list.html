@@ -5,118 +5,6 @@
 {% block title %}培训管理{% endblock  %}
 
 {% block content %}
-{% comment %} <link rel="stylesheet" href="{% static 'css/training/training.css' %}">
-<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-<div class="all-container">
-    <div class="uk-container">
-        <div class="side-bar">
-            <div class="bar1">
-            <!--改动-->
-               <div class="menu1_icon"></div>
-             <!--改动-->
-                <a href="#" class="menu1 btn-default" role="button">培训</a>
-            </div>
-            <div class="bar2">
-                <a href="#" class="menu2 btn-default" role="button">积分</a>
-            </div>
-        </div>
-        <div class="mid">
-            <img src="{% static 'images/training/mid.svg' %}" alt="" class="separate">
-        </div>
-        <div class="content">
-            <div class="title">
-                <span>培训</span>
-            </div>
-            <div class="group1 default">
-                <span>搜索范围：</span>
-            </div>
-            <div class="group2 default">
-                <select id="group-select" class="department form-control default" style="font-size: 13px;">
-                    <option selected value="测试部" class="select_option">测试部</option>
-                    <option value="1" class="">1</option>
-                </select>
-            </div>
-            <div class="time1 default">
-                <span>时间选择：</span>
-            </div>
-            <div class="time2 default">
-                <select id="time-year" class="year form-control default" style="font-size: 13px;">
-                    <option value="2020">2020</option>
-                </select>
-            </div>
-            <div class="search default">
-                <input type="text" id="search1" value="请输入">
-            </div>
-            <div class="addbutton">
-                {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
-                <a href="{% url 'training:add_course' %}"><button id="add">添加</button></a>
-                {% endif %}
-            </div>
-            <div class="table-train">
-                <table class="table table-text table-hover">
-                    <thead class="thead-style">
-                        <tr>
-                            <th><input type="checkbox" id=all onclick=""></th>
-                            <th>序号</th>
-                            <th>名称</th>
-                            <th>培训范围</th>
-                            <th>主讲人</th>
-                            <th>参加成员</th>
-                            <th>培训地址</th>
-                            <th>培训时间</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox" name="box" onclick=""></td>
-                            <td>1</td>
-                            <td>RF框架-架构篇</td>
-                            <td>商用测试组</td>
-                            <td>李测试</td>
-                            <td>19人</td>
-                            <td>5楼5号会议室</td>
-                            <td>2019/12/08</td>
-                            <td>
-                                <div class="operate">
-                                    <a name="look-over">查看</a>
-                                    <a name="download">下载</a>
-                                    <img src="{% static 'images/training/button.png' %}" href="#" class="img-button">
-                                </div>
-                            </td>
-                        </tr>
-                        {% for course in courses %}
-                        <tr>
-                            <td><input type="checkbox" name="box" onclick=""></td>
-                            <td>{{forloop.counter}}</td>
-                            <td>{{course.cname}}</td>
-                            <td>{{course.range}}</td>
-                            <td>{{course.teacher}}</td>
-                            <td></td>
-                            <td>{{course.address}}</td>
-                            <td>{{course.course_time}}</td>
-                            <td>
-                                <div class="operate">
-                                    <a name="look-over">查看</a>
-                                    <a name="download">下载</a>
-                                    <img src="{% static 'images/training/button.png' %}" href="#" class="img-button">
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="page-foot">
-                <div class="data-num"></div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-{% endcomment %}
-
-
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
 <link rel="stylesheet" href="{% static 'css/training/train.css' %}">
@@ -144,120 +32,21 @@
                     <option value="接入测试组">接入测试组</option>
                     <option value="家用测试组">家用测试组</option>
                     <option value="商用测试组">商用测试组</option>
-                    <option value="便携测试组">便携测试组</option>
+                    <option value="智能外设测试组">智能外设测试组</option>
                     <option value="资料开发组">资料开发组</option>
-                    <option value="OEM测试组">OEM测试组</option>
+                    <option value="ISP运营商测试组">ISP运营商测试组</option>
                 </select>
                 <label for="" class="gptime">时间选择：</label>
                 <select class="gptimepick" onchange="selectCTime()" id="selectCTime">
-                    <option value="2019">2019</option>
+                    <option value="All">所有</option>
                     <option value="2020">2020</option>
                 </select>
-                <input type="text" class="trsearch" placeholder="请输入" id="search-course">
+                <input type="text" class="trsearch" placeholder="请输入课程名, 培训地点" id="search-course">
                 <img src="{% static 'images/asset/icn_search.png' %}" id="btn3" class="trsortimg">
                 {% if userinfo.role_id == 3 or userinfo.role_id == 4 %}
                 <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">新增</button></a>
                 {% endif %}
             </div>
-            {% comment %}
-            <table class="tntable" align="center">
-                <thead>
-                    <tr class="gd_th">
-                        <td class="tntd1">
-                            <input type="checkbox" class="tnck">
-                        </td>
-                        <td class="tntd2">序号</td>
-                        <td class="tntd3">名称</td>
-                        <td class="tntd4">培训范围</td>
-                        <td class="tntd5">主讲人</td>
-                        <td class="tntd6">参加成员</td>
-                        <td class="tntd7">培训地址</td>
-                        <td class="tntd8">培训时间</td>
-                        <td class="tntd9">操作</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="tntr">
-                        <td class="tntd1">
-                            <input type="checkbox" class="tnck">
-                        </td>
-                        <td>1</td>
-                        <td>
-                            <span class="sign"></span>
-                            <span class="Cust_cont">RF框架-架构篇</span>
-                        </td>
-                        <td>商用测试组</td>
-                        <td>李测试</td>
-                        <td>
-                            <span>19人</span>
-                            <span class="sign"></span>
-                        </td>
-                        <td>5楼5号会议室</td>
-                        <td>2019/12/08</td>
-                        <td>
-                            <span class="dload"><a href="">查看</a> | <a href="">下载</a></span>
-                            <img src="{% static 'images/asset/see.png' %}" class="see_dload">
-                        </td>
-                    </tr>
-                    {% for course in courses %}
-                    <tr class="tntr">
-                        <td class="tntd1">
-                            <input type="checkbox" class="tnck">
-                        </td>
-                        <td>{{forloop.counter}}</td>
-                        <td>
-                            <span class="sign"></span>
-                            <span class="Cust_cont">{{course.cname}}</span>
-                        </td>
-                        <td>{{course.range}}</td>
-                        <td>{{course.teacher.realname}}</td>
-                        <td>
-                            <span>{{course.student.all.count}}人</span>
-                            <span class="sign"></span>
-                        </td>
-                        <td>{{course.address}}</td>
-                        <td>{{course.course_time|date:"Y/m/d H:i"}}</td>
-                        <td>
-                            <span class="dload">
-                                <a href="{% url 'training:course_detail' course.id %}">查看</a> | {% if course.file_name != "" %}<a href="{% url 'training:download_file' course.id %}">下载</a>{% endif %}
-                            </span>
-                            <a onclick="showTipbox(this)" style="position: relative;">
-                                <img src="{% static 'images/asset/see.png' %}" class="see_dload">
-                                <div class="tip_box" style="display: none;">
-                                    <div class="tip_content">
-                                        <span>删除</span>
-                                        <span>编辑</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    <tr class="tntr">
-                        <td class="tntd1">
-                            <input type="checkbox" class="tnck">
-                        </td>
-                        <td>8</td>
-                        <td>
-                            <span class="sign"></span>
-                            <span class="Cust_cont">实验室资产管理平台定时发送邮件实现物品催…</span>
-                        </td>
-                        <td>自动化开发组</td>
-                        <td>李家用</td>
-                        <td>
-                            <span>10人</span>
-                            <span class="sign"></span>
-                        </td>
-                        <td>5楼5号会议室</td>
-                        <td>2019/12/08</td>
-                        <td>
-                            <span class="dload">查看 | 下载</span>
-                            
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            {% endcomment %}
             <div style="position:absolute;left:25px;top:118px;"><table id="train_table" lay-filter="test"></table></div>
         </div>
     </div>
