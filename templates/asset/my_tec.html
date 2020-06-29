@@ -26,7 +26,7 @@
                 <span>80</span>
             </div>
             <div class="hv">
-                <span>29</span>
+                <span>{{ste_tecs.count}}</span>
             </div>
             <div class="accum">
                 <span>积分</span>
@@ -86,7 +86,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for tec in ste_tecs %}
+                {% for tec in cur_tecs %}
                 <tr class="Pra_tr">
                     <td class="ep2">{{forloop.counter}}</td>
                     <td class="ep3">
@@ -112,8 +112,8 @@
                         {% endif %}
                     </td>
                     <td class="ep9">
-                        <span class="dload">查看 | 下载</span>
-                        <img src="{% static 'images/asset/see.png' %} " class="see_dload">
+                        <span class="dload"><a href="{% url 'asset:tec_detail' tec.id %}">查看</a> | <a href="{% url 'asset:down_tec_file' tec.id %}">下载</a></span>
+                        {% comment %} <img src="{% static 'images/asset/see.png' %} " class="see_dload"> {% endcomment %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -126,15 +126,15 @@
 </div>
 <script src="{% static 'layui/layui.js' %}"></script>
 <script>
-    layui.use('laypage', function () {
-        var laypage = layui.laypage;
+layui.use('laypage', function () {
+    var laypage = layui.laypage;
 
-        //执行一个laypage实例
-        laypage.render({
-            elem: 'tec_page' //注意，这里的 test1 是 ID，不用加 # 号
-            , limit: 10
-            , count: {{ ste_tecs.count }} //数据总数，从服务端得到
-        , curr: 1
+    //执行一个laypage实例
+    laypage.render({
+        elem: 'tec_page' //注意，这里的 test1 是 ID，不用加 # 号
+        , limit: 10
+        , count: {{ ste_tecs.count }} //数据总数，从服务端得到
+        , curr: {{ cur_tecs.number }}
         , hash: 'fenye'
         , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
         , jump: function (obj, first) {

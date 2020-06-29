@@ -37,7 +37,7 @@
                 <span class="cdname">名称：{{tec.tname}}</span>
                 <span class="cdtype">作者：    {{tec.author.realname}}</span>
                 <span class="hdname">所在小组：{{tec.author.group}}</span>
-                <span class="cdoa">标签：{{tec.tag}}</span>
+                <span class="cdoa">类别：{% for tag in tec.tec_tag.all %} {{tag.tag}} {% endfor %}</span>
                 <span class="cdtime">编写时间：{{tec.created_at|date:"Y/m/d"}}</span>
             </div>
             <div class="gdcont">
@@ -46,7 +46,7 @@
                 <span class="gdextext">附件：{{tec.file.name}}</span>
             </div>
             <button class="gdrelist" onclick="window.history.back()">返回列表</button>
-            <button class="gdfile">下载附件</button>
+            <a href="{% url 'asset:down_tec_file' tec.id %}"><button class="gdfile">下载附件</button></a>
         </div>
     </div>
 </div>
