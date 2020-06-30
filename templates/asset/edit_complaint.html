@@ -23,7 +23,7 @@
             <div class="Cp_title">
                 <span class="Cust_Com">编辑客诉</span>
             </div>
-            <form action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+            <form class="layui-form" action="{{complaint.id}}" method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="catitle">
                     <div class="cainfo_title">
                         <span>基本信息</span>
@@ -34,40 +34,44 @@
                         <div class="cm_name">
                             <span>客诉名称</span>
                         </div>
-                        <input type="text" class="cmit_name" name="cname" placeholder="请填写客诉名称" value="{{complaint.cname}}">
+                        <textarea class="layui-textarea cmit_name" lay-verify="cname" name="cname"  placeholder="请填写客诉名称" >{{complaint.cname}}</textarea>
                         <div class="cmtype">
                             <span>客诉类型</span>
                         </div>
-                        <select class="typeselt" name="type">
-                            <option value="{{complaint.type}}" selected="selected">{{complaint.type}}</option>
-                            <option value="品质">品质</option>
-                            <option value="新需求">新需求</option>
-                            <option value="软件Bug">软件Bug</option>
-                            <option value="硬件Bug">硬件Bug</option>
-                            <option value="重复Bug">重复Bug</option>
-                        </select>
+						<div class="layui-form-item typeselt">
+	                        <select name="type" lay-filter="system_type1" lay-verify="type">
+	                            <option value="{{complaint.type}}" selected="selected">{{complaint.type}}</option>
+	                            <option value="品质">品质</option>
+	                            <option value="新需求">新需求</option>
+	                            <option value="软件Bug">软件Bug</option>
+	                            <option value="硬件Bug">硬件Bug</option>
+	                            <option value="重复Bug">重复Bug</option>
+	                        </select>
+						</div>
                         <div class="pickman">
                             <span>提交人</span>
                         </div>
-                        <input type="text" class="selectman" value="{{complaint.submitter}}" name="submitter">
+                        <input type="text" class="layui-input submitter" lay-verify="submitter" value="{{complaint.submitter}}" name="submitter">
                     </div>
                     <div class="cafloor2">
                         <div class="cm_name">
                             <span>OA流程号</span>
                         </div>
-                        <input type="text" class="cmit_name" value="{{complaint.oa_number}}" name="oa_number">
+                        <input type="text" class="layui-input cmit_oanum" lay-verify="oa_number" value="{{complaint.oa_number}}" name="oa_number">
                         <div class="cmtype">
                             <span>客诉时间</span>
+                            <input type="text" class="layui-input cmtype_time" lay-verify="ctime" name="ctime" id="ctime" value="{{complaint.ctime|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
                         </div>
-                        <input type="date" class="pickdate" name="ctime" placeholder="年 /月/日" style="color: rgb(153, 153, 153);" value="{{complaint.ctime|date:'Y-m-d'}}">
                         <div class="pickman">
                             <span>客诉区域</span>
                         </div>
-                        <select class="selectman" name="area">
-                            <option value="{{complaint.area}}" selected="selected">{{complaint.area}}</option>
-                            <option value="国内">国内</option>
-                            <option value="海外">海外</option>
-                        </select>
+						<div class="layui-form-item selectman">
+	                        <select class="selectman" lay-verify="area" name="area">
+	                            <option value="{{complaint.area}}" selected="selected">{{complaint.area}}</option>
+	                            <option value="国内">国内</option>
+	                            <option value="海外">海外</option>
+	                        </select>
+						</div>
                     </div>
                 </div>
                 <div class="catitle2">
@@ -80,20 +84,22 @@
                         <div class="cm_name">
                             <span>产品型号</span>
                         </div>
-                        <input type="text" class="cmit_name" name="product" value="{{complaint.product}}" placeholder="请输入产品型号">
+                        <input type="text" class="product_type" name="product" value="{{complaint.product}}" placeholder="请输入产品型号">
                         <div class="cmtype">
                             <span>产品线</span>
                         </div>
-                        <select class="typeselt" name="product_line">
-                            <option value="{{complaint.product_line}}" selected="selected">{{complaint.product_line}}</option>
-                            <option value="家用">家用</option>
-                            <option value="商用">商用</option>
-                            <option value="PON">PON</option>
-                            <option value="PLC">PLC</option>
-                            <option value="交换机">交换机</option>
-                            <option value="便携">便携</option>
-                            <option value="OEM">OEM</option>
-                        </select>
+						<div class="layui-form-item typeselt">
+	                        <select class="typeselt" name="product_line">
+	                            <option value="{{complaint.product_line}}" selected="selected">{{complaint.product_line}}</option>
+	                            <option value="家用">家用</option>
+	                            <option value="商用">商用</option>
+	                            <option value="PON">PON</option>
+	                            <option value="PLC">PLC</option>
+	                            <option value="交换机">交换机</option>
+	                            <option value="便携">便携</option>
+	                            <option value="OEM">OEM</option>
+	                        </select>
+						</div>
                         <div class="pickman">
                             <span>软件版本信息</span>
                         </div>
@@ -103,16 +109,18 @@
                         <div class="cm_name">
                             <span>资产编号</span>
                         </div>
-                        <input type="text" class="cmit_name">
+                        <input type="text" name="asset_number" class="product_type" value="{{complaint.asset_number}}">
                         <div class="cmtype">
                             <span>严重程度</span>
                         </div>
-                        <select class="typeselt" name="level">
-                            <option value="{{complaint.level}}" selected="selected">{{complaint.level}}</option>
-                            <option value="low">低</option>
-                            <option value="mid">中</option>
-                            <option value="high">高</option>
-                        </select>
+						<div class="layui-form-item typeselt">
+	                        <select class="typeselt" name="level" lay-verify="level">
+	                            <option value="{{complaint.level}}" selected="selected">{{complaint.level}}</option>
+	                            <option value="低">低</option>
+	                            <option value="中">中</option>
+	                            <option value="高">高</option>
+	                        </select>
+						</div>
                     </div>
                 </div>
                 <div class="catitle3">
@@ -125,60 +133,69 @@
                         <div class="cm_name">
                             <span>是否分析</span>
                         </div>
-                        <select class="analypick">
-                            <option value="否">否</option>
-                            <option value="是">是</option>
-                        </select>
+						<div class="layui-form-item analypick">
+	                        <select class="analypick" name="analysis_status">
+								<option value="{{complaint.analysis_status}}" selected="selected">{{complaint.analysis_status}}</option>
+	                            <option value="否">否</option>
+	                            <option value="是">是</option>
+	                        </select>
+						</div>
                         <div class="cmtype">
                             <span>分析负责人</span>
                         </div>
-                        <input type="text" class="typeselt" name="tester" value="{{complaint.tester}}" placeholder="请填写分析负责人">
+                        <input type="text" class="analyman" name="tester" value="{{complaint.tester}}" placeholder="请填写分析负责人">
                         <div class="pickman">
                             <span>分析完成时间</span>
+							<input type="text" class="layui-input cmtype_time" value="{{complaint.analysis_time|date:'Y-m-d'}}" name="analysis_time" id="analysis_time" style="color: rgb(153, 153, 153);">
                         </div>
-                        <input type="date" class="timepick" value="{{complaint.complete_time|date:'Y-m-d'}}" name="complete_time" placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+
                     </div>
                     <div class="cafloor2">
-                        <div class="cm_name">
-                            <span>改进措施</span>
-                        </div>
-                        <input type="text" class="cmit_name">
-                        <div class="cmtype">
-                            <span>措施状态</span>
-                        </div>
-                        <select class="typeselt" name="status">
-                            <option value="{{complaint.status}}">{{complaint.status}}</option>
-                            <option value="Open">Open</option>
-                            <option value="Closed">Closed</option>
-                        </select>
-                        <div class="pickman">
-                            <span>措施完成时间</span>
-                        </div>
-                        <input type="date" class="stepdate" value="{{complaint.complete_time|date:'Y-m-d'}}" name="complete_time" placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+					<div class="cm_name">
+                    	<span>问题分类</span>
                     </div>
-                    <div class="cafloor3">
-                        <div class="cm_name">
-                            <span>问题分类</span>
-                        </div>
-                        <select class="analypick" name="category">
+					<div class="layui-form-item analypick">
+                        <select class="analypick" name="category" lay-verify="category">
                             <option value="{{complaint.category}}">{{complaint.category}}</option>
                             <option value="安全性">安全性</option>
-                            <option value="场景类">场景类</option>
                             <option value="场景类">场景类</option>
                             <option value="功能类">功能类</option>
                             <option value="可靠性">可靠性</option>
                             <option value="需求类">需求类</option>
                         </select>
+					</div>
+
                         <div class="cmtype">
-                            <span>计划闭环时间</span>
+                            <span>措施状态</span>
                         </div>
-                        <input type="date" class="pickdate"  placeholder="年 /月/日" style="color: rgb(153, 153, 153);">
+						<div class="layui-form-item typeselt">
+	                        <select class="typeselt" lay-verify="status" name="status">
+	                            <option value="{{complaint.status}}">{{complaint.status}}</option>
+	                            <option value="Open">Open</option>
+	                            <option value="Closed">Closed</option>
+	                        </select>
+						</div>
+                        <div class="pickman">
+                            <span>措施完成时间</span>
+							<input type="text" class="layui-input cmtype_time" name="complete_time" id="complete_time" value="{{complaint.complete_time|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
+                        </div>
+
+                    </div>
+                    <div class="cafloor3">
+                        <div class="cm_name">
+                            <span>计划闭环时间</span>
+							<input type="text" class="layui-input cmtype_time" name="closed_time" id="closed_time" value="{{complaint.closed_time|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
+                        </div>
+                        <div class="cmtype">
+                            <span>改进措施</span>
+                        </div>
+                        <textarea name="solutions" class="layui-textarea prob_solution" placeholder="" >{{complaint.solutions}}</textarea>
                     </div>
                     <div class="cafloor4">
                         <div class="cm_name">
                             <span>问题描述</span>
                         </div>
-                        <textarea id="pbtext" cols="30" rows="10" name="description" >{{complaint.description}}</textarea>
+                        <textarea id="pbtext" cols="30" rows="10" lay-verify="description" name="description" >{{complaint.description}}</textarea>
                         <img src="{% static 'images/asset/texttag.png' %}" class="pbttag">
                     </div>
                     <div class="cafllor5">
@@ -186,10 +203,10 @@
                             <span>上传附件</span>
                         </div>
                         <div class="upload">
-                            {% comment %} <input type="file" name="cfile" value="{{complaint.cfile}}"> {% endcomment %}
+                            {% comment %} <input type="file" id="cfile" name="cfile" value="{{complaint.cfile}}"> {% endcomment %}
                             {{form.cfile}}
                         </div>
-                        <input id="handin" type="button" value="提交" onclick="edit_complaint()" style="text-align:center">
+                        <button class="layui-btn handin" lay-submit lay-filter="formComplaint">提交</button>
                     </div>
                 </div>
             </form>
@@ -197,38 +214,89 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
-<script type ="text/javascript">
-function edit_complaint() {
-    var cname = $("[name='cname']").val();
-    var type = $("[name='type']").val();
-    var submitter = $("[name='submitter']").val();
-    var oa_number = $("[name='oa_number']").val();
-    var ctime = $("[name='ctime']").val();
-    var area = $("[name='area']").val();
-    var product = $("[name='product']").val();
-    var product_line = $("[name='product_line']").val();
-    var version = $("[name='version']").val();
-    var level = $("[name='level']").val();
-    var tester = $("[name='tester']").val();
-    var status = $("[name='status']").val();
-    var complete_time = $("[name='complete_time']").val();
-    var category = $("[name='category']").val();
-    var description = $("[name='description']").val();
-    $.ajax({
-        url: "{% url 'asset:edit_complaint' complaint.id %}",
-        type: "POST",
-        data: {"cname":cname,"type":type,"submitter":submitter,"oa_number":oa_number,"ctime":ctime,"area":area,"product":product,"product_line":product_line,"version":version,"level":level,"tester":tester,"status":status,"complete_time":complete_time, "category":category, "description":description},
-        success:function(e) {
-            if(e=="1") {
-                layer.msg("提交成功。");
-                location.href = "{% url 'asset:complaint_list' %}";
-            }else{
-                layer.msg("修改失败。");
-            }
-        },
-    });
-}
-</script>
 
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+    //监听提交
+  form.on('submit(formComplaint)', function(data){
+
+});
+  form.verify({
+    cname: [
+      /^.{1,30}$/
+      ,'请输入1-30个字符'
+    ]
+   ,type: [
+      /\S/
+      ,'请选择客诉类型'
+    ]
+    ,submitter: [
+      /\S/
+      ,'请输入提交人'
+    ]
+    ,oa_number: [
+      /\S/
+      ,'请输入流程号'
+    ]
+    ,ctime: [
+      /\S/
+      ,'请输入客诉时间'
+    ]
+    ,area: [
+      /\S/
+      ,'请选择客诉区域'
+    ]
+    ,level: [
+      /\S/
+      ,'请选择严重程度'
+    ]
+    ,category: [
+      /\S/
+      ,'请选择问题类型'
+    ]
+    ,status: [
+      /\S/
+      ,'请选择措施状态'
+    ]
+    ,description: [
+      /\S/
+      ,'请输入问题描述'
+    ]
+    ,cfile: [
+      /\S/
+      ,'请选择附件'
+    ]
+  });
+});
+
+// 日期时间控件
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#analysis_time' //指定元素
+    ,type: 'date'
+    ,format: 'yyyy-MM-dd'
+  });
+  laydate.render({
+    elem: '#ctime' //指定元素
+    ,type: 'date'
+    ,format: 'yyyy-MM-dd'
+  });
+  laydate.render({
+     elem: '#complete_time' //指定元素
+     ,type: 'date'
+     ,format: 'yyyy-MM-dd'
+    });
+  laydate.render({
+    elem: '#closed_time' //指定元素
+    ,type: 'date'
+    ,format: 'yyyy-MM-dd'
+  });
+
+});
+
+</script>
 {% endblock  %}
