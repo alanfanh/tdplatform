@@ -120,14 +120,15 @@ def add_complaint(request):
     # 添加客诉信息
     form = ComplaintForm(request.POST, request.FILES)
     if request.method == "POST":
-        # print(form)
         if form.is_valid():
             new_complaint = form.save(commit=False)
             new_complaint.created_by = request.user
             new_complaint.save()
             return redirect("asset:complaint_list")
         else:
-            return HttpResponse('3')
+            error = form.errors
+            print(error)
+            return render(request, 'asset/add_complaint.html', {'form': form, 'error': error})
     else:
         return render(request, "asset/add_complaint.html", {"form":form})
 
@@ -135,32 +136,25 @@ def add_complaint(request):
 @csrf_exempt
 def edit_complaint(request, complaint_id):
     # 编辑客诉信息
+    complaint = Complaint.objects.get(id=complaint_id)
     if request.method == "GET":
-        complaint = Complaint.objects.get(id=complaint_id)
         form = ComplaintForm(instance=complaint)
         return render(request, "asset/edit_complaint.html", {"complaint":complaint,"form":form})
     else:
-        com = Complaint.objects.get(id=complaint_id)
-        try:
-            com.cname = request.POST['cname']
-            com.type = request.POST['type']
-            com.submitter = request.POST['submitter']
-            com.oa_number = request.POST['oa_number']
-            com.ctime = request.POST['ctime']
-            com.area = request.POST['area']
-            com.product = request.POST['product']
-            com.product_line = request.POST['product_line']
-            com.version = request.POST['version']
-            com.level = request.POST['level']
-            com.tester = request.POST['tester']
-            com.status = request.POST['status']
-            com.complete_time = request.POST['complete_time']
-            com.category = request.POST['category']
-            com.description = request.POST['description']
-            com.save()
-            return HttpResponse("1")
-        except:
-            return HttpResponse("2")
+        form = ComplaintForm(request.POST, request.FILES,instance=complaint)
+        print(form)
+        print(form.cleaned_data)
+        if form.is_valid():
+            new_complaint = form.save(commit=False)
+            new_complaint.created_by = request.user
+            new_complaint.save()
+            return redirect("asset:complaint_list")
+        else:
+            form = ComplaintForm(instance=complaint)
+            error = form.errors
+            print(error)
+            return render(request, 'asset/edit_complaint.html', {"form":form, 'error': error})
+            # return HttpResponse('3')
 
 
 @login_required(login_url="/account/login")
@@ -446,7 +440,7 @@ def filter_tec_range(request):
     if request.GET.get('time_year'):
         # 筛选创建年
         year = request.GET.get('time_year')
-        if year ！= "All":
+        if year != "All":
             tecs = tecs.filter(created_at__year=year)
     if request.GET.get('tag_id'):
         # 筛选tec标签

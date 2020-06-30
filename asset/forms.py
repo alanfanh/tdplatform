@@ -10,8 +10,6 @@ class TecContentForm(forms.ModelForm):
 class ComplaintForm(forms.ModelForm):
     ctime = forms.DateTimeField(
         input_formats=['%Y-%m-%d'], widget=forms.DateTimeInput(attrs={'type': 'datetime'}))
-    complete_time = forms.DateTimeField(
-        input_formats=['%Y-%m-%d'], widget=forms.DateTimeInput(attrs={'type': 'datetime'}))
     class Meta:
         model = Complaint
-        fields = ("cname","type","submitter","oa_number","ctime","area","product", "product_line","version", "level", "product_line", "category", "tester", "analysis_time", "status","complete_time", "cfile", "description")
+        fields = ("cname","type","submitter","oa_number","asset_number","ctime", "area", "product", "product_line", "version", "level", "product_line", "category", "tester", "analysis_status", "analysis_time", "status", "complete_time","solutions", "closed_time", "cfile", "description")
