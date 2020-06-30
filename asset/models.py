@@ -74,21 +74,25 @@ class Complaint(models.Model):
     type = models.CharField(verbose_name="客诉类型", max_length=10)
     submitter = models.CharField(verbose_name="提交人", max_length=50)
     oa_number = models.CharField(verbose_name="OA流程号", max_length=20, blank=True)
+    asset_number = models.CharField(verbose_name="资产编号", max_length=20, blank=True)
     ctime = models.DateTimeField(verbose_name="客诉时间", auto_now=False, auto_now_add=False)
     area = models.CharField(verbose_name="区域", max_length=4, default=None)
-    product = models.CharField(verbose_name="产品型号", max_length=10)
+    product = models.CharField(verbose_name="产品型号", max_length=20)
     product_line = models.CharField(verbose_name="产品线", max_length=20)
     version = models.CharField(verbose_name="软件版本", max_length=10)
     NAME_IN_LEVEL_CHOICES = (
-        ("high","高"),
-        ("mid","中"),
-        ("low","低"),
+        ("高","high"),
+        ("中","mid"),
+        ("低","low"),
     )
     level = models.CharField(verbose_name="严重程度", max_length=50, choices=NAME_IN_LEVEL_CHOICES)
+    analysis_status = models.CharField(verbose_name="是否分析", max_length=10,blank=True)
     tester = models.CharField(verbose_name="分析责任人", max_length=10)
     analysis_time = models.DateTimeField(verbose_name="分析完成时间", auto_now=False, auto_now_add=False, blank=True)
     status = models.CharField(verbose_name="措施状态", max_length=50)
     complete_time = models.DateField(verbose_name="措施完成时间", auto_now=False, auto_now_add=False, blank=True)
+    solutions = models.TextField(verbose_name="改进措施", blank=True)
+    closed_time = models.DateField(verbose_name="计划闭环时间", auto_now=False, auto_now_add=False, blank=True)
     category = models.CharField(verbose_name="问题分类", max_length=10)
     cfile = models.FileField(verbose_name="材料附件", upload_to="complaint_file", max_length=100)
     description = models.TextField(verbose_name="问题描述", blank=True)
