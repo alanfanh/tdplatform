@@ -24,66 +24,68 @@
             <div class="Cp_title">
                 <span class="Cust_Com">编辑培训课程</span>
             </div>
-            <form action="{% url  'training:edit_course' course.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-                <div class="gnbd">
-                    <span class="taname">培训名称：</span>
-                    <input type="text" class="course-name" name="cname" placeholder="请输入培训名称" value="{{course.cname}}">
-                </div>
-                <div class="tabd2">
-                    <span class="taname">培训时间：</span>
-                    <input type="text" name="course_time" id="course_time" style="color: rgb(153, 153, 153);" class="tatm" value="{{course.course_time | date:'Y/m/d H:i:s'}}">
-                </div>
-                <div class="tabd3">
-                    <span class="taauth">主讲人：</span>
-                    <select class="group-user" name="" id="groups-user" onchange="change_teacher();">
-                        {% for group in groups %}
-                        {% if group.name == course.teacher.group.name %}
-                        <option value="{{group.id}}" selected>{{group.name}}</option>
-                        {% endif %}
-                        <option value="{{group.id}}">{{group.name}}</option>
-                        {% endfor %}
-                    </select>
-                    <select class="taauthpick" id="id_teacher" name="teacher">
-                        <option value="{{course.teacher.id}}">{{course.teacher.realname}}</option>
-                    </select>
-                </div>
-                <div class="tabd4">
-                    <span class="taname">参与成员：</span>
-                    <div class="tree-select">
-                        <input type="hidden" name="student-joined" value="">
-                        <div id="joined"></div>
+            <div class="add-course">
+                <form action="{% url  'training:edit_course' course.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="tabd">
+                        <span class="taname">培训名称：</span>
+                        <input type="text" class="course-name" name="cname" placeholder="请输入培训名称" value="{{course.cname}}">
                     </div>
-                </div>
-                <div class="tabd5">
-                    <span class="taname">培训地址：</span>
-                    <input type="text" class="ittaname" name="address" value="{{course.address}}" placeholder="请输入培训地址">
-                </div>
-                <div class="tabd6">
-                    <span class="taname">培训范围：</span>
-                    <select class="tarang" name="range">
-                        <option value="测试部">测试部</option>
-                        <option value="自动化开发组">自动化开发组</option>
-                        <option value="接入测试组">接入测试组</option>
-                        <option value="家用测试组">家用测试组</option>
-                        <option value="商用测试组">商用测试组</option>
-                        <option value="便携测试组">便携测试组</option>
-                        <option value="资料开发组">资料开发组</option>
-                        <option value="OEM测试组">OEM测试组</option>
-                    </select>
-                </div>
-                <div class="tabd7">
-                    <span class="tacontsum">内容概括：</span>
-                    <textarea class="tasumtext" cols="30" rows="10" name="cdescription" placeholder="请简单概括一下培训记录的大致内容">{{course.cdescription}}</textarea>
-                </div>
-                <div class="tabd8">
-                    <span class="taname">上传附件：</span>
-                    <div class="taupextra">
-                        {{this_form.file_name}}
+                    <div class="tabd">
+                        <span class="taname">培训时间：</span>
+                        <input type="text" name="course_time" id="course_time" style="color: rgb(153, 153, 153);" class="tatm" value="{{course.course_time | date:'Y/m/d H:i:s'}}">
                     </div>
-                    <input type="submit" id="tahandin" value="提交">
-                    <button id="tarevoke"  onclick="window.history.back()">取消</button>
-                </div>
-            </form>
+                    <div class="tabd">
+                        <span class="taauth">主讲人：</span>
+                        <select class="group-user" name="" id="groups-user" onchange="change_teacher();">
+                            {% for group in groups %}
+                            {% if group.name == course.teacher.group.name %}
+                            <option value="{{group.id}}" selected>{{group.name}}</option>
+                            {% endif %}
+                            <option value="{{group.id}}">{{group.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select class="taauthpick" id="id_teacher" name="teacher">
+                            <option value="{{course.teacher.id}}">{{course.teacher.realname}}</option>
+                        </select>
+                    </div>
+                    <div class="tabd">
+                        <span class="taname">培训地址：</span>
+                        <input type="text" class="ittaname" name="address" value="{{course.address}}" placeholder="请输入培训地址">
+                        <div class="tabd-range">
+                            <span class="taname">培训范围：</span>
+                            <select class="tarang" name="range">
+                                <option value="测试部">测试部</option>
+                                <option value="自动化开发组">自动化开发组</option>
+                                <option value="接入测试组">接入测试组</option>
+                                <option value="家用测试组">家用测试组</option>
+                                <option value="商用测试组">商用测试组</option>
+                                <option value="智能外设测试组">智能外设测试组</option>
+                                <option value="资料开发组">资料开发组</option>
+                                <option value="ISP运营商测试组">ISP运营商测试组</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tabd-joined">
+                        <span class="taname">签到成员：</span>
+                        <div class="tree-select">
+                            <input type="hidden" name="student-joined" value="">
+                            <div id="joined"></div>
+                        </div>
+                    </div>
+                    <div class="tabd-content">
+                        <span class="tacontsum">内容概括：</span>
+                        <textarea class="tasumtext" cols="30" rows="10" name="cdescription" placeholder="请简单概括一下培训记录的大致内容">{{course.cdescription}}</textarea>
+                    </div>
+                    <div class="tabd-file">
+                        <span class="taname">上传附件：</span>
+                        <div class="taupextra">
+                            {{this_form.file_name}}
+                        </div>
+                        <input type="submit" id="tahandin" value="提交">
+                        <button id="tarevoke"  onclick="window.history.back()">取消</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
