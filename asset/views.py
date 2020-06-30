@@ -446,7 +446,8 @@ def filter_tec_range(request):
     if request.GET.get('time_year'):
         # 筛选创建年
         year = request.GET.get('time_year')
-        tecs = tecs.filter(created_at__year=year)
+        if year ！= "All":
+            tecs = tecs.filter(created_at__year=year)
     if request.GET.get('tag_id'):
         # 筛选tec标签
         tag_id = request.GET.get('tag_id')

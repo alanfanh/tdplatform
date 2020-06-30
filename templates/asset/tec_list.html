@@ -23,7 +23,6 @@
             </div>
             <div class="info_selt">
                 <label for="" class="sortrg">搜索范围：</label>
-                
                 <select class="rgselect" onchange="selectRange()" id="selectRange">
                     <option value="0">测试部</option>
                     <option value="1">家用测试组</option>
@@ -36,7 +35,7 @@
                 </select>
                 <label for="" class="gptime">时间选择：</label>
                 <select class="gptimepick" onchange="selectTime()" id="selectTime">
-                    <option value="2019">2019</option>
+                    <option value="All">所有</option>
                     <option value="2020">2020</option>
                 </select>
                 <label for="" class="lbselect">类别选择：</label>
@@ -56,9 +55,6 @@
                 {% endif %}
             </div>
             <div style="position:absolute;left:25px;top:120px;"><table id="demo" lay-filter="test"></table></div>
-            {% comment %} <div class="autotip">
-                <span class="attipcont">实验室资产管理平台定时发送邮件实现物品催还的方法与实施</span>
-            </div> {% endcomment %}
         </div>
     </div>
 </div>
