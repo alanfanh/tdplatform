@@ -198,7 +198,8 @@ def filter_course_list(request):
         courses = courses.filter(range=range)
     if request.GET.get('year'):
         year = request.GET.get('year')
-        courses = courses.filter(course_time__year=year)
+        if year != "All":
+            courses = courses.filter(course_time__year=year)
     for course in courses:
         obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
         obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
