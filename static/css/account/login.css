@@ -72,7 +72,7 @@
   border-radius: 24px;
   border:none;
   font-family: PingFangSC-Regular;
-  -webkit-text-fill-color:#333333;
+  /*-webkit-text-fill-color:#333333;*/
   font-size:16px;
   line-height: 22px;
 }
@@ -95,7 +95,7 @@
   border-radius: 24px;
   border-radius: 24px;
   border:none;
-  -webkit-text-fill-color:#333333;
+  /* -webkit-text-fill-color:#333333; */
   font-size:16px;
   line-height: 22px;
 }

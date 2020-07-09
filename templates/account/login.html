@@ -34,10 +34,10 @@
                 {% endfor %}
                 {% endif %}
                 <div class="user">
-                    
                     {% comment %} {{ form.username.errors }}
                     {{ form.username }} {% endcomment %}
                     <input type="text" id="login_usrname" name="username" placeholder="请输入用户名">
+                    <span id="username_msg" ></span><br>
                 </div>
                 <span id="usr_pwd">密码</span>
                 <div class="pwd">
@@ -47,11 +47,12 @@
                     <div id="eye_img">
                         <img src="{% static 'images/account/eye.png' %}" onclick="show_pwd()">
                     </div>
+                    <span id="password_msg"></span><br>
                 </div>
                 <input type="checkbox" id="is_pick">
                 <span id="auto_login">自动登录</span>
                 <div>
-                    <input id="submit" type="submit" value="登录">
+                    <input id="submit" type="button" value="登录" onclick="LoginForm()">
                 </div>
                 </form>
                 <div id="fg_pwd">
@@ -63,4 +64,68 @@
         </div>
     </div>
 </body>
+
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+    // 判断是否为空
+    function ifnull(txt){
+        if(txt.length==0){
+            return true;
+        }
+        var $reg=/\s+/;
+        return $reg.test(txt);
+    }
+
+    // 在id为login_usrname的元素失去焦点时进行用户名验证
+    $("#login_usrname").blur(function(){
+        var $parent = $(this).parent();
+        if(ifnull($(this).val())){
+            $("#username_msg").html("用户名不能为空!");
+        }else{
+            $("#username_msg").html("");
+        }
+    });
+
+    // 在id为login_pwd的元素失去焦点时进行密码验证
+    $("#login_pwd").blur(function(){
+        if(ifnull($(this).val())){
+            $("#password_msg").html("密码不能为空!");
+        }else{
+            $("#password_msg").html("");
+        }
+    });
+
+    // 验证并提交登录表单
+    function LoginForm(){
+        // 验证用户名
+        if(ifnull($("#login_usrname").val())){
+            $("#username_msg").html("请输入用户名后再登录!");
+            return false;
+        }
+
+        // 验证密码
+        if(ifnull($("#login_pwd").val())){
+            $("#password_msg").html("请输入密码后再登录!");
+            return false;
+        }
+
+        // ajax提交表单、接收后端数据
+        var username=$('#login_usrname').val();
+        var password=$('#login_pwd').val();
+        $.ajax({
+            url:"/account/login/",
+            data:{"username": username, "password": password,"csrfmiddlewaretoken": '{{ csrf_token }}'},
+            type:'POST',
+            success:function(data){
+                if (data.res==0) {                
+                    layer.msg("您输入的用户名或者密码不正确，请重新输入!",{time: 500,icon: 5,anim: 6});
+                    return false;
+                }
+                else {
+                    location.href="{% url 'home' %}" // 跳转到主页面
+                }
+            },
+        });        
+    }
+</script>
 </html>
