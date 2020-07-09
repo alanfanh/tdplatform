@@ -29,10 +29,10 @@
             <img src="{% static '/images/header/icn_help.png' %}" alt="" class="help-img">
             <a href="" class="navbar-help">帮助</a>
         </div>
-        <div class="tip">
+        <li class="layui-nav-item tip">
             <img src="{% static '/images/header/icn_notice.png' %}" alt="" class="tip-img">
-            <a href="" class="navbar-tip">提醒</a>
-        </div>
+            <a class="navbar-tip" href="{% url 'asset:unprocess_tec' %}">提醒<span id="tips" class=""></span></a>
+        </li>
         
         <ul class="layui-nav navbar-user" style="background-color:#FFFFFF">  
             <li class="layui-nav-item">
@@ -56,5 +56,32 @@ layui.use('element', function(){
   
   //…
 });
+
+// 读取cookie值
+function getCookie(name){
+             var strCookie=document.cookie;
+             var arrCookie=strCookie.split("; ");
+             for(var i=0;i<arrCookie.length;i++){
+                   var arr=arrCookie[i].split("=");
+                   if(arr[0]==name)return arr[1];
+             }
+             return "";
+}
+
+// 页面加载即执行JQuery
+$(document).ready(function(){
+    // document.cookie
+    unproc_num = getCookie('unproc_num_cookie')
+    // alert(unproc_num)    
+    unproc_num = Number(unproc_num) //转换为数字类型
+    // alert(typeof unproc_num)
+
+    if (unproc_num > 0){    
+        $("#tips").addClass("layui-badge-dot");
+    } else {
+        $("#tips").removeClass("layui-badge-dot");
+    }
+});
+
 </script>
 

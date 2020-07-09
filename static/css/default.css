@@ -36,6 +36,18 @@ p {
     padding-left:10px;
     outline: none;
 }
+
+#username_msg {
+    height:48px;
+    width: 420px;
+    background: none;
+    color: #FF0000;
+    font-size: 12px;
+    border:0;
+    padding-left:10px;
+    outline: none;
+}
+
 #login_pwd {
     height:48px;
     width: 420px;
@@ -45,6 +57,18 @@ p {
     padding-left:10px;
     outline: none;
 }
+
+#password_msg {
+    height:48px;
+    width: 420px;
+    background: none;
+    color: #FF0000;
+    font-size: 12px;
+    border:0;
+    padding-left:10px;
+    outline: none;
+}
+
 input::-webkit-input-placeholder {
     color:#333333;
 }
