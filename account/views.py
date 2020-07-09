@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -19,6 +19,25 @@ def index(request):
     if request.method == "GET":
         users = UserInfo.objects.all()
         return render(request, 'account/index.html', {'users':users})
+
+def user_login(request):
+    # 登录验证
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            # 与数据库中的用户进行比对
+            user = authenticate(username=username, password=password)
+            if user is not None:  # 通过验证
+                login(request, user)
+                # print("登陆成功！")
+                return JsonResponse({'res': 1})
+            else:
+                # print("用户名密码错误！！！")
+                return JsonResponse({'res': 0})
+    else:
+        return render(request, 'account/login.html')
 
 @login_required(login_url="/account/login/")
 def user_detail(request, user_id):
@@ -232,4 +251,23 @@ def home_page(request):
     # 获取最近培训数据
     last_courses = Course.objects.filter().order_by('-course_time')[:4]
     files = Course.objects.filter().order_by('-course_time')[:5]
-    return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
+
+    # 未处理的优秀实践
+    userinfo = UserInfo.objects.get(user=request.user)
+    role = Role.objects.get(id=userinfo.role_id)
+    unproc_num = ''
+    if role.role_name == "PL":
+        # PL用户
+        tec_list = TecContent.objects.filter(status="1", group_id=userinfo.group_id)
+        unproc_num = tec_list.count()
+    elif role.role_name == "M":
+        # M用户
+        tec_list = TecContent.objects.filter(status="2")
+        unproc_num = tec_list.count()
+    else:
+        return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
+    # print(tec_num)
+    # rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files, "tec_num": tec_num})
+    rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
+    rsp.set_cookie("unproc_num_cookie",unproc_num, path='/')
+    return rsp
