@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<div class="menuinfo">
+    <div class="pt">
+        <img src="{% static 'images/account/photo.svg' %}">
+    </div>
+    <div class="nm">
+        <span>{{userinfo.realname}}</span>
+    </div>
+    <div class="pt_dp">
+        <span>{{userinfo.group}}</span>
+    </div>
+    <div class="sc">
+        <span>80</span>
+    </div>
+    <div class="hv">
+        <span>{{ste_tecs.count}}</span>
+    </div>
+    <div class="accum">
+        <span>积分</span>
+    </div>
+    <div class="tc">
+        <span>技术资产</span>
+    </div>
+    <div class="menu_gp1">
+        <a href="{% url 'training:person_course' %}"><span class="train">我贡献的培训</span></a>
+    </div>
+    <div class="chmenu_gp2">
+        <span class="left_bd"></span>
+        <a href="{% url 'asset:my_tec' %}"><span class="chpract">我的技术资产</span></a>
+    </div>
+    <div class="menu_gp3">
+        <a href="{% url 'account:my_information' %}"><span class="Per_Data">个人资料</span></a>
+    </div>
+</div>

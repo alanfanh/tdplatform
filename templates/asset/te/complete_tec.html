@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/default.css' %} ">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+
+<div class="base">
+    <div class="baseplate">
+        {% include "asset/te/sidebar_te.html" %}
+        <div class="info_base">
+            <div class="gp_title">
+                <span class="Cust_Com">优秀实践详情</span>
+            </div>
+            <div class="pj_going">
+                <span class="pj_info">项目信息</span>
+            </div>
+            <div class="pjgoing_cont">
+                <span class="Pjgoing_name">名称：{{tec.tname}}</span>
+                <span class="Pjgoing_author">作者：{{tec.author.realname}}</span>
+                <span class="Pjgoing_group">所在小组：{{tec.group}}</span>
+                <span class="Pjgoing_tag">标签：{{tec.tec_tag.all | join:', '}}</span>
+                <span class="Pjgoing_time">编写时间：{{tec.created_at}}</span>
+                <span class="Pjgoing_Summary">内容概述：{{tec.body}}</span>
+            </div>
+            <div class="pjgoing_speed">
+                <span class="spgoing_title">审核进度</span>
+            </div>
+            <div class="pjgoing_content">
+                <span class="Sp_block">审核进度</span>
+                <img src="{% static 'images/asset/success.svg' %}" class="Suc_img">
+                <span class="mSuc_line"></span>
+                <img src="{% static 'images/asset/success.svg' %}" class="pjgoing_Suc2">
+                <img src="{% static 'images/asset/success.svg' %}" class="mSuc3">
+                <img src="{% static 'images/asset/success2.svg' %}" class="mSuc4">
+                <span class="Creat">创建项目</span>
+                <span class="gpld_exam">组长初审</span>
+                <span class="manag_check">经理复审</span>
+                <span class="msuc_pass">完成</span>
+                <div class="Pj_st">
+                    <span class="exam_name">{{tec.author.realname}}</span>
+                    <span class="st_time">{{tec.created_at | date:"Y-m-d"}}</span>
+                    <span class="hms">{{tec.created_at | date:"H:i:s"}}</span>
+                </div>
+                <div class="Pj_gp">
+                    <span class="exam_name">{{node.pl_name}}</span>
+                    <span class="gp_time">{{node.pl_time | date:"Y-m-d"}}</span>
+                    <span class="gp_hms">{{node.pl_time | date:"H:i:s"}}</span>
+                </div>
+                <div class="m_stage">
+                    <span class="exam_name">{{node.m_name}}</span>
+                    <span class="gp_time">{{node.pl_time | date:"Y-m-d"}}</span>
+                    <span class="gp_hms">{{node.m_time | date:"H:i:s"}}</span>
+                </div>
+            </div>
+            <div class="pjexam_hist">
+                <span>审核历史</span>
+            </div>
+            <table class="pjexam_tb" align="center">
+                <thead>
+                    <tr class="ex_th">
+                    <td class="ex1">节点名称</td>
+                    <td class="ex2">执行人名称</td>
+                    <td class="ex3">岗位</td>
+                    <td class="ex4">审核意见</td>
+                    <td class="ex5">操作时间</td>
+                    <td class="ex6">意见说明</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="ex_tr">
+                    <td class="ex1">010_创建项目</td>
+                    <td class="ex2">{{tec.author.realname}}</td>
+                    <td class="ex3">{{tec.author.rank}}</td>
+                    <td class="ex4">提交</td>
+                    <td class="ex5">{{tec.created_at}}</td>
+                    <td class="ex6">初始化</td>
+                    </tr>
+                    <tr class="ex_tr">
+                    <td class="ex1">020_组长审核</td>
+                    <td class="ex2">{{node.pl_name}}</td>
+                    <td class="ex3">{{tec.group}}PL</td>
+                    <td class="ex4">{{node.pl_decide}}</td>
+                    <td class="ex5">{{node.pl_time}}</td>
+                    <td class="ex6">{{node.pl_notes}}</td>
+                    </tr>
+                    <tr class="ex_tr">
+                    <td class="ex1">030_经理审核</td>
+                    <td class="ex2">{{node.m_name}}</td>
+                    <td class="ex3">经理</td>
+                    <td class="ex4">{{node.m_decide}}</td>
+                    <td class="ex5">{{node.m_time}}</td>
+                    <td class="ex6">{{node.m_notes}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="{% url 'asset:my_tec' %}"><button id="mre_bt">
+                <span>返回列表</span>
+            </button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

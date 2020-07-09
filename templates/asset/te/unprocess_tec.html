@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+{% endblock  %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
+<link rel="stylesheet" href="{% static 'css/default.css' %} ">
+
+<div class="Ed_base">
+    <div class="Ed_baseplate">
+        {% include "asset/te/sidebar_te.html" %}
+        <div class="Ed_info_base">
+            <div class="De_title">
+                <div class="Route">
+                    <span style="color:rgba(0, 0, 0, 0.447058823529412);">个人中心</span>
+                    <span style="color:#999999;"> </span>
+                    <span style="color:rgba(0, 0, 0, 0.447058823529412);"> /  </span>
+                    <span style="color:rgba(0, 0, 0, 0.427450980392157);">我的优秀实践</span>
+                    <span style="color:rgba(0, 0, 0, 0.447058823529412);">  /</span>
+                    <span style="color:rgba(0, 0, 0, 0.847058823529412);">  审核进度</span>
+                </div>
+                <div class="Page_Title">优秀实践详情</div>
+            </div>
+            <div class="De_content">
+                <span class="Project_info">项目信息</span>
+                <span class="Pj_name">名称：{{tec.tname}}</span>
+                <span class="Pj_author">作者：{{tec.author.realname}}</span>
+                <span class="Pj_group">所在小组：{{tec.group}}</span>
+                <span class="Pj_tag">标签：{{tec.tec_tag.all | join:', '}}</span>
+                <span class="Pj_time">编写时间：{{tec.created_at}}</span>
+                <span class="Pj_Summary">内容概述：{{tec.body}}</span>
+            </div>
+            <div class="Pj_speed">
+                <span class="Sp_title">审核进度</span>
+            </div>
+            <div class="Sp_content">
+                <span class="Sp_block">审核进度</span>
+                <img src="{% static 'images/asset/success.svg' %}" class="Suc_img">
+                <span class="Suc_line"></span>
+                <img src="{% static 'images/asset/success2.svg' %}" class="Suc_2">
+                <span class="wait_line"></span>
+                <img src="{% static 'images/asset/success3.svg' %}" class="Suc_3">
+                <img src="{% static 'images/asset/success3.svg' %} " class="Suc_4">
+                <span class="Creat">创建项目</span>
+                <span class="gp_exam">小组初审</span>
+                <span class="depart_exam">部门复审</span>
+                <span class="suc_pass">完成</span>
+                <div class="Pj_st">
+                    <span class="exam_name">{{tec.author.realname}}</span>
+                    <p><span class="st_time">{{tec.created_at | date:"Y-m-d"}}</span></p>
+                    <span class="hms">{{tec.created_at | date:"H:i:s"}}</span>
+                </div>
+                <span class="gp_Assessor">{{userinfo.group}}pl</span>
+            </div>
+            <div class="exam_hist">
+                <span>审核历史</span>
+            </div>
+            <table class="exam_tb" align="center">
+                <thead>
+                    <tr class="ex_th">
+                    <td class="ex1">节点名称</td>
+                    <td class="ex2">执行人名称</td>
+                    <td class="ex3">岗位</td>
+                    <td class="ex4">审核意见</td>
+                    <td class="ex5">操作时间</td>
+                    <td class="ex6">意见说明</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="ex_tr">
+                    <td class="ex1">010_创建项目</td>
+                    <td class="ex2">{{tec.author.realname}}</td>
+                    <td class="ex3">{{tec.author.rank}}</td>
+                    <td class="ex4">提交</td>
+                    <td class="ex5">{{tec.created_at}}</td>
+                    <td class="ex6">初始化</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="{% url 'asset:my_tec' %}"><button id="Re_bt">
+                <span>返回列表</span>
+            </button></a>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
