@@ -13,6 +13,7 @@ urlpatterns = [
     path('assigned-list', views.assigned_list, name="assigned_list"),
     path('unprocess-tec-detail/<int:tec_id>', views.unprocess_tec_detail, name="unprocess_tec_detail"),
     path('processed-tec-detail/<int:tec_id>', views.processed_tec_detail, name="processed_tec_detail"),
+    path('my-process-tec/<int:tec_id>', views.my_process_tec, name="my_process_tec"),
     # 主页客诉
     path('complaint-list/', views.complaint_list, name="complaint_list"),
     path('complaint-detail/<int:complaint_id>', views.complaint_detail, name="complaint_detail"),

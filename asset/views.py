@@ -178,9 +178,11 @@ def unprocess_tec(request):
     # 未处理的优秀实践
     userinfo = UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
+    unproc_num = ''
     if role.role_name == "PL":
         # PL用户
         tec_list = TecContent.objects.filter(status="1", group_id=userinfo.group_id)
+        unproc_num = tec_list.count()
         #每页显示10条
         paginator = Paginator(tec_list, 10)
         page = request.GET.get('page')
@@ -196,10 +198,15 @@ def unprocess_tec(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/unprocess_pl.html"
-        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"tecs": groupnum})
+        # return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"tecs": groupnum})
+        rsp = render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"tecs": groupnum})
+        rsp.set_cookie("unproc_num_cookie",unproc_num, path='/')
+        return rsp
+
     elif role.role_name == "M":
         # M用户
         tec_list = TecContent.objects.filter(status="2")
+        unproc_num = tec_list.count()
         #每页显示10条
         paginator = Paginator(tec_list, 10)
         page = request.GET.get('page')
@@ -215,7 +222,10 @@ def unprocess_tec(request):
             # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
             groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/unprocess_m.html"
-        return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": groupnum})
+        # return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": groupnum})
+        rsp = render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": groupnum})
+        rsp.set_cookie("unproc_num_cookie", unproc_num, path='/')
+        return rsp
     else:
         return HttpResponse('Not Found')
 
@@ -374,14 +384,30 @@ def processed_tec_detail(request, tec_id):
     userinfo = UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
     if role.role_name == "PL":
+        # get_object_or_404必须返回唯一对象，最好传入主键
         tec = get_object_or_404(TecContent, id=tec_id)
         node = get_object_or_404(NodeMessage, name_id=tec_id)
-        user = get_object_or_404(UserInfo, role_id=4)
-        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo, "node": node, "user_m": user})
+        # user = get_object_or_404(UserInfo, role_id=4)
+        return render(request, "asset/processed_pl_detail.html", {"tec": tec, "userinfo": userinfo, "node": node})
     elif role.role_name == "M":
         tec = get_object_or_404(TecContent, id=tec_id)
         node = get_object_or_404(NodeMessage, name_id=tec_id)
         return render(request, "asset/processed_m_detail.html", {"tec":tec, "userinfo":userinfo, "node":node})
+
+@login_required(login_url="/account/login")
+def my_process_tec(request, tec_id):
+    # te和ste所提交优秀实践
+    userinfo = UserInfo.objects.get(user=request.user)
+    tec = get_object_or_404(TecContent, pk=tec_id)
+    ste_tecs = TecContent.objects.filter(author=userinfo, status="3")
+    if tec.status == "1":
+        return render(request, "asset/te/unprocess_tec.html", {"tec": tec, "userinfo": userinfo, "ste_tecs": ste_tecs})
+    elif tec.status == "2":
+        node = get_object_or_404(NodeMessage, name_id=tec_id)
+        return render(request, "asset/te/process_tec.html", {"tec":tec, "userinfo":userinfo, "node":node, "ste_tecs":ste_tecs})
+    elif tec.status == "3":
+        node = get_object_or_404(NodeMessage, name_id=tec_id)
+        return render(request, "asset/te/complete_tec.html", {"tec": tec, "userinfo": userinfo, "node": node, "ste_tecs": ste_tecs})
 
 @login_required(login_url="/account/login")
 def download_tec_file(request, tec_id):
