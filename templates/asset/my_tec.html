@@ -4,12 +4,15 @@
 
 {% block title %}我添加的优秀实践{% endblock %}
 
-{% block content %}
-
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/default.css' %}">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
-    
+<script src="{% static 'layui/layui.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
@@ -50,12 +53,12 @@
                 <span class="Cust_Com">我的技术资产</span>
             </div>
             <div class="Handle_State">
-            <div class="Processed_bd">
-                <a href="{% url 'asset:my_tec' %}"><span class="ste_pract" style="color:black">优秀实践（{{ste_tecs.count}}）</span></a>
-            </div>
-            <div class="Untreated_bd">
-                <a href="{% url 'asset:assigned_list' %}"><span class="ste_compt" style="color:rgba(85, 85, 85, 0.647058823529412)">客诉问题</span></a>
-            </div>
+                <div class="Processed_bd">
+                    <a href="{% url 'asset:my_tec' %}"><span class="ste_pract" style="color:black">优秀实践（{{ste_tecs.count}}）</span></a>
+                </div>
+                <div class="Untreated_bd">
+                    <a href="{% url 'asset:assigned_list' %}"><span class="ste_compt" style="color:rgba(85, 85, 85, 0.647058823529412)">客诉问题</span></a>
+                </div>
             </div>
             <div class="My_State">
                 <span class="State_tt">状态：</span>
@@ -69,85 +72,58 @@
                 <button class="Ep_Record" id="ste_add">添加优秀实践</button>
                 {% endif %}
             </div>
-            <table class="Pra_data" align="center">
-            <thead>
-                <tr class="Pra_th">
-                    {% comment %} <td class="ep1">
-                        <input type="checkbox" class="ck">
-                    </td> {% endcomment %}
-                    <td class="ep2">序号</td>
-                    <td class="ep3">名称</td>
-                    <td class="ep4">作者</td>
-                    <td class="ep5">小组</td>
-                    <td class="ep6">标签</td>
-                    <td class="ep7">编写时间</td>
-                    <td class="ep8">状态</td>
-                    <td class="ep9">操作</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for tec in cur_tecs %}
-                <tr class="Pra_tr">
-                    <td class="ep2">{{forloop.counter}}</td>
-                    <td class="ep3">
-                        <span class="Cust_cont">{{tec.tname}}</span>
-                    </td>
-                    <td class="ep4">{{tec.author}}</td>
-                    <td class="ep5">{{tec.group}}</td>
-                    <td class="ep6">{{tec.tec_tag.all | join:' '}}</td>
-                    <td class="ep7">{{tec.created_at | date:'Y-m-d'}}</td>
-                    <td class="ep8">
-                        {% if tec.status == '3' %}
-                        <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
-                        <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
-                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
-                        {% elif tec.status == '0' %}
-                        <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#F5222D;">●</span>
-                        <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
-                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">驳回</span>
-                        {% else %}
-                        <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#1890FF;">●</span>
-                        <span style="font-family:'Helvetica';color:#1890FF;"> </span>
-                        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">进行中</span>
-                        {% endif %}
-                    </td>
-                    <td class="ep9">
-                        <span class="dload"><a href="{% url 'asset:my_process_tec' tec.id %}">查看</a> | <a href="{% url 'asset:down_tec_file' tec.id %}">下载</a></span>
-                        {% comment %} <img src="{% static 'images/asset/see.png' %} " class="see_dload"> {% endcomment %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-            </table>
-            <div class="Ep_total" id="tec_page">
+            <div class="content_data">
+                <table id="tec_data" lay-filter="state"></table>
             </div>
+            
+            {% comment %} <div class="Ep_total" id="tec_page"></div> {% endcomment %}
         </div>
     </div>
 </div>
-<script src="{% static 'layui/layui.js' %}"></script>
-<script>
-layui.use('laypage', function () {
-    var laypage = layui.laypage;
+{% endblock %}
 
-    //执行一个laypage实例
-    laypage.render({
-        elem: 'tec_page' //注意，这里的 test1 是 ID，不用加 # 号
-        , limit: 10
-        , count: {{ ste_tecs.count }} //数据总数，从服务端得到
-        , curr: {{ cur_tecs.number }}
-        , hash: 'fenye'
-        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
-        , jump: function (obj, first) {
-            console.log(obj.curr);
-            console.log(obj.limit);
-            page = obj.curr;
-            limit = obj.limit;
-            // 首次不执行
-            if (!first) {
-                location.href = `?page=${obj.curr}&limit=${obj.limit}`
+{% block javascript %}
+<script type="text/html" id="toolbar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="download" >下载</a>
+</script>
+<script>
+    layui.use(['laypage', 'layer', 'table', 'element'], function(){
+        var table = layui.table      // 表格
+        ,layer = layui.layer         // 弹窗
+        ,laypage = layui.laypage;    // 分页
+
+        //table实例
+        table.render({
+            elem: '#tec_data'
+            ,height: 512
+            ,url: '/asset/my-tec-data/' //数据接口
+            ,page: true //开启分页
+            //,even: true
+            //,skin: 'line'
+            ,cols: [[ //表头
+            {field: 'id', title: 'ID', width:60, sort: true, }
+            ,{field: 'tname', title: '名称', width:310}
+            ,{field: 'author', title: '作者', width:100}
+            ,{field: 'group', title: '小组', width:120}
+            ,{field: 'award', title: '奖项级别', width:100}
+            ,{field: 'tec_tag', title: '类别', width: 180}
+            ,{field: 'status', title:'状态', width: 80}
+            ,{field: 'created_at', title: '编写时间', width: 120, sort: true}
+            ,{field: '', title: '操作', toolbar:"#toolbar", width: 120}
+            ]]
+        });
+
+        // table行工具栏事件
+        table.on('tool(state)', function(obj){
+            var data = obj.data ,layEvent=obj.event;
+            console.log(data)
+            if(layEvent === 'detail'){
+                window.location.href="/asset/my-process-tec/" + data.id
+            } else if(layEvent === 'download') {
+                window.location.href="/asset/download-file/" + data.id
             }
-        }
-  });
-});
+        });
+    });
 </script>
 {% endblock  %}
