@@ -73,69 +73,56 @@
                 </select>
                 <button class="Ep_Record" id="madd_bt">添加记录</button>
             </div>
-            <table class="Pra_data" align="center">
-                <thead>
-                    <tr class="Pra_th">
-                    <td class="ep1">
-                        <input type="checkbox" class="ck">
-                    </td>
-                    <td class="ep2">序号</td>
-                    <td class="ep3">名称</td>
-                    <td class="ep4">作者</td>
-                    <td class="ep5">小组</td>
-                    <td class="ep6">标签</td>
-                    <td class="ep7">编写时间</td>
-                    <td class="Mp8">状态</td>
-                    <td class="Mp9">操作</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for tec in tecs %}
-                    <tr class="Pra_tr">
-                        <td class="ep1">
-                            <input type="checkbox" class="ck">
-                        </td>
-                        <td class="ep2">{{forloop.counter}}</td>
-                        <td class="ep3">
-                            <span class="sign"></span>
-                            <span class="Cust_cont">{{tec.tname}}</span>
-                        </td>
-                        <td class="ep4">{{tec.author.realname}}</td>
-                        <td class="ep5">{{tec.group}}</td>
-                        <td class="ep6">{{tec.tec_tag.all | join:' '}}</td>
-                        <td class="ep7">{{tec.created_at | date:'Y-m-d'}}</td>
-                        <td class="mp8">
-                            {% if tec.status == '3' %}
-                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#52C41A;">●</span>
-                            <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">成功</span>
-                            {% elif tec.status == '0' %}
-                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#F5222D;">●</span>
-                            <span style="font-family:'Helvetica';color:rgba(0, 0, 0, 0.427450980392157);"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">驳回</span>
-                            {% else %}
-                            <span style="font-family:'LucidaGrande', 'Lucida Grande';color:#1890FF;">●</span>
-                            <span style="font-family:'Helvetica';color:#1890FF;"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:rgba(0, 0, 0, 0.647058823529412);">进行中</span>
-                            {% endif %}
-                        </td>
-                        <td class="mp9">
-                            <span class="dload"><a href="{% url 'asset:processed_tec_detail' tec.id %}">查看</a> | <a href="{% url 'asset:down_tec_file' tec.id %}">下载</a></span>
-                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
-                        </td>
-                    </tr>
-                    {% endfor %}        
-                </tbody>
-            </table>
-            <div class="Ep_total" id="mpd_num">
+            <div class="content_data">
+                <table id="m_tecdata" lay-filter="state"></table>
             </div>
         </div>
     </div>
 </div>
-<script src="{% static 'layui/layui.js' %}"></script>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/html" id="mtool">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="download" >下载</a>
+</script>
 <script>
-layui.use('laypage', function () {
-    var laypage = layui.laypage;
+layui.use(['laypage', 'layer', 'table', 'element'], function () {
+    var table = layui.table      // 表格
+    ,layer = layui.layer         // 弹窗
+    ,laypage = layui.laypage;    // 分页
+
+    //table实例
+    table.render({
+        elem: '#m_tecdata'
+        ,height: 512
+        ,url: '/asset/process-tec-data/' //数据接口
+        ,page: true //开启分页
+        //,even: true
+        //,skin: 'line'
+        ,cols: [[ //表头
+        {field: 'id', title: 'ID', width:60, sort: true, }
+        ,{field: 'tname', title: '名称', width:310}
+        ,{field: 'author', title: '作者', width:100}
+        ,{field: 'group', title: '小组', width:120}
+        ,{field: 'award', title: '奖项级别', width:100}
+        ,{field: 'tec_tag', title: '类别', width: 180}
+        ,{field: 'status', title:'状态', width: 80}
+        ,{field: 'created_at', title: '编写时间', width: 120, sort: true}
+        ,{field: '', title: '操作', toolbar:"#mtool", width: 120}
+        ]]
+    });
+
+    // table行工具栏事件
+    table.on('tool(state)', function(obj){
+        var data = obj.data ,layEvent=obj.event;
+        console.log(data)
+        if(layEvent === 'detail'){
+            window.location.href="/asset/processed-tec-detail/" + data.id
+        } else if(layEvent === 'download') {
+            window.location.href="/asset/download-file/" + data.id
+        }
+    });
 
     //执行一个laypage实例
     laypage.render({
