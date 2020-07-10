@@ -323,3 +323,16 @@
 .layui-nav .layui-nav-child a {
   text-decoration: none;
 }
+
+.foot-bar {
+    position: fixed;
+    bottom: 0px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #808080;
+    z-index: 2;
+    overflow: hidden;
+    color: #ffffff;
+    width: 100%;
+}

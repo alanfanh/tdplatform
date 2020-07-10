@@ -333,7 +333,7 @@
   position: absolute;
   left: 25px;
   top: 9px;
-  width: 1416px;
+  width: 300px;
   height: 55px;
 }
 
@@ -746,8 +746,9 @@
   border-radius: 2px;
 }
 
-.Pra_data {
+.content_data {
   position: relative;
+  left: 20px;
   margin-top: 174px;
   width: 1200px;
   border-collapse: collapse;

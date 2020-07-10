@@ -13,6 +13,9 @@
         <script src="{% static 'js/jquery.js' %}"></script>
         <script src="{% static 'js/bootstrap.js' %}"></script>
         <script src="{% static 'js/common.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+        <script type="text/javascript" src='{% static "layui/layui.js" %}'></script>
+        {% block head %}{% endblock %}
     </head>
     <body>
         {% include "header.html" %}
@@ -23,4 +26,39 @@
         {% include "footer.html" %}
         {% block javascript %}{% endblock  %}          
     </body>
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function(){
+        var element = layui.element;
+        
+        //…
+        });
+
+        // 读取cookie值
+        function getCookie(name){
+                    var strCookie=document.cookie;
+                    var arrCookie=strCookie.split("; ");
+                    for(var i=0;i<arrCookie.length;i++){
+                        var arr=arrCookie[i].split("=");
+                        if(arr[0]==name)return arr[1];
+                    }
+                    return "";
+        }
+
+        // 页面加载即执行JQuery
+        $(document).ready(function(){
+            // document.cookie
+            unproc_num = getCookie('unproc_num_cookie')
+            // alert(unproc_num)    
+            unproc_num = Number(unproc_num) //转换为数字类型
+            // alert(typeof unproc_num)
+
+            if (unproc_num > 0){    
+                $("#tips").addClass("layui-badge-dot");
+            } else {
+                $("#tips").removeClass("layui-badge-dot");
+            }
+        });
+    </script>
 </html>
