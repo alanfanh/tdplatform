@@ -274,6 +274,44 @@ def process_tec(request):
     else:
         return HttpResponse("Not Found")
 
+@login_required(login_url="")
+def process_tec_data(request):
+    # 已处理的优秀实践，分PL和M用户
+    result = {"code":0, "msg":"", "count": 100, "data":[]}
+    kv = {"0": "驳回", "1": "审核中", "2": "审核中", "3": "完成"}
+    userinfo = UserInfo.objects.get(user=request.user)
+    role = Role.objects.get(id=userinfo.role_id)
+    if role.role_name == "PL":
+        tecs = TecContent.objects.filter(group_id=userinfo.group_id).exclude(status="1")
+    elif role.role_name == "M":
+        tecs = TecContent.objects.exclude(status="2")
+        tecs = tecs.exclude(status="1")
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(tecs, limit)
+    else:
+        paginator = Paginator(tecs, 10)
+    page = request.GET.get('page')
+    try:
+        tecs_page = paginator.page(page)
+    except PageNotAnInteger:
+        tecs_page = paginator.page(1)
+    except EmptyPage:
+        tecs_page = paginator.page(paginator.num_pages)
+    for tec in tecs_page:
+        obj = model_to_dict(tec, exclude=['file', ])
+        obj['created_at'] = tec.created_at.strftime('%Y-%m-%d')
+        tag_list = []
+        for tag in tec.tec_tag.all():
+            tag_list.append(tag.tag)
+        obj['tec_tag'] = tag_list
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        obj['status'] = kv[obj['status']]
+        result['data'].append(obj)
+    result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
+
 @login_required(login_url="/account/login")
 def my_tec(request):
     # STE添加的优秀实践
@@ -297,6 +335,41 @@ def my_tec(request):
         cur_tecs = paginator.page(paginator.num_pages)
     template_view = "asset/my_tec.html"
     return render(request, template_view, {"userinfo": userinfo, "ste_tecs": ste_tecs, "cur_tecs": cur_tecs})
+
+@login_required(login_url="/account/login")
+def my_tec_data(request):
+    # 个人申请优秀实践，返回json格式的数据
+    result = {"code":0, "msg":"", "count": 1000, "data": []}
+    kv = {"0":"驳回","1":"审核中", "2":"审核中","3":"完成"}
+    userinfo = UserInfo.objects.get(user=request.user)
+    # 筛选自己提交的实践
+    tecs = TecContent.objects.filter(author=userinfo)
+    # 获取url附带的参数，进行分页处理
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(tecs, limit)
+    else:
+        paginator = Paginator(tecs, 10)
+    page = request.GET.get('page')
+    try:
+        tecs_page = paginator.page(page)
+    except PageNotAnInteger:
+        tecs_page = paginator.page(1)
+    except EmptyPage:
+        tecs_page = paginator.page(paginator.num_pages)
+    for tec in tecs_page:
+        obj = model_to_dict(tec, exclude=['file',])
+        obj['created_at'] = tec.created_at.strftime('%Y-%m-%d')
+        tag_list = []
+        for tag in tec.tec_tag.all():
+            tag_list.append(tag.tag)
+        obj['tec_tag'] = tag_list
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        obj['status'] = kv[obj['status']]
+        result['data'].append(obj)
+    result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
 
 @login_required(login_url="/account/login")
 def tec_list(request):
