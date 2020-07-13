@@ -314,27 +314,12 @@ def process_tec_data(request):
 
 @login_required(login_url="/account/login")
 def my_tec(request):
-    # STE添加的优秀实践
+    # STE添加的优秀实践, 页面路由
     userinfo = UserInfo.objects.get(user=request.user)
-    ste_tecs = TecContent.objects.filter(author=userinfo)
-    # ste_tecs = TecContent.objects.filter(status="3", author=userinfo)
-    # 每页显示10条
-    paginator = Paginator(ste_tecs, 10)
-    # 获取前台传入后台的page值
-    page = request.GET.get('page')
-    try:
-        cur_tecs = paginator.page(page)
-        # 获取当前页面，实现当前页条目序号
-        current_page = int(page)
-        strat = (current_page-1)*10
-    except PageNotAnInteger:
-        # 如果请求的页数不是整数, 返回第一页。
-        cur_tecs = paginator.page(1)
-    except EmptyPage:
-        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-        cur_tecs = paginator.page(paginator.num_pages)
+    # ste_tecs = TecContent.objects.filter(author=userinfo)
+    ste_tecs = TecContent.objects.filter(status="3", author=userinfo)
     template_view = "asset/my_tec.html"
-    return render(request, template_view, {"userinfo": userinfo, "ste_tecs": ste_tecs, "cur_tecs": cur_tecs})
+    return render(request, template_view, {"userinfo": userinfo, "ste_tecs": ste_tecs})
 
 @login_required(login_url="/account/login")
 def my_tec_data(request):
@@ -675,3 +660,51 @@ def check_tec(request):
         return HttpResponse("1")
     else:
         return HttpResponse('404')
+
+# 筛选状态
+@login_required(login_url="/account/login")
+def filter_tec_status(request):
+    result = {"code":0, "msg":"", "count":0, "data":[]}
+    kv = {"0": "驳回", "1": "审核中", "2": "审核中", "3": "完成"}
+    userinfo = UserInfo.objects.get(user=request.user)
+    role = Role.objects.get(id=userinfo.role_id)
+    # 判断当前用户角色，返回不同数据
+    if role.role_name == "PL":
+        tecs = TecContent.objects.filter(group_id=userinfo.group_id).exclude(status="1")
+    elif role.role_name == "M":
+        tecs = TecContent.objects.exclude(Q(status="2") | Q(status="1"))
+    else:
+        tecs = TecContent.objects.filter(author=userinfo)
+    if request.GET.get('status'):
+        status = request.GET.get('status')
+        if status == "1&2":
+            status = status.split('&')
+            tecs = tecs.filter(Q(status=status[0]) | Q(status=status[1]))
+        else:
+            tecs = tecs.filter(status=status)
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(tecs, limit)
+    else:
+        paginator = Paginator(tecs, 10)
+    page = request.GET.get('page')
+    try:
+        tecs_page = paginator.page(page)
+    except PageNotAnInteger:
+        tecs_page = paginator.page(1)
+    except EmptyPage:
+        tecs_page = paginator.page(paginator.num_pages)
+    for tec in tecs_page:
+        obj = model_to_dict(tec, exclude=['file', ])
+        obj['created_at'] = tec.created_at.strftime('%Y-%m-%d')
+        tag_list = []
+        for tag in tec.tec_tag.all():
+            tag_list.append(tag.tag)
+        obj['tec_tag'] = tag_list
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        obj['status'] = kv[obj['status']]
+        result['data'].append(obj)
+    # 统计总数，用于前端分页
+    result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii":False})

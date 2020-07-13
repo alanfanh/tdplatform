@@ -36,5 +36,6 @@ urlpatterns = [
     path('search-complaint/', views.search_complaint, name="search_complaint"),
     path('check-tec/', views.check_tec, name="check_tec"),
     path('my-tec-data/', views.my_tec_data, name="my_tec_data"),
-    path('process-tec-data/', views.process_tec_data, name="process_tec_data")
+    path('process-tec-data/', views.process_tec_data, name="process_tec_data"),
+    path('filter-tec-status/', views.filter_tec_status, name="filter_tec_status"),
 ]
