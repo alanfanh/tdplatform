@@ -65,11 +65,10 @@
             </div>
             <div class="My_State">
                 <span class="State_tt">状态：</span>
-                <select class="pick_State">
-                    <option value="所有状态" selected>所有状态</option>
-                    <option value="成功">成功</option>
-                    <option value="进行中">进行中</option>
-                    <option value="驳回">驳回</option>
+                <select class="pick_State" id="selectStatus" onchange="selectStatus()">
+                    <option value="All" selected>所有状态</option>
+                    <option value="3">成功</option>
+                    <option value="0">驳回</option>
                 </select>
                 <button class="Ep_Record" id="madd_bt">添加记录</button>
             </div>
@@ -124,25 +123,21 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
         }
     });
 
-    //执行一个laypage实例
-    laypage.render({
-        elem: 'mpd_num' //注意，这里的 test1 是 ID，不用加 # 号
-        , limit: 10
-        , count: {{ tec_list.count }} //数据总数，从服务端得到
-        , curr: {{tecs.number}}
-        , hash: 'fenye'
-        , layout: ['count', 'prev', 'page', 'next', 'refresh', 'skip']
-        , jump: function (obj, first) {
-        console.log(obj.curr);
-        console.log(obj.limit);
-        page = obj.curr;
-        limit = obj.limit;
-        // 首次不执行
-        if (!first) {
-            location.href = `?page=${obj.curr}&limit=${obj.limit}`
-        }
-    }
-  });
 });
+function selectStatus() {
+    // 选择状态筛选表格内容
+    var status = $("#selectStatus").val()
+    if (status != "All") {
+        layui.use(['table'], function() {
+            var table = layui.table
+            table.reload('m_tecdata', {
+                url: '/asset/filter-tec-status/',
+                where: {status:status}
+            })
+        });
+    } else {
+        window.location.href="/asset/process-tec/"
+    }
+}
 </script>
 {% endblock  %}
