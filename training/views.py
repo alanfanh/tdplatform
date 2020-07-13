@@ -243,6 +243,7 @@ def search_course(request):
         courses = Course.objects.filter(Q(cname__icontains=search_key) | Q(address__icontains=search_key)| Q(teacher__realname__icontains=search_key))
         for course in courses:
             obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
+            obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
             obj['number'] = course.student.all().count()
             obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%m')
             result['data'].append(obj)
