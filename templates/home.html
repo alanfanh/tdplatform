@@ -171,6 +171,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
 <script>
 // 实现页面图片轮播
 layui.use('carousel', function(){
@@ -178,14 +181,13 @@ layui.use('carousel', function(){
   //建造实例
   carousel.render({
     elem: '#autoplay'
-    ,width: '760px' //设置容器宽度
+    ,width: '760px'   //设置容器宽度
     ,height: '240px'
     ,autoplay: 'true'
     ,interval: '2000' //自动切换时间间隔
-    ,arrow: 'always' //始终显示箭头
+    ,arrow: 'hover'   //隐藏显示箭头
     //,anim: 'updown' //切换动画方式
   });
 });
 </script>
-
 {% endblock %}
