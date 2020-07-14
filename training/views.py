@@ -37,19 +37,19 @@ class PersonCourseListView(UserCourseMixin, ListView):
         context = super(PersonCourseListView, self).get_context_data(**kwargs)
         userinfo = UserInfo.objects.get(user=self.request.user)
         courses_list = Course.objects.filter(teacher=userinfo)
-        paginator = Paginator(courses_list, self.paginate_by)
-        page = self.request.GET.get('page')
+        # paginator = Paginator(courses_list, self.paginate_by)
+        # page = self.request.GET.get('page')
         # print(page)
-        try:
-            course_list = paginator.page(page)
-            context['current_page'] = int(page)
-            strat = (context['current_page']-1)*self.paginate_by
-            context['strat'] = strat
-        except PageNotAnInteger:
-            course_list = paginator.page(1)
-        except EmptyPage:
-            course_list = paginator.page(paginator.num_pages)
-        context['course_list'] = course_list
+        # try:
+        #     course_list = paginator.page(page)
+        #     context['current_page'] = int(page)
+        #     strat = (context['current_page']-1)*self.paginate_by
+        #     context['strat'] = strat
+        # except PageNotAnInteger:
+        #     course_list = paginator.page(1)
+        # except EmptyPage:
+        #     course_list = paginator.page(paginator.num_pages)
+        # context['course_list'] = course_list
         context['courses_list'] = courses_list
         context['userinfo'] = userinfo
         return context
@@ -279,7 +279,7 @@ def edit_course(request, course_id):
             return redirect("training:course_list")
 
 
-# 返回json数据，
+# 返回json数据
 @login_required(login_url="/account/login")
 def get_userinfo(request):
     result = {"data": [], "select":[]}
@@ -293,4 +293,33 @@ def get_userinfo(request):
         course = Course.objects.get(id=request.GET['id'])
         for s in course.student.all():
             result['select'].append(s.id)
+    return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
+
+# 返回个人培训的json数据
+@login_required(login_url="/account/login")
+def person_course_data(request):
+    result = {"code":0, "msg":"", "count":0, "data":[]}
+    user = UserInfo.objects.get(user=request.user)
+    courses = Course.objects.filter(teacher=user)
+    # 获取url附带的参数，进行数据分页
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(courses, limit)
+    else:
+        paginator = Paginator(courses, 10)
+    page = request.GET.get('page')
+    try:
+        page_courses = paginator.page(page)
+    except PageNotAnInteger:
+        page_courses = paginator.page(1)
+    except EmptyPage:
+        page_courses = paginator.page(paginator.num_pages)
+    # 对已分页的数据处理成json
+    for course in page_courses:
+        obj = model_to_dict(course, fields=['id', 'cname', 'range', 'address','course_time', 'cdescription', 'teacher'])
+        obj['teacher'] =  UserInfo.objects.get(id=obj['teacher']).realname
+        obj['number'] = course.student.all().count()
+        obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%m')
+        result['data'].append(obj)
+    result['count'] = courses.count()
     return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
