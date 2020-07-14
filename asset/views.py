@@ -28,32 +28,51 @@ def article_content(request, article_id):
     pub = article.publish
     return render(request, "asset/content.html", {"article":article, "publish":pub})
 
-
 # 资产应用视图函数
 # 客诉
-
 @login_required(login_url="/account/login")
 def my_complaint(request):
     # 我添加的客诉
     userinfo = UserInfo.objects.get(user=request.user)
     complaints_list = Complaint.objects.filter(created_by=request.user)
-    # 每页显示10条
-    paginator = Paginator(complaints_list, 10)
-    if request.method == "GET":
-        page = request.GET.get('page')
-        try:
-            complaints = paginator.page(page)
-            # 获取当前页面，实现当前页条目序号
-            current_page = int(page)
-            strat = (current_page-1)*10
-        except PageNotAnInteger:
-            # 如果请求的页数不是整数, 返回第一页。
-            complaints = paginator.page(1)
-        except EmptyPage:
-            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-            complaints = paginator.page(paginator.num_pages)
     template_view = "asset/pl_complaint_list.html"
-    return render(request, template_view, {"userinfo": userinfo, "complaints": complaints, "complaints_list": complaints_list})
+    return render(request, template_view, {"userinfo": userinfo, "complaints_list": complaints_list})
+
+@login_required(login_url="/account/login")
+def my_complaint_data(request):
+    # 返回complaint_list的json数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    userinfo = UserInfo.objects.get(user=request.user)
+    complaints_list = Complaint.objects.filter(created_by=request.user)
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(complaints_list, limit)
+    else:
+        paginator = Paginator(complaints_list, 10)
+    page = request.GET.get('page')
+       
+    try:
+        complaints_page = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        complaints_page = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        complaints_page = paginator.page(paginator.num_pages)
+    
+    for complaint in complaints_page:
+        obj = model_to_dict(complaint, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','analysis_time','status'])
+        try:
+            obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
+            obj['analysis_time'] = obj['analysis_time'].strftime('%Y-%m-%d')        
+        except:
+            pass
+        result['data'].append(obj)
+    result['count'] = complaints_list.count()  
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
 def assigned_list(request):
@@ -127,7 +146,7 @@ def add_complaint(request):
             return redirect("asset:complaint_list")
         else:
             error = form.errors
-            print(error)
+            # print(error)
             return render(request, 'asset/add_complaint.html', {'form': form, 'error': error})
     else:
         return render(request, "asset/add_complaint.html", {"form":form})
@@ -142,20 +161,25 @@ def edit_complaint(request, complaint_id):
         return render(request, "asset/edit_complaint.html", {"complaint":complaint,"form":form})
     else:
         form = ComplaintForm(request.POST, request.FILES,instance=complaint)
-        print(form)
-        print(form.cleaned_data)
-        if form.is_valid():
+        upfile_name = request.FILES.get('cfile')        
+        if form.is_valid() and complaint.cfile == '' and upfile_name is None:
+            # 附件为空时提示上传附件
+            form.add_error("cfile", u"请选择上传附件。")
+            flag = 0
+        elif form.is_valid() and complaint.cfile != '':
+            flag = 1
+        else:
+            flag = 0
+        
+        error = form.errors
+        if flag == 1:
             new_complaint = form.save(commit=False)
             new_complaint.created_by = request.user
             new_complaint.save()
             return redirect("asset:complaint_list")
         else:
-            form = ComplaintForm(instance=complaint)
-            error = form.errors
-            print(error)
-            return render(request, 'asset/edit_complaint.html', {"form":form, 'error': error})
-            # return HttpResponse('3')
-
+            return render(request, 'asset/edit_complaint.html', {"complaint":complaint, "form":form, 'error': error})
+            # return HttpResponse('1')
 
 @login_required(login_url="/account/login")
 @require_POST

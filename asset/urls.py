@@ -7,6 +7,7 @@ urlpatterns = [
     path('<int:article_id>', views.article_content, name="blog_detail"),
     # 
     path('my-complaint/', views.my_complaint, name="my_complaint"),
+    path('my-complaint-data/', views.my_complaint_data, name="my_complaint_data"),
     path('unprocess-tec/', views.unprocess_tec, name="unprocess_tec"),
     path('process-tec/', views.process_tec, name="process_tec"),
     path('my-tec/', views.my_tec, name="my_tec"),
