@@ -2,11 +2,13 @@
 
 {% load staticfiles %}
 
-{% block content %}
+{% block head %}
 
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/default.css' %}">
+{% endblock  %}
 
+{% block content %}
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
@@ -59,124 +61,71 @@
         <div class="info_base">
             <div class="gp_title">
                 <span class="Cust_Com">我的客诉问题</span>
-            </div>
-            <table class="gp_table" align="center"">
-                <thead>
-                    <tr class="ct_th">
-                    {% comment %} <th class="ctt1">
-                        <input type="checkbox" class="ck">
-                    </th> {% endcomment %}
-                    <th class="ctt2">序号</th>
-                    <th class="ctt3">
-                        客诉名称
-                    </th>
-                    <th class="ctt4">客诉类型</th>
-                    <th class="ctt5">提交人</th>
-                    <th class="ctt6">客诉时间
-                        {% comment %} <img src="{% static 'images/asset/up.svg' %}" class="up_img"> {% endcomment %}
-                        {% comment %} <img src="{% static 'images/asset/down.svg' %}" class="down_img"> {% endcomment %}
-                    </th>
-                    <th class="ctt7">严重程度</th>
-                    <th class="ctt8">产品线</th>
-                    <th class="ctt9">问题分类</th>
-                    <th class="ctt10">分析负责人</th>
-                    <th class="ctt11">分析完成时间</th>
-                    <th class="ctt12">措施状态</th>
-                    <th class="ctt13">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% comment %} <tr class="ct_tr">
-                        <td class="ctt1">
-                            <input type="checkbox" class="ck">
-                        </td>
-                        <td class="ctt2">1</td>
-                        <td class="ctt3">
-                            <span class="sign"></span>
-                            <span class="Cust_cont">02客户端模式透传需求</span>
-                        </td>
-                        <td class="ctt4">新需求</td>
-                        <td class="ctt5">李测试</td>
-                        <td class="ctt6">2019/10</td>
-                        <td class="ctt7">高</td>
-                        <td class="ctt8">家用</td>
-                        <td class="ctt9">安全性</td>
-                        <td class="ctt10">李负责</td>
-                        <td class="ctt11">-</td>
-                        <td class="ctt12">
-                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
-                        </td>
-                        <td class="ctt13">
-                            <span class="dload">查看 | 下载</span>
-                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
-                        </td>
-                    </tr> {% endcomment %}
-                    {% for com in complaints %}
-                    <tr class="ct_tr">
-                        {% comment %} <td class="ctt1">
-                            <input type="checkbox" class="ck">
-                        </td> {% endcomment %}
-                        <td class="ctt2">{{forloop.counter}}</td>
-                        <td class="ctt3">
-                            <span class="Cust_cont">{{com.cname}}</span>
-                        </td>
-                        <td class="ctt4">{{com.type}}</td>
-                        <td class="ctt5">{{com.submitter}}</td>
-                        <td class="ctt6">{{com.ctime | date:"Y-m-d"}}</td>
-                        <td class="ctt7">{{com.level}}</td>
-                        <td class="ctt8">{{com.product_line}}</td>
-                        <td class="ctt9">{{com.category}}</td>
-                        <td class="ctt10">{{com.tester}}</td>
-                        <td class="ctt11">{{com.complete_time}}</td>
-                        <td class="ctt12">
-                            {% if com.status == "Open" %}
-                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F; font-size:14px;">Open</span>
-                            {% elif com.status == "Closed" %}
-                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;">● </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
-                            {% endif %}
-                        </td>
-                        <td class="ctt13">
-                            <span class="dload"><a href="{% url 'asset:complaint_detail' com.id %}">查看</a> | <a href="{% url 'asset:download_cfile' com.id %}">下载</a></span>
-                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            </div>                            
+            <div style="position:absolute;left:25px;top:60px;"><table id="mycomplaint_table" lay-filter="test"></table></div>
             <div class="ct_footer" id="ct_fenye">
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static '/layui/layui.js' %}"></script>
+<script type="text/html" id="operatebar">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="download" >下载</a>  
+</script>
+
+<script type="text/html" id="statusTpl">
+    {% verbatim %}
+    {{#  if(d.status=='Open'){ }}
+        <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
+        <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
+        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F; font-size:14px;">Open</span>  
+    {{#  } else if (d.status=='Closed'){ }}
+        <span style="font-family:'Helvetica';font-size:12px;color:#999999;">● </span>
+        <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
+    {{#  } }}
+    {% endverbatim %}   
+</script>
 <script src="{% static 'layui/layui.js' %}"></script>
 <script>
-layui.use('laypage', function(){
-  var laypage = layui.laypage;
-  
-  //执行一个laypage实例
-  laypage.render({
-    elem: 'ct_fenye' //注意，这里的 test1 是 ID，不用加 # 号
-    ,limit: 10
-    ,count: {{complaints_list.count}} //数据总数，从服务端得到
-    ,curr: 1
-    ,hash:'fenye'
-    ,layout: ['count', 'prev', 'page', 'next',  'refresh', 'skip']
-    ,jump: function(obj, first) {
-        console.log(obj.curr);
-        console.log(obj.limit);
-        page=obj.curr; 
-        limit=obj.limit;
-        // 首次不执行
-        if ( !first) {
-            location.href=`?page=${obj.curr}&limit=${obj.limit}`
-        }
-    }
+layui.use('table', function(){  
+  var table = layui.table  // 表格
+  //table实例
+  table.render({
+    elem: '#mycomplaint_table'
+    ,height: 512
+    ,url: '/asset/my-complaint-data/' //数据接口
+    ,page: true //开启分页
+    ,limit: 10   
+    ,cols: [[ //表头
+      {field: 'id', title: 'ID', width:50}
+      ,{field: 'cname', title: '客诉名称', width:210}
+      ,{field: 'type', title: '客诉类型', width:86}
+      ,{field: 'submitter', title: '提交人', width:86}
+      ,{field: 'ctime', title: '客诉时间', width:103}
+      ,{field: 'level', title: '严重程度', width:86} 
+      ,{field: 'product_line', title: '产品线', width:72}
+      ,{field: 'category', title: '问题分类', width:86}
+      ,{field: 'tester', title: '分析负责人', width:100}
+      ,{field: 'analysis_time', title: '分析完成时间', width:114}
+      ,{field: 'status', title: '措施状态', width:86, templet: '#statusTpl'}
+      ,{field: '', title: '操作', toolbar:"#operatebar", width:113}
+    ]]
   });
+  
+  // table行工具栏事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data ,layEvent=obj.event;
+    if(layEvent === 'detail'){
+        window.location.href="/asset/complaint-detail/" + data.id
+    } else if(layEvent === 'download') {
+        window.location.href="/asset/download-cfile/" + data.id
+    }
+  });  
+
 });
 </script>
 {% endblock  %}

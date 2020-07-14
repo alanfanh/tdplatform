@@ -3,11 +3,13 @@
 {% load staticfiles %}
 {% block title %}编辑客诉问题{% endblock %}
 
-{% block content %}
+{% block head %}
 
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+{% endblock  %}
 
+{% block content %}
 <div class="cabase">
     <div class="cabaseplate">
         <div class="camenuinfo">
@@ -48,7 +50,7 @@
 	                            <option value="重复Bug">重复Bug</option>
 	                        </select>
 						</div>
-                        <div class="pickman">
+                        <div class="pickman_edit">
                             <span>提交人</span>
                         </div>
                         <input type="text" class="layui-input submitter" lay-verify="submitter" value="{{complaint.submitter}}" name="submitter">
@@ -62,7 +64,7 @@
                             <span>客诉时间</span>
                             <input type="text" class="layui-input cmtype_time" lay-verify="ctime" name="ctime" id="ctime" value="{{complaint.ctime|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
                         </div>
-                        <div class="pickman">
+                        <div class="area_name_edit">
                             <span>客诉区域</span>
                         </div>
 						<div class="layui-form-item selectman">
@@ -84,12 +86,12 @@
                         <div class="cm_name">
                             <span>产品型号</span>
                         </div>
-                        <input type="text" class="product_type" name="product" value="{{complaint.product}}" placeholder="请输入产品型号">
+                        <input type="text" class="product_type" lay-verify="product" name="product" value="{{complaint.product}}" placeholder="请输入产品型号">
                         <div class="cmtype">
                             <span>产品线</span>
                         </div>
 						<div class="layui-form-item typeselt">
-	                        <select class="typeselt" name="product_line">
+	                        <select class="typeselt" lay-verify="product_line" name="product_line">
 	                            <option value="{{complaint.product_line}}" selected="selected">{{complaint.product_line}}</option>
 	                            <option value="家用">家用</option>
 	                            <option value="商用">商用</option>
@@ -100,16 +102,16 @@
 	                            <option value="OEM">OEM</option>
 	                        </select>
 						</div>
-                        <div class="pickman">
+                        <div class="version_name_edit">
                             <span>软件版本信息</span>
                         </div>
-                        <input type="text" class="swversion" name="version" value="{{complaint.version}}">
+                        <input type="text" class="swversion" lay-verify="version" name="version" value="{{complaint.version}}">
                     </div>
                     <div class="cafloor2">
                         <div class="cm_name">
                             <span>资产编号</span>
                         </div>
-                        <input type="text" name="asset_number" class="product_type" value="{{complaint.asset_number}}">
+                        <input type="text" name="asset_number" lay-verify="asset_number" class="product_type" value="{{complaint.asset_number}}">
                         <div class="cmtype">
                             <span>严重程度</span>
                         </div>
@@ -134,7 +136,7 @@
                             <span>是否分析</span>
                         </div>
 						<div class="layui-form-item analypick">
-	                        <select class="analypick" name="analysis_status">
+	                        <select class="analypick" lay-verify="analysis_status" name="analysis_status">
 								<option value="{{complaint.analysis_status}}" selected="selected">{{complaint.analysis_status}}</option>
 	                            <option value="否">否</option>
 	                            <option value="是">是</option>
@@ -143,12 +145,11 @@
                         <div class="cmtype">
                             <span>分析负责人</span>
                         </div>
-                        <input type="text" class="analyman" name="tester" value="{{complaint.tester}}" placeholder="请填写分析负责人">
-                        <div class="pickman">
+                        <input type="text" class="analyman" name="tester" lay-verify="tester" value="{{complaint.tester}}" placeholder="请填写分析负责人">
+                        <div class="analysis_time">
                             <span>分析完成时间</span>
-							<input type="text" class="layui-input cmtype_time" value="{{complaint.analysis_time|date:'Y-m-d'}}" name="analysis_time" id="analysis_time" style="color: rgb(153, 153, 153);">
+							<input type="text" class="layui-input cmtype_time" value="{{complaint.analysis_time|date:'Y-m-d'}}" lay-verify="analysis_time" name="analysis_time" id="analysis_time" style="color: rgb(153, 153, 153);">
                         </div>
-
                     </div>
                     <div class="cafloor2">
 					<div class="cm_name">
@@ -164,7 +165,6 @@
                             <option value="需求类">需求类</option>
                         </select>
 					</div>
-
                         <div class="cmtype">
                             <span>措施状态</span>
                         </div>
@@ -175,99 +175,171 @@
 	                            <option value="Closed">Closed</option>
 	                        </select>
 						</div>
-                        <div class="pickman">
+                        <div class="complete_time">
                             <span>措施完成时间</span>
-							<input type="text" class="layui-input cmtype_time" name="complete_time" id="complete_time" value="{{complaint.complete_time|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
+							<input type="text" class="layui-input cmtype_time" lay-verify="complete_time" name="complete_time" id="complete_time" value="{{complaint.complete_time|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
                         </div>
-
                     </div>
                     <div class="cafloor3">
                         <div class="cm_name">
                             <span>计划闭环时间</span>
-							<input type="text" class="layui-input cmtype_time" name="closed_time" id="closed_time" value="{{complaint.closed_time|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
+							<input type="text" class="layui-input cmtype_time" lay-verify="closed_time" name="closed_time" id="closed_time" value="{{complaint.closed_time|date:'Y-m-d'}}" style="color: rgb(153, 153, 153);">
                         </div>
                         <div class="cmtype">
                             <span>改进措施</span>
                         </div>
-                        <textarea name="solutions" class="layui-textarea prob_solution" placeholder="" >{{complaint.solutions}}</textarea>
+                        <textarea name="solutions" lay-verify="solutions" class="layui-textarea prob_solution" placeholder="" >{{complaint.solutions}}</textarea>
                     </div>
                     <div class="cafloor4">
                         <div class="cm_name">
                             <span>问题描述</span>
                         </div>
                         <textarea id="pbtext" cols="30" rows="10" lay-verify="description" name="description" >{{complaint.description}}</textarea>
-                        <img src="{% static 'images/asset/texttag.png' %}" class="pbttag">
-                    </div>
+                        <span id="cfile_msg">{{error.cfile.0}}</span><br>
+                        <img src="{% static 'images/asset/texttag.png' %}" class="pbttag">                        
+                    </div>                    
                     <div class="cafllor5">
                         <div class="cm_name">
                             <span>上传附件</span>
                         </div>
                         <div class="upload">
-                            {% comment %} <input type="file" id="cfile" name="cfile" value="{{complaint.cfile}}"> {% endcomment %}
+                            {% comment %}<input type="file" id="cfile" name="cfile" lay-verify="cfile" value="{{complaint.cfile}}"> {% endcomment %}
                             {{form.cfile}}
                         </div>
                         <button class="layui-btn handin" lay-submit lay-filter="formComplaint">提交</button>
                     </div>
                 </div>
             </form>
-            <button id="revoke" onclick="window.history.back()">取消</button>
+            <button id="revoke" onclick="window.history.back()">取消</button>            
         </div>
     </div>
 </div>
+{% endblock  %}
 
-<script>
-layui.use('form', function(){
-  var form = layui.form;
-    //监听提交
-  form.on('submit(formComplaint)', function(data){
-
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
+<script type="text/javascript">
+//隐藏 “清除”文件 元素
+//页面属性，图片，内容完全加载完，执行
+$(window).on("load",function(){
+    $("label").hide();
+    $("i.layui-icon.layui-icon-ok").hide();　　
 });
-  form.verify({
+
+layui.use('form', function(){
+    var form = layui.form;
+    //监听提交
+    form.on('submit(formComplaint)', function(data){
+    
+    });
+    
+    form.verify({
     cname: [
-      /^.{1,30}$/
-      ,'请输入1-30个字符'
+        /^.{1,30}$/
+        ,'请输入1-30个字符'
     ]
-   ,type: [
-      /\S/
-      ,'请选择客诉类型'
+    ,type: [
+        /\S/
+        ,'请选择客诉类型'
     ]
-    ,submitter: [
-      /\S/
-      ,'请输入提交人'
-    ]
-    ,oa_number: [
-      /\S/
-      ,'请输入流程号'
-    ]
+    ,submitter: function(value, item){ 
+        if(!/\S/.test(value)){
+        return '请输入提交人';
+        }
+        if(!/^.{1,20}$/.test(value)){
+        return '不能超过20个字符';
+        }
+    }
+    ,oa_number: function(value, item){ 
+        if(!/\S/.test(value)){
+        return '请输入流程号';
+        }
+        if(!/^.{1,20}$/.test(value)){
+        return '不能超过20个字符';
+        }
+    }
     ,ctime: [
-      /\S/
-      ,'请输入客诉时间'
+        /\S/
+        ,'请输入客诉时间'
     ]
     ,area: [
-      /\S/
-      ,'请选择客诉区域'
+        /\S/
+        ,'请选择客诉区域'
     ]
+    ,product: function(value, item){ 
+        if(!/\S/.test(value)){
+        return '请输入产品型号';
+        }
+        if(!/^.{1,20}$/.test(value)){
+        return '不能超过20个字符';
+        }
+    }
+    ,product_line: [
+        /\S/
+        ,'请选择产品线'
+    ]
+    ,version: function(value, item){ 
+        if(!/\S/.test(value)){
+        return '请输入软件版本信息';
+        }
+        if(!/^.{1,30}$/.test(value)){
+        return '不能超过30个字符';
+        }
+    }
+    ,asset_number: function(value, item){ 
+        if(!/\S/.test(value)){
+        return '请输入资产编号';
+        }
+        if(!/^.{1,20}$/.test(value)){
+        return '不能超过20个字符';
+        }
+    }
     ,level: [
-      /\S/
-      ,'请选择严重程度'
+        /\S/
+        ,'请选择严重程度'
     ]
+    ,analysis_status: [
+        /\S/
+        ,'请选择是否分析'
+    ]
+    ,tester: function(value, item){ 
+        if(!/\S/.test(value)){
+        return '请填写分析负责人';
+        }
+        if(!/^.{1,10}$/.test(value)){
+        return '不能超过10个字符';
+        }
+    }
+    ,analysis_time: [
+        /\S/
+        ,'请输入分析完成时间'
+    ]         
     ,category: [
-      /\S/
-      ,'请选择问题类型'
+        /\S/
+        ,'请选择问题类型'
     ]
     ,status: [
-      /\S/
-      ,'请选择措施状态'
+        /\S/
+        ,'请选择措施状态'
     ]
+    ,complete_time: [
+        /\S/
+        ,'请输入措施完成时间'
+    ]
+    ,closed_time: [
+        /\S/
+        ,'请输入计划闭环时间'
+    ]
+    ,solutions: [
+        /\S/
+        ,'请填写改进措施'
+    ]            
     ,description: [
-      /\S/
-      ,'请输入问题描述'
+        /\S/
+        ,'请输入问题描述'
     ]
-    ,cfile: [
-      /\S/
-      ,'请选择附件'
-    ]
-  });
+    });
+ 
 });
 
 // 日期时间控件

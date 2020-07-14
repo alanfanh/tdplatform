@@ -4,12 +4,14 @@
 
 {% block title %}客诉问题详情{% endblock  %}
 
-{% block content %}
+{% block head %}
 
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/default.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+{% endblock  %}
 
+{% block content %}
 <div class="Ed_base">
     <div class="Ed_baseplate">
         <div class="Ed_menuinfo">
@@ -51,18 +53,18 @@
                 <span class="cdname">产品型号：{{complaint.product}}</span>
                 <span class="cdtype">产品线：{{complaint.product_line}}</span>
                 <span class="hdname">软件版本信息：{{complaint.version}}</span>
-                <span class="cdoa">资产编号：{{complaint.asset_id}}</span>
+                <span class="cdoa">资产编号：{{complaint.asset_number}}</span>
                 <span class="cdtime">严重程度：{{complaint.level}}</span>
             </div>
             <div class="cddet">
                 <span class="cd_info">问题详情</span>
             </div>
             <div class="cdgoing_cont3">
-                <span class="cdname">是否分析：{{complaint.analysis}}</span>
+                <span class="cdname">是否分析：{{complaint.analysis_status}}</span>
                 <span class="cdtype">分析责任人：{{complaint.tester}}</span>
-                <span class="hdname">分析完成时间：{{complaint.complete_time}}</span>
+                <span class="hdname">分析完成时间：{{complaint.analysis_time}}</span>
                 <span class="cdoa">改进措施：</span>
-                <span class="egcont">{{complaint.improvement}}</span>
+                <span class="egcont">{{complaint.solutions}}</span>
             </div>
             <div class="cdgoing_cont4">
                 <span class="cdname">措施状态：{{complaint.status}}</span>

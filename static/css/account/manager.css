@@ -391,7 +391,8 @@
   .tr_table {
     position:relative;
     margin-top:72px;
-    width: 1200px;
+    width: 1120px;
+    left: 30px;
     border-collapse:collapse;
     font-size:14px;
   }
@@ -1019,6 +1020,65 @@
   color:rgba(0, 0, 0, 0.847058823529412);
   line-height:22px;
 }
+
+.cm_product {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.cm_product:before {
+    content: '*';
+    color: red;
+}
+
+.cm_complaint_name {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+
+.cm_complaint_name:before {
+    content: '*';
+    color: red;
+}
+
+.cm_oanum {
+  border-width:0px;
+  position:absolute;
+  left:0px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.cm_oanum:before {
+    content: '*';
+    color: red;
+}
+
 .cmit_name {
   border-width:0px;
   position:absolute;
@@ -1065,8 +1125,6 @@
   padding-top:0px;
   line-height:22px;
 }
-
-
 .cmtype {
   border-width:0px;
   position:absolute;
@@ -1081,6 +1139,87 @@
   color:rgba(0, 0, 0, 0.847058823529412);
   line-height:22px;
 }
+
+.bug_level {
+  border-width:0px;
+  position:absolute;
+  left:366px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.bug_level:before {
+    content: '*';
+    color: red;
+}
+
+
+.title_pline {
+  border-width:0px;
+  position:absolute;
+  left:366px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.title_pline:before {
+    content: '*';
+    color: red;
+}
+
+.title_ctime {
+  border-width:0px;
+  position:absolute;
+  left:366px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.title_ctime:before {
+    content: '*';
+    color: red;
+}
+
+
+
+
+.cm_complaint_type {
+  border-width:0px;
+  position:absolute;
+  left:366px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.cm_complaint_type:before {
+    content: '*';
+    color: red;
+}
+
 
 .cmtype_time {
     width:200px;
@@ -1173,7 +1312,134 @@
   color:rgba(0, 0, 0, 0.847058823529412);
   line-height:22px;
 }
+.pickman:before {
+    content: '*';
+    color: red;
+}
 
+.pickman_edit {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+
+.area_name {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.area_name:before {
+    content: '*';
+    color: red;
+}
+
+.area_name_edit {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+
+.version_name {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.version_name:before {
+  content: '*';
+  color: red;
+}
+
+.version_name_edit {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+
+#cfile_msg {
+  height: 48px;
+  width: 420px;
+  position: absolute;
+  top: 115px;
+  background: none;
+  color: #FF0000;
+  font-size: 12px;
+  border: 0;
+  outline: none;
+}
+
+.analysis_time {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
+.complete_time {
+  border-width:0px;
+  position:absolute;
+  left:732px;
+  top:0px;
+  background-color:rgba(255, 255, 255, 0);
+  border:none;
+  font-family:'PingFangSC-Regular', 'PingFang SC';
+  font-weight:400;
+  font-style:normal;
+  font-size:14px;
+  color:rgba(0, 0, 0, 0.847058823529412);
+  line-height:22px;
+}
 .submitter {
     border-width:0px;
     position:absolute;
