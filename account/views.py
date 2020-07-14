@@ -11,7 +11,7 @@ from .forms import LoginForm,UserInfoForm
 from .models import UserInfo, Group, Role, Rank
 from asset.models import TecContent, Complaint
 from training.models import Course
-
+import json
 from django.contrib.auth.forms import PasswordChangeForm
 
 @login_required(login_url="/account/login/")
@@ -32,10 +32,14 @@ def user_login(request):
             if user is not None:  # 通过验证
                 login(request, user)
                 # print("登陆成功！")
-                return JsonResponse({'res': 1})
+                data={'res':1}                
             else:
                 # print("用户名密码错误！！！")
-                return JsonResponse({'res': 0})
+                data={'res':0}                
+            response = HttpResponse(json.dumps(data),content_type="application/json")
+            # 调用delete_cookie("unproc_num_cookie")删除cookie 
+            response.delete_cookie("unproc_num_cookie")
+            return response
     else:
         return render(request, 'account/login.html')
 
