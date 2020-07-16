@@ -107,9 +107,22 @@ def complaint_list_data(request):
     # 返回complaint_list的json数据
     result = {"code": 0, "msg": "", "count": 1000, "data": []}
     complaints = Complaint.objects.all()
-    for complaint in complaints:
-        obj = model_to_dict(complaint, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(complaints, limit)
+    else:
+        paginator = Paginator(complaints, 10)
+    page = request.GET.get('page')
+    try:
+        complaints_page = paginator.page(page)
+    except PageNotAnInteger:
+        complaints_page = paginator.page(1)
+    except EmptyPage:
+        complaints_page = paginator.page(paginator.num_pages)
+    for complaint in complaints_page:
+        obj = model_to_dict(complaint, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status','oa_number','area','product', 'version','created_by'])
         obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
+        obj['created_by'] = get_object_or_404(UserInfo, pk=obj['created_by']).realname
         result['data'].append(obj)
     result['count'] = complaints.count()
     # print(result)
@@ -392,7 +405,21 @@ def tec_list_data(request):
     # 返回tec_list的json数据
     result = {"code": 0, "msg": "", "count": 1000, "data": []}
     tecs = TecContent.objects.filter(status="3")
-    for tec in tecs:
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(tecs, limit)
+    else:
+        paginator = Paginator(tecs, 10)
+    page = request.GET.get('page')
+    try:
+        tecs_page = paginator.page(page)
+        # 获取当前页面，生成页面条目序号
+        current_page = int(page)
+    except PageNotAnInteger:
+        tecs_page - paginator.page(1)
+    except EmptyPage:
+        tecs_page = paginator.page(paginator.num_pages)
+    for tec in tecs_page:
         obj = model_to_dict(tec, exclude=['file',])
         obj["created_at"] = tec.created_at.strftime('%Y-%m-%d')
         # 获取tec标签，多对多查询
