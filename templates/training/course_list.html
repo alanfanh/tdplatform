@@ -4,11 +4,13 @@
 
 {% block title %}培训管理{% endblock  %}
 
-{% block content %}
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
 <link rel="stylesheet" href="{% static 'css/training/train.css' %}">
+{% endblock  %}
 
+{% block content %}
 <div class="base">
     <div class="tnbaseplate">
         <div class="menuinfo">
@@ -47,11 +49,13 @@
                 <a href="{% url 'training:add_course' %}"><button class="adcustomer" type="button">新增</button></a>
                 {% endif %}
             </div>
-            <div style="position:absolute;left:25px;top:118px;"><table id="train_table" lay-filter="test"></table></div>
+            <div style="position:absolute;left:25px;top:118px;width:1162px"><table id="train_table" lay-filter="test"></table></div>
         </div>
     </div>
 </div>
-<script src="{% static '/layui/layui.js' %}"></script>
+{% endblock  %}
+
+{% block javascript %}
 <script type="text/html" id="oper_tool">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="download" >下载</a>
@@ -64,6 +68,13 @@
     <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
     <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
     <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+  </div>
+</script>
+<script type="text/html" id="toolbar">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
   </div>
 </script>
 <script>
@@ -83,23 +94,35 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
     //table实例
     table.render({
         elem: '#train_table'
-        , height: 512
+        , height: 550
         , url: '/training/course-list-data/' //数据接口
         , page: true //开启分页
         , limit: 10
+        , toolbar: 'true'
+        , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+            title: '提示'
+            ,layEvent: 'LAYTABLE_TIPS'
+            ,icon: 'layui-icon-tips'
+        }]
         //, even: true
         //, skin: 'line'
+        , title: '课程培训表'
         , cols: [[ //表头
-            { field: 'id', title: 'ID', width: 60, sort: true, }
+            {type: 'checkbox', fixed: 'left'}
+            //{ field: 'id', title: 'ID', width: 60, sort: true, }
             , { field: 'cname', title: '课程名', width: 343 }
             , { field: 'range', title: '课程范围', width: 120 }
             , { field: 'teacher', title: '主讲人', width: 96, sort: true }
             , { field: 'number', title: '参加人数', width: 100, sort: true }
             , { field: 'address', title: '培训地点', width: 134 }
-            , { field: 'course_time', title: '培训时间', width: 149 }
-            , { field: '', title: '操作', toolbar: "#oper_tool" }
+            , { field: 'course_time', title: '培训时间', width: 149, sort:true}
+            , { field: 'cdescription', title: '内容简介', hide: true}
+            , { field: 'student', title: '培训签到', hide: true}
+            , { fixed: 'right', title: '操作', toolbar: "#oper_tool" }
         ]]
     });
+    // table 头工具栏事件
+
 
     // table行工具栏事件
     table.on('tool(test)', function (obj) {
