@@ -124,6 +124,9 @@ def course_list_data(request):
         obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
         # 获取参加课程的人数
         obj['number'] = course.student.all().count()
+        obj['student'] = []
+        for name in course.student.all():
+            obj['student'].append(name.realname)
         obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%M')
         result['data'].append(obj)
     result['count'] = courses.count()
