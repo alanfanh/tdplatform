@@ -678,8 +678,8 @@
 }
 .linenm {
     position: relative;;
-    left: 118px;
-    top: 6px;
+    /* left: 118px;
+    top: 6px; */
     width: 52px;
     height: 17px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
@@ -687,8 +687,8 @@
     font-size: 13px;
 }
 .lineselt {
-    position:absolute;
-    left:171px;
+    position: relative;;
+    /* left:171px; */
     top:2px;
     width:120px;
     height:32px;
@@ -706,8 +706,8 @@
 }
 .pdtime {
     position: relative;;
-    left: 263px;
-    top: 6px;
+    left: 10px;
+    /* top: 6px; */
     width: 65px;
     height: 17px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
@@ -715,8 +715,8 @@
     font-size: 13px;
 }
 .pdtimepick {
-    position:absolute;
-    left:386px;
+    position: relative;;
+    left:10px;
     top:2px;
     width:120px;
     height:32px;
@@ -734,8 +734,8 @@
 }
 .pdclassific {
     position: relative;;
-    left:395.5px;
-    top: 6px;
+    left:10px;
+    /* top: 6px; */
     width: 65px;
     height: 17px;
     font-family: 'PingFangSC-Regular', 'PingFang SC';
@@ -743,8 +743,8 @@
     font-size: 13px;
 }
 .typepick {
-    position:absolute;
-    left:588px;
+    position: relative;;
+    left:10px;
     top:2px;
     width:120px;
     height:32px;
@@ -761,8 +761,8 @@
     line-height:22px;
 }
 .itsearch {
-    position:absolute;
-    left:724px;
+    position: relative;;
+    left: 20px;
     top:2px;
     width:195px;
     height:32px;
@@ -781,8 +781,8 @@
 }
 .sortimg {
     position: relative;
-    left:700px;
-    top:8px;
+    left:-10px;
+    /* top:8px; */
     width: 16px;
     height: 16px;
     transform: rotate(345deg);

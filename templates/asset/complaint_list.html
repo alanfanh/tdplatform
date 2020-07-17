@@ -4,11 +4,12 @@
 
 {% block title %}客诉列表{% endblock %}
 
-{% block content %}
-
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+{% endblock  %}
 
+{% block content %}
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
@@ -25,10 +26,7 @@
                 <span class="Cust_Com">客诉问题</span>
             </div>
             <div class="info_selt">
-                <div class="selcom">
-                    <span class="showcont">显示内容</span>
-                    <img src="{% static 'images/asset/select.png' %}" class="sltimg">
-                </div>
+                
                 <label for="" class="linenm">产品线：</label>
                 <select class="lineselt" onchange="selectProduct()" id="selectProduct">
                     <option value="家用">家用</option>
@@ -59,248 +57,15 @@
                 <a href="{% url 'asset:add_complaint' %}"><button class="adcustomer" type="button">新增客诉</button></a>
                 {% endif %}
             </div>
-            <div class="tbbd" hidden>
-                <table align="center" class="hidtb">
-                    <thead>
-                    <tr class="tiptr">
-                        <td>
-                        <div class="tipcont">
-                            <span class="tiptext">请选择表格要显示的内容</span>
-                        </div>
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 客诉名称
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 客诉类型
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 提交人
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 客诉月份
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 产品型号
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 软件版本信息
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 严重程度
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 产品线
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 问题分类
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 分析负责人
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 分析完成时间
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 措施状态
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 改进措施
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 措施完成时间
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 计划闭环时间
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 问题根因
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 问题引入点
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 问题控制点
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 是否分析
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 客户影响分析
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 典型问题
-                        </td>
-                    </tr>
-                    <tr class="tipselt">
-                        <td>
-                        <input type="checkbox" class="tipck"> 资产编号
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div style="position:absolute;left:25px;top:126px;width:1180px">
+                <table id="demo_table" lay-filter="test"></table>
             </div>
-            {% comment %}
-            <table class="cc_table" align="center">
-                <thead>
-                    <tr class="cc_th">
-                    <th class="cct1">
-                        <input type="checkbox" class="ck">
-                    </th>
-                    <th class="cct2">序号</th>
-                    <th class="cct3">
-                        <span class="Cust_name">客诉名称</span>
-                    </th>
-                    <th class="cct4">客诉类型</th>
-                    <th class="cct5">提交人</th>
-                    <th class="cct6">客诉时间
-                        <img src="images/admin/up.svg" class="up_img">
-                        <img src="images/admin/down.svg" class="down_img">
-                    </th>
-                    <th class="cct7">严重程度</th>
-                    <th class="cct8">产品线</th>
-                    <th class="cct9">问题分类</th>
-                    <th class="cct10">分析负责人</th>
-                    <th class="cct11">措施状态</th>
-                    <th class="cct12">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="ct_trwiden">
-                        <td class="cct1">
-                            <input type="checkbox" class="ck">
-                        </td>
-                        <td>1</td>
-                        <td>
-                            <span class="sign"></span>
-                            <span class="Cust_cont">02客户端模式透传需求</span>
-                        </td>
-                        <td>新需求</td>
-                        <td>李测试</td>
-                        <td>2019/10</td>
-                        <td>高</td>
-                        <td>家用</td>
-                        <td>安全性</td>
-                        <td>李负责</td>
-                        <td>
-                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Open</span>
-                        </td>
-                        <td>
-                            <span class="dload">查看 | 下载</span>
-                            <img src="{% static 'images/asset/see.png' %} " class="see_dload">
-                        </td>
-                        </tr>
-                        <tr class="extratr">
-                        <td class="extratd" colspan="12">问题描述：客诉问题的概括，一两句话介绍客诉问题的的大概内容。</td>
-                    </tr>
-                    {% for complaint in complaints %}
-                    <tr class="cc_tr">
-                        <td class="cct1">
-                            <input type="checkbox" class="ck">
-                        </td>
-                        <td>{{forloop.counter}}</td>
-                        <td>
-                            <span class="sign"></span>
-                            <span class="Cust_cont">{{complaint.cname}}</span>
-                        </td>
-                        <td>{{complaint.type}}</td>
-                        <td>{{complaint.submitter}}</td>
-                        <td>{{complaint.ctime | date:"Y-m-d"}}</td>
-                        <td>{{complaint.level}}</td>
-                        <td>{{complaint.product_line}}</td>
-                        <td>{{complaint.category}}</td>
-                        <td>{{complaint.tester}}</td>
-                        <td>
-                            {% if complaint.status == "Open" %}
-                            <span style="font-family:'Helvetica';font-size:12px;color:#039D12;">●</span>
-                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;"> </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F; font-size:14px;">Open</span>
-                            {% elif complaint.status == "Closed" %}
-                            <span style="font-family:'Helvetica';font-size:12px;color:#999999;">● </span>
-                            <span style="font-family:'PingFangSC-Regular', 'PingFang SC';color:#7F7F7F;">Closed</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            <span class="dload"><a href="{% url 'asset:complaint_detail' complaint.id %}">查看</a> | <a href="{% url 'asset:download_cfile' complaint.id %}">下载</a></span>
-                            <a onclick="showTipbox(this)" style="position: relative;">
-                                <img src="{% static 'images/asset/see.png' %}" class="see_dload">
-                                <div class="tip_box" style="display: none;">
-                                    <div class="tip_content">
-                                        <span>删除</span>
-                                        <span>编辑</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    <tr class="cc_tr">
-                        <td class="cct1"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            {% endcomment %}
-            <div style="position:absolute;left:25px;top:126px;"><table id="demo_table" lay-filter="test"></table></div>
         </div>
     </div>
 </div>
+{% endblock  %}
+
+{% block javascript %}
 <script src="{% static '/layui/layui.js' %}"></script>
 <script type="text/html" id="demobar">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -318,12 +83,12 @@
 </script>
 <script>
 function showTipbox(target) {
-        $el = $(target).find(".tip_box");
-        if ($el.is(':visible')) {
-            $el.hide()
-        } else {
-            $el.show()
-        }
+    $el = $(target).find(".tip_box");
+    if ($el.is(':visible')) {
+        $el.hide()
+    } else {
+        $el.show()
+    }
 };
 layui.use(['laypage', 'layer', 'table', 'element'], function(){
   var table = layui.table  // 表格
@@ -336,11 +101,13 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
     ,height: 512
     ,url: '/asset/complaint-list-data/' //数据接口
     ,page: true //开启分页
+    ,toolbar: 'true'
     //,even: true
     //,skin: 'line'
+    ,title: '客诉信息'
     ,cols: [[ //表头
-      {field: 'id', title: 'ID', width:50, sort: true, }
-      ,{field: 'cname', title: '名称', width:254}
+      //{field: 'id', title: 'ID', width:50, sort: true, }
+      {field: 'cname', title: '名称', width:280}
       ,{field: 'type', title: '客诉类型', width:86}
       ,{field: 'submitter', title: '提交人', width:86, sort: true}
       ,{field: 'ctime', title: '客诉时间', width:108, sort: true}
@@ -349,7 +116,12 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
       ,{field: 'category', title: '问题分类', width:92}
       ,{field: 'tester', title: '分析负责人', width:100}
       ,{field: 'status', title: '措施状态', width:86}
-      ,{field: '', title: '操作', toolbar:"#demobar"}
+      ,{field: 'oa_number', title:'oa流程号', hide:true}
+      ,{field: 'area', title: '区域', hide:true}
+      ,{field: 'product', title: '产品型号', hide:true}
+      ,{field: 'version', title: '软件版本', hide:true}
+      ,{field: 'created_by', title: '创建者', hide:true}
+      ,{ title: '操作', toolbar:"#demobar"}
     ]]
   });
   
