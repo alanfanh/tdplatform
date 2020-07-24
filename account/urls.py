@@ -27,4 +27,5 @@ urlpatterns = [
     path('redit_user/<int:user_id>', views.redit_user, name="redit_user"),
     path('group-list',views.group_list, name="group_list"),
     path('change-password/', views.change_pwd, name="change_password"),
+    path( 'click_add',views.click_number_add, name="click_number_add"),
 ]

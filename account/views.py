@@ -13,6 +13,8 @@ from asset.models import TecContent, Complaint
 from training.models import Course
 import json
 from django.contrib.auth.forms import PasswordChangeForm
+from django.forms.models import model_to_dict
+from account.models import CommonLinks
 
 @login_required(login_url="/account/login/")
 def index(request):
@@ -52,13 +54,13 @@ def user_detail(request, user_id):
 def myself(request):
     user = User.objects.get(username=request.user.username)
     form = PasswordChangeForm(request.user)
-
-    if user.is_superuser != 1:
-        userinfo = UserInfo.objects.get(user=user)
-        role = Role.objects.get(id=userinfo.role_id)
-        return render(request,"account/myself.html",{"user":user,"userinfo":userinfo,"form":form})
-    else:
-        return render(request, "account/myself_admin.html", {"user":user})
+    # userinfo = UserInfo.objects.get()
+    # if user.is_superuser != 1:
+    userinfo = UserInfo.objects.get(user=user)
+    role = Role.objects.get(id=userinfo.role_id)
+    return render(request,"account/myself.html",{"user":user,"userinfo":userinfo,"form":form})
+    # else:
+    #     return render(request, "account/myself_admin.html", {"user":user})
 
 
 @login_required(login_url="/account/login/")
@@ -252,10 +254,13 @@ def home_page(request):
     courses = Course.objects.all()
     tecs = TecContent.objects.filter(status="3")
     coms = Complaint.objects.all()
+
+    #获取常用链接表单
+    links = CommonLinks.objects.order_by('-click_number')
+
     # 获取最近培训数据
     last_courses = Course.objects.filter().order_by('-course_time')[:4]
-    files = Course.objects.filter().order_by('-course_time')[:5]
-
+    # files = Course.objects.filter().order_by('-course_time')[:5]
     # 未处理的优秀实践
     userinfo = UserInfo.objects.get(user=request.user)
     role = Role.objects.get(id=userinfo.role_id)
@@ -269,9 +274,71 @@ def home_page(request):
         tec_list = TecContent.objects.filter(status="2")
         unproc_num = tec_list.count()
     else:
-        return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
+        return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses})
     # print(tec_num)
     # rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files, "tec_num": tec_num})
-    rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files})
+        unproc_num = ''
+    rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "links":links})
     rsp.set_cookie("unproc_num_cookie",unproc_num, path='/')
     return rsp
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def home_course_list(request):
+    result = {"count": 5, "data": []}
+    if request.GET.get('range'):        
+        range = request.GET.get('range')
+        # 数据查询
+        if range == "0":
+            files = Course.objects.filter().order_by('-course_time')[:5]
+        else:            
+            files = Course.objects.filter(range=range)[:5]        
+        # 数据转换
+        for file in files:
+            obj = model_to_dict(file, fields=['id','cname','range','course_time','file_name'])
+            obj['file_name'] = str(obj['file_name'])            
+            try:
+                obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d')                    
+            except:
+                pass
+            result['data'].append(obj)
+        result['count'] = files.count()        
+        return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+#跳转至外部链接后 链接点击数目增加
+@login_required(login_url="/account/login")
+@csrf_exempt
+def click_number_add(request):
+    linksname = request.POST.get('linksname')
+    testlink = CommonLinks.objects.get(id=1)
+    bugfree = CommonLinks.objects.get(id=2)
+    eoa = CommonLinks.objects.get(id=3)
+    oa = CommonLinks.objects.get(id=4)
+    management_platform = CommonLinks.objects.get(id=5)
+    agile = CommonLinks.objects.get(id=6)
+    attendance = CommonLinks.objects.get(id=7)
+    linksname = linksname.strip()
+    if linksname == 'testlink':
+        testlink.click_number += 1
+        testlink.save()
+    elif linksname == 'bugfree':
+
+        bugfree.click_number += 1
+        bugfree.save()
+    elif linksname == 'eoa':
+        eoa.click_number += 1
+        eoa.save()
+        return JsonResponse({'res': 3})
+    elif linksname == '旧oa':
+        oa.click_number += 1
+        oa.save()
+    elif linksname == '资产设备管理平台':
+        management_platform.click_number += 1
+        management_platform.save()
+    elif linksname == 'Agile平台':
+        agile.click_number += 1
+        agile.save()
+    elif linksname == '考勤查询':
+        attendance.click_number += 1
+        attendance.save()
+    return JsonResponse({'res': 1})
