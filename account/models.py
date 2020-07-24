@@ -72,3 +72,16 @@ class UserInfo(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class CommonLinks(models.Model):
+    """
+    常用网站点击次数统计表
+    """
+    id = models.AutoField(primary_key=True)
+    links_name = models.CharField(verbose_name="常用链接",max_length=30)
+    click_number = models.IntegerField(verbose_name="点击次数",default=0)
+    url = models.CharField(verbose_name="url地址",max_length=100,default=0)
+    class Meta:
+        verbose_name = "常用链接"
+        verbose_name_plural = "常用链接"
