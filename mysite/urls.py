@@ -26,6 +26,7 @@ urlpatterns = [
     path('pwd_reset/', include("password_reset.urls")),
     path('', views.home_page, name='home'), 
     path('home/', views.home_page, name='home'),
+    path('home/home-course-list-data', views.home_course_list, name='home_course_list'),
     path('article/', include('article.urls', namespace='article')),
     path('training/', include('training.urls', namespace='training')),
     path('favicon.ico', RedirectView.as_view(url='static/favicon.ico'))

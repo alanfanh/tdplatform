@@ -16,51 +16,51 @@
                 <div class="shadowborder1">
                     <div class="menulink"></div>
                     <span class="linknum">1</span>
-                    <a href="http://192.168.100.23/testlink/login.php"><span class="linkname">testlink</span></a>
+                    <a href={{ links.0.url}} onclick="clickNumberAdd(event)" >  <span class="linkname"> {{links.0.links_name}} </span> </a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">789</span>
+                    <span class="seenumber">{{links.0.click_number}}</span>
                 </div>
                 <div class="shadowborder2">
                     <div class="menulink"></div>
                     <span class="linknum">2</span>
-                    <a href="http://192.168.100.23/bugfree/"><span class="linkname">bugfree</span></a>
+                    <a href={{ links.1.url}} onclick="clickNumberAdd(event)">  <span class="linkname"> {{links.1.links_name}} </span> </a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">654</span>
+                    <span class="seenumber">{{links.1.click_number}}</span>
                 </div>
                 <div class="shadowborder3">
                     <div class="menulink"></div>
                     <span class="linknum">3</span>
-                    <a href="http://eoa.tenda.cn"><span class="linkname">eoa</span></a>
+                    <a href={{ links.2.url}} onclick="clickNumberAdd(event)">  <span class="linkname"> {{links.2.links_name}} </span> </a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">623</span>
+                    <span class="seenumber">{{links.2.click_number}}</span>
                 </div>
                 <div class="shadowborder4">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">4</span>
-                    <a href="http://oa.tenda.cn"><span class="linkname">旧oa</span></a>
+                    <a href={{ links.3.url}}  onclick="clickNumberAdd(event)"> <span class="linkname"> {{links.3.links_name}} </span> </a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">590</span>
+                    <span class="seenumber">{{links.3.click_number}}</span>
                 </div>
                 <div class="shadowborder5">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">5</span>
-                    <a href="http://172.16.100.12/login"><span class="linkname">资产设备管理平台</span></a>
+                    <a href={{ links.4.url}} onclick="clickNumberAdd(event)"><span class="linkname"> {{links.4.links_name}} </span></a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">123</span>
+                    <span class="seenumber">{{links.4.click_number}}</span>
                 </div>
                 <div class="shadowborder6">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">6</span>
-                    <a href="http://plm.tenda.cn:7001/Agile/default/login-cms.jsp"><span class="linkname">Agile平台</span></a>
+                    <a href={{ links.5.url}} onclick="clickNumberAdd(event)"><span class="linkname"> {{links.5.links_name}} </span></a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">113</span>
+                    <span class="seenumber">{{links.5.click_number}}</span>
                 </div>
                 <div class="shadowborder7">
                     <img src="{% static 'images/home/link2.svg' %}" class="menulink">
                     <span class="linknum">7</span>
-                    <a href="http://172.16.100.5:1808/"><span class="linkname">考勤查询</span></a>
+                    <a href={{ links.6.url}} onclick="clickNumberAdd(event)"><span class="linkname"> {{links.6.links_name}} </span></a>
                     <img src="{% static 'images/home/icn_check.png' %}" class="linkeye">
-                    <span class="seenumber">110</span>
+                    <span class="seenumber">{{links.6.click_number}}</span>
                 </div>
             </div>
         </div>
@@ -138,19 +138,20 @@
         <div class="courseware">
             <div class="down_title">
                 <p class="title_text">培训课件</p>
-                <select id="select_group">
-                    <option value="0">测试部</option>
-                    <option value="1">家用测试组</option>
-                    <option value="2">ISP运营商测试组</option>
-                    <option value="3">接入测试组</option>
-                    <option value="4">商用测试组</option>
-                    <option value="5">智能外设测试组</option>
-                    <option value="6">资料开发组</option>
-                    <option value="7">自动化开发组</option>
-                </select>
+                    <select id="select_group" onchange="selectGroup()">
+                        <option value="0">所有</option>
+                        <option value="测试部">测试部</option>
+                        <option value="家用测试组">家用测试组</option>
+                        <option value="ISP运营商测试组">ISP运营商测试组</option>
+                        <option value="接入测试组">接入测试组</option>
+                        <option value="商用测试组">商用测试组</option>
+                        <option value="智能外设测试组">智能外设测试组</option>
+                        <option value="资料开发组">资料开发组</option>
+                        <option value="自动化开发组">自动化开发组</option>
+                    </select>                    
             </div>
-            <div class="downbase">
-                {% for course in files %}
+            <div class="downbase" id="downbase">
+                <!-- {% for course in files %}
                 <div class="fileshadow">
                     <div class="file_tip">
                         <img src="{% static 'images/training/format_ppt.png' %}" >
@@ -158,9 +159,9 @@
                     <span class="file_name">{{course.cname}}</span>
                     <span class="file_group">{{course.range}} {{course.course_time | date:'Y.m.d'}}</span>
                     <a href="{% url 'training:download_file' course.id %}"> <span class="file_down">下载</span></a>
-                    <a href="{% url 'training:course_detail' course.id %}"><span class="file_detail">查看</span></a>    
+                    <a href="{% url 'training:course_detail' course.id %}"> <span class="file_detail">查看</span></a>    
                 </div>
-                {% endfor %}
+                {% endfor %} -->
             </div>
         </div>
         <div class="flie_list">
@@ -189,5 +190,69 @@ layui.use('carousel', function(){
     //,anim: 'updown' //切换动画方式
   });
 });
+
+$(document).ready(function(){
+    selectGroup();
+});
+
+function selectGroup() {
+    var range = $("#select_group").val();
+    // ajax动态获取后台json数据，并加载到页面
+    $.ajax({
+        type: "GET",
+        data: {range: range},
+        url: "/home/home-course-list-data",
+        success:function(data){           
+            var course_list = "";   
+            for (var i = 0; i < data.count; i++) {   
+                //获得文件扩展名 
+                var fileName = data.data[i].file_name;
+                var fileExtension = fileName.split('.').pop();               
+                if (fileExtension=='xls' || fileExtension=='xlsx') {
+                    file_pic = '/static/images/training/format_xsl.png';
+                }
+                else if (fileExtension=='ppt') {
+                    file_pic = '/static/images/training/format_ppt.png';
+                }
+                else if (fileExtension=='pdf') {
+                    file_pic = '/static/images/training/format_pdf.png';
+                }
+                else if (fileExtension=='doc') {
+                    file_pic = '/static/images/training/format_doc.png';
+                }
+                else if (fileExtension=='rar' || fileExtension=='zip') {
+                    file_pic = '/static/images/training/format_rar_zip.png';
+                }
+                else {
+                    file_pic = '/static/images/training/format_ppt.png';
+                };
+                // var course_time = data.data[i].course_time.substring(0,10);
+                var course_time = data.data[i].course_time;
+                var download_url = "/training/download-coursefile/" + data.data[i].id;
+                var detail_url = "/training/course-detail/" + data.data[i].id;
+                // 显示查询的培训课件信息
+                course_list += "<div class='fileshadow'>" +
+                    "<div class='file_tip'>" +   
+                    "<img src=" + file_pic + ">" + 
+                    "</div>" + 
+                    "<span class='file_name'>" + data.data[i].cname + "</span>" + 
+                    "<span class='file_group'>" + data.data[i].range + " " + course_time + "</span>" +
+                    "<a href=" + download_url + "> <span class='file_down'>下载</span></a>" + 
+                    "<a href=" + detail_url + "> <span class='file_detail'>查看</span></a>" + 
+                    "</div>" ;
+            };            
+            downbase.innerHTML = course_list;   //将数据写入html中                  
+        }
+    });
+};
+function clickNumberAdd() {
+        var obj=event.srcElement;  //event在ie中自带有，可以不用传入，其他少数浏览器需要传入
+        var linksname=obj.innerHTML
+        $.ajax({
+            url:"/account/click_add",
+            data:{"linksname": linksname},
+            type:'POST',
+        });
+}
 </script>
 {% endblock %}
