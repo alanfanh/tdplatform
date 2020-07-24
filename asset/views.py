@@ -45,26 +45,30 @@ def my_complaint_data(request):
     userinfo = UserInfo.objects.get(user=request.user)
     complaints_list = Complaint.objects.filter(created_by=request.user)
     if request.GET.get('limit'):
-        limit = request.GET.get('limit')
+        limit = int(request.GET.get('limit'))
         paginator = Paginator(complaints_list, limit)
     else:
-        paginator = Paginator(complaints_list, 10)
+        limit = 10
+        paginator = Paginator(complaints_list, limit)
     page = request.GET.get('page')
        
     try:
         complaints_page = paginator.page(page)
         # 获取当前页面，实现当前页条目序号
         current_page = int(page)
-        strat = (current_page-1)*10
+        strat = (current_page-1)*limit
     except PageNotAnInteger:
         # 如果请求的页数不是整数, 返回第一页。
         complaints_page = paginator.page(1)
     except EmptyPage:
         # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
         complaints_page = paginator.page(paginator.num_pages)
-    
+            
     for complaint in complaints_page:
         obj = model_to_dict(complaint, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','analysis_time','status'])
+        # 顺序编号
+        strat = strat + 1
+        obj["num"] = strat
         try:
             obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
             obj['analysis_time'] = obj['analysis_time'].strftime('%Y-%m-%d')        
@@ -78,23 +82,48 @@ def my_complaint_data(request):
 def assigned_list(request):
     # 指派给ste、te的客诉
     userinfo = UserInfo.objects.get(user=request.user)
+    complaints = Complaint.objects.filter(tester=userinfo.realname)    
+    template_view = "asset/assigned_list.html"
+    return render(request, template_view, {"userinfo":userinfo, "complaints":complaints})
+
+@login_required(login_url="/account/login")
+def assigned_list_data(request):
+    # 指派给ste、te的客诉
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    userinfo = UserInfo.objects.get(user=request.user)
     complaints = Complaint.objects.filter(tester=userinfo.realname)
-    #每页显示10条
-    paginator = Paginator(complaints, 10)
-    page = request.GET.get('page')
+    # 每页显示10条
+    if request.GET.get('limit'):
+        limit = int(request.GET.get('limit'))
+        paginator = Paginator(complaints, limit)
+    else:
+        limit = 10
+        paginator = Paginator(complaints, limit)        
+    page = request.GET.get('page')    
     try:
-        groupnum = paginator.page(page)
-        # 获取当前页面，实现当前页条目序号
+        assigned_page = paginator.page(page)    
         current_page = int(page)
-        strat = (current_page-1)*10
+        strat = (current_page-1)*limit  
     except PageNotAnInteger:
         # 如果请求的页数不是整数, 返回第一页。
-        groupnum = paginator.page(1)
+        assigned_page = paginator.page(1)
     except EmptyPage:
         # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-        groupnum = paginator.page(paginator.num_pages)
-    template_view = "asset/assigned_list.html"
-    return render(request, template_view, {"userinfo":userinfo, "complaints":complaints,"groupnum": groupnum})
+        assigned_page = paginator.page(paginator.num_pages)
+    
+    for assigned in assigned_page:
+        obj = model_to_dict(assigned, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','analysis_time','status'])
+        # 顺序编号
+        strat = strat + 1
+        obj["num"] = strat        
+        try:
+            obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
+            obj['analysis_time'] = obj['analysis_time'].strftime('%Y-%m-%d')        
+        except:
+            pass
+        result['data'].append(obj)
+    result['count'] = complaints.count()  
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
 def complaint_list(request):
@@ -392,6 +421,58 @@ def my_tec_data(request):
         result['data'].append(obj)
     result['count'] = tecs.count()
     return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def filter_status_myteclist(request):
+    # ajax请求，筛选不同状态数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    # 筛选请求用户的数据记录
+    userinfo = UserInfo.objects.get(user=request.user)
+    ste_tecs = TecContent.objects.filter(author=userinfo)    
+    if request.GET.get('range_name'):
+        # 过滤状态        
+        status_id = request.GET.get('range_name')        
+        if status_id == "进行中":
+            ste_tecs = ste_tecs.filter(Q(status='1') | Q(status='2'))
+        else:                       
+            ste_tecs = ste_tecs.filter(status=status_id)
+
+    # 每页显示10条
+    if request.GET.get('limit'):
+        limit = int(request.GET.get('limit'))
+        paginator = Paginator(ste_tecs, limit)
+    else:
+        limit = 10
+        paginator = Paginator(ste_tecs, limit)
+
+    # 获取前台传入后台的page值
+    page = request.GET.get('page')
+    try:
+        cur_tecs = paginator.page(page)    
+        current_page = int(page)
+        strat = (current_page-1)*limit  
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        cur_tecs = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        cur_tecs = paginator.page(paginator.num_pages)
+
+    for cur_tec in cur_tecs:
+        obj = model_to_dict(cur_tec, fields=['id','tname','author','group','tec_tag','created_at','status'])
+        obj["created_at"] = cur_tec.created_at.strftime('%Y-%m-%d')
+        # 获取tec标签，多对多查询
+        tag_list = [tag.tag for tag in cur_tec.tec_tag.all()]
+        obj['tec_tag'] = tag_list
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        # 顺序编号
+        strat = strat + 1
+        obj["num"] = strat     
+        result['data'].append(obj)
+    result['count'] = ste_tecs.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 @login_required(login_url="/account/login")
 def tec_list(request):
