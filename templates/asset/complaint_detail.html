@@ -5,7 +5,6 @@
 {% block title %}客诉问题详情{% endblock  %}
 
 {% block head %}
-
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/default.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
@@ -62,18 +61,18 @@
             <div class="cdgoing_cont3">
                 <span class="cdname">是否分析：{{complaint.analysis_status}}</span>
                 <span class="cdtype">分析责任人：{{complaint.tester}}</span>
-                <span class="hdname">分析完成时间：{{complaint.analysis_time}}</span>
+                <span class="hdname">分析完成时间：{{complaint.analysis_time|default_if_none:''|date:'Y-m-d'}}</span>
                 <span class="cdoa">改进措施：</span>
                 <span class="egcont">{{complaint.solutions}}</span>
             </div>
             <div class="cdgoing_cont4">
                 <span class="cdname">措施状态：{{complaint.status}}</span>
-                <span class="cdtype">措施完成时间：{{complaint.complete_time}}</span>
-                <span class="hdname">计划闭环时间：{{complaint.closed_time}}</span>
+                <span class="cdtype">措施完成时间：{{complaint.complete_time|default_if_none:''|date:'Y-m-d'}}</span>
+                <span class="hdname">计划闭环时间：{{complaint.closed_time|default_if_none:''|date:'Y-m-d'}}</span>
                 <span class="cdoa">问题描述：</span>
                 <span class="egcont2">{{complaint.description}}</span>
             </div>
-            <a href="{% url 'asset:complaint_list' %}"><button class="bklist">返回列表</button></a>
+            <button class="bklist" onclick="window.history.back()">返回列表</button>            
             <a href="{% url 'asset:download_cfile' complaint.id %}"><button class="ddfile">下载附件</button></a>
         </div>
     </div>

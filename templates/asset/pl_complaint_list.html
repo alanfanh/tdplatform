@@ -101,12 +101,12 @@ layui.use('table', function(){
     ,page: true //开启分页
     ,limit: 10   
     ,cols: [[ //表头
-      {field: 'id', title: 'ID', width:50}
+      {field: 'num', title: '序号', width:50}
       ,{field: 'cname', title: '客诉名称', width:210}
       ,{field: 'type', title: '客诉类型', width:86}
       ,{field: 'submitter', title: '提交人', width:86}
       ,{field: 'ctime', title: '客诉时间', width:103}
-      ,{field: 'level', title: '严重程度', width:86} 
+      ,{field: 'level', title: '严重程度', align:"center", width:86} 
       ,{field: 'product_line', title: '产品线', width:72}
       ,{field: 'category', title: '问题分类', width:86}
       ,{field: 'tester', title: '分析负责人', width:100}
