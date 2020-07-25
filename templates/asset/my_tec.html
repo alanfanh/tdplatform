@@ -68,8 +68,8 @@
                     <option value="1&2">进行中</option>
                     <option value="0">驳回</option>
                 </select>
-                {% if userinfo.role_id == 2 %}
-                <button class="Ep_Record" id="ste_add">添加优秀实践</button>
+                {% if userinfo.role_id == 2 %}                
+                <a href="{% url 'asset:add_tec' %}"><button class="Ep_Record" id="ste_add" type="button">添加优秀实践</button></a>
                 {% endif %}
             </div>
             <div class="content_data">
