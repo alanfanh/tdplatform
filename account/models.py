@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
-
+from training.models import Course
 
 class Role(models.Model):
     """
@@ -73,6 +73,21 @@ class UserInfo(models.Model):
     def __str__(self):
         return self.user.username
 
+    def get_joined_points(self):
+        # 类方法，返回该User参加的培训的积分
+        course = Course.objects.filter(student=self.user.userinfo).exclude(teacher_id=self.id)
+        point = course.count() * 1
+        return point
+
+    def get_group_points(self):
+        # 类方法，返回该User主持小组的培训的积分
+        course = Course.objects.filter(teacher_id=self.id).exclude(range="测试部")
+        return course.count() * 2
+
+    def get_department_points(self):
+        # 类方法，返回该user主持部门的培训的积分
+        course = Course.objects.filter(teacher_id=self.id, range="测试部")
+        return course.count() * 2
 
 class CommonLinks(models.Model):
     """
