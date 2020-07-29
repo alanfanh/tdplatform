@@ -302,41 +302,44 @@ def process_tec(request):
     role = Role.objects.get(id=userinfo.role_id)
     if role.role_name == "PL":
         tec_list = TecContent.objects.filter(group_id=userinfo.group_id).exclude(status="1")
-        #每页显示10条
-        paginator = Paginator(tec_list, 10)
-        page = request.GET.get('page')
-        try:
-            groupnum = paginator.page(page)
-            # 获取当前页面，实现当前页条目序号
-            current_page = int(page)
-            strat = (current_page-1)*10
-        except PageNotAnInteger:
-            # 如果请求的页数不是整数, 返回第一页。
-            groupnum = paginator.page(1)
-        except EmptyPage:
-            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-            groupnum = paginator.page(paginator.num_pages)
+        unprocess_tec_list = TecContent.objects.filter(
+            status="1", group_id=userinfo.group_id)
+        # 每页显示10条
+        # paginator = Paginator(tec_list, 10)
+        # page = request.GET.get('page')
+        # try:
+        #     groupnum = paginator.page(page)
+        #     # 获取当前页面，实现当前页条目序号
+        #     current_page = int(page)
+        #     strat = (current_page-1)*10
+        # except PageNotAnInteger:
+        #     # 如果请求的页数不是整数, 返回第一页。
+        #     groupnum = paginator.page(1)
+        # except EmptyPage:
+        #     # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        #     groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/processed_pl.html"
-        return render(request, template_view,{"userinfo":userinfo, "tec_list":tec_list,"tecs": groupnum})
+        return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": unprocess_tec_list})
     elif role.role_name == "M":
         tec_list = TecContent.objects.exclude(status="2")
         tec_list = tec_list.exclude(status="1")
-        #每页显示10条
-        paginator = Paginator(tec_list, 10)
-        page = request.GET.get('page')
-        try:
-            groupnum = paginator.page(page)
-            # 获取当前页面，实现当前页条目序号
-            current_page = int(page)
-            strat = (current_page-1)*10
-        except PageNotAnInteger:
-            # 如果请求的页数不是整数, 返回第一页。
-            groupnum = paginator.page(1)
-        except EmptyPage:
-            # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
-            groupnum = paginator.page(paginator.num_pages)
+        unprocess_tecs = TecContent.objects.filter(status="2")
+        # 每页显示10条
+        # paginator = Paginator(tec_list, 10)
+        # page = request.GET.get('page')
+        # try:
+        #     groupnum = paginator.page(page)
+        #     # 获取当前页面，实现当前页条目序号
+        #     current_page = int(page)
+        #     strat = (current_page-1)*10
+        # except PageNotAnInteger:
+        #     # 如果请求的页数不是整数, 返回第一页。
+        #     groupnum = paginator.page(1)
+        # except EmptyPage:
+        #     # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        #     groupnum = paginator.page(paginator.num_pages)
         template_view = "asset/processed_m.html"
-        return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": groupnum})
+        return render(request, template_view, {"userinfo": userinfo, "tec_list": tec_list, "tecs": unprocess_tecs})
     else:
         return HttpResponse("Not Found")
 
@@ -497,7 +500,7 @@ def tec_list_data(request):
         # 获取当前页面，生成页面条目序号
         current_page = int(page)
     except PageNotAnInteger:
-        tecs_page - paginator.page(1)
+        tecs_page = paginator.page(1)
     except EmptyPage:
         tecs_page = paginator.page(paginator.num_pages)
     for tec in tecs_page:
@@ -662,7 +665,21 @@ def filter_tec_range(request):
         # 筛选tec标签
         tag_id = request.GET.get('tag_id')
         tecs = tecs.filter(tec_tag=tag_id)
-    for tec in tecs:
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(tecs, limit)
+    else:
+        paginator = Paginator(tecs, 10)
+    page = request.GET.get('page')
+    try:
+        tecs_page = paginator.page(page)
+        # 获取当前页面，生成页面条目序号
+        current_page = int(page)
+    except PageNotAnInteger:
+        tecs_page = paginator.page(1)
+    except EmptyPage:
+        tecs_page = paginator.page(paginator.num_pages)
+    for tec in tecs_page:
         obj = model_to_dict(tec, exclude=['file', ])
         obj["created_at"] = tec.created_at.strftime('%Y-%m-%d')
         # 获取tec标签，多对多查询
@@ -693,7 +710,21 @@ def filter_complaint_list(request):
     if request.GET.get("type"):
         type = request.GET.get("type")
         complaints = complaints.filter(category=type)
-    for com in complaints:
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(complaints, limit)
+    else:
+        paginator = Paginator(complaints, 10)
+    page = request.GET.get('page')
+    try:
+        coms_page = paginator.page(page)
+        # 获取当前页面，生成页面条目序号
+        current_page = int(page)
+    except PageNotAnInteger:
+        coms_page = paginator.page(1)
+    except EmptyPage:
+        coms_page = paginator.page(paginator.num_pages)
+    for com in coms_page:
         obj = model_to_dict(com, fields=['id','cname','type','submitter','ctime','level','product_line','category','tester','status'])
         obj['ctime'] = obj['ctime'].strftime('%Y-%m-%d')
         result['data'].append(obj)
