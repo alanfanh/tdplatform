@@ -60,7 +60,7 @@
           <a href="{% url 'asset:process_tec' %}"><span class="Processed_text" style="color:black">已处理（{{tec_list.count}}）</span></a>
         </div>
         <div class="Untreated_bd">
-          <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color: rgba(85, 85, 85, 0.647058823529412);">未处理</span></a>
+          <a href="{% url 'asset:unprocess_tec' %}"><span class="Untreated_text" style="color: rgba(85, 85, 85, 0.647058823529412);">未处理（{{tecs.count}}）</span></a>
         </div>
       </div>
       <div class="My_State">
