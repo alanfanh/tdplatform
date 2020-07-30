@@ -176,17 +176,45 @@ class PointListView(LoginRequiredMixin, ListView):
 
 @login_required(login_url="/account/login")
 def point_list_data(request):
-    # 返回course_list的json数据
+    # 查询每个用户的course_list数据，通过json返回数据
     result = {"code": 0, "msg": "", "count": 1000, "data": []}
-    integrals = Integral.objects.all()
-    for integral in integrals:
-        obj = model_to_dict(integral, fields=['id','person','total','joined','teached_group','teached'])
-        user_id = obj['person']
-        obj['person'] = UserInfo.objects.get(id=user_id).realname
-        obj['group'] = UserInfo.objects.get(id=user_id).group.name
-        result['data'].append(obj)
-    result['count'] = integrals.count()
+    # integrals = Integral.objects.all()
+    # for integral in integrals:
+    #     obj = model_to_dict(integral, fields=['id','person','total','joined','teached_group','teached'])
+    #     user_id = obj['person']
+    #     obj['person'] = UserInfo.objects.get(id=user_id).realname
+    #     obj['group'] = UserInfo.objects.get(id=user_id).group.name
+    #     result['data'].append(obj)
+    # result['count'] = integrals.count()
     # print(result)
+    all_userinfo = UserInfo.objects.all()
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(all_userinfo, limit)
+    else:
+        paginator = Paginator(all_userinfo, 10)
+    page = request.GET.get('page')
+    try:
+        user_page = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        user_page = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        user_page = paginator.page(paginator.num_pages)
+    for user in user_page:
+        obj = model_to_dict(user, fields=['realname','group'])
+        # 外键关联查询
+        obj['group'] = user.group.name
+        obj['joined'] = user.get_joined_points()
+        obj['teached_group'] = user.get_group_points()
+        obj['teached'] = user.get_department_points()
+        obj['total'] = obj['joined'] + obj['teached_group'] + obj['teached']
+        result['data'].append(obj)
+    result['count'] = all_userinfo.count()
     return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
 
 
@@ -203,7 +231,25 @@ def filter_course_list(request):
         year = request.GET.get('year')
         if year != "All":
             courses = courses.filter(course_time__year=year)
-    for course in courses:
+    # 分页处理
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(courses, limit)
+    else:
+        paginator = Paginator(courses, 10)
+    page = request.GET.get('page')
+    try:
+        course_page = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        course_page = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        course_page = paginator.page(paginator.num_pages)
+    for course in course_page:
         obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
         obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
         # 获取参加课程的人数
@@ -218,23 +264,56 @@ def filter_course_list(request):
 def filter_point_list(request):
     # 筛选point数据
     result = {"code":0, "msg":"", "count": 0, "data":[]}
-    points = Integral.objects.all()
+    # points = Integral.objects.all()
+    # if request.GET.get('group'):
+    #     group_id = request.GET.get('group')
+    #     if group_id != 0:
+    #         group = Group.objects.get(id=group_id)
+    #         # 根据用户所属组过滤
+    #         points = points.filter(person__group=group)
+    # if request.GET.get('year'):
+    #     pass
+    # for point in points:
+    #     obj = model_to_dict(point, fields=['id','person','total','joined','teached_group','teached'])
+    #     user_id = obj['person']
+    #     obj['person'] = UserInfo.objects.get(id=user_id).realname
+    #     obj['group'] = UserInfo.objects.get(id=user_id).group.name
+    #     result['data'].append(obj)
+    # result['count'] = points.count()
+    # print(result)
+    all_userinfo = UserInfo.objects.all()
     if request.GET.get('group'):
         group_id = request.GET.get('group')
         if group_id != 0:
-            group = Group.objects.get(id=group_id)
-            # 根据用户所属组过滤
-            points = points.filter(person__group=group)
-    if request.GET.get('year'):
-        pass
-    for point in points:
-        obj = model_to_dict(point, fields=['id','person','total','joined','teached_group','teached'])
-        user_id = obj['person']
-        obj['person'] = UserInfo.objects.get(id=user_id).realname
-        obj['group'] = UserInfo.objects.get(id=user_id).group.name
+            all_userinfo = all_userinfo.filter(group_id=group_id)
+    # 分页处理
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(all_userinfo, limit)
+    else:
+        paginator = Paginator(all_userinfo, 10)
+    page = request.GET.get('page')
+    try:
+        user_page = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        user_page = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        user_page = paginator.page(paginator.num_pages)
+    for user in user_page:
+        obj = model_to_dict(user, fields=['realname', 'group'])
+        # 外键关联查询
+        obj['group'] = user.group.name
+        obj['joined'] = user.get_joined_points()
+        obj['teached_group'] = user.get_group_points()
+        obj['teached'] = user.get_department_points()
+        obj['total'] = obj['joined'] + obj['teached_group'] + obj['teached']
         result['data'].append(obj)
-    result['count'] = points.count()
-    # print(result)
+    result['count'] = all_userinfo.count()
     return JsonResponse(result, json_dumps_params={'ensure_ascii':False})
 
 
@@ -244,13 +323,31 @@ def search_course(request):
     if request.GET.get("search"):
         search_key = request.GET.get("search")
         courses = Course.objects.filter(Q(cname__icontains=search_key) | Q(address__icontains=search_key)| Q(teacher__realname__icontains=search_key))
-        for course in courses:
-            obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
-            obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
-            obj['number'] = course.student.all().count()
-            obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%m')
-            result['data'].append(obj)
-        result['count'] = courses.count()
+    # 分页及每页条目数
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(courses, limit)
+    else:
+        paginator = Paginator(courses, 10)
+    page = request.GET.get('page')
+    try:
+        course_page = paginator.page(page)
+        # 获取当前页面，实现当前页条目序号
+        current_page = int(page)
+        strat = (current_page-1)*10
+    except PageNotAnInteger:
+        # 如果请求的页数不是整数, 返回第一页。
+        course_page = paginator.page(1)
+    except EmptyPage:
+        # 如果请求的页数不在合法的页数范围内，返回结果的最后一页。
+        course_page = paginator.page(paginator.num_pages)
+    for course in course_page:
+        obj = model_to_dict(course, fields=['id','cname','range','address','course_time','cdescription','teacher'])
+        obj['teacher'] = UserInfo.objects.get(id=obj['teacher']).realname
+        obj['number'] = course.student.all().count()
+        obj['course_time'] = obj['course_time'].strftime('%Y-%m-%d %H:%m')
+        result['data'].append(obj)
+    result['count'] = courses.count()
     return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
 
 
