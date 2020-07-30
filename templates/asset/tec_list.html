@@ -48,7 +48,7 @@
                     <option value="5">机制</option>
                     <option value="6">要求</option>
                 </select>
-                <input type="text" class="gpsearch" id="search-tec" placeholder="请输入">
+                <input type="text" class="gpsearch" id="search-tec" placeholder="请输入名称、作者">
                 <img src="{% static 'images/asset/icn_search.png' %}" id="btn1" class="gpsortimg">
                 {% if user.role_id  != 1 %}
                 <a href="{% url 'asset:add_tec' %}"><button class="adcustomer" type="button">新增</button></a>
