@@ -274,7 +274,7 @@ def home_page(request):
         tec_list = TecContent.objects.filter(status="2")
         unproc_num = tec_list.count()
     else:
-        return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses})
+        return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "links": links})
     # print(tec_num)
     # rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files, "tec_num": tec_num})
         unproc_num = ''
