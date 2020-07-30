@@ -4,13 +4,14 @@
 
 {% block title %}培训积分表{% endblock  %}
 
-{% block content %}
-
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/default.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
 <link rel="stylesheet" href="{% static 'css/training/train.css' %} ">
+{% endblock  %}
 
+{% block content %}
 <div class="base">
     <div class="tnbaseplate">
         <div class="menuinfo">
@@ -31,182 +32,29 @@
                 <select class="rgselect" onchange="selectDepart()" id="selectDepart">
                     <option value="0">测试部</option>
                     <option value="1">家用测试组</option>
-                    <option value="2">OEM测试组</option>
+                    <option value="2">ISP运营商测试组</option>
                     <option value="3">接入测试组</option>
                     <option value="4">商用测试组</option>
-                    <option value="5">便携测试组</option>
+                    <option value="5">智能外设测试组</option>
                     <option value="6">资料开发组</option>
                     <option value="7">自动化开发组</option>
                 </select>
                 <label for="" class="gptime">时间选择：</label>
                 <select class="gptimepick" onchange="selectYear()" id="selectDepart">
-                    <option value="2019">2019</option>
+                    <option value="All">所有</option>
                     <option value="2020">2020</option>
                 </select>
                 {% comment %} <input type="text" class="trsearch" placeholder="请输入">
                 <img src="{% static 'images/training/sort.svg' %}" class="trsortimg">
                 <img src="{% static 'images/asset/handle.svg' %} " class="trsthandle"> {% endcomment %}
             </div>
-            {% comment %}
-            <table class="tmtable" align="center">
-                <thead>
-                    <tr class="gd_th">
-                        <td class="tmtd1">序号</td>
-                        <td class="tmtd2">姓名</td>
-                        <td class="tmtd3">
-                            <span class="tmgroup">所属组</span>
-                        </td>
-                        <td class="tmtd4">参加培训积分</td>
-                        <td class="tmtd5">组织小组训积分</td>
-                        <td class="tmtd6">组织部门训积分</td>
-                        <td class="tmtd7">
-                            <span class="tmsore">总积分</span>
-                            <img src="{% static 'images/asset/up.svg' %}" class="tmupimg">
-                            <img src="{% static 'images/asset/down.svg' %}" class="tmdownimg">
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="tntr">
-                        <td class="tmtd1">1</td>
-                        <td class="tmtd2">李测试</td>
-                        <td class="tmtd3">
-                            <span class="tmgroup">商用测试组</span>
-                        </td>
-                        <td class="tmtd4">42</td>
-                        <td class="tmtd5">20</td>
-                        <td class="tmtd6">30</td>
-                        <td class="tmtd7">
-                            <span class="tmsums">92</span>
-                        </td>
-                    </tr>
-                    {% for point in points %}
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                    <tr class="tntr">
-                        <td class="tmtd1"></td>
-                        <td class="tmtd2"></td>
-                        <td class="tmtd3">
-                            <span class="tmgroup"></span>
-                        </td>
-                        <td class="tmtd4"></td>
-                        <td class="tmtd5"></td>
-                        <td class="tmtd6"></td>
-                        <td class="tmtd7">
-                            <span class="tmsums"></span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            {% endcomment %}
             <div style="position:absolute;left:25px;top:117px;"><table id="point_table" lay-filter="test"></table></div>
         </div>
     </div>
 </div>
-<script src="{% static '/layui/layui.js' %}"></script>
+{% endblock %}
+
+{% block javascript %}
 <script>
 function showTipbox(target) {
     $el = $(target).find(".tip_box");
@@ -227,11 +75,12 @@ layui.use(['laypage', 'layer', 'table', 'element'], function () {
         , height: 512
         , url: '/training/point-list-data/' //数据接口
         , page: true //开启分页
+        , toolbar: true
+        , title: '培训积分表'
         //, even: true
         //, skin: 'line'
         , cols: [[ //表头
-            { field: 'id', title: 'ID', width: 60, sort: true, }
-            , { field: 'person', title: '姓名', width: 200 }
+            { field: 'realname', title: '姓名', width: 200 }
             , { field: 'group', title: '所属组', width: 190 }
             , { field: 'joined', title: '参加培训积分', width: 160, sort:true}
             , { field: 'teached_group', title: '组织小组培训积分', width: 168}
