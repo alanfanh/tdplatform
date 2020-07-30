@@ -60,5 +60,24 @@
                 $("#tips").removeClass("layui-badge-dot");
             }
         });
+
+        function show_help() {
+            // console.log('test')
+            layui.use('layer', function() {
+                var $ = layui.jquery, layer = layui.layer;
+                layer.open({
+                    type: 1
+                    ,title:  ['帮助信息', 'font-size:18px;'] // 标题栏
+                    ,closeBtn: false
+                    ,area: '400px;'
+                    ,shade: 0.8
+                    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                    ,btn: ['我知道了']
+                    ,btnAlign: 'c'
+                    ,moveType: 1 //拖拽模式，0或者1
+                    ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">你知道吗？<br>本平台完全由自动化开发组开发完成。<br><br>平台实现对培训、优秀实践以及客诉等材料与数据的统一管理。你可以使用本平台获取培训材料、查看优秀实践设计以及获取客诉信息。<br><br>如果你在使用本平台的过程中遇到疑惑、Bug或者有其他改进建议，可以联系自动化开发组团队，提供协助。<br><br>希望对你有所帮助^_^</div>'
+                });
+            })
+        };
     </script>
 </html>
