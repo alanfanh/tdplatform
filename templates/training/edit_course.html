@@ -4,11 +4,13 @@
 
 {% block title %}编辑培训课程{% endblock  %}
 
-{% block content %}
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %} ">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
 <link rel="stylesheet" href="{% static 'css/training/train.css' %}">
+{% endblock  %}
 
+{% block content %}
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
@@ -54,6 +56,7 @@
                         <div class="tabd-range">
                             <span class="taname">培训范围：</span>
                             <select class="tarang" name="range">
+                                <option value="{{course.range}}" selected>{{course.range}}</option>
                                 <option value="测试部">测试部</option>
                                 <option value="自动化开发组">自动化开发组</option>
                                 <option value="接入测试组">接入测试组</option>
@@ -89,6 +92,9 @@
         </div>
     </div>
 </div>
+{% endblock  %}
+
+{% block javascript %}
 <script type="text/javascript" src="{% static 'js/layer.js' %}"></script>
 <script>
 layui.use('transfer', function(){
