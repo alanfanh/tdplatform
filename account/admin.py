@@ -8,7 +8,7 @@ from .models import UserInfo, Group, Role
 class UserInfoAdmin(admin.ModelAdmin):
     list_display = ("user","realname","job_num","group", "rank", "email", "gender", "role")
     list_filter = ("group",)
-    search_fields = ("user", "realname", "group")
+    search_fields = ("user__username","realname", "group__name")
 
 
 @admin.register(Group)
