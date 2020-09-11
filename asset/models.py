@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from account.models import Group, UserInfo
+from django.urls import reverse
 
 class Articles(models.Model):
     title = models.CharField(max_length=300)
@@ -123,3 +124,27 @@ class Complaint(models.Model):
 #     asset_id = models.CharField(verbose_name="资产编号", max_length=50)
 #     month = models.CharField(verbose_name="客诉月", max_length=6)
 #     area = models.CharField(verbose_name="区域", max_length=4)
+
+class Patent(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(verbose_name="专利名称", max_length=50)
+    type = models.CharField(verbose_name="类别", max_length=50)
+    author = models.ForeignKey(UserInfo, verbose_name="作者", on_delete=models.DO_NOTHING, related_name='user_patent')
+    group = models.ForeignKey(Group, verbose_name="小组", on_delete=models.DO_NOTHING, related_name='group_patent')
+    submit_time = models.DateField(verbose_name="提交时间", auto_now=False, auto_now_add=False)
+    created_at = models.DateField(verbose_name="创建时间", auto_now=False, auto_now_add=True)
+    status = models.CharField(verbose_name="状态", max_length=50)
+    patent_id = models.CharField(verbose_name=("专利号"), max_length=50)
+    award = models.CharField(verbose_name=("奖励"), max_length=50)
+    file = models.FileField(verbose_name="专利申请材料", upload_to="patent_files", max_length=100)
+
+    class Meta:
+        ordering = ("-created_at", )
+        verbose_name = ("专利")
+        verbose_name_plural = ("专利")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("Patent_detail", kwargs={"pk": self.pk})
