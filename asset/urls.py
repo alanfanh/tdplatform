@@ -41,4 +41,7 @@ urlpatterns = [
     path('my-tec-data/', views.my_tec_data, name="my_tec_data"),
     path('process-tec-data/', views.process_tec_data, name="process_tec_data"),
     path('filter-tec-status/', views.filter_tec_status, name="filter_tec_status"),
+    # 专利
+    path('patent-list/', views.patent_list, name="patent_list"),
+    path('patent-list-data/', views.patent_list_data, name="patent_list_data"),
 ]

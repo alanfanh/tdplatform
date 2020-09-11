@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 # Create your views here.
-from .models import Articles, TecContent, Complaint, TecTag, NodeMessage
+from .models import Articles, TecContent, Complaint, TecTag, NodeMessage, Patent
 from account.models import UserInfo, Role, Group
 
 from django.http import HttpResponse, JsonResponse, FileResponse
@@ -871,3 +871,36 @@ def filter_tec_status(request):
     # 统计总数，用于前端分页
     result['count'] = tecs.count()
     return JsonResponse(result, json_dumps_params={"ensure_ascii":False})
+
+
+@login_required(login_url="/account/login")
+def patent_list(request):
+    template_view = "asset/patent/patent_list.html"
+    return render(request, template_view)
+
+
+@login_required(login_url="/account/login")
+def patent_list_data(request):
+    # 返回json数据
+    result_data = {"code":0, "msg":"", "count":0, "data":[]}
+    patents = Patent.objects.all()
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(patents, limit)
+    else:
+        paginator = Paginator(patents, 10)
+    page = request.GET.get('page')
+    try:
+        patents_page = paginator.page(page)
+    except PageNotAnInteger:
+        patents_page = paginator.page(1)
+    except EmptyPage:
+        patents_page = paginator.page(paginator.num_pages)
+    for patent in patents_page:
+        obj = model_to_dict(patent, fields=['id','name','type','author','group','submit_time','created_at','status','patent_id','award'])
+        obj['submit_time'] = obj['ctime'].strftime('%Y-%m-%d')
+        obj['author'] = get_object_or_404(UserInfo, pk=obj['created_by']).realname
+        result_data['data'].append(obj)
+    result_data['count'] = patents.count()
+    return JsonResponse(result_data, json_dumps_params={'ensure_ascii': False})
+
