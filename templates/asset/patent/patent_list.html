@@ -2,31 +2,35 @@
 
 {% load staticfiles %}
 
-{% block content %}
+{% block head %}
+
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
 <link rel="stylesheet" href="{% static 'css/account/manager.css' %}">
 
+{% endblock %}
+
+{% block content %}
 <div class="base">
     <div class="baseplate">
         <div class="menuinfo">
-            <div class="gmenu_cp1">
-                <span class="left_bd"></span>
-                <a href="{% url 'asset:tec_list' %}"><span class="chpract">优秀实践</span></a>
+            <div class="gmenu_cp1" style="background-color: white">
+                <a href="{% url 'asset:tec_list' %}"><span class="m_mdata">优秀实践</span></a>
             </div>
-                <div class="gmenu_cp2">
+            <div class="gmenu_cp2">
                 <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
             </div>
-            <div class="gmenu_cp3">
-                <a href="{% url 'asset:patent_list' %}"><span class="m_mdata">专利</span></a>
+            <div class="gmenu_cp3" style="background-color: rgba(244, 244, 244, 1)">
+                <span class="left_bd"></span>
+                <a href="{% url 'asset:patent_list' %}"><span class="chpract">专利</span></a>
             </div>
         </div>
         <div class="info_base">
             <div class="Cp_title">
-                <span class="Cust_Com">优秀实践</span>
+                <span class="Cust_Com">专利</span>
             </div>
             <div class="info_selt">
-                <label for="" class="sortrg">搜索范围：</label>
-                <select class="rgselect" onchange="selectRange()" id="selectRange">
+                <label for="" class="sortrg" style="top:0px">搜索范围：</label>
+                <select class="rgselect" onchange="selectRange()" id="selectRange" style="position:relative;left:0px">
                     <option value="0">测试部</option>
                     <option value="1">家用测试组</option>
                     <option value="2">ISP运营商测试组</option>
@@ -36,26 +40,9 @@
                     <option value="6">资料开发组</option>
                     <option value="7">自动化开发组</option>
                 </select>
-                <label for="" class="gptime">时间选择：</label>
-                <select class="gptimepick" onchange="selectTime()" id="selectTime">
-                    <option value="All">所有</option>
-                    <option value="2020">2020</option>
-                </select>
-                <label for="" class="lbselect">类别选择：</label>
-                <select class="lbpick" onchange="selectTag()" id="selectTag">
-                    <option value="0">所有类别</option>
-                    <option value="1">工具</option>
-                    <option value="2">方法</option>
-                    <option value="3">流程</option>
-                    <option value="4">规范</option>
-                    <option value="5">机制</option>
-                    <option value="6">要求</option>
-                </select>
-                <input type="text" class="gpsearch" id="search-tec" placeholder="请输入名称、作者">
-                <img src="{% static 'images/asset/icn_search.png' %}" id="btn1" class="gpsortimg">
-                {% if user.role_id  != 1 %}
-                <a href="{% url 'asset:add_tec' %}"><button class="adcustomer" type="button">新增</button></a>
-                {% endif %}
+                <input type="text" class="gpsearch" id="search-patent" placeholder="请输入名称、作者" style="position:relative;left:0px">
+                <img src="{% static 'images/asset/icn_search.png' %}" id="btn1" class="gpsortimg" style="left:-30px;top:0px;">
+                <a href=""><button class="adcustomer" type="button">新增</button></a>
             </div>
             <div style="position:absolute;left:25px;top:120px;"><table id="demo" lay-filter="test"></table></div>
         </div>
@@ -94,18 +81,18 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
   table.render({
     elem: '#demo'
     ,height: 512
-    ,url: '/asset/tec-list-data/' //数据接口
+    ,url: '/asset/patent-list-data/' //数据接口
     ,page: true //开启分页
     //,even: true
     //,skin: 'line'
     ,cols: [[ //表头
       {field: 'id', title: 'ID', width:60, sort: true, }
-      ,{field: 'tname', title: '名称', width:380}
+      ,{field: 'name', title: '专利名称', width:380}
+      ,{field: 'patent_id', title: '专利申请号', width: 120, sort: true}
       ,{field: 'author', title: '作者', width:100, sort: true}
       ,{field: 'group', title: '小组', width:120}
-      ,{field: 'award', title: '奖项级别', width:100}
-      ,{field: 'tec_tag', title: '类别', width: 180}
-      ,{field: 'created_at', title: '编写时间', width: 120, sort: true}
+      ,{field: 'submit_time', title: '申请时间', width:100, sort: true}
+      ,{field: 'status', title: '状态', width: 120}
       ,{field: '', title: '操作', toolbar:"#bar", width: 125}
     ]]
   });
@@ -130,62 +117,32 @@ function selectRange() {
         layui.use(['table'], function(){
             var table = layui.table  // 表格
             table.reload('demo', {
-                url: '/asset/filter-tec-range/'
+                url: '/asset/filter-patent-range/'
                 ,where: { range_name: range } //设定异步数据接口的额外参数
                 //,height: 300
             });
         });
     };
     if(range == 0) {
-        window.location.href="/asset/tec-list/"
+        window.location.href="/asset/patent-list/"
     }
-};
-
-function selectTag() {
-    // 选择刷新标签、
-    var tag = $("#selectTag").val()
-    if(tag != 0) {
-        layui.use(['table'], function(){
-            var table = layui.table  // 表格
-            table.reload('demo', {
-                url: '/asset/filter-tec-range/'
-                ,where: { tag_id: tag } //设定异步数据接口的额外参数
-                //,height: 300
-            });
-        });
-    };
-    if(tag == 0) {
-        window.location.href="/asset/tec-list/"
-    }
-};
-
-function selectTime() {
-    var time = $("#selectTime").val()
-    layui.use(['table'], function(){
-            var table = layui.table  // 表格
-            table.reload('demo', {
-                url: '/asset/filter-tec-range/'
-                ,where: { time_year: time } //设定异步数据接口的额外参数
-                //,height: 300
-            });
-    });
 };
 
 
 $("#btn1").on('click', function() {
-    var text = $('#search-tec').val()
+    var text = $('#search-patent').val()
     console.log(text)
     if(text != "") {
         layui.use(['table'], function(){
             var table = layui.table  // 表格
             table.reload('demo', {
-                url: '/asset/search-tec/'
+                url: '/asset/search-patent/'
                 ,where: { search: text } //设定异步数据接口的搜索的关键字
                 //,height: 300
             });
         });
     } else {
-        window.location.href="/asset/tec-list/"
+        window.location.href="/asset/patent-list/"
     }
 });
 
