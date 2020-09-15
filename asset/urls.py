@@ -44,4 +44,10 @@ urlpatterns = [
     # 专利
     path('patent-list/', views.patent_list, name="patent_list"),
     path('patent-list-data/', views.patent_list_data, name="patent_list_data"),
+    path('add-patent/', views.add_patent, name="add_patent"),
+    path('download-patent-file/<int:patent_id>', views.download_patent_file,
+         name="download_patent_file"),
+    path('search-patent/', views.search_patent, name="seach_patent"),
+    path('filter-patent-range/', views.filter_patent_range, name="filter_patent_range"),
+    path('edit-patent/<int:patent_id>', views.edit_patent, name="edit_patent"),
 ]
