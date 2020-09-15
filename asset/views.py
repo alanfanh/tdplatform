@@ -10,7 +10,7 @@ from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db.models import Q
-from .forms import TecContentForm, ComplaintForm
+from .forms import TecContentForm, ComplaintForm, PatentForm
 
 from django.core import serializers
 from django.forms.models import model_to_dict
@@ -898,9 +898,135 @@ def patent_list_data(request):
         patents_page = paginator.page(paginator.num_pages)
     for patent in patents_page:
         obj = model_to_dict(patent, fields=['id','name','type','author','group','submit_time','created_at','status','patent_id','award'])
-        obj['submit_time'] = obj['ctime'].strftime('%Y-%m-%d')
-        obj['author'] = get_object_or_404(UserInfo, pk=obj['created_by']).realname
+        obj['submit_time'] = obj['submit_time'].strftime('%Y-%m-%d')
+        obj['author'] = get_object_or_404(UserInfo, pk=obj['author']).realname
+        obj['group'] = get_object_or_404(Group, pk=obj['group']).name
         result_data['data'].append(obj)
     result_data['count'] = patents.count()
     return JsonResponse(result_data, json_dumps_params={'ensure_ascii': False})
 
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def add_patent(request):
+    # 添加优秀实践
+    form = PatentForm(request.POST, request.FILES)
+    if request.method == "POST":
+        if form.is_valid():
+            new_patent = form.save(commit=False)
+            # new_tec.author = UserInfo.objects.get(id=request.POST['author'])
+            # new_tec.group = Group.objects.get(id=request.POST['group'])
+            # tags = request.POST.getlist('tec_tag')
+            # new_tec.created_at = timezone.now().strftime("%Y-%m-%d %H:%m:%S")
+            # print(new_tec.created_at)
+            new_patent.save()
+            # form.save_m2m()
+            return redirect("asset:patent_list")
+            # role = Role.objects.get(role_name="PL")
+            # userinfo = UserInfo.objects.filter(group=new_patent.group,role=role)
+            # return render(request, "asset/add_success.html", {"newtec":new_patent})
+        else:
+            error = form.errors
+            groups = Group.objects.all()
+            print(error)
+            return render(request, 'asset/patent/add_patent.html', {'form': form, 'error': error, "groups":groups})
+    else:
+        groups = Group.objects.all()
+        return render(request, "asset/patent/add_patent.html", {"groups": groups, "form":form})
+
+@login_required(login_url="/account/login")
+def download_patent_file(request, patent_id):
+    # 下载优秀实践附件
+    patent = get_object_or_404(Patent, id=patent_id)
+    if patent.file != "":
+        file_name = patent.file.name.split('/')[1]
+        response = FileResponse(patent.file)
+        response['Content-Type'] = "application/octet-stream"
+        response['Content-Disposition'] = "attachment;filename*=utf-8''{}".format(
+            escape_uri_path(file_name))
+        return response
+    else:
+        return HttpResponse("null")
+
+
+@login_required(login_url="/account/login")
+def filter_patent_range(request):
+    # ajax请求，筛选不同部门范围的数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    # 筛选出所有的数据记录
+    patents = Patent.objects.all()
+    if request.GET.get('range_name'):
+        # 过滤部门范围
+        range_id = request.GET.get('range_name')
+        patents = patents.filter(group_id=range_id)
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(patents, limit)
+    else:
+        paginator = Paginator(patents, 10)
+    page = request.GET.get('page')
+    try:
+        patents_page = paginator.page(page)
+        # 获取当前页面，生成页面条目序号
+        current_page = int(page)
+    except PageNotAnInteger:
+        patents_page = paginator.page(1)
+    except EmptyPage:
+        patents_page = paginator.page(paginator.num_pages)
+    for tec in patents_page:
+        obj = model_to_dict(tec, exclude=['file', ])
+        obj["submit_time"] = tec.created_at.strftime('%Y-%m-%d')
+        obj['group'] = Group.objects.get(id=obj['group']).name
+        obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+        result['data'].append(obj)
+    result['count'] = patents.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+@login_required(login_url="/account/login")
+def search_patent(request):
+    # 返回json数据
+    result = {"code": 0, "msg": "", "count": 0, "data": []}
+    # 获取数据
+    if request.GET.get("search"):
+        search_key = request.GET.get("search")
+        tecs = TecContent.objects.filter(status="3")
+        # author为外键，需author__realname关联UserInfo的实际姓名
+        patents = Patent.objects.filter(Q(name__icontains=search_key) |
+                           Q(author__realname__icontains=search_key))
+        for patent in patents:
+            obj = model_to_dict(patent, exclude=['file', ])
+            obj["submit_time"] = patent.created_at.strftime('%Y-%m-%d')
+            obj['group'] = Group.objects.get(id=obj['group']).name
+            obj['author'] = UserInfo.objects.get(id=obj['author']).realname
+            result['data'].append(obj)
+        result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii": False})
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def edit_patent(request, patent_id):
+    # 编辑客诉信息
+    patent = Patent.objects.get(id=patent_id)
+    if request.method == "GET":
+        form = PatentForm(instance=patent)
+        groups = Group.objects.all()
+        return render(request, "asset/patent/edit_patent.html", {"patent": patent, "form": form, "groups":groups})
+    else:
+        form = PatentForm(request.POST, request.FILES, instance=patent)
+        upfile_name = request.FILES.get('file')
+        if form.is_valid() and patent.file == '' and upfile_name is None:
+            # 附件为空时提示上传附件
+            form.add_error("cfile", u"请选择上传附件。")
+            flag = 0
+        elif form.is_valid() and patent.file != '':
+            flag = 1
+        else:
+            flag = 0
+
+        error = form.errors
+        if flag == 1:
+            new_patent = form.save(commit=False)
+            new_patent.save()
+            return redirect("asset:patent_list")
+        else:
+            return render(request, 'asset/patent/edit_patent.html', {"patent": patent, "form": form, 'error': error})
