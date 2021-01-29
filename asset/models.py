@@ -148,3 +148,56 @@ class Patent(models.Model):
 
     def get_absolute_url(self):
         return reverse("Patent_detail", kwargs={"pk": self.pk})
+
+
+class Project(models.Model):
+    """企业网BU项目过程数据记录"""
+    # 基本项目信息
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(verbose_name=("项目名称"), max_length=50)
+    type = models.CharField(verbose_name=("项目类型"), max_length=50)
+    created_at = models.DateField(verbose_name=("创建时间"), auto_now=False, auto_now_add=True)
+    completed_time = models.DateField(verbose_name=(
+        "结项时间"), auto_now=False, auto_now_add=False, null=True, blank=True)
+    coder = models.CharField(verbose_name=("软件owner"), max_length=50, null=True, blank=True)
+    developer = models.CharField(verbose_name=("硬件owner"), max_length=50, null=True, blank=True)
+    tester = models.CharField(verbose_name=("测试owner"), max_length=50, null=True, blank=True)
+    # 过程质量
+    newbug_percent = models.CharField(verbose_name=("缺陷引入率"), max_length=20, help_text="百分数", null=True, blank=True)
+    reopen_count = models.IntegerField(verbose_name=("缺陷回归不通过数"), help_text="正整数", null=True, blank=True)
+    missing_percent = models.CharField(verbose_name=("漏测率"), max_length=20, help_text="百分数", null=True, blank=True)
+    nocase_found = models.IntegerField(verbose_name=("用例外发现bug数"), null=True, blank=True)
+    bbit_round = models.IntegerField(verbose_name=("迭代/BBIT轮次"), null=True, blank=True)
+    tr4_round = models.IntegerField(verbose_name=("TR4/正常轮次"), null=True, blank=True)
+    reject_count = models.IntegerField(verbose_name=("驳回轮次"), help_text="正整数", null=True, blank=True)
+    reject_reason = models.TextField(verbose_name=("转测试驳回原因"), null=True, blank=True)
+    # 效率
+    delay = models.IntegerField(verbose_name=("项目进度偏差"), help_text="项目进度偏差天数", null=True, blank=True)
+    delay_reason = models.TextField(verbose_name=("偏差原因"), null=True, blank=True)
+    day_round = models.FloatField(verbose_name=("转测试天数每轮"), null=True, blank=True)
+    per_version = models.FloatField(verbose_name=("平均人力天/B版本"), null=True, blank=True)
+    # 产品质量
+    perf_count = models.IntegerField(verbose_name=("关键性能超越竞品数"), null=True, blank=True)
+    beta_bug = models.IntegerField(verbose_name=("Beta/内测问题数"), null=True, blank=True)
+    customer_bug = models.IntegerField(verbose_name=("OA客诉问题数"),null=True, blank=True)
+    quality_issue = models.IntegerField(verbose_name=("重大质量事故"),null=True, blank=True)
+    # 领域竞争力
+    solution = models.CharField(verbose_name=("解决方案体验满意度"), max_length=20, help_text="百分数", null=True, blank=True)
+    tec_count = models.IntegerField(verbose_name=("技术开发数"),null=True, blank=True)
+    cost_percent = models.CharField(
+        verbose_name=("目标成本达成率"), max_length=50, null=True, blank=True)
+    pcb_count = models.IntegerField(verbose_name=("PCB打板次数"), null=True, blank=True)
+    item_percent = models.CharField(verbose_name=("材料优选率"), max_length=50, help_text="百分数", null=True, blank=True)
+    # 备注说明
+    note = models.TextField(verbose_name=("项目备注"), null=True, blank=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+        verbose_name = ("项目信息")
+        verbose_name_plural = ("项目信息")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("project_detail", kwargs={"pk": self.pk})
