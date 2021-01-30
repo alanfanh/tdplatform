@@ -15,11 +15,16 @@
     <div class="Ed_baseplate">
         <div class="Ed_menuinfo">
             <div class="menu_cp1">
-                <a href=""><span class="m_mdata">优秀实践</span></a>
+                <a href="{% url 'asset:tec_list' %}"><span class="m_mdata">优秀实践</span></a>
             </div>
-            <div class="menu_cp2">
-                <span class="left_bd"></span>
+            <div class="menu_cp2" style="background-color: orange">
                 <a href="{% url 'asset:complaint_list' %}"><span class="chpract">客诉问题</span></a>
+            </div>
+            <div class="gmenu_cp3">
+                <a href="{% url 'asset:patent_list' %}"><span class="m_mdata">专利</span></a>
+            </div>
+            <div class="gmenu_cp4">
+                <a href="{% url 'asset:project_list' %}"><span class="m_mdata">项目数据</span></a>
             </div>
         </div>
         <div class="Ed_info_base">
