@@ -156,9 +156,9 @@ class Project(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name=("项目名称"), max_length=50)
     type = models.CharField(verbose_name=("项目类型"), max_length=50)
-    created_at = models.DateField(verbose_name=("创建时间"), auto_now=False, auto_now_add=True)
+    created_at = models.DateField(verbose_name=("立项时间"), auto_now=False, auto_now_add=False)
     completed_time = models.DateField(verbose_name=(
-        "结项时间"), auto_now=False, auto_now_add=False, null=True, blank=True)
+        "TR5/6时间"), auto_now=False, auto_now_add=False, null=True, blank=True)
     coder = models.CharField(verbose_name=("软件owner"), max_length=50, null=True, blank=True)
     developer = models.CharField(verbose_name=("硬件owner"), max_length=50, null=True, blank=True)
     tester = models.CharField(verbose_name=("测试owner"), max_length=50, null=True, blank=True)
@@ -167,12 +167,13 @@ class Project(models.Model):
     reopen_count = models.IntegerField(verbose_name=("缺陷回归不通过数"), help_text="正整数", null=True, blank=True)
     missing_percent = models.CharField(verbose_name=("漏测率"), max_length=20, help_text="百分数", null=True, blank=True)
     nocase_found = models.IntegerField(verbose_name=("用例外发现bug数"), null=True, blank=True)
-    bbit_round = models.IntegerField(verbose_name=("迭代/BBIT轮次"), null=True, blank=True)
-    tr4_round = models.IntegerField(verbose_name=("TR4/正常轮次"), null=True, blank=True)
+    test_round = models.IntegerField(verbose_name=("测试轮次"), null=True, blank=True)
     reject_count = models.IntegerField(verbose_name=("驳回轮次"), help_text="正整数", null=True, blank=True)
     reject_reason = models.TextField(verbose_name=("转测试驳回原因"), null=True, blank=True)
+    deliver = models.DateField(verbose_name=("性能板交付时间"), auto_now=False, auto_now_add=False, null=True, blank=True)
     # 效率
     delay = models.IntegerField(verbose_name=("项目进度偏差"), help_text="项目进度偏差天数", null=True, blank=True)
+    delay_percent = models.CharField(verbose_name=("项目偏差率"), max_length=10,null=True, blank=True)
     delay_reason = models.TextField(verbose_name=("偏差原因"), null=True, blank=True)
     day_round = models.FloatField(verbose_name=("转测试天数每轮"), null=True, blank=True)
     per_version = models.FloatField(verbose_name=("平均人力天/B版本"), null=True, blank=True)
@@ -183,11 +184,13 @@ class Project(models.Model):
     quality_issue = models.IntegerField(verbose_name=("重大质量事故"),null=True, blank=True)
     # 领域竞争力
     solution = models.CharField(verbose_name=("解决方案体验满意度"), max_length=20, help_text="百分数", null=True, blank=True)
-    tec_count = models.IntegerField(verbose_name=("技术开发数"),null=True, blank=True)
     cost_percent = models.CharField(
         verbose_name=("目标成本达成率"), max_length=50, null=True, blank=True)
     pcb_count = models.IntegerField(verbose_name=("PCB打板次数"), null=True, blank=True)
     item_percent = models.CharField(verbose_name=("材料优选率"), max_length=50, help_text="百分数", null=True, blank=True)
+    # 技术领域
+    tec_count = models.IntegerField(verbose_name=("技术开发数"),null=True, blank=True)
+    tec =  models.TextField(verbose_name=("技术项目"),null=True,blank=True)
     # 备注说明
     note = models.TextField(verbose_name=("项目备注"), null=True, blank=True)
 
