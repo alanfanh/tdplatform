@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Complaint, TecContent, Patent
+from .models import Complaint, TecContent, Patent, Project
 
 class TecContentForm(forms.ModelForm):
     class Meta:
@@ -18,3 +18,8 @@ class PatentForm(forms.ModelForm):
     class Meta:
         model = Patent
         fields = ("name","type","author","group","submit_time", "status", "patent_id", "award", "file")
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ("name","type","created_at","completed_time","coder","developer","tester","newbug_percent","reopen_count","missing_percent", "nocase_found","test_round", "reject_count", "reject_reason", "deliver", "delay", "delay_percent", "delay_reason", "day_round", "per_version", "perf_count", "beta_bug","customer_bug", "quality_issue","solution","cost_percent","pcb_count","item_percent","tec_count", "tec","note")
