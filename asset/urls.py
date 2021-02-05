@@ -50,4 +50,8 @@ urlpatterns = [
     path('search-patent/', views.search_patent, name="seach_patent"),
     path('filter-patent-range/', views.filter_patent_range, name="filter_patent_range"),
     path('edit-patent/<int:patent_id>', views.edit_patent, name="edit_patent"),
+    # 企业网BU 项目过程质量数据
+    path('project-list/', views.project_list, name="project_list"),
+    path('project-list-data/', views.project_list_data, name="project_list_data"),
+    path('add-project/', views.add_project, name="add_project"),
 ]

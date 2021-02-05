@@ -3,14 +3,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 # Create your views here.
-from .models import Articles, TecContent, Complaint, TecTag, NodeMessage, Patent
+from .models import Articles, TecContent, Complaint, TecTag, NodeMessage, Patent, Project
 from account.models import UserInfo, Role, Group
 
 from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db.models import Q
-from .forms import TecContentForm, ComplaintForm, PatentForm
+from .forms import TecContentForm, ComplaintForm, PatentForm, ProjectForm
 
 from django.core import serializers
 from django.forms.models import model_to_dict
@@ -1030,3 +1030,55 @@ def edit_patent(request, patent_id):
             return redirect("asset:patent_list")
         else:
             return render(request, 'asset/patent/edit_patent.html', {"patent": patent, "form": form, 'error': error})
+
+
+# 企业网BU项目过程质量数据
+@login_required(login_url="/account/login")
+def project_list(request):
+    template_view = "asset/project/project_list.html"
+    return render(request, template_view)
+
+@login_required(login_url="/account/login")
+def project_list_data(request):
+    result_data = {"code": 0, "msg": "", "count": 0, "data": []}
+    projects = Project.objects.all()
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(projects, limit)
+    else:
+        paginator = Paginator(projects, 10)
+    page = request.GET.get('page')
+    try:
+        projects_page = paginator.page(page)
+    except PageNotAnInteger:
+        projects_page = paginator.page(1)
+    except EmptyPage:
+        projects_page = paginator.page(paginator.num_pages)
+    for project in projects_page:
+        obj = model_to_dict(project, fields=[
+                            'id', 'name', 'type', 'created_at', 'completed_time', 'coder', 'developer', 'tester', 'newbug_percent', 'reopen_count', 'missing_percent', 'nocase_found', 'test_round', 'reject_count', 'reject_reason', 'deliver','delay', 'delay_percent','delay_reason','day_round','per_version','perf_count','beta_bug','customer_bug','quality_issue','solution','cost_percent','pcb_count','item_percent','tec_count','tec','note'])
+        if obj['completed_time'] != None:
+            obj['completed_time'] = obj['completed_time'].strftime('%Y-%m-%d')
+        if obj['deliver'] != None:
+            obj['deliver'] = obj['deliver'].strftime('%Y-%m-%d')
+        obj['created_at'] = obj['created_at'].strftime('%Y-%m-%d')
+        result_data['data'].append(obj)
+    result_data['count'] = projects.count()
+    return JsonResponse(result_data, json_dumps_params={'ensure_ascii':False})
+
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def add_project(request):
+    # 添加项目数据
+    form = ProjectForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            new_project = form.save(commit=False)
+            new_project.save()
+            return redirect("asset:project_list")
+        else:
+            error = form.errors
+            return render(request, "asset/project/add_project.html",{"form":form, "error":error})
+    else:
+        return render(request, "asset/project/add_project.html",{"form":form})
