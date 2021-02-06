@@ -1,0 +1,328 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}添加优秀实践{% endblock  %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+{% endblock  %}
+
+{% block content %}
+<div class="cabase">
+    <div class="cabaseplate">
+        <div class="camenuinfo">
+            <div class="menu_cp1">
+                <a href="{% url 'asset:tec_list' %}"><span class="m_mdata">优秀实践</span></a>
+            </div>
+            <div class="gmenu_cp2">
+                <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
+            </div>
+            <div class="gmenu_cp3" >
+                <a href="{% url 'asset:patent_list' %}"><span class="m_mdata">专利</span></a>
+            </div>
+            <div class="gmenu_cp4" style="background-color: orange">
+                <a href="{% url 'asset:project_list' %}"><span class="chpract">项目数据</span></a>
+            </div>
+        </div>
+        <div class="cainfo_base">
+            <blockquote class="layui-elem-quote layui-text" style="margin-top:10px;margin-left:1px">
+                添加项目过程数据。标注测试即由测试领域人员填写。其他标注软件和硬件同理
+            </blockquote>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+                <legend style="width:160px;border-bottom:none;margin-bottom:0px;color: orange">项目说明(测试)</legend>
+            </fieldset>
+            <div class="site-text" style="padding:5px">
+                <form action="." method="post" class="layui-form" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">项目名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="name" lay-verify="required" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:100px">项目类型</label>
+                        <div class="layui-input-inline" style="width:100px">
+                            <select name="type" lay-verify="required">
+                                <option value="全新">全新</option>
+                                <option value="改进">改进</option>
+                                <option value="OEM">OEM</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label" style="width:100px">立项时间</label>
+                        <div class="layui-input-inline">
+                            <input type="lay-date" class="layui-input" lay-verify="required" name="created_at" id="created_at" placeholder="yyyy-MM-dd" style="height:38px">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">软件owner</label>
+                        <div class="layui-input-inline" style="width:85px">
+                            <input type="text" name="coder" lay-verify="required" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:100px">硬件owner</label>
+                        <div class="layui-input-inline" style="width:85px">
+                            <input type="text" name="developer" lay-verify="required" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:100px">测试owner</label>
+                        <div class="layui-input-inline" style="width:85px">
+                            <input type="text" name="tester" lay-verify="required" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:100px">TR5/6时间</label>
+                        <div class="layui-input-inline">
+                            <input type="lay-date" class="layui-input" lay-verify="" name="completed_time" id="completed_time" placeholder="yyyy-MM-dd" style="height:38px">
+                        </div>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+                        <legend style="width:100px;border-bottom:none;margin-bottom:0px;color: orange">过程质量</legend>
+                    </fieldset>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:150px">性能板子交付时间</label>
+                        <div class="layui-input-inline">
+                            <input type="lay-date" class="layui-input" lay-verify="" name="deliver" id="deliver" placeholder="yyyy-MM-dd" style="height:38px">
+                        </div>
+                        <label class="layui-form-label" style="width:110px">缺陷引入率</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="newbug_percent" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:150px">缺陷回归不通过数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="reopen_count" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:100px">测试轮次</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="test_round" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">测试</div>
+                        <label class="layui-form-label" style="width:100px">驳回轮次</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="reject_count" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:100px">漏测率</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="missing_percent" lay-verify="" lay-reqtext="不能为空" placeholder="测试填写" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:120px">用例外Bug数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="nocase_found" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label" style="width:100px">驳回原因</label>
+                        <div class="layui-input-block" style="width:600px">
+                        <textarea name="reject_reason" placeholder="测试填写" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+                        <legend style="width:100px;border-bottom:none;margin-bottom:0px;color: orange">项目效率</legend>
+                    </fieldset>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:120px">进度偏差天数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="delay" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:120px">进度偏差率</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="delay_percent" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:120px">转测试天数/轮</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="day_round" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:140px">人均人力天/版本</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="per_version" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label" style="width:100px">偏差原因</label>
+                        <div class="layui-input-block" style="width:600px">
+                        <textarea name="delay_reason" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+                        <legend style="width:100px;border-bottom:none;margin-bottom:0px;color:orange">产品质量</legend>
+                    </fieldset>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:160px">关键性能超越竞品数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="perf_count" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:160px">Beta/内测问题数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="beta_bug" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:160px">OA客诉问题数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="customer_bug" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:160px">重大质量事故数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="quality_issue" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+                        <legend style="width:120px;border-bottom:none;margin-bottom:0px;color:orange">领域竞争力</legend>
+                    </fieldset>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:130px">解决方案满意度</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="solution" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px">目标成本达成率</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="cost_percent" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px">PCB打板次数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="pcb_count" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                        <label class="layui-form-label" style="width:130px">材料优选率</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="item_percent" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
+                        <legend style="width:100px;border-bottom:none;margin-bottom:0px;color:orange">技术领域</legend>
+                    </fieldset>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width:110px">技术项目数</label>
+                        <div class="layui-input-inline" style="width:80px">
+                            <input type="text" name="tec_count" lay-verify="" lay-reqtext="不能为空" placeholder="" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label" style="width:100px">技术项目</label>
+                        <div class="layui-input-block" style="width:600px">
+                        <textarea name="tec" placeholder="技术模块  立项时间  交付时间" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" style="background-color:#FF8F00" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+layui.use('form', function(){
+  var form = layui.form;
+  form.on('select(group)', function(data) {
+      var value = data.value
+      //console.log(data.elem);  //得到select原始DOM对象
+      //console.log(data.value); //得到被选中的值
+      //console.log(data.othis); //得到美化后的DOM对象
+
+      $.ajax({
+        type:"post",
+        url:"/asset/group-user/",
+        data:{"group_id": value},
+        datatype:'json',
+        success: function(e) {
+            if(e!=null){
+                var author = $("#id_author");
+                var dataObj = eval(e);
+                var dataArr = dataObj.data;
+                author.empty();
+                // console.log(dataArr)
+                if (dataArr!=null) {
+                    for(var i=0;i<dataArr.length;i++){
+                        var item =dataArr[i];
+                        author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                    };
+                } else {
+                    author.append("<option value = '-1'>"+"成员为空"+"</option>");
+                }
+            }
+            layui.form.render("select");
+        }
+        
+      });
+  });
+  // layui.form.render("select", 'author');
+
+  //各种基于事件的操作，下面会有进一步介绍
+  form.verify({
+    // 验证多选框不能全为空
+    otherReq: function(value,item){
+      var $ = layui.$;
+      var verifyName=$(item).attr('name')
+        , verifyType=$(item).attr('type')
+        ,formElem=$(item).parents('.layui-form')//获取当前所在的form元素,如果存在的话
+        ,verifyElem=formElem.find('input[name='+verifyName+']')//获取需要校验的元素
+        ,isTrue= verifyElem.is(':checked')//是否命中校验
+        ,focusElem = verifyElem.next().find('i.layui-icon');//焦点元素
+        if(!isTrue || !value){
+            //定位焦点
+            focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
+            //对非输入框设置焦点
+            focusElem.first().attr("tabIndex","1").css("outline","0").blur(function() {
+                focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
+            }).focus();
+            return '必填项不能为空';
+        }
+    }
+  });
+
+});
+
+// 进入页面后，即根据小组 更新 作者选择框数据
+window.onload=function() {
+    layui.use('form', function(){
+        var form = layui.form;
+        var group = $("#id_group").val()
+        console.log('test',group)
+        $.ajax({
+            type:"post",
+            url:"/asset/group-user/",
+            data:{"group_id": group},
+            datatype:'json',
+            success: function(e) {
+                if(e!=null){
+                    var author = $("#id_author");
+                    var dataObj = eval(e);
+                    var dataArr = dataObj.data;
+                    author.empty();
+                    // console.log(dataArr)
+                    if (dataArr!=null) {
+                        for(var i=0;i<dataArr.length;i++){
+                            var item =dataArr[i];
+                            author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                        };
+                    } else {
+                        author.append("<option value = '-1'>"+"成员为空"+"</option>");
+                    }
+                }
+                form.render("select");
+            }
+            
+        });
+    })
+}
+
+
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#created_at' //立项时间
+  });
+
+  laydate.render({
+    elem: '#completed_time' //结项时间
+  });
+  
+  laydate.render({
+    elem: '#deliver'     // 性能板子交付时间
+  })
+
+});
+
+</script>
+
+{% endblock  %}
