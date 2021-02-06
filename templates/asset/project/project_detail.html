@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}添加优秀实践{% endblock  %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
+<link rel="stylesheet" href="{% static 'css/account/manager.css' %} ">
+<link rel="stylesheet" href="{% static 'css/asset/project.css' %}">
+{% endblock  %}
+
+{% block content %}
+<div class="cabase" style="height:1100px">
+    <div class="cabaseplate" style="height:1100px">
+        <div class="camenuinfo" style="height:1100px">
+            <div class="menu_cp1">
+                <a href="{% url 'asset:tec_list' %}"><span class="m_mdata">优秀实践</span></a>
+            </div>
+            <div class="gmenu_cp2">
+                <a href="{% url 'asset:complaint_list' %}"><span class="m_mdata">客诉问题</span></a>
+            </div>
+            <div class="gmenu_cp3" >
+                <a href="{% url 'asset:patent_list' %}"><span class="m_mdata">专利</span></a>
+            </div>
+            <div class="gmenu_cp4" style="background-color: orange">
+                <a href="{% url 'asset:project_list' %}"><span class="chpract">项目数据</span></a>
+            </div>
+        </div>
+        <div class="cainfo_base" style="height:1100px">
+            <blockquote class="layui-elem-quote layui-text" style="margin-top:20px;margin-left:1px;font-size:25px;color:orange">
+                {{project.name}}项目过程质量数据详情
+            </blockquote>
+            <div class="site-text" style="padding:5px;left:4%;width:1000px;margin-top:0">
+                <div class="layui-collapse">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">项目说明</h2>
+                        <div class="layui-colla-content layui-show">
+                            <div>
+                                <span class="format">项目名称：{{project.name}}</span>  
+                                <span class="format">项目类型：{{project.type}}</span>  
+                                <span class="format">立项时间：{{project.created_at}}</span>  
+                                <span class="format">TR5/6时间：{{project.completed_time|default_if_none:""}}</span>
+                            </div>
+                            <div>
+                                <span class="format">软件负责人：{{project.coder}}</span>
+                                <span class="format">硬件负责人：{{project.developer}}</span>
+                                <span class="format">测试负责人：{{project.tester}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">过程质量</h2>
+                        <div class="layui-colla-content layui-show">
+                            <div>
+                                <span class="format">性能板子交付时间：{{project.deliver|default_if_none:""}}</span>
+                                <span class="format">缺陷引入率：{{project.newbug_percent|default_if_none:""}}</span>
+                                <span class="format">缺陷回归不通过数：{{project.newbug_percent|default_if_none:""}}</span>
+                            </div>
+                            <div>
+                                <span class="format">漏测率：{{project.missing_bug|default_if_none:""}}</span>
+                                <span class="format">用例外发现BUG数：{{project.nocase_found|default_if_none:""}}</span>
+                                <span class="format">测试轮次：{{project.test_round|default_if_none:""}}</span>
+                                <span class="format">驳回轮次：{{project.reject_count|default_if_none:""}}
+                            </div>
+                            <div>驳回原因：{{project.reject_reason|default_if_none:""}}</div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">项目效率</h2>
+                        <div class="layui-colla-content layui-show">
+                            <div>
+                                <span class="format">项目进度偏差天数：{{project.delay|default_if_none:""}}</span>
+                                <span class="format">项目偏差率：{{project.delay_percent|default_if_none:""}}</span>  
+                            </div>
+                            <div>
+                                <span class="format">转测试天数每轮：{{project.day_round|default_if_none:""}}</span>
+                                <span class="format">平均人力天/B版本：{{project.per_version|default_if_none:""}}</span>
+                            </div>
+                            <div>偏差原因：{{project.delay_reason}}</div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">产品质量</h2>
+                        <div class="layui-colla-content layui-show">
+                            <div>
+                                <span class="format">关键性能超越竞品数：{{project.perf_count|default_if_none:""}}</span>
+                                <span class="format">Beta/内测问题数：{{project.beta_bug|default_if_none:""}}</span>  
+                            </div>
+                            <div>
+                                <span class="format">OA客诉问题数：{{project.customer_bug|default_if_none:""}}</span>
+                                <span class="format">重大质量事故：{{project.quality_issue|default_if_none:""}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">领域竞争力</h2>
+                        <div class="layui-colla-content layui-show">
+                            <div>
+                                <span class="format">解决方案体验满意度：{{project.solution|default_if_none:""}}</span>
+                                <span class="format">目标成本达成率：{{project.cost_percent|default_if_none:""}}</span>  
+                            </div>
+                            <div>
+                                <span class="format">PCB打板次数：{{project.pcb_count|default_if_none:""}}</span>
+                                <span class="format">材料优选率：{{project.item_percent|default_if_none:""}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">技术领域</h2>
+                        <div class="layui-colla-content layui-show">
+                            <div>
+                                <span class="format">技术开发数：{{project.tec_count|default_if_none:"0"}}</span>
+                            </div>
+                            <div>
+                                技术项目：{{project.tec|default_if_none:""}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">项目备注信息</h2>
+                        <div class="layui-colla-content layui-show">
+                        {{project.note|default_if_none:""}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
