@@ -109,7 +109,7 @@ button {
   border-width:0px;
   position:relative;
   top:24px;
-  width:1440px;
+  width:1340px;
   height:912px;
   background:inherit;
   background-color:rgba(255, 255, 255, 1);
@@ -124,7 +124,7 @@ button {
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 200px;
+  width: 120px;
   height: 912px;
   background: inherit;
   background-color: rgba(255, 255, 255, 1);
@@ -133,12 +133,13 @@ button {
   border-top:none;
   border-bottom:none;
   border-left:none;
+  border-right: 1px solid #e5e5e5;
 }
 .info_base {
   position: absolute;
-  left: 200px;
+  left: 120px;
   top: 0px;
-  width: 1240px;
+  width: 1220px;
   height: 912px;
   background: inherit;
   background-color: rgba(255, 255, 255, 1);

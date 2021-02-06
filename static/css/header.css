@@ -1,7 +1,7 @@
 ﻿#header-navbar {
   border-width:0px;
   position:relative;
-  width:1440px;
+  width:1340px;
   height:64px;
   display:flex;
   background:inherit;
@@ -16,8 +16,8 @@
 }
 #navbar-user-info {
   position: relative;
-  left: 1062px;
-  width: 172px;
+  left: 1020px;
+  width: 150px;
 }
 #logo {
   border-width: 0px;

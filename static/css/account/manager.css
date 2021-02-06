@@ -532,7 +532,7 @@
   .menu_cp1 {
     border-width: 0px;
     position: absolute;
-    width:200px;
+    width:120px;
     height:46px;
     left:0px;
     top:25px;
@@ -540,7 +540,7 @@
   .menu_cp2 {
     border-width: 0px;
     position: absolute;
-    width:200px;
+    width:120px;
     height:46px;
     left:0px;
     top:71px;
@@ -558,7 +558,7 @@
     position:absolute;
     left:25px;
     top:78px;
-    width:1200px;
+    width:1100px;
     height:45px;
     background:inherit;
     background-color:rgba(255, 255, 255, 1);
@@ -926,7 +926,7 @@
   border-width:0px;
   position:relative;
   top:24px;
-  width:1440px;
+  width:1340px;
   height:1542px;
   background-color:rgba(255, 255, 255, 1);
   margin-left: auto;
@@ -936,7 +936,7 @@
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 200px;
+  width: 120px;
   height: 1542px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -944,12 +944,13 @@
   border-top:none;
   border-bottom:none;
   border-left:none;
+  border-right: 1px solid #e5e5e5;
 }
 .cainfo_base {
   position: absolute;
-  left: 200px;
+  left: 120px;
   top: 0px;
-  width: 1240px;
+  width: 1220px;
   height: 1542px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -959,7 +960,7 @@
   position:absolute;
   left:33px;
   top:79px;
-  width:1174px;
+  width:1000px;
   height:55px;
   border-width:1px;
   border-style:solid;
@@ -998,7 +999,7 @@
   position:absolute;
   left:33px;
   top:0px;
-  width:1200px;
+  width:1000px;
   height:63px;
   background-color:rgba(255, 255, 255, 1);
   box-sizing:border-box;
@@ -1576,7 +1577,7 @@
     position:absolute;
     left:33px;
     top:614px;
-    width:1174px;
+    width:1000px;
     height:55px;
     border-width:1px;
     border-style:solid;
@@ -1639,7 +1640,7 @@
     position:absolute;
     left:33px;
     top:281px;
-    width:1416px;
+    width:1000px;
     height:100px;
 }
 #pbtext {
@@ -2040,7 +2041,7 @@
 .gmenu_cp1 {
   border-width: 0px;
   position: absolute;
-  width:200px;
+  width:120px;
   height:46px;
   left:0px;
   top:25px;
@@ -2049,7 +2050,7 @@
 .gmenu_cp2 {
   border-width: 0px;
   position: absolute;
-  width:200px;
+  width:120px;
   height:46px;
   left:0px;
   top:71px;
@@ -2057,11 +2058,20 @@
 .gmenu_cp3 {
   border-width: 0px;
   position: absolute;
-  width:200px;
+  width:120px;
   height:46px;
   left:0px;
   top:117px;
 }
+.gmenu_cp4 {
+  border-width: 0px;
+  position: absolute;
+  width: 120px;
+  height: 46px;
+  left: 0px;
+  top: 163px;
+}
+
 .sortrg {
   position: relative;;
   left:1px;

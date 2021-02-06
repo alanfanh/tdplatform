@@ -2,7 +2,7 @@
   border-width:0px;
   position:relative;
   top:24px;
-  width: 1440px;
+  width: 1340px;
   height:912px;
   background:inherit;
   background-color:rgba(255, 255, 255, 1);
@@ -639,7 +639,7 @@
 .tmenu_cp1 {
     border-width: 0px;
     position: absolute;
-    width:200px;
+    width:120px;
     height:46px;
     left:0px;
     top:25px;
@@ -647,7 +647,7 @@
   .tmenu_cp2 {
     border-width: 0px;
     position: absolute;
-    width:200px;
+    width:120px;
     height:46px;
     left:0px;
     top:71px;

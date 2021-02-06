@@ -30,9 +30,9 @@
 
 .nm {
   border-width: 0px;
-  position: absolute;
-  left: 96px;
-  top: 48px;
+  position: relative;
+  left: 38px;
+  top: 68px;
   width: 100px;
   height: 25px;
   font-weight: 400;
@@ -46,8 +46,8 @@
 
 .pt_dp {
   border-width: 0px;
-  position: absolute;
-  left: 96px;
+  position: relative;
+  left: 26px;
   top: 85px;
   width: 100px;
   height: 20px;
@@ -128,7 +128,7 @@
 .menu_gp1 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 231px;
@@ -154,7 +154,7 @@
 .menu_gp2 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 277px;
@@ -163,7 +163,7 @@
 .chmenu_gp2 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 277px;
@@ -207,7 +207,7 @@
 .menu_gp3 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 323px;
@@ -216,7 +216,7 @@
 .chmenu_gp3 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 323px;
@@ -243,7 +243,7 @@
 .menu_gp4 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 369px;
@@ -253,7 +253,7 @@
 .chmenu_gp4 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 369px;
@@ -306,7 +306,7 @@
 .menu_gp5 {
   border-width: 0px;
   position: absolute;
-  width: 200px;
+  width: 120px;
   height: 46px;
   left: 0px;
   top: 415px;
@@ -465,7 +465,7 @@
   position: absolute;
   left: 27px;
   top: 689px;
-  width: 1415px;
+  width: 600px;
   height: 40px;
   font-family: 'PingFangSC-Regular', 'PingFang SC';
   font-weight: 400;
@@ -713,7 +713,7 @@
   position: absolute;
   left: 25px;
   top: 120px;
-  width: 1416px;
+  width: 1180px;
   height: 40px;
 }
 
@@ -989,7 +989,7 @@
   position: absolute;
   left: 25px;
   top: 855px;
-  width: 1415px;
+  width: 500px;
   height: 40px;
 }
 
@@ -1015,7 +1015,7 @@
   border-width: 0px;
   position: relative;
   top: 24px;
-  width: 1440px;
+  width: 1340px;
   height: 1032px;
   background-color: rgba(255, 255, 255, 1);
   margin-left: auto;
@@ -1026,7 +1026,7 @@
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 200px;
+  width: 120px;
   height: 1032px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -1034,13 +1034,14 @@
   border-top: none;
   border-bottom: none;
   border-left: none;
+  border-right: 1px solid #e5e5e5;
 }
 
 .Ed_info_base {
   position: absolute;
-  left: 200px;
+  left: 120px;
   top: 0px;
-  width: 1240px;
+  width: 1220px;
   height: 1032px;
   background-color: rgba(255, 255, 255, 1);
   box-sizing: border-box;
@@ -1064,7 +1065,7 @@
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 1240px;
+  width: 1220px;
   height: 97px;
   box-sizing: border-box;
   border-width: 1px;
