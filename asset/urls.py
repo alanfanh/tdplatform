@@ -54,4 +54,6 @@ urlpatterns = [
     path('project-list/', views.project_list, name="project_list"),
     path('project-list-data/', views.project_list_data, name="project_list_data"),
     path('add-project/', views.add_project, name="add_project"),
+    path('edit-project/<int:project_id>', views.edit_project, name="edit_porject"),
+    path('project-detail/<int:project_id>', views.project_detail, name="project_detail"),
 ]

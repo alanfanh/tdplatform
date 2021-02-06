@@ -1082,3 +1082,30 @@ def add_project(request):
             return render(request, "asset/project/add_project.html",{"form":form, "error":error})
     else:
         return render(request, "asset/project/add_project.html",{"form":form})
+
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def edit_project(request,project_id):
+    # 编辑项目数据
+    project = Project.objects.get(id=project_id)
+    if request.method == "GET":
+        form = ProjectForm(instance=project)
+        return render(request, "asset/project/edit_project.html", {"project": project, "form": form})
+    else:
+        form = ProjectForm(request.POST, instance=project)      
+        if form.is_valid():
+            new_project = form.save(commit=False)
+            new_project.save()
+            return redirect("asset:project_list")
+        else:
+            return render(request, 'asset/project/edit_project.html', {"project":project, "form":form, 'error': error})
+            # return HttpResponse('1')
+
+
+@login_required(login_url="/account/login")
+@csrf_exempt
+def project_detail(request,project_id):
+    # 项目详细信息
+    project = Project.objects.get(id=project_id)
+    return render(request, 'asset/project/project_detail.html', {"project":project})
