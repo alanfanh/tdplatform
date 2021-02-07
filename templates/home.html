@@ -71,9 +71,9 @@
             <div class="menuconten2">
                 <div class="menushadow1">
                     <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
-                    <span class="dataname">培训</span>
-                    <span class="datanumber">{{courses.count}}</span>
-                    <a href="{% url 'training:course_list' %}">   
+                    <span class="dataname">项目</span>
+                    <span class="datanumber">{{ projects_count }} </span>
+                    <a href="{% url 'asset:project_list' %}">   
                         <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
                         <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
                     </a>
@@ -81,7 +81,7 @@
                 <div class="menushadow2">
                     <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
                     <span class="dataname">优秀实践</span>
-                    <span class="datanumber">{{tecs.count}}</span>
+                    <span class="datanumber">{{tecs_count}}</span>
                     <a href="{% url 'asset:tec_list' %}">
                         <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
                         <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
@@ -90,7 +90,7 @@
                 <div class="menushadow3">
                     <img src="{% static 'images/home/dataimg.svg' %}" class="dataimg">
                     <span class="dataname">客诉问题</span>
-                    <span class="datanumber">{{coms.count}}</span>
+                    <span class="datanumber">{{coms_count}}</span>
                     <a href="{% url 'asset:complaint_list' %}">
                         <img src="{% static 'images/home/arrbase.svg' %}" class="arrbase">
                         <img src="{% static 'images/home/dataarr.svg' %}" class="dataarr">
