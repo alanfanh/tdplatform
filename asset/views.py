@@ -1093,12 +1093,13 @@ def edit_project(request,project_id):
         form = ProjectForm(instance=project)
         return render(request, "asset/project/edit_project.html", {"project": project, "form": form})
     else:
-        form = ProjectForm(request.POST, instance=project)      
+        form = ProjectForm(request.POST, instance=project)
         if form.is_valid():
             new_project = form.save(commit=False)
             new_project.save()
             return redirect("asset:project_list")
         else:
+            error = form.errors
             return render(request, 'asset/project/edit_project.html', {"project":project, "form":form, 'error': error})
             # return HttpResponse('1')
 
