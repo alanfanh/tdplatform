@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from .forms import LoginForm,UserInfoForm
 from .models import UserInfo, Group, Role, Rank
-from asset.models import TecContent, Complaint
+from asset.models import TecContent, Complaint, Project
 from training.models import Course
 import json
 from django.contrib.auth.forms import PasswordChangeForm
@@ -251,9 +251,10 @@ def change_pwd(request):
 @csrf_exempt
 def home_page(request):
     # 查询数据中心
-    courses = Course.objects.all()
-    tecs = TecContent.objects.filter(status="3")
-    coms = Complaint.objects.all()
+    # courses = Course.objects.all()
+    tecs_count = TecContent.objects.filter(status="3").count()
+    coms_count = Complaint.objects.all().count()
+    projects_count = Project.objects.all().count()
 
     #获取常用链接表单
     links = CommonLinks.objects.order_by('-click_number')
@@ -274,11 +275,12 @@ def home_page(request):
         tec_list = TecContent.objects.filter(status="2")
         unproc_num = tec_list.count()
     else:
-        return render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "links": links})
+        return render(request, "home.html", {"tecs_count": tecs_count, "coms_count": coms_count, "projects_count": projects_count, "last_courses": last_courses, "links": links})
     # print(tec_num)
     # rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "files": files, "tec_num": tec_num})
         unproc_num = ''
-    rsp = render(request, "home.html", {"courses": courses, "tecs": tecs, "coms": coms, "last_courses": last_courses, "links":links})
+    rsp = render(request, "home.html", {"tecs_count": tecs_count, "coms_count": coms_count,
+                                        "projects_count": projects_count, "last_courses": last_courses, "links": links})
     rsp.set_cookie("unproc_num_cookie",unproc_num, path='/')
     return rsp
 
