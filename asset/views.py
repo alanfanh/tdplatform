@@ -1110,3 +1110,60 @@ def project_detail(request,project_id):
     # 项目详细信息
     project = Project.objects.get(id=project_id)
     return render(request, 'asset/project/project_detail.html', {"project":project})
+
+@login_required(login_url="/account/login")
+def filter_project_type(request):
+    # ajax请求，筛选不同项目类型的数据
+    result = {"code": 0, "msg": "", "count": 1000, "data": []}
+    # 筛选出所有的数据记录
+    projects = Project.objects.all()
+    if request.GET.get('type_name'):
+        # 过滤项目类型
+        type_name = request.GET.get('type_name')
+        projects = projects.filter(type=type_name)
+    if request.GET.get('limit'):
+        limit = request.GET.get('limit')
+        paginator = Paginator(projects, limit)
+    else:
+        paginator = Paginator(projects, 10)
+    page = request.GET.get('page')
+    try:
+        projects_page = paginator.page(page)
+        # 获取当前页面，生成页面条目序号
+        current_page = int(page)
+    except PageNotAnInteger:
+        projects_page = paginator.page(1)
+    except EmptyPage:
+        projects_page = paginator.page(paginator.num_pages)
+    for project in projects_page:
+        obj = model_to_dict(project, exclude=['file', ])
+        if obj['completed_time'] != None:
+            obj['completed_time'] = obj['completed_time'].strftime(
+                    '%Y-%m-%d')
+        if obj['deliver'] != None:
+            obj['deliver'] = obj['deliver'].strftime('%Y-%m-%d')
+        obj['created_at'] = obj['created_at'].strftime('%Y-%m-%d')
+        result['data'].append(obj)
+    result['count'] = projects.count()
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': False})
+
+@login_required(login_url="/account/login")
+def search_project(request):
+    # 返回json数据
+    result = {"code": 0, "msg": "", "count": 0, "data": []}
+    # 获取数据,项目名称
+    if request.GET.get("search"):
+        search_key = request.GET.get("search")
+        tecs = TecContent.objects.filter(status="3")
+        # 过滤project项目名
+        projects = Project.objects.filter(Q(name__icontains=search_key))
+        for p in projects:
+            obj = model_to_dict(p, exclude=['file', ])
+            if obj['completed_time'] != None:
+                obj['completed_time'] = obj['completed_time'].strftime('%Y-%m-%d')
+            if obj['deliver'] != None:
+                obj['deliver'] = obj['deliver'].strftime('%Y-%m-%d')
+            obj['created_at'] = obj['created_at'].strftime('%Y-%m-%d')
+            result['data'].append(obj)
+        result['count'] = tecs.count()
+    return JsonResponse(result, json_dumps_params={"ensure_ascii": False})

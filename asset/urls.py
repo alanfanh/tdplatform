@@ -56,4 +56,6 @@ urlpatterns = [
     path('add-project/', views.add_project, name="add_project"),
     path('edit-project/<int:project_id>', views.edit_project, name="edit_project"),
     path('project-detail/<int:project_id>', views.project_detail, name="project_detail"),
+    path('search-project/', views.search_project, name="search_project"),
+    path('filter-project-type/',views.filter_project_type,name="filter_project_type"),
 ]
