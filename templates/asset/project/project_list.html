@@ -33,13 +33,14 @@
             </div>
             <div class="info_selt">
                 <label for="" class="sortrg" style="top:0px">项目类型：</label>
-                <select class="rgselect" onchange="selectRange()" id="selectRange" style="position:relative;left:0px">
+                <select class="rgselect" onchange="selectType()" id="selectType" style="position:relative;left:0px">
+                    <option value="All">所有</option>
                     <option value="全新">全新</option>
                     <option value="改进">改进</option>
                     <option value="OEM">OEM</option>
                 </select>
-                <input type="text" class="gpsearch" id="search-patent" placeholder="请输入项目名称、作者" style="position:relative;left:0px">
-                <img src="{% static 'images/asset/icn_search.png' %}" id="btn1" class="gpsortimg" style="left:-30px;top:0px;">
+                <input type="text" class="gpsearch" id="search-project" placeholder="请输入项目名称" style="position:relative;left:0px">
+                <img src="{% static 'images/asset/icn_search.png' %}" id="btn-search" class="gpsortimg" style="left:-30px;top:0px;">
                 {% comment %} <a href="{% url 'asset:add_project' %}"><button class="adcustomer" type="button">新增</button></a> {% endcomment %}
             </div>
             <div style="position:absolute;left:15px;top:120px;"><table id="demo" lay-filter="test"></table></div>
@@ -131,7 +132,7 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
   table.on('toolbar(test)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id)
         var data = checkStatus.data;
-        console.log(obj,checkStatus,data)
+        //console.log(obj,checkStatus,data)
         switch(obj.event) {
             case 'add':
                 window.location.href="/asset/add-project/"
@@ -167,18 +168,19 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
 
 function selectType() {
     // 选择范围，刷新表格
-    var range = $("#selectType").val()
-    if(range != 0) {
+    var type_name = $("#selectType").val()
+    // console.log(type_name)
+    if(type_name != 0) {
         layui.use(['table'], function(){
             var table = layui.table  // 表格
             table.reload('demo', {
                 url: '/asset/filter-project-type/'
-                ,where: { type_name: type } //设定异步数据接口的额外参数
+                ,where: { type_name: type_name } //设定异步数据接口的额外参数
                 //,height: 300
             });
         });
     };
-    if(range == 0) {
+    if(type_name == "All") {
         window.location.href="/asset/project-list/"
     }
 };
@@ -186,7 +188,6 @@ function selectType() {
 
 $("#btn-search").on('click', function() {
     var text = $('#search-project').val()
-    console.log(text)
     if(text != "") {
         layui.use(['table'], function(){
             var table = layui.table  // 表格
