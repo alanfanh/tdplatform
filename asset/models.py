@@ -162,6 +162,7 @@ class Project(models.Model):
     coder = models.CharField(verbose_name=("软件owner"), max_length=50, null=True, blank=True)
     developer = models.CharField(verbose_name=("硬件owner"), max_length=50, null=True, blank=True)
     tester = models.CharField(verbose_name=("测试owner"), max_length=50, null=True, blank=True)
+    changed = models.IntegerField(verbose_name=("需求变更次数"),help_text="正整数", null=True, blank=True)
     # 过程质量
     newbug_percent = models.CharField(verbose_name=("缺陷引入率"), max_length=20, help_text="百分数", null=True, blank=True)
     reopen_count = models.IntegerField(verbose_name=("缺陷回归不通过数"), help_text="正整数", null=True, blank=True)
