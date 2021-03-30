@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
@@ -252,6 +252,11 @@ def change_pwd(request):
 def home_page(request):
     # 查询数据中心
     # courses = Course.objects.all()
+    user = User.objects.get(username=request.user.username)
+    if user.username == 'admin' and user.is_superuser:
+        # redirect后面可接URI或者asset:project_list
+        return redirect('/admin/')
+        # return HttpResponse("请进入后台管理页面退出admin管理员账户，使用用户账户登录")
     tecs_count = TecContent.objects.filter(status="3").count()
     coms_count = Complaint.objects.all().count()
     projects_count = Project.objects.all().count()
