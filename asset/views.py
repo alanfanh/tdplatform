@@ -1056,7 +1056,7 @@ def project_list_data(request):
         projects_page = paginator.page(paginator.num_pages)
     for project in projects_page:
         obj = model_to_dict(project, fields=[
-                            'id', 'name', 'type', 'created_at', 'completed_time', 'coder', 'developer', 'tester', 'newbug_percent', 'reopen_count', 'missing_percent', 'nocase_found', 'test_round', 'reject_count', 'reject_reason', 'deliver','delay', 'delay_percent','delay_reason','day_round','per_version','perf_count','beta_bug','customer_bug','quality_issue','solution','cost_percent','pcb_count','item_percent','tec_count','tec','note'])
+                            'id', 'name', 'type', 'created_at', 'completed_time', 'coder', 'developer', 'tester', 'changed','newbug_percent', 'reopen_count', 'missing_percent', 'nocase_found', 'test_round', 'reject_count', 'reject_reason', 'deliver','delay', 'delay_percent','delay_reason','day_round','per_version','perf_count','beta_bug','customer_bug','quality_issue','solution','cost_percent','pcb_count','item_percent','tec_count','tec','note'])
         if obj['completed_time'] != None:
             obj['completed_time'] = obj['completed_time'].strftime('%Y-%m-%d')
         if obj['deliver'] != None:

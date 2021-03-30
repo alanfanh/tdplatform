@@ -22,4 +22,4 @@ class PatentForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ("name","type","created_at","completed_time","coder","developer","tester","newbug_percent","reopen_count","missing_percent", "nocase_found","test_round", "reject_count", "reject_reason", "deliver", "delay", "delay_percent", "delay_reason", "day_round", "per_version", "perf_count", "beta_bug","customer_bug", "quality_issue","solution","cost_percent","pcb_count","item_percent","tec_count", "tec","note")
+        fields = ("name","type","created_at","completed_time","coder","developer","tester","changed" ,"newbug_percent","reopen_count","missing_percent", "nocase_found","test_round", "reject_count", "reject_reason", "deliver", "delay", "delay_percent", "delay_reason", "day_round", "per_version", "perf_count", "beta_bug","customer_bug", "quality_issue","solution","cost_percent","pcb_count","item_percent","tec_count", "tec","note")
