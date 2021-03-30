@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% block title %}项目数据{% endblock  %}
+
 {% block head %}
 
 <link rel="stylesheet" href="{% static 'css/account/admin_group.css' %}">
@@ -36,8 +38,10 @@
                 <select class="rgselect" onchange="selectType()" id="selectType" style="position:relative;left:0px">
                     <option value="All">所有</option>
                     <option value="全新">全新</option>
-                    <option value="改进">改进</option>
+                    <option value="小改进">小改进</option>
                     <option value="OEM">OEM</option>
+                    <option value="大改进">大改进</option>
+                    <option value="技术项目">技术项目</option>
                 </select>
                 <input type="text" class="gpsearch" id="search-project" placeholder="请输入项目名称" style="position:relative;left:0px">
                 <img src="{% static 'images/asset/icn_search.png' %}" id="btn-search" class="gpsortimg" style="left:-30px;top:0px;">
@@ -86,40 +90,41 @@ layui.use(['laypage', 'layer', 'table', 'element'], function(){
     [
     {type: 'checkbox', fixed: 'left', rowspan: 2}
     ,{field: 'id', hide:true, rowspan: 2}
-    ,{align:'center', title: '项目说明', colspan: 7}
+    ,{align:'center', title: '项目说明', colspan: 8}
     ,{align:'center', title: '过程质量', colspan: 8}
     ,{align:'center', title:'效率', colspan:5}
     ,{align:'center', title:'产品质量', colspan:4}
     ,{align:'center', title:'领域竞争力', colspan:4}
     ,{align:'center', title: '技术领域', colspan:2}
-    ,{field:'note', title: '备注', rowspan:2, hide:true}
+    ,{field:'note', title: '备注', rowspan:2}
     //,{field: '', title: '操作', toolbar:"#bar", width: 125, rowspan: 2}
     ],[ //表头
       {align:'center',field: 'name', title: '项目名称', width:120}
       ,{field: 'type', title: '类型', width:60}
-      ,{field: 'coder', title: '软件owner', width: 100, hide: true}
-      ,{field: 'tester', title: '测试owner', width:100, hide: true}
-      ,{field: 'developer', title: '硬件owner', width:100, hide: true}
+      ,{field: 'coder', title: '软件owner', width: 100}
+      ,{field: 'tester', title: '测试owner', width:100}
+      ,{field: 'developer', title: '硬件owner', width:100}
       ,{field: 'created_at', title: '立项时间', width:100, sort:true}
       ,{field: 'completed_time', title: 'TR5/6时间', width:110, sort: true}
+      ,{field: 'changed', title: '需求变更次数', width: 100,sort: true}
       ,{field: 'deliver', title: '性能板交付时间', width:110,sort:true}
-      ,{field: 'newbug_percent', title: '缺陷引入率', width: 90,sort:true,hide:true}
-      ,{field: 'reopen_count', title: '缺陷激活数', width: 90,sort:true,hide:true}
-      ,{field: 'missing_percent', title: '漏测率', width: 90,sort:true,hide:true}
+      ,{field: 'newbug_percent', title: '缺陷引入率', width: 90,sort:true}
+      ,{field: 'reopen_count', title: '缺陷激活数', width: 90,sort:true}
+      ,{field: 'missing_percent', title: '漏测率', width: 90,sort:true}
       ,{field: 'nocase_found', title: '用例外BUG数', width: 90,sort:true}
       ,{field: 'test_round', title: '测试轮次', width: 100,sort:true}
       ,{field: 'reject_count',title: '驳回轮次'}
-      ,{field: 'reject_reason',title:'驳回原因', hide:true}
+      ,{field: 'reject_reason',title:'驳回原因'}
       ,{field: 'delay', title:'进度偏差天数',width:100}
-      ,{field: 'delay_percent', title: '进度偏差率',hide:true}
-      ,{field: 'delay_reason', title:'偏差原因',hide:true}
+      ,{field: 'delay_percent', title: '进度偏差率'}
+      ,{field: 'delay_reason', title:'偏差原因'}
       ,{field: 'day_round', title:'转测试天数/轮',width:100}
-      ,{field: 'per_version', title: '平均人力天/版本',hide:true}
-      ,{field: 'perf_count', title: '关键性能超越竞品数',hide:true}
+      ,{field: 'per_version', title: '平均人力天/版本'}
+      ,{field: 'perf_count', title: '关键性能超越竞品数'}
       ,{field: 'beta_bug', title: 'Beta/内测问题'}
       ,{field: 'customer_bug', title: 'OA客诉问题'}
       ,{field: 'quality_issue', title: '质量事故'}
-      ,{field: 'solution', title: '解决方案满意度', width: 100, hide: true}
+      ,{field: 'solution', title: '解决方案满意度', width: 100}
       ,{field: 'cost_percent', title:'目标成本达成率'}
       ,{field: 'pcb_count', title:'PCB打板次数',width: 100}
       ,{field: 'item_percent', title:'材料优选率',width:100}
