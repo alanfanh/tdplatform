@@ -46,7 +46,11 @@
                             <div class="layui-input-block">
                                 <select lay-filter="group" class="atgpselt" lay-verify="required|number" id="id_group" name="group"  onchange="handle();">
                                     {% for group in groups %}
+                                    {% if patent.group.id == group.id %}
+                                    <option value="{{group.id}}" selected>{{group.name}}</option>
+                                    {% else %}
                                     <option value="{{group.id}}">{{group.name}}</option>
+                                    {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
@@ -201,7 +205,8 @@ window.onload=function() {
     layui.use('form', function(){
         var form = layui.form;
         var group = $("#id_group").val()
-        console.log('test',group)
+        var author_id = {{patent.author.id}}
+        //console.log('test',group,author_id)
         $.ajax({
             type:"post",
             url:"/asset/group-user/",
@@ -217,7 +222,11 @@ window.onload=function() {
                     if (dataArr!=null) {
                         for(var i=0;i<dataArr.length;i++){
                             var item =dataArr[i];
-                            author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                            if (author_id==item.id) {
+                                author.append("<option value = '"+item.id+"'selected>"+item.realname+"</option>")
+                            } else {
+                                author.append("<option value = '"+item.id+"'>"+item.realname+"</option>")
+                            }
                         };
                     } else {
                         author.append("<option value = '-1'>"+"成员为空"+"</option>");
