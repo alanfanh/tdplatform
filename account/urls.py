@@ -1,12 +1,8 @@
-from django.conf.urls import url
 from django.urls import path, reverse_lazy
 from . import views
 
-from django.conf import settings
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
-from django.contrib.auth.views import PasswordResetView
-from django.contrib.auth.views import PasswordResetDoneView
 
 app_name = 'account'
 urlpatterns = [
