@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <html>
 <head>
     <title>login</title>
@@ -62,7 +62,7 @@
                 </div>
                 </form>
                 <div id="fg_pwd">
-                    <a class="pwd_page" href="{% url 'password_reset_recover' %}">
+                    <a class="pwd_page" href="{% url 'password_reset' %}">
                         <span>忘记密码？</span>
                     </a>
                 </div>
