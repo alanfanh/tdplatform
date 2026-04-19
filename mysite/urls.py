@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
 from account import views
 
@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('asset/', include('asset.urls', namespace='asset')),
     path('account/', include('account.urls',namespace='account')),
-    path('pwd_reset/', include("password_reset.urls")),
+    path('pwd_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('pwd_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('', views.home_page, name='home'), 
     path('home/', views.home_page, name='home'),
     path('home/home-course-list-data', views.home_course_list, name='home_course_list'),
