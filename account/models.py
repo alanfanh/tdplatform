@@ -43,6 +43,9 @@ class Rank(models.Model):
     def __str__(self):
         return self.rank_name
     
+    class Meta:
+        verbose_name = "员工职级"
+        verbose_name_plural = "员工职级"
 
 class UserInfo(models.Model):
     """

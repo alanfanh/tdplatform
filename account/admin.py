@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import UserInfo, Group, Role
+from .models import UserInfo, Group, Role, Rank
 
 
 @admin.register(UserInfo)
@@ -17,15 +17,19 @@ class GroupAdmin(admin.ModelAdmin):
     list_filter = ("name", "pl")
     search_fields = ("name", "pl")
 
-
+@admin.register(Role)  # 使用装饰器替代 admin.site.register
 class RoleAdmin(admin.ModelAdmin):
     list_display = ("role_name",)
     list_filter = ("role_name",)
     search_fields = ("role_name",)
 
-
-# 将role注册到管理后台
-admin.site.register(Role, RoleAdmin)
+@admin.register(Rank)
+class RankAdmin(admin.ModelAdmin):
+    list_display = ("id", "rank_name")
+    list_display_links = ("rank_name",)
+    list_filter = ("rank_name",)
+    search_fields = ("rank_name",)
+    list_per_page = 10  # 每页显示10条数据
 
 
 # 更改后台管理的标题
