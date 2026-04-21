@@ -1,17 +1,18 @@
+import json
 from django.shortcuts import get_object_or_404, redirect, render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger, InvalidPage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from .forms import LoginForm,UserInfoForm
 from .models import UserInfo, Group, Role, Rank
 from asset.models import TecContent, Complaint, Project
 from training.models import Course
-import json
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms.models import model_to_dict
 from account.models import CommonLinks
@@ -249,6 +250,7 @@ def change_pwd(request):
 # 首页视图渲染
 @login_required(login_url="/account/login")
 @csrf_exempt
+@never_cache
 def home_page(request):
     # 查询数据中心
     # courses = Course.objects.all()
