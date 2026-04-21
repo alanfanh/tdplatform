@@ -57,18 +57,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/37/bd/a122ba96167f5dfab70a58ca22fa046b7ef1ebad9ff026f7831bd6c2a49c/django-crontab-0.7.1.tar.gz", hash = "sha256:1201810a212460aaaa48eb6a766738740daf42c1a4f6aafecfb1525036929236", size = 7089, upload-time = "2016-03-07T19:35:54.714Z" }
 
 [[package]]
-name = "django-password-reset"
-version = "2.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/5a/cb805f30b11049404549d818892c1937980c09ebf75c538821ddec644136/django-password-reset-2.0.tar.gz", hash = "sha256:2080621bcd3409bc0d516f0ea147648ccff70cf499e24acde37576842797c4d4", size = 21525, upload-time = "2018-08-27T10:06:55.98Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/a3/9e8c75842722d08b8ff369972cbe8c25b35c4d7af81726c8af068ab45cea/django_password_reset-2.0-py2.py3-none-any.whl", hash = "sha256:1789b6445d4aec802366625b0facba2ab0b406ac0bfa28d26a5fb29d0f889eee", size = 48324, upload-time = "2018-08-27T10:06:54.338Z" },
-]
-
-[[package]]
 name = "django-simpleui"
 version = "2026.1.13"
 source = { registry = "https://pypi.org/simple" }
@@ -144,7 +132,6 @@ dependencies = [
     { name = "django" },
     { name = "django-braces" },
     { name = "django-crontab" },
-    { name = "django-password-reset" },
     { name = "django-simpleui" },
     { name = "pymysql" },
 ]
@@ -155,7 +142,6 @@ requires-dist = [
     { name = "django", specifier = ">=6.0.4" },
     { name = "django-braces", specifier = ">=1.17.0" },
     { name = "django-crontab", specifier = ">=0.7.1" },
-    { name = "django-password-reset", specifier = ">=2.0" },
     { name = "django-simpleui", specifier = ">=2026.1.13" },
     { name = "pymysql", specifier = ">=1.1.2" },
 ]

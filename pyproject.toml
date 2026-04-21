@@ -9,7 +9,6 @@ dependencies = [
     "django>=6.0.4",
     "django-braces>=1.17.0",
     "django-crontab>=0.7.1",
-    "django-password-reset>=2.0",
     "django-simpleui>=2026.1.13",
     "pymysql>=1.1.2",
 ]
