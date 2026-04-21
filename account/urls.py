@@ -14,7 +14,7 @@ urlpatterns = [
     # django内置的登录LoginView类
     # path('login/', LoginView.as_view(template_name="account/login.html"), name="user_login"),
     path('login/', views.user_login, name="user_login"),
-    path('logout/', LogoutView.as_view(template_name="account/logout.html"), name="user_logout"),
+    path('logout/', LogoutView.as_view(), name="user_logout"),
     path('password-change/', PasswordChangeView.as_view(template_name="account/password_change_form.html", success_url=reverse_lazy('account:password_change_done')), name='password_change'),
     path('password-change-done', PasswordChangeDoneView.as_view(template_name="account/password_change_done.html"), name='password_change_done'),
     # 用户

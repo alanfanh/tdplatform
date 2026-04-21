@@ -41,7 +41,14 @@
                 <dl class="layui-nav-child">
                     <dd><a href="{% url 'account:my_information' %}">个人中心</a></dd>
                     {% comment %} <dd><a href="javascript:;" onclick="change_pwd();">修改密码</a></dd> {% endcomment %}
-                    <dd><a href="{% url 'account:user_logout' %}">退出登录</a></dd>
+                    <dd>
+                        <form id="logout-form" action="{% url 'account:user_logout' %}" method="post" style="display: none;">
+                        {% csrf_token %}
+                        </form>
+                        <a href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
+                            退出登录
+                        </a>
+                    </dd>
                 </dl>
             </li>
         </ul>
