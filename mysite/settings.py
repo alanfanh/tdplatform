@@ -61,7 +61,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -175,3 +175,5 @@ SIMPLEUI_LOGO = '../../static/images/logo.png'
 CRONJOBS = [
     ('30 5 * * 1-5', 'training.cron.send_course_email')
 ]
+
+LOGOUT_REDIRECT_URL = '/account/login/'
